@@ -24,6 +24,9 @@
     packages:
       - name: nodejs
       - name: npm
+      - name: i3
+    source_key: "./.ssh/id_rsa"
+    dest_key: "{{ lookup('env', 'HOME') }}/.ssh/id_rsa"
   tasks:
     - name: Install packages
       apt:
@@ -51,6 +54,21 @@
       become: yes
       become_user: "{{ user }}"
       loop: "{{ plugins }}"
+
+    - name: Check if .zshrc exists
+      stat:
+        path: "/home/{{ user }}/.zshrc"
+      register: zshrc
+
+    - name: Create .zshrc if it does not exist
+      file:
+        path: "/home/{{ user }}/.zshrc"
+        state: touch
+        owner: "{{ user }}"
+        group: "{{ user }}"
+        mode: '0644'
+      when: not zshrc.stat.exists
+
 
     - name: Configure .zshrc
       block:
