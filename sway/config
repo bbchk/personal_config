@@ -1,0 +1,49 @@
+# Ansible managed message here
+
+#==================================================================================#
+# Sway Window Manager Configuration File                                           #
+#----------------------------------------------------------------------------------#
+# Purpose: This configuration file enables you to tweak keyboard shortcuts, adjust #
+# themes and colors, set the wallpaper, and more.                                  #
+#                                                                                  #
+# License: Creative Commons Attribution 4.0 International                          #
+#                                                                                  #
+# Pro-tip: While using Sway, you can trigger this configuration to be re-read by   #
+# pressing Super + Shift + C.                                                      #
+#==================================================================================#
+
+# Appearance and Theming #
+include sway_config/appearance
+
+# Keyboard Shortcuts (Sway-specific) #
+include sway_config/sway_specific
+
+# Waybar config #
+include sway_config/waybar
+
+# Personal config #
+include sway_config/my_specific
+
+# Keyboard Shortcuts (Window Management) #
+include sway_config/key_bindings/window_management
+
+# Keyboard Shortcuts (WorksEpaces) #
+include sway_config/key_bindings/workspace_management
+
+# Keyboard Shortcuts (Layout) #
+include sway_config/key_bindings/layout
+
+# Keyboard Shortcuts (scratchpad) #
+include sway_config/key_bindings/scratchpad
+
+# Keyboard Shortcuts (hardware) #
+include sway_config/key_bindings/harware
+
+# Keyboard Shortcuts (launching applications) #
+include sway_config/key_bindings/applications
+
+#======#
+# Misc #
+#======#
+include /etc/sway/config-vars.d/*
+include /etc/sway/config.d/*

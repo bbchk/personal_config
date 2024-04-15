@@ -1,0 +1,13 @@
+#====================================#
+# Activate the waybar                 #
+#====================================#
+bar {
+    swaybar_command waybar
+    position top
+    hidden_state hide
+    mode hide
+    modifier Mod4
+}   
+
+# Activate the waybar keybind        #
+bindsym $mod+p exec killall -SIGUSR1 waybar     
