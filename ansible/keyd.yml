@@ -1,0 +1,50 @@
+- name: Clone keyd repository
+  git:
+    repo: 'https://github.com/rvaiya/keyd.git'
+    dest: '/tmp/keyd'
+    clone: yes
+    update: yes
+
+- name: Build and install keyd
+  command: '{{ item }}'
+  args:
+    chdir: '/tmp/keyd'
+  with_items:
+    - 'make'
+    - 'sudo make install'
+
+- name: Enable and start keyd service
+  systemd:
+    name: keyd
+    enabled: yes
+    state: started
+
+- name: Create keyd config directory
+  file:
+    path: '/etc/keyd'
+    state: directory
+
+- name: Write keyd config
+  copy:
+    content: |
+      [ids]
+      *
+      [main]
+      capslock = backspace
+      rightalt = layer(movement_layer)
+      [movement_layer:C]
+      i = up
+      j = left
+      k = down
+      l = right
+      u = home
+      o = end
+    dest: '/etc/keyd/config.cfg'
+    owner: root
+    group: root
+    mode: '0644'
+
+- name: Restart keyd service
+  systemd:
+    name: keyd
+    state: restarted

@@ -1,0 +1,8 @@
+aliases:
+  - 'alias dev="npm run dev"'
+  - 'alias build="npm run build"'
+  - 'alias start="npm run start"'
+  - 'alias gpilot="gh copilot"'
+  - 'alias ghs="ghs copilot suggest"'
+  - 'alias ghe="ghe copilot explain"'
+  - 'alias open="xdg-open"'

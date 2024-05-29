@@ -1,0 +1,19 @@
+- hosts: localhost
+  gather_facts: yes
+  become: true
+  pre_tasks:
+    - name: Update cache
+      apt:
+        update_cache: true
+  vars:
+    user: bchk
+  tasks:
+    - name: Include multiple task files
+      include_tasks: '{{ item }}'
+      loop:
+        - setup.yml
+        - packages.yml
+        # - zsh.yml
+        # - keyd.yml
+        # - aliases.yml
+        # - node.yml

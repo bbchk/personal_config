@@ -1,0 +1,75 @@
+vars:
+  plugins:
+    - name: zsh-syntax-highlighting
+      repo: 'https://github.com/zsh-users/zsh-syntax-highlighting.git'
+    - name: zsh-autosuggestions
+      repo: 'https://github.com/zsh-users/zsh-autosuggestions.git'
+    - name: you-should-use
+      repo: 'https://github.com/MichaelAquilina/zsh-you-should-use.git'
+tasks:
+  - name: Install oh-my-zsh
+    shell: |
+      sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
+    args:
+      executable: /bin/bash
+    become: yes
+    become_user: '{{ user }}'
+
+  - name: Set zsh as default shell
+    shell: chsh -s $(which zsh) "{{ user }}"
+    become: yes
+
+  - name: Install plugins
+    git:
+      repo: '{{ item.repo }}'
+      dest: '/home/{{ user }}/.oh-my-zsh/custom/plugins/{{ item.name }}'
+    become: yes
+    become_user: '{{ user }}'
+    loop: '{{ plugins }}'
+
+  - name: Check if .zshrc exists
+    stat:
+      path: '/home/{{ user }}/.zshrc'
+    register: zshrc
+
+  - name: Create .zshrc if it does not exist
+    file:
+      path: '/home/{{ user }}/.zshrc'
+      state: touch
+      owner: '{{ user }}'
+      group: '{{ user }}'
+      mode: '0644'
+    when: not zshrc.stat.exists
+
+  - name: Configure .zshrc
+    block:
+      - name: Source oh-my-zsh.sh in .zshrc
+        lineinfile:
+          path: '/home/{{ user }}/.zshrc'
+          line: 'source $HOME/.oh-my-zsh/oh-my-zsh.sh'
+          insertbefore: 'BOF'
+        become: yes
+        become_user: '{{ user }}'
+
+      - name: Enable plugins in .zshrc
+        lineinfile:
+          path: '/home/{{ user }}/.zshrc'
+          regexp: '^plugins='
+          line: "plugins=(git {{ plugins | map(attribute='name') | join(' ') }})"
+        become: yes
+        become_user: '{{ user }}'
+
+      - name: Add aliases to .zshrc
+        lineinfile:
+          path: '/home/{{ user }}/.zshrc'
+          line: '{{ item }}'
+        loop: '{{ aliases }}'
+        become: yes
+        become_user: '{{ user }}'
+
+  - name: Apply changes to zshrc file
+    shell: source ~/.zshrc
+    args:
+      executable: /bin/zsh
+    become: yes
+    become_user: '{{ user }}'

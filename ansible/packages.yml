@@ -1,0 +1,11 @@
+- name: Install necessary packages for Ubuntu
+  apt:
+    name: ['git', 'build-essential']
+    state: present
+  when: ansible_os_family == "Debian"
+
+- name: Install necessary packages for Arch
+  pacman:
+    name: ['git', 'base-devel']
+    state: present
+  when: ansible_os_family == "Archlinux"
