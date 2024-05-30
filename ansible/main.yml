@@ -5,7 +5,7 @@
     - name: Initial setup
       include_tasks: setup.yml
   vars:
-    user: bchk
+    user: '{{ ansible_user_id }}'
   tasks:
     - name: Include tasks
       include_tasks: '{{ item }}'
@@ -18,3 +18,4 @@
 #
 #
 # ansible-pull -U https://github.com/bbuukk/pers.git ansible/main.yml
+

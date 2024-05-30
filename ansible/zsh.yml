@@ -25,32 +25,27 @@
     sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
   args:
     executable: /bin/bash
-  become_method: sudo
-  become: yes
-  become_user: '{{ user }}'
+  # become_method: sudo
 
 - name: Set zsh as default shell
   shell: chsh -s $(which zsh) "{{ user }}"
-  become: yes
 
 - name: Install plugins
   git:
     repo: '{{ pl.repo }}'
-    dest: '/home/{{ user }}/.oh-my-zsh/custom/plugins/{{ pl.name }}'
-  become: yes
-  become_user: '{{ user }}'
+    dest: '~/.oh-my-zsh/custom/plugins/{{ pl.name }}'
   loop: '{{ plugins }}'
   loop_control:
     loop_var: pl
 
 - name: Check if .zshrc exists
   stat:
-    path: '/home/{{ user }}/.zshrc'
+    path: '~/.zshrc'
   register: zshrc
 
 - name: Create .zshrc if it does not exist
   file:
-    path: '/home/{{ user }}/.zshrc'
+    path: '~/.zshrc'
     state: touch
     owner: '{{ user }}'
     group: '{{ user }}'
@@ -61,23 +56,17 @@
   block:
     - name: Source oh-my-zsh.sh in .zshrc
       lineinfile:
-        path: '/home/{{ user }}/.zshrc'
+        path: '~/.zshrc'
         line: 'source $HOME/.oh-my-zsh/oh-my-zsh.sh'
         insertbefore: 'BOF'
-      become: yes
-      become_user: '{{ user }}'
 
     - name: Enable plugins in .zshrc
       lineinfile:
-        path: '/home/{{ user }}/.zshrc'
+        path: '~/.zshrc'
         regexp: '^plugins='
         line: "plugins=(git {{ plugins | map(attribute='name') | join(' ') }})"
-      become: yes
-      become_user: '{{ user }}'
 
 - name: Apply changes to zshrc file
-  shell: source /home/{{ user }}/.zshrc
+  shell: source ~/.zshrc
   args:
     executable: /bin/zsh
-  become: yes
-  become_user: '{{ user }}'

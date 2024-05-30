@@ -1,26 +1,3 @@
-# Create user if does not exist
-- name: Check if user exists
-  command: id -u {{ user }}
-  register: user_exists
-  ignore_errors: yes
-
-- name: Create user
-  user:
-    name: '{{ user }}'
-    shell: /bin/bash
-  become: yes
-  become_method: sudo
-  when: user_exists.rc != 0
-
-- name: Output active user
-  command:
-    cmd: whoami
-  register: act_user # Register the output to a variable
-
-- name: Print active user
-  debug:
-    var: act_user.stdout # Print
-
 # Update cache and install Python for Ansible
 #   Debian OS family
 - name: Update cache (Debian)
