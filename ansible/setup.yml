@@ -15,6 +15,11 @@
 - name: Output active user
   command:
     cmd: whoami
+  register: act_user # Register the output to a variable
+
+- name: Print active user
+  debug:
+    var: act_user.stdout # Print
 
 # Update cache and install Python for Ansible
 #   Debian OS family
