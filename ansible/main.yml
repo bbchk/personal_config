@@ -2,16 +2,14 @@
   gather_facts: yes
   become: true
   pre_tasks:
-    - name: Update cache
-      apt:
-        update_cache: true
+    - name: Initial setup
+      include_tasks: setup.yml
   vars:
     user: bchk
   tasks:
-    - name: Include multiple task files
+    - name: Include tasks
       include_tasks: '{{ item }}'
       loop:
-        - setup.yml
         - packages.yml
         # - zsh.yml
         # - keyd.yml
