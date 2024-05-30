@@ -35,11 +35,13 @@
 
 - name: Install plugins
   git:
-    repo: '{{ item.repo }}'
-    dest: '/home/{{ user }}/.oh-my-zsh/custom/plugins/{{ item.name }}'
+    repo: '{{ pl.repo }}'
+    dest: '/home/{{ user }}/.oh-my-zsh/custom/plugins/{{ pl.name }}'
   become: yes
   become_user: '{{ user }}'
   loop: '{{ plugins }}'
+  loop_control:
+    loop_var: pl
 
 - name: Check if .zshrc exists
   stat:

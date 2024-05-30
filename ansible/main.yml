@@ -8,15 +8,13 @@
     user: bchk
   tasks:
     - name: Include tasks
-      include_tasks: '{{ task_name }}'
+      include_tasks: '{{ item }}'
       loop:
         - packages.yml
         - zsh.yml
         # - aliases.yml
         # - keyd.yml
         # - node.yml
-      loop_control:
-        loop_var: task_name
 #
 #
 # ansible-pull -U https://github.com/bbuukk/pers.git ansible/main.yml
