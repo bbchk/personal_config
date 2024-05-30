@@ -15,6 +15,3 @@ EXPOSE 80
 ENV NAME marge
 
 
-
-# Use ansible-pull to apply the playbook from the remote git repository
-# RUN ansible-pull -U https://github.com/bbuukk/pers.git ansible/main.yml

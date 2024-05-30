@@ -23,7 +23,9 @@
   become: yes
   become_user: '{{ user }}'
 
-- name: Source .zshrc
-  shell: source /home/{{ user }}/.zshrc
+- name: Apply changes to zshrc file
+  shell: source ~/.zshrc
+  args:
+    executable: /bin/zsh
   become: yes
   become_user: '{{ user }}'
