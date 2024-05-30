@@ -81,3 +81,12 @@
     executable: /bin/zsh
   become: yes
   become_user: '{{ user }}'
+
+- name: Debug output
+  command:
+    cmd: cat /home/{{ user }}/.zshrc
+  register: command_output # Register the output to a variable
+
+- name: Print command output
+  debug:
+    var: command_output.stdout # Print
