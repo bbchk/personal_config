@@ -12,6 +12,6 @@
       loop:
         - packages.yml
         - zsh.yml
-        # - keyd.yml
-        # - aliases.yml
+        - aliases.yml
+        - keyd.yml
         # - node.yml

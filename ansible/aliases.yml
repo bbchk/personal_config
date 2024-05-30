@@ -1,8 +1,24 @@
-aliases:
-  - 'alias dev="npm run dev"'
-  - 'alias build="npm run build"'
-  - 'alias start="npm run start"'
-  - 'alias gpilot="gh copilot"'
-  - 'alias ghs="ghs copilot suggest"'
-  - 'alias ghe="ghe copilot explain"'
-  - 'alias open="xdg-open"'
+- name: Add aliases to .zshrc
+  blockinfile:
+    path: '/home/{{ user }}/.zshrc'
+    block: |
+      # alias nrd="npm run dev"
+      # alias nrb="npm run build"
+      # alias nrs="npm run start"
+      # alias nrt="npm run test"
+      # alias nrl="npm run lint"
+      # alias nr="npm run"
+
+      # alias cl="clear"
+
+      # alias gpilot="gh copilot"
+      # alias ghs="ghs copilot suggest"
+      # alias ghe="ghe copilot explain"
+      # alias open="xdg-open"
+    marker: '# {mark} ANSIBLE MANAGED BLOCK - ALIASES'
+    create: yes
+    owner: '{{ user }}'
+    group: '{{ user }}'
+    mode: '0644'
+  become: yes
+  become_user: '{{ user }}'
