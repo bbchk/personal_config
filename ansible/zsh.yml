@@ -26,8 +26,8 @@
   args:
     executable: /bin/bash
   become_method: sudo
-  # become: yes
-  # become_user: '{{ user }}'
+  become: yes
+  become_user: '{{ user }}'
 
 - name: Set zsh as default shell
   shell: chsh -s $(which zsh) "{{ user }}"
