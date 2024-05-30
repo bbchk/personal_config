@@ -8,10 +8,11 @@
     user: bchk
   tasks:
     - name: Include tasks
-      include_tasks: '{{ item }}'
+      include_tasks: '{{ item.file }}'
       loop:
-        - packages.yml
-        - zsh.yml
-        # - keyd.yml
-        # - aliases.yml
-        # - node.yml
+        # - { file: packages.yml, tags: 'packages' }
+        - { file: zsh.yml, tags: 'zsh' }
+        # - { file: keyd.yml, tags: 'keyd' }
+        # - { file: aliases.yml, tags: 'aliases' }
+        # - { file: node.yml, tags: 'node' }
+      tags: '{{ item.tags }}'
