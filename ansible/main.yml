@@ -13,8 +13,8 @@
         - packages
         - zsh
         - aliases
-        - keyd
-        # - node.yml
+        # - keyd
+        - node.yml
 #
 #
 # ansible-pull -U https://github.com/bbuukk/pers.git ansible/main.yml

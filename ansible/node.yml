@@ -1,31 +1,23 @@
-vars:
-  node_version: 14.17.0
-tasks:
-  - name: Install necessary packages
-    apt:
-      name: '{{ item }}'
-      state: present
-    loop: ['curl', 'zsh']
+- name: Define variables
+  set_fact:
+    node_version: 14.17.0
 
-  - name: Install nvm
-    become_user: '{{ user }}'
-    shell: |
-      curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.38.0/install.sh | zsh
-    args:
-      executable: /bin/zsh
+- name: Install nvm
+  shell: |
+    curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.38.0/install.sh | zsh
+  args:
+    executable: /bin/zsh
 
-  - name: Source nvm in .zshrc
-    become_user: '{{ user }}'
-    lineinfile:
-      path: '/home/{{ user }}/.zshrc'
-      line: 'export NVM_DIR="$HOME/.nvm"; [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"'
-      insertbefore: 'BOF'
+- name: Source nvm in .zshrc
+  lineinfile:
+    path: '~/.zshrc'
+    line: 'export NVM_DIR="$HOME/.nvm"; [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"'
+    insertbefore: 'BOF'
 
-  - name: Install Node.js and npm
-    become_user: '{{ user }}'
-    shell: |
-      source ~/.zshrc
-      nvm install {{ node_version }}
-      nvm alias default {{ node_version }}
-    args:
-      executable: /bin/zsh
+- name: Install Node.js and npm
+  shell: |
+    source ~/.zshrc
+    nvm install {{ node_version }}
+    nvm alias default {{ node_version }}
+  args:
+    executable: /bin/zsh

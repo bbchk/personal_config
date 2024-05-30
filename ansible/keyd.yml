@@ -6,12 +6,14 @@
     update: yes
 
 - name: Build and install keyd
-  command: '{{ item }}'
+  command: '{{ command_name }}'
   args:
     chdir: '/tmp/keyd'
-  with_items:
+  loop:
     - 'make'
     - 'sudo make install'
+  loop_control:
+    loop_var: command_name
 
 - name: Enable and start keyd service
   systemd:
@@ -42,7 +44,6 @@
     dest: '/etc/keyd/config.cfg'
     owner: root
     group: root
-    # todo change from root to user
     mode: '0644'
 
 - name: Restart keyd service
