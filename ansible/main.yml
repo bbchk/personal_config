@@ -8,7 +8,7 @@
     user: bchk
   tasks:
     - name: Include tasks
-      include_tasks: '{{ item }}'
+      include_tasks: '{{ task_item }}'
       loop:
         - packages.yml
         - zsh.yml

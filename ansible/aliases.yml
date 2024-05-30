@@ -1,5 +1,6 @@
 - name: Add aliases to .zshrc
   blockinfile:
+    # ~/.zshrc
     path: '/home/{{ user }}/.zshrc'
     block: |
       alias nrd="npm run dev"
