@@ -11,7 +11,7 @@
       include_tasks: '{{ item }}'
       loop:
         - packages.yml
-        # - zsh.yml
+        - zsh.yml
         # - keyd.yml
         # - aliases.yml
         # - node.yml
