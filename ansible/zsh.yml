@@ -60,14 +60,6 @@
       become: yes
       become_user: '{{ user }}'
 
-    - name: Add aliases to .zshrc
-      lineinfile:
-        path: '/home/{{ user }}/.zshrc'
-        line: '{{ item }}'
-      loop: '{{ aliases }}'
-      become: yes
-      become_user: '{{ user }}'
-
 - name: Apply changes to zshrc file
   shell: source ~/.zshrc
   args:
