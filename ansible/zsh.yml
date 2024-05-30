@@ -35,8 +35,8 @@
 
 - name: Install plugins
   git:
-    repo: '{{ pl.repo }}'
-    dest: '/home/{{ user }}/.oh-my-zsh/custom/plugins/{{ pl.name }}'
+    repo: '{{ item.repo }}'
+    dest: '/home/{{ user }}/.oh-my-zsh/custom/plugins/{{ item.name }}'
   become: yes
   become_user: '{{ user }}'
   loop: '{{ plugins }}'
