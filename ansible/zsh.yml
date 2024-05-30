@@ -8,6 +8,18 @@
       - name: you-should-use
         repo: 'https://github.com/MichaelAquilina/zsh-you-should-use.git'
 
+- name: Install zsh
+  apt:
+    name: zsh
+    state: present
+  when: ansible_os_family == "Debian"
+
+- name: Install zsh
+  pacman:
+    name: zsh
+    state: present
+  when: ansible_os_family == "Archlinux"
+
 - name: Install oh-my-zsh
   shell: |
     sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
