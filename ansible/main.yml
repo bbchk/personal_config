@@ -12,7 +12,7 @@
       loop:
         - packages.yml
         - zsh.yml
-        # - aliases.yml
+        - aliases.yml
         # - keyd.yml
         # - node.yml
 #
