@@ -16,5 +16,5 @@
   when: ansible_os_family == "Archlinux"
 
 - name: Install Python for Ansible on Arch
-  raw: test -e /iusr/bin/python || (pacman -Sy --noconfirm python)
+  raw: test -e /usr/bin/python || (pacman -Sy --noconfirm python)
   when: ansible_os_family == "Archlinux"
