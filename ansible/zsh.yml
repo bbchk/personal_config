@@ -13,8 +13,9 @@
     sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
   args:
     executable: /bin/bash
-  become: yes
-  become_user: '{{ user }}'
+  become_method: sudo
+  # become: yes
+  # become_user: '{{ user }}'
 
 - name: Set zsh as default shell
   shell: chsh -s $(which zsh) "{{ user }}"
