@@ -1,4 +1,19 @@
-# Debian OS family
+# Create user if does not exist
+- name: Check if user exists
+  command: id -u {{ user }}
+  register: user_exists
+  ignore_errors: yes
+
+- name: Create user
+  user:
+    name: '{{ user }}'
+    shell: /bin/bash
+  become: yes
+  become_method: sudo
+  when: user_exists.rc != 0
+
+# Update cache and install Python for Ansible
+#   Debian OS family
 - name: Update cache (Debian)
   apt:
     update_cache: true
@@ -8,7 +23,7 @@
   raw: test -e /usr/bin/python || (apt -y update && apt install -y python-minimal)
   when: ansible_os_family == "Debian"
 
-# Archlinux OS
+#   Archlinux OS
 - name: Update cache (Arch)
   pacman:
     update_cache: yes
