@@ -12,6 +12,10 @@
   become_method: sudo
   when: user_exists.rc != 0
 
+- name: Output active user
+  command:
+    cmd: whoami
+
 # Update cache and install Python for Ansible
 #   Debian OS family
 - name: Update cache (Debian)

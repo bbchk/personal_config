@@ -1,6 +1,7 @@
 - hosts: localhost
   gather_facts: yes
   become: true
+  # become_user: '{{ user }}'
   pre_tasks:
     - name: Initial setup
       include_tasks: setup.yml
