@@ -1,6 +1,6 @@
 - name: Add aliases to .zshrc
   blockinfile:
-    path: '/home/{{ user }}/.zshrc'
+    path: '~/.zshrc'
     block: |
       alias nrd="npm run dev"
       alias nrb="npm run build"
@@ -20,12 +20,8 @@
     owner: '{{ user }}'
     group: '{{ user }}'
     mode: '0644'
-  become: yes
-  become_user: '{{ user }}'
 
 - name: Apply changes to zshrc file
-  shell: source /home/{{ user }}/.zshrc
+  shell: source ~/.zshrc
   args:
     executable: /bin/zsh
-  become: yes
-  become_user: '{{ user }}'

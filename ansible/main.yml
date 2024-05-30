@@ -8,12 +8,12 @@
     user: '{{ ansible_user_id }}'
   tasks:
     - name: Include tasks
-      include_tasks: '{{ item }}'
+      include_tasks: '{{ item }}.yml'
       loop:
-        - packages.yml
-        - zsh.yml
-        - aliases.yml
-        # - keyd.yml
+        - packages
+        - zsh
+        - aliases
+        - keyd
         # - node.yml
 #
 #

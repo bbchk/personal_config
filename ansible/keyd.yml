@@ -42,6 +42,7 @@
     dest: '/etc/keyd/config.cfg'
     owner: root
     group: root
+    # todo change from root to user
     mode: '0644'
 
 - name: Restart keyd service
