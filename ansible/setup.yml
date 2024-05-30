@@ -1,13 +1,11 @@
 # Tasks for Debian (Ubuntu) OS family
-- name: Update cache (Ubuntu)
+- name: Update cache (Debian)
   apt:
     update_cache: true
   when: ansible_os_family == "Debian"
 
-- name: Install Python for Ansible on Ubuntu
+- name: Install Python for Ansible on Debian
   raw: test -e /usr/bin/python || (apt -y update && apt install -y python-minimal)
-  become: yes
-  gather_facts: no
   when:
     ansible_os_family == "Debian"
 
@@ -19,6 +17,4 @@
 
 - name: Install Python for Ansible on Arch
   raw: test -e /iusr/bin/python || (pacman -Sy --noconfirm python)
-  become: yes
-  gather_facts: no
   when: ansible_os_family == "Archlinux"
