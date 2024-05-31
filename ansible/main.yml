@@ -1,4 +1,8 @@
 - hosts: localhost
+  vars_prompt:
+    - name: 'vlt_pass'
+      prompt: 'Enter password for vault'
+      private: yes
   gather_facts: yes
   become: true
   pre_tasks:
