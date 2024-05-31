@@ -1,0 +1,19 @@
+- name: Set git configuration
+  set_fact:
+    git_config:
+      - { key: 'user.name', value: 'Bohdan Buchok' }
+      - { key: 'user.email', value: 'bohdanbuchok@gmail.com' }
+      - { key: 'init.defaultbranch', value: 'main' }
+      - { key: 'pull.rebase', value: 'true' }
+      - { key: 'core.editor', value: 'code --wait' }
+      - { key: 'alias.shl', value: 'log --pretty=oneline --abbrev-commit' }
+      - { key: 'alias.ci', value: 'commit -v' }
+
+- name: Configure git
+  git_config:
+    scope: global
+    name: '{{ git_setting.key }}'
+    value: '{{ git_setting.value }}'
+  loop: '{{ git_config }}'
+  loop_control:
+    loop_var: git_setting

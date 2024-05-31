@@ -17,9 +17,11 @@
         - packages
         - zsh
         - aliases
+        - git
         # - keyd
         - node
         - secrets
+        # - hyperland
 #
 #
 # ansible-pull -U https://github.com/bbuukk/pers.git ansible/main.yml

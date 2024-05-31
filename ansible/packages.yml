@@ -1,13 +1,22 @@
-# Debian
+- name: Define package list
+  set_fact:
+    packages:
+      - 'git'
+      - 'build-essential'
+      - 'code'
+      - 'keepassxc'
+      - 'postman'
+      - 'mongodb-compass'
+      - 'mongodb-tools'
+
 - name: Install necessary packages for Debian
   apt:
-    name: ['git', 'build-essential']
+    name: '{{ packages }}'
     state: present
   when: ansible_os_family == "Debian"
 
-# Arch
 - name: Install necessary packages for Arch
   pacman:
-    name: ['git', 'base-devel']
+    name: '{{ packages }}'
     state: present
   when: ansible_os_family == "Archlinux"
