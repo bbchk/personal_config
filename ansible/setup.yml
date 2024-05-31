@@ -21,7 +21,7 @@
 
 - name: Clone yay-git repository
   git:
-    repo: 'https://aur.archlinux.org/yay-git.git'
+    repo: 'https://aur.archlinux.org/yay.git'
     dest: '/tmp/yay-git'
   when: ansible_os_family == "Archlinux"
 
