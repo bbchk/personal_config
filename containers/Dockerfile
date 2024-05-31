@@ -3,7 +3,8 @@ FROM archlinux:latest
 
 # Update the system and install necessary packages
 RUN pacman -Syu --noconfirm && \
-    pacman -S --noconfirm ansible git python-pip
+    pacman -S --noconfirm ansible git python-pip \
+    pacman -Syu sudo
 
 # Set the working directory to /tmp
 WORKDIR /tmp

@@ -1,4 +1,4 @@
-- name: Install Hyprland using yay
-  command:
-    cmd: yay -S hyprland
-    creates: /usr/bin/hyprland
+# - name: Install Hyprland using yay
+#   command:
+#     cmd: yay -S hyprland
+#     creates: /usr/bin/hyprland

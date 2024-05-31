@@ -20,8 +20,8 @@
         - git
         # - keyd
         - node
-        - secrets
         # - hyperland
+        - secrets
 #
 #
 # ansible-pull -U https://github.com/bbuukk/pers.git ansible/main.yml
