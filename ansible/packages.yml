@@ -2,21 +2,14 @@
   set_fact:
     packages:
       - 'git'
-      - 'build-essential'
+      - 'base-devel'  # equivalent to 'build-essential' in Debian
       - 'code'
       - 'keepassxc'
-      - 'postman'
-      - 'mongodb-compass'
-      - 'mongodb-tools'
-
-- name: Install necessary packages for Debian
-  apt:
-    name: '{{ packages }}'
-    state: present
-  when: ansible_os_family == "Debian"
+      # - 'postman-bin'  # 'postman' is available as 'postman-bin' in AUR
+      # - 'mongodb-compass-bin'  # 'mongodb-compass' is available as 'mongodb-compass-bin' in AUR
+      # - 'mongodb-tools-bin'  # 'mongodb-tools' is available as 'mongodb-tools-bin' in AUR
 
 - name: Install necessary packages for Arch
   pacman:
     name: '{{ packages }}'
     state: present
-  when: ansible_os_family == "Archlinux"

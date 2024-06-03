@@ -25,6 +25,16 @@
   file:
     path: '/etc/keyd'
     state: directory
+    mode: '0755'
+
+- name: Change owner of keyd config directory
+  file:
+    path: '/etc/keyd'
+    state: directory
+    owner: '{{ user }}'
+    group: '{{ user }}'
+    mode: '0755'
+  become: true
 
 - name: Write keyd config
   copy:
@@ -42,11 +52,12 @@
       u = home
       o = end
     dest: '/etc/keyd/config.cfg'
-    owner: root
-    group: root
+    owner: '{{ user }}'
+    group: '{{ user }}'
     mode: '0644'
 
 - name: Restart keyd service
   systemd:
     name: keyd
     state: restarted
+  become: true

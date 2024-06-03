@@ -1,23 +1,12 @@
-# Update cache and install Python for Ansible
-#   Debian OS family
-- name: Update cache (Debian)
-  apt:
-    update_cache: true
-  when: ansible_os_family == "Debian"
-
-- name: Install Python for Ansible on Debian
-  raw: test -e /usr/bin/python || (apt -y update && apt install -y python-minimal)
-  when: ansible_os_family == "Debian"
-
 #   Archlinux OS
 - name: Update cache (Arch)
+  become: true
   pacman:
     update_cache: yes
-  when: ansible_os_family == "Archlinux"
 
 - name: Install Python for Ansible on Arch
   raw: test -e /usr/bin/python || (pacman -Sy --noconfirm python)
-  when: ansible_os_family == "Archlinux"
+
 # - name: Clone yay-git repsitory
 #   git:
 #     repo: 'https://aur.archlinux.org/yay.git'

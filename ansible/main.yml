@@ -1,15 +1,11 @@
 - hosts: localhost
-  vars_prompt:
-    - name: 'vlt_pass'
-      prompt: 'Enter password for vault'
-      private: yes
-  gather_facts: yes
-  become: true
+  gather_facts: no
+  become: false
   pre_tasks:
     - name: Initial setup
       include_tasks: setup.yml
   vars:
-    user: '{{ ansible_user_id }}'
+    user: 'bchk'
   tasks:
     - name: Include tasks
       include_tasks: '{{ item }}.yml'
@@ -18,9 +14,8 @@
         - zsh
         - aliases
         - git
-        # - keyd
+        - keyd
         - node
-        # - hyperland
         - secrets
 #
 #

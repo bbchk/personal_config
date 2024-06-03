@@ -9,26 +9,26 @@
         repo: 'https://github.com/MichaelAquilina/zsh-you-should-use.git'
 
 - name: Install zsh
-  apt:
-    name: zsh
-    state: present
-  when: ansible_os_family == "Debian"
-
-- name: Install zsh
   pacman:
     name: zsh
     state: present
-  when: ansible_os_family == "Archlinux"
+
+- name: Remove previous cfg
+  file:
+    path: /home/{{user}}/.oh-my-zsh
+    state: absent
+  become: true
+
 
 - name: Install oh-my-zsh
   shell: |
     sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
   args:
-    executable: /bin/bash
-  # become_method: sudo
-
+    executable: /bin/zsh
+    
 - name: Set zsh as default shell
   shell: chsh -s $(which zsh) "{{ user }}"
+  become: true
 
 - name: Install plugins
   git:
