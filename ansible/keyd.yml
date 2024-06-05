@@ -51,7 +51,7 @@
       l = right
       u = home
       o = end
-    dest: '/etc/keyd/config.cfg'
+    dest: '/etc/keyd/default.conf'
     owner: '{{ user }}'
     group: '{{ user }}'
     mode: '0644'
