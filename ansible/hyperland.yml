@@ -2,3 +2,36 @@
 #   command:
 #     cmd: yay -S hyprland
 #     creates: /usr/bin/hyprland
+
+# stow dotfiles
+
+# install howdy and configure automatically
+
+# install paru
+
+# install hyprpaper
+
+# install waybar
+
+set binding for waybar toggle and change bash file permissions
+➜  scripts chmod +x ~/.config/hypr/cfg/scripts/waybar_toggle.sh
+
+exec-once=waybar
+
+, brightnessctl, grimshot, grim
+
+
+
+bind = ,XF86AudioRaiseVolume, exec, pactl set-sink-volume @DEFAULT_SINK@ +5%
+bind = ,XF86AudioLowerVolume, exec, pactl set-sink-volume @DEFAULT_SINK@ -5%
+bind = ,XF86AudioMute, exec, pactl set-sink-volume @DEFAULT_SINK@ 0%
+
+# # Brightness
+bind=,XF86MonBrightnessDown,exec,brightnessctl set 10%-
+bind=,XF86MonBrightnessUp,exec,brightnessctl set +10%
+
+
+bind = ,Print, exec, grimshot copy active
+bind = ,$mainMod+Shift+p, exec, grimshot copy area
+bind = $mainMod_SHIFT, p, exec, grimshot copy area
+
