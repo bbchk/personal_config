@@ -21,3 +21,10 @@
 #
 # ansible-pull -U https://github.com/bbuukk/pers.git ansible/main.yml
 
+# install tmux 
+# 
+
+# change config of pacman
+# uncomment color and parallel downloads, also add line ILoveCandy, then update the pacman by writing pacman -Sy
+
+# install mercurial dvs, and then install firefox-nightly
