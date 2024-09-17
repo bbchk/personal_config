@@ -20,6 +20,17 @@
 #
 #
 # ansible-pull -U https://github.com/bbuukk/pers.git ansible/main.yml
+# install rvm and ruby
+# install google chrome dev and change its 
+# sudo vim /usr/share/applications/google-chrome.desktop
+#Exec=/usr/bin/google-chrome-stable --force-device-scale-factor=2 %U
+# to have scale factor
+#
+# install tmux 
+# install fzf https://github.com/junegunn/fzf?tab=readme-ov-file#installation and ./install it 
+#
+#
+# screate script to fzf into tmux sessions
 
 # install tmux 
 # 

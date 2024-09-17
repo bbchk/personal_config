@@ -37,7 +37,7 @@ include sway_config/key_bindings/layout
 include sway_config/key_bindings/scratchpad
 
 # Keyboard Shortcuts (hardware) #
-include sway_config/key_bindings/harware
+include sway_config/key_bindings/hardware
 
 # Keyboard Shortcuts (launching applications) #
 include sway_config/key_bindings/applications
