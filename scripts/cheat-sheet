@@ -2,7 +2,7 @@
 #!/usr/bin/env bash
 
 languages=$(echo "javascript ruby rust" | tr " " "\n")
-core_utils=$(echo "find awk sed xargs" | tr " " "\n")
+core_utils=$(echo "git find awk sed xargs" | tr " " "\n")
 
 selected=$(echo -e "$languages\n$core_utils" | fzf)
 
