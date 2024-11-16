@@ -1,15 +1,25 @@
 - name: Define package list
   set_fact:
     packages:
-      - 'git'
-      - 'base-devel'  # equivalent to 'build-essential' in Debian
-      - 'code'
-      - 'keepassxc'
-      # - 'postman-bin'  # 'postman' is available as 'postman-bin' in AUR
-      # - 'mongodb-compass-bin'  # 'mongodb-compass' is available as 'mongodb-compass-bin' in AUR
-      # - 'mongodb-tools-bin'  # 'mongodb-tools' is available as 'mongodb-tools-bin' in AUR
+      - "git"
+      - "base-devel"
+      - "keepassxc"
+      - "aws-cli-v2"
+      - "bruno"
+      - "docker-desktop"
+      - "google-chrome"
+      - "grimshot"
+      - "members"
+      - "ttf-ms-fonts"
+      - "xwaylandvideobridge-git"
+      - "yay"
+      - "tmux"
+      - "neovim"
+      - "openfortivpn"
 
 - name: Install necessary packages for Arch
   pacman:
-    name: '{{ packages }}'
+    name: "{{ packages }}"
     state: present
+
+    sioyek to install!

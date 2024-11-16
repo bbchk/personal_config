@@ -19,8 +19,10 @@
         - secrets
 #
 #
+# stow dotfiles
+#
 # ansible-pull -U https://github.com/bbuukk/pers.git ansible/main.yml
-# install rvm and ruby
+#
 # install google chrome dev and change its
 # sudo vim /usr/share/applications/google-chrome.desktop
 #Exec=/usr/bin/google-chrome-stable --force-device-scale-factor=2 %U
@@ -28,7 +30,6 @@
 #
 # install tmux
 # install fzf https://github.com/junegunn/fzf?tab=readme-ov-file#installation and ./install it
-#
 #
 # screate script to fzf into tmux sessions
 
@@ -38,7 +39,5 @@
 # change config of pacman
 # uncomment color and parallel downloads, also add line ILoveCandy, then update the pacman by writing pacman -Sy
 
-# install mercurial dvs, and then install firefox-nightly
-#
 # install github cli and provide user ability to auth in the end of script
 

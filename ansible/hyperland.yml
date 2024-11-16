@@ -1,18 +1,7 @@
-2# install firefox and set theme to ~/.mozilla/firefox from fox/userChrome.css
-# - name: Install Hyprland using yay
-#   command:
-#     cmd: yay -S hyprland
-#     creates: /usr/bin/hyprland
 
-# stow dotfiles
-
-# install howdy and configure automatically
-
-# install paru
 
 # install hyprpaper
-
-# install wa ybar
+# install waybar
 
 set binding for waybar toggle and change bash file permissions
 ➜  scripts chmod +x ~/.config/hypr/cfg/scripts/waybar_toggle.sh
