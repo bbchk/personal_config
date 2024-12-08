@@ -3,6 +3,15 @@
   pacman:
     update_cache: yes
 
+- name: Copy pacman.conf to /etc
+  copy:
+    src: "{{ playbook_dir }}/cfg/pacman.conf"
+    dest: "/etc/pacman.conf"
+    owner: root
+    group: root
+    mode: "0644"
+  become: yes
+
 - name: Install Python for Ansible on Arch
   raw: test -e /usr/bin/python || (pacman -Sy --noconfirm python)
 
@@ -10,11 +19,9 @@
   git:
     repo: "https://aur.archlinux.org/yay.git"
     dest: "/tmp/yay-git"
-  when: ansible_os_family == "Archlinux"
 
 - name: Build and install yay
   command:
     cmd: makepkg -sri
     chdir: /tmp/yay-git
     creates: /usr/bin/yay
-  when: ansible_os_family == "Archlinux"
