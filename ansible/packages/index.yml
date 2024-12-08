@@ -18,20 +18,20 @@
       - "openfortivpn"
       - "fzf"
       - "github-cli"
+      - "zsh"
 
 - name: Install necessary packages for Arch
   pacman:
     name: "{{ packages }}"
     state: present
-
-- name: Define aur package list
-  set_fact:
-    packages:
-      - "git"
-      - "google-chrome-stable"
-- name: Install necessary packages for Arch using yay
-  become: yes
-  shell: yay -S --noconfirm {{ item }}
-  loop: "{{ packages }}"
-  args:
-    executable: /bin/zsh
+# - name: Define aur package list
+#   set_fact:
+#     packages:
+#       - "git"
+#       - "google-chrome-stable"
+# - name: Install necessary packages for Arch using yay
+#   become: yes
+#   shell: yay -S --noconfirm {{ item }}
+#   loop: "{{ packages }}"
+#   args:
+#     executable: /bin/zsh
