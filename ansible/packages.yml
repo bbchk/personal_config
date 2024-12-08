@@ -22,4 +22,13 @@
     name: "{{ packages }}"
     state: present
 
-    sioyek to install!
+    # sioyek to install!
+# install google chrome dev and change its
+# sudo vim /usr/share/applications/google-chrome.desktop
+#Exec=/usr/bin/google-chrome-stable --force-device-scale-factor=2 %U
+# to have scale factor
+#
+# install tmux
+# install fzf https://github.com/junegunn/fzf?tab=readme-ov-file#installation and ./install it
+#
+# install github cli and provide user ability to auth in the end of script
