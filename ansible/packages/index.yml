@@ -1,3 +1,4 @@
+---
 - name: Define package list
   set_fact:
     packages:
@@ -7,7 +8,6 @@
       - "aws-cli-v2"
       - "bruno"
       - "docker-desktop"
-      - "google-chrome"
       - "grimshot"
       - "members"
       - "ttf-ms-fonts"
@@ -16,19 +16,22 @@
       - "tmux"
       - "neovim"
       - "openfortivpn"
+      - "fzf"
+      - "github-cli"
 
 - name: Install necessary packages for Arch
   pacman:
     name: "{{ packages }}"
     state: present
 
-    # sioyek to install!
-# install google chrome dev and change its
-# sudo vim /usr/share/applications/google-chrome.desktop
-#Exec=/usr/bin/google-chrome-stable --force-device-scale-factor=2 %U
-# to have scale factor
-#
-# install tmux
-# install fzf https://github.com/junegunn/fzf?tab=readme-ov-file#installation and ./install it
-#
-# install github cli and provide user ability to auth in the end of script
+- name: Define aur package list
+  set_fact:
+    packages:
+      - "git"
+      - "google-chrome-stable"
+- name: Install necessary packages for Arch using yay
+  become: yes
+  shell: yay -S --noconfirm {{ item }}
+  loop: "{{ packages }}"
+  args:
+    executable: /bin/zsh

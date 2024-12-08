@@ -11,10 +11,10 @@
       include_tasks: "{{ item }}.yml"
       loop:
         - packages
-        - zsh
-        - aliases
-        - git
-        - keyd
-        - node
-        - secrets
+        # - zsh
+        # - aliases
+        # - git
+        # - keyd
+        # - node
+        # - secrets
         # - dotfiles
