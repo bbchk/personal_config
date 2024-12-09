@@ -12,6 +12,7 @@
       loop:
         - packages/install
         - packages/config
+        - secrets/index
         # - secrets
         # - stow dotfiles
         # source .zshrc

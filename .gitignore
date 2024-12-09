@@ -1,4 +1,1 @@
-keepassxc/key_decrypted
-ssh/id_rsa
-ssh/id_ed25519
 scripts/openforti.cfg
