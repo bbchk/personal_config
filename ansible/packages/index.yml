@@ -19,6 +19,7 @@
       - "fzf"
       - "github-cli"
       - "zsh"
+      - "keychain"
 
 - name: Install necessary packages for Arch
   pacman:
