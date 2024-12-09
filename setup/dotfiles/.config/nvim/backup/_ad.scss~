@@ -1,0 +1,88 @@
+@use "@styles/settings/index" as *;
+
+.ad {
+  display: grid;
+  gap: 10px;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: 200px 200px;
+  justify-items: center;
+  align-items: center;
+  grid-template-areas:
+    "heading image"
+    "symbols image";
+
+  padding: 60px 20px;
+
+  color: $color-text;
+
+  perspective: 1000px;
+}
+
+.ad__heading {
+  grid-area: heading;
+
+  font-size: 3rem;
+  max-width: 30ch;
+  text-align: center;
+}
+
+.ad__symbolsList {
+  grid-area: symbols;
+
+  display: flex;
+  justify-content: space-around;
+}
+
+.ad__symbolsItem {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  margin: 10px;
+  padding: 10px;
+
+  min-width: 150px;
+
+  border: 5px solid $color-primary;
+  color: $color-primary;
+
+  border-radius: 20px;
+
+  /* transform-origin: center; */
+  /* transform: rotateX(10deg) rotateY(-30deg); */
+}
+
+.ad__symbolFigure {
+  display: flex;
+  gap: 10px;
+  flex-flow: column nowrap;
+  justify-content: center;
+  align-items: center;
+
+  width: 100px;
+
+  span {
+    font-size: 7rem;
+  }
+
+  figcaption {
+    text-align: center;
+    font-size: 1.3rem;
+  }
+}
+
+.ad__image {
+  grid-area: image;
+
+  transition: transform 0.5s;
+  transform-origin: center;
+
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+
+  /* transform-origin: center; */
+  /* transform: rotateX(0deg) rotateY(-20deg); */
+  /* Rotate the image on hover */
+  /* Sets the origin of transformation */
+}

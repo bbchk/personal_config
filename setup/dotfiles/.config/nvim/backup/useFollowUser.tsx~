@@ -1,0 +1,25 @@
+import { useMutation, useQueryClient } from '@tanstack/react-query';
+import { followUser, unfollowUser } from 'api/profile';
+
+// Define an enum for the action types
+enum FollowAction {
+  Follow = 'follow',
+  Unfollow = 'unfollow'
+}
+
+const useManageFollowingOfUser = (action: FollowAction) => {
+  const queryClient = useQueryClient();
+
+  return useMutation({
+    mutationFn: action === FollowAction.Follow ? followUser : unfollowUser,
+    onSuccess: (variables) => {
+      queryClient.invalidateQueries({ queryKey: ['user', variables.userId] });
+      queryClient.invalidateQueries({ queryKey: ['me'] });
+    }
+  });
+};
+
+export const useFollowUser = () =>
+  useManageFollowingOfUser(FollowAction.Follow);
+export const useUnfollowUser = () =>
+  useManageFollowingOfUser(FollowAction.Unfollow);

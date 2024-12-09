@@ -1,0 +1,28 @@
+---
+- name: Update Google Chrome desktop file to set scale factor
+  hosts: all
+  become: yes
+  tasks:
+    - name: Find Google Chrome desktop file
+      find:
+        paths: /usr/share/applications
+        patterns: "google-chrome.desktop"
+      register: chrome_desktop_file
+
+    - name: Ensure Google Chrome desktop file is found
+      fail:
+        msg: "Google Chrome desktop file not found."
+      when: chrome_desktop_file.matched == 0
+
+    - name: Update Exec line in Google Chrome desktop file
+      lineinfile:
+        path: "{{ item.path }}"
+        regexp: "^Exec=.*"
+        line: "Exec=/usr/bin/google-chrome-stable --force-device-scale-factor=2 %U"
+        backup: yes
+      loop: "{{ chrome_desktop_file.files }}"
+      when: chrome_desktop_file.matched > 0
+
+    - name: Notify user of changes
+      debug:
+        msg: "Google Chrome desktop file updated to set scale factor to 2."

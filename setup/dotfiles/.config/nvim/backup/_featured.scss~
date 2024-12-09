@@ -1,0 +1,18 @@
+/* <article class="featuredArticle"> */
+/*               <a class="featuredArticle__link"> */
+/*                 <figure class="featuredArticle__figure"> */
+/*                   <img src="../assets/images/featuredArticle2.jpeg" class="featuredArticle__image"></img> */
+/*                   <figcaption class="featuredArticle__caption"> */
+/*                 <div class="featuredArticle__header"> */
+/*                   <h3>Design</h3> */
+/*                   <i class="fa-regular fa-gem" aria-label="Premium article"></i> */
+/*                 </div> */
+/*                 <div class="featuredArticle__body"> */
+/*                   <time datetime="2024-05-04">May 4, 2024</time> */
+/*                   <h4>Lorem ipsum dolor sit</h4> */
+/*                   <p>By: Author Name</p> */
+/*                 </div> */
+/*                   </figcaption> */
+/*                 </figure> */
+/*               </a> */
+/*             </article> */

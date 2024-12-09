@@ -1,0 +1,69 @@
+import ConfirmDeleteModal from 'components/ConfirmDeleteModal';
+import { HeroProfile } from 'components/Hero';
+import { User } from 'types';
+import ProfileEditForm from 'components/ProfileEditForm';
+import { SortingOrder } from 'enums';
+import useGetMe from 'hooks/auth/useGetMe';
+import useDeleteUser from 'hooks/useDeleteUser';
+import { useState } from 'react';
+import { Link } from 'react-router-dom';
+
+const EditProfile = () => {
+  const { user } = useGetMe();
+  const [deleteAccount, setDeleteAccount] = useState(false);
+  const { mutate, isPending } = useDeleteUser();
+
+  return (
+    <main>
+      {deleteAccount && (
+        <ConfirmDeleteModal
+          setIsModal={setDeleteAccount}
+          mutate={mutate}
+          isPending={isPending}
+          navigeteTo="/"
+          title="Profile"
+        />
+      )}
+
+      <HeroProfile user={user}>
+        <div>
+          <h1 className="mb-4 font-serif text-4xl font-bold">Edit Profile</h1>
+
+          <Link
+            className="mb-3 block font-bold text-primary"
+            to={`/profile/${user?.id}?${SortingOrder.CREATED_AT_ASC}`}
+          >
+            {'<-'} Back to profile
+          </Link>
+
+          <Link
+            className="block font-bold text-primary"
+            to={`/subscription/${user?.id}/edit`}
+          >
+            Edit subscription {'->'}
+          </Link>
+        </div>
+      </HeroProfile>
+
+      <div className="py-10">
+        {user && (
+          <ProfileEditForm
+            name={user.name}
+            email={user.email}
+            slug=""
+            userId={user.id}
+          />
+        )}
+
+        <button
+          onClick={() => setDeleteAccount(true)}
+          className="w-full text-[#FF2CB5]"
+        >
+          Delete Profile
+        </button>
+      </div>
+    </main>
+  );
+};
+
+export default EditProfile;

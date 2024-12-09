@@ -1,0 +1,141 @@
+
+<?php
+
+namespace Tests\Feature;
+
+use App\Models\User;
+use Carbon\Carbon;
+use Illuminate\Foundation\Testing\RefreshDatabase;
+use Illuminate\Foundation\Testing\WithFaker;
+use Illuminate\Http\UploadedFile;
+use Illuminate\Support\Facades\Storage;
+use Tests\TestCase;
+
+class UserControllerTest extends TestCase
+{
+    use RefreshDatabase, WithFaker;
+
+    public function test_index_returns_paginated_users()
+    {
+        User::factory()->count(20)->create();
+
+        $response = $this->getJson('/users?page=1&perPage=10');
+
+        $response->assertStatus(200)
+            ->assertJsonStructure([
+                'data',
+                'current_page',
+                'per_page',
+                'total'
+            ])
+            ->assertJsonCount(10, 'data');
+    }
+
+    public function test_index_filters_by_email_verification()
+    {
+        User::factory()->count(5)->create(['email_verified_at' => null]);
+        User::factory()->count(5)->create(['email_verified_at' => now()]);
+
+        $response = $this->getJson('/users?filter[isEmailVerified]=1');
+
+        $response->assertStatus(200)
+            ->assertJsonCount(5, 'data');
+    }
+
+    public function test_index_filters_by_created_since_date()
+    {
+        User::factory()->count(3)->create(['created_at' => now()->subDays(5)]);
+        User::factory()->count(2)->create(['created_at' => now()]);
+
+        $response = $this->getJson('/users?filter[createdSinceDate]=' . now()->subDays(2)->toDateString());
+
+        $response->assertStatus(200)
+            ->assertJsonCount(2, 'data');
+    }
+
+    public function test_show_returns_user()
+    {
+        $user = User::factory()->create();
+
+        $response = $this->getJson("/users/{$user->id}");
+
+        $response->assertStatus(200)
+            ->assertJson($user->toArray());
+    }
+
+    public function test_store_creates_new_user()
+    {
+        Storage::fake('avatars');
+
+        $userData = [
+            'name' => $this->faker->name,
+            'email' => $this->faker->unique()->safeEmail,
+            'password' => 'password123',
+            'avatar' => UploadedFile::fake()->image('avatar.jpg')
+        ];
+
+        $response = $this->postJson('/users', $userData);
+
+        $response->assertStatus(201)
+            ->assertJsonStructure(['id', 'name', 'email', 'avatar_url']);
+
+        $this->assertDatabaseHas('users', [
+            'name' => $userData['name'],
+            'email' => $userData['email'],
+        ]);
+
+        Storage::disk('avatars')->assertExists($response['avatar_url']);
+    }
+
+    public function test_update_modifies_user()
+    {
+        $user = User::factory()->create();
+        $this->actingAs($user);
+
+        $updatedData = [
+            'name' => 'Updated Name',
+            'email' => 'updated@example.com',
+        ];
+
+        $response = $this->putJson("/users/{$user->id}", $updatedData);
+
+        $response->assertStatus(200)
+            ->assertJson($updatedData);
+
+        $this->assertDatabaseHas('users', $updatedData);
+    }
+
+    public function test_update_fails_for_unauthorized_user()
+    {
+        $user = User::factory()->create();
+        $anotherUser = User::factory()->create();
+        $this->actingAs($anotherUser);
+
+        $response = $this->putJson("/users/{$user->id}", ['name' => 'New Name']);
+
+        $response->assertStatus(403);
+    }
+
+    public function test_destroy_deletes_user()
+    {
+        $user = User::factory()->create();
+        $this->actingAs($user);
+
+        $response = $this->deleteJson("/users/{$user->id}");
+
+        $response->assertStatus(204);
+        $this->assertDatabaseMissing('users', ['id' => $user->id]);
+    }
+
+    public function test_destroy_fails_for_unauthorized_user()
+    {
+        $user = User::factory()->create();
+        $anotherUser = User::factory()->create();
+        $this->actingAs($anotherUser);
+
+        $response = $this->deleteJson("/users/{$user->id}");
+
+        $response->assertStatus(403);
+        $this->assertDatabaseHas('users', ['id' => $user->id]);
+    }
+}

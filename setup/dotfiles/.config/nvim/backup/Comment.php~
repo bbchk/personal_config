@@ -1,0 +1,35 @@
+<?php
+
+namespace App\Models;
+
+use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Model;
+<<<<<<< HEAD
+=======
+use Illuminate\Database\Eloquent\ModelNotFoundException;
+>>>>>>> ee3571a (feat(comments): implement comment authorship)
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+
+class Comment extends Model
+{
+    use HasFactory;
+
+<<<<<<< HEAD
+=======
+    public function resolveRouteBinding($value, $field = null)
+    {
+        $record = $this->where('id', $value)->first();
+
+        if (!$record) {
+            throw new ModelNotFoundException("The requested comment could not be found. It may have been removed or does not exist.", 404);
+        }
+
+        return $record;
+    }
+
+>>>>>>> ee3571a (feat(comments): implement comment authorship)
+    public function author(): BelongsTo
+    {
+        return $this->belongsTo(User::class, 'author_id');
+    }
+}

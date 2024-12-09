@@ -1,0 +1,119 @@
+<?php
+
+namespace App\Models\Services;
+
+use App\Builders\ArticleQueryBuilder;
+use App\DTO\ArticleMutationDTO;
+use App\DTO\SearchParamsDTO;
+use App\Models\Article;
+use App\Models\ArticleVersion;
+use App\Models\Tag;
+use App\Models\User;
+use App\Traits\SortableTrait;
+use Illuminate\Contracts\Pagination\LengthAwarePaginator;
+use Illuminate\Support\Facades\Log;
+
+class ArticleService
+{
+  use SortableTrait;
+
+  public function __construct(protected ArticleQueryBuilder $queryBuilder) {}
+
+  public function listAllArticles(SearchParamsDTO $params): LengthAwarePaginator
+  {
+    return $this->queryBuilder
+      ->buildArticleQuery($params->getKeyword(), $params->getSorts())
+      ->with(['author', 'tags'])
+      ->paginate($params->getPerPage());
+  }
+
+  public function listArticlesByTag(Tag $tag, SearchParamsDTO $params): LengthAwarePaginator
+  {
+    return $this->queryBuilder
+      ->buildTagArticleQuery($tag, $params->getKeyword(), $params->getSorts())
+      ->with(['author', 'tags'])
+      ->paginate($params->getPerPage());
+  }
+
+  public function getPremiumArticles(SearchParamsDTO $params): LengthAwarePaginator
+  {
+    return $this->queryBuilder->buildArticleQuery($params->getKeyword(), $params->getSorts())
+      ->where('is_premium', true)
+      ->with(['author', 'tags'])
+      ->select(['id', 'title', 'user_id', 'is_premium', 'created_at', 'updated_at', 'image_url'])
+      ->paginate($params->getPerPage());
+  }
+
+  public function listPremiumArticlesByTag(Tag $tag, SearchParamsDTO $params): LengthAwarePaginator
+  {
+    return $this->queryBuilder
+      ->buildTagArticleQuery($tag, $params->getKeyword(), $params->getSorts())
+      ->where('is_premium', true)
+      ->with(['author', 'tags'])
+      ->select(['articles.id', 'title', 'user_id', 'is_premium', 'articles.created_at', 'articles.updated_at'])
+      ->paginate($params->getPerPage());
+  }
+
+  public function listArticleByAuthor(int $userId, SearchParamsDTO $params): LengthAwarePaginator
+  {
+    return $this->queryBuilder
+      ->buildUserArticleQuery($userId, $params->getSorts())
+      ->with(['author', 'tags'])
+      ->paginate($params->getPerPage());
+  }
+
+  public function findArticle(int $articleId): Article
+  {
+    return Article::query()->with([
+      'author',
+      'author.articles' => function ($query) {
+        $query->select(['id', 'title', 'user_id'])->take(3);
+      },
+      'tags'
+    ])->findOrFail($articleId);
+  }
+
+  public function getCommentsForArticle(Article $article, SearchParamsDTO $params): LengthAwarePaginator
+  {
+    $query = $article->comments();
+
+    $this->applySorting($query, $params->getSorts());
+
+    return $query->with('author')->paginate($params->getPerPage());
+  }
+
+  public function storeArticle(ArticleMutationDTO $data, User $author): Article
+  {
+    $article = new Article();
+    $article->title = $data->getTitle();
+    $article->content = $data->getContent();
+    $article->author()->associate($author);
+    Log::info("is_premium: " . $data->getPremium();)
+    $article->is_premium = $data->getPremium();
+    $article->save();
+
+    $author->articleDrafts()->delete();
+
+    return $article;
+  }
+
+  public function updateArticle(ArticleMutationDTO $data, Article $article): bool
+  {
+    $article->title = $data->getTitle();
+    $article->content = $data->getContent();
+    $article->is_premium = $data->getPremium();
+
+    return $article->save();
+  }
+
+  public function syncTags($article, $tags)
+  {
+    if ($tags) {
+      $tagsIds = array_map(function ($tag) {
+        return $tag['id'];
+      }, $tags);
+
+      $article->tags()->sync($tagsIds);
+    }
+  }
+}

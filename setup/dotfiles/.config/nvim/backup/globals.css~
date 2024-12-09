@@ -1,0 +1,75 @@
+@import url('https://fonts.googleapis.com/css2?family=Alegreya+Sans:wght@100;400;700&family=Alegreya:ital,wght@0,400..900;1,400..900&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Custom styles */
+.app-container {
+  @apply container mx-auto px-4;
+}
+
+.article-container {
+  @apply mx-auto max-w-[891px];
+}
+
+.header-link {
+  @apply font-serif font-bold transition duration-300 hover:text-primary;
+}
+
+<<<<<<< HEAD
+.link-primary {
+  @apply inline-block rounded-[21px] bg-primary font-sans font-bold text-black hover:bg-[#228be6] hover:text-white hover:shadow-md;
+}
+
+=======
+>>>>>>> 553afda9 (refactor: extend button styles from base button class)
+.button-base {
+  @apply rounded-[21px] font-serif font-bold text-dark-200;
+}
+
+.button-primary {
+  @apply button-base bg-primary;
+}
+
+.button-secondary {
+  @apply button-base bg-light-100;
+}
+
+.fadded {
+  @apply absolute inset-0 bg-dark-100/40;
+}
+
+.rouded-left-side {
+  @apply rounded-bl-[10px] rounded-tl-[10px];
+}
+
+.rouded-right-side {
+  @apply rounded-br-[10px] rounded-tr-[10px];
+}
+
+.premium-title {
+  @apply text-center font-serif text-3xl font-bold md:text-5xl lg:text-start;
+}
+
+.progress {
+  animation: progress 1s infinite linear;
+}
+
+.left-right {
+  transform-origin: 0% 50%;
+}
+
+@keyframes progress {
+  0% {
+    transform: translateX(0) scaleX(0);
+  }
+
+  40% {
+    transform: translateX(0) scaleX(0.4);
+  }
+
+  100% {
+    transform: translateX(100%) scaleX(0.5);
+  }
+}

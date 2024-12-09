@@ -1,0 +1,27 @@
+@use "settings/variables/index" as *;
+@use "settings/index" as *;
+@use "settings/mixins" as *;
+
+.articlePremiumBadge {
+  padding: 5px;
+  border-radius: 50%;
+
+  background-color: $color-white;
+
+  color: $color-primary;
+}
+
+//todo? rename?
+.articleTopicBadge {
+  padding: 2px 15px;
+  border-radius: 20px;
+
+  width: min-content;
+
+  font-weight: bold;
+  font-family: $font-serif;
+  text-align: center;
+  color: $color-black;
+
+  background-color: $color-primary;
+}

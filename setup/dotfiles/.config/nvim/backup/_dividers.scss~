@@ -1,0 +1,12 @@
+.contextDivider {
+  height: 2px;
+  background-color: $color-primary;
+}
+
+.pageDivider {
+  height: 1px;
+  width: 100vw;
+
+  background-color: $color-green-midnight;
+  border: none;
+}

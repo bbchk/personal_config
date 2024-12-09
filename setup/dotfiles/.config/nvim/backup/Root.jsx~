@@ -1,0 +1,62 @@
+import MemoryDashboard from 'components/memory/memoryDashboard';
+import MemoryTable from 'components/memory/memoryTable';
+import MemoryVictoryModal from 'components/memory/memoryVictoryModal';
+import { useState, useRef } from 'react';
+
+const Root = () => {
+  const [gameState, setGameState] = useState('running');
+  const [clicks, setClicks] = useState(0);
+  const [bestScore, setBestScore] = useState(
+    localStorage.getItem('bestScore') ?? 0
+  );
+
+  function restartGame() {
+    setClicks(0);
+    setGameState('restart');
+
+    // Set back to running in next render
+    setTimeout(() => {
+      setGameState('running');
+    }, 0);
+  }
+
+  const victorySound = useRef(new Audio('/sounds/victory.mp3'));
+
+  function registerVictory() {
+    //check for new best score
+    if (!bestScore || clicks < bestScore) {
+      localStorage.setItem('bestScore', clicks + 1);
+      setBestScore(clicks + 1);
+    }
+
+    setGameState('victory');
+  }
+
+  return (
+    <>
+      <main className="flex max-w-[900px] flex-col items-center">
+        <MemoryTable
+          gameState={gameState}
+          incrementClickCount={() => setClicks((prev) => ++prev)}
+          registerVictory={registerVictory}
+        />
+        <MemoryDashboard
+          bestScore={bestScore}
+          clicks={clicks}
+          restartGame={restartGame}
+        />
+      </main>
+
+      {gameState === 'victory' && (
+        <MemoryVictoryModal
+          clicks={clicks}
+          bestScore={bestScore}
+          restartGame={restartGame}
+          sound={victorySound.current}
+        />
+      )}
+    </>
+  );
+};
+
+export default Root;

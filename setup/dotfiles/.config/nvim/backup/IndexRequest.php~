@@ -1,0 +1,49 @@
+<?php
+
+namespace App\Http\Requests\Common;
+
+use Illuminate\Foundation\Http\FormRequest;
+
+class IndexRequest extends FormRequest
+{
+    /**
+     * Determine if the user is authorized to make this request.
+     */
+    public function authorize(): bool
+    {
+        return true;
+    }
+
+    protected function prepareforvalidation(): void
+    {
+        $this->merge([
+            //todo: if it is cursor it should not be defaulted
+            //todo: default cursor on first req
+            'page' => (int) ($this->input('page', 1)) ?? null,
+            // 'cursor' => $this->input('cursor', null)
+
+        ]);
+    }
+
+    protected function passedValidation(): void
+    {
+        $this->replace(['name' => 'Taylor']);
+    }
+
+    /**
+     * get the validation rules that apply to the request.
+     *
+     * @return array<string, \illuminate\contracts\validation\validationrule|array<mixed>|string>
+     */
+    public function rules(): array
+    {
+        return [
+            'page' => ['sometimes', 'required', 'numeric'],
+            'perPage' => ['required', 'numeric'],
+            'sort' => ['required', 'array'],
+            //todo?: is it relevant to have it for all the child requests in this base index req?
+            'sort.created_at' => ['sometimes', 'required', 'string', 'in:asc,desc'],
+            'cursor' => ['nullable', 'string'],
+        ];
+    }
+}

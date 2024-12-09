@@ -1,0 +1,55 @@
+<?php
+
+namespace App\Http\Resources;
+
+use App\Http\Resources\AuthorResource;
+use App\Http\Resources\CommentResource;
+use Illuminate\Http\Resources\Json\JsonResource;
+use Illuminate\Support\Facades\Auth;
+
+class ArticleResource extends JsonResource
+{
+
+    public function toArray($request)
+    {
+        $user = Auth::user();
+
+        $isPremiumUser = $user && $user->activeSubscription;
+        $isArticlePremium = $this->is_premium;
+
+        return [
+            'id' => $this->id,
+            'title' => $this->title,
+            'content' => $this->getFormattedContent($isArticlePremium, $isPremiumUser),
+            'author' => new AuthorResource($this->author),
+            'tags' => $this->tags,
+            'is_premium' => $this->is_premium,
+            'created_at' => $this->created_at,
+            'updated_at' => $this->updated_at,
+            'comments' => $this->getComments($isArticlePremium, $isPremiumUser),
+        ];
+    }
+
+    /**
+     * @param bool $isArticlePremium
+     * @param bool $isPremiumUser
+     * @return string
+     */
+    private function getFormattedContent(bool $isArticlePremium, bool $isPremiumUser): string
+    {
+        if ($isArticlePremium && !$isPremiumUser) {
+            return substr($this->content, 0, 100) . '...';
+        }
+
+        return $this->content;
+    }
+
+    private function getComments(bool $isArticlePremium, bool $isPremiumUser)
+    {
+        if ($isArticlePremium && !$isPremiumUser) {
+            return 'Can\'t see premium article comment';
+        }
+
+        return CommentResource::collection($this->whenLoaded('comments'));
+    }
+}

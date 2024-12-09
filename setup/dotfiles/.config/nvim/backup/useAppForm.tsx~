@@ -1,0 +1,119 @@
+import { useForm, zodResolver } from '@mantine/form';
+import {
+  createArticleFormSchema,
+  imageSchema,
+  loginFormSchema,
+  profileUpdateFormSchema,
+  registerFormSchema,
+  subscriptionUpdateFormSchema
+} from 'schema';
+import {
+  CreateArticleForm,
+  LoginForm,
+  ProfileUpdateForm,
+  RegisterForm,
+  SubscriptionForm
+} from 'types';
+import useGetArticle from './useGetArticle';
+import useGetImage from './useGetImage';
+import { SubscriptionType } from 'enums';
+
+const useCreateArticleForm = () => {
+  const { data } = useGetArticle();
+  const { data: imageFile } = useGetImage(data?.image_url || '');
+
+  const createArticleForm = useForm<CreateArticleForm>({
+    initialValues: {
+      title: data?.title || '',
+      date: new Date(),
+      slug: '',
+      tags: data?.tags || [],
+      content: data?.content || '',
+<<<<<<< HEAD
+      is_premium: data?.is_premium || false,
+=======
+      premium: false,
+>>>>>>> 88d68ea0 (fix: refactor featured and premium articles as per requiremt. Imlement simple Featured Articles page with pagination and search.)
+      image: imageFile || null
+    },
+    validate: zodResolver(createArticleFormSchema)
+  });
+
+  return { createArticleForm };
+};
+
+const useRegisterForm = () => {
+  const registerForm = useForm<RegisterForm>({
+    initialValues: {
+      email: '',
+      name: '',
+      password: '',
+      password_confirmation: ''
+    },
+    validate: zodResolver(registerFormSchema)
+  });
+
+  return { registerForm };
+};
+
+const useLoginForm = () => {
+  const loginForm = useForm<LoginForm>({
+    initialValues: {
+      email: '',
+      password: ''
+    },
+    validate: zodResolver(loginFormSchema)
+  });
+
+  return { loginForm };
+};
+
+const useUpadateProfileForm = (initialValues: ProfileUpdateForm) => {
+  const profileUpdateForm = useForm<ProfileUpdateForm>({
+    initialValues: {
+      ...initialValues
+    },
+    validate: zodResolver(profileUpdateFormSchema)
+  });
+
+  return { profileUpdateForm };
+};
+
+const useUpdateSubscriptionForm = () => {
+  const updateSubscriptionForm = useForm<SubscriptionForm>({
+    initialValues: {
+      card: '',
+      cvc: '',
+      month: '',
+      year: '',
+      name: '',
+      surname: '',
+      address: '',
+      type: SubscriptionType.MONTHLY,
+      total: 0
+    },
+    validate: zodResolver(subscriptionUpdateFormSchema)
+  });
+
+  return { updateSubscriptionForm };
+};
+
+const useAvatarEditForm = () => {
+  const editAvatarForm = useForm<{ image: File | null }>({
+    initialValues: {
+      image: null
+    },
+    validate: zodResolver(imageSchema)
+  });
+
+  return { editAvatarForm };
+};
+
+export {
+  useUpadateProfileForm,
+  useCreateArticleForm,
+  useRegisterForm,
+  useLoginForm,
+  useAvatarEditForm,
+  useUpdateSubscriptionForm
+};

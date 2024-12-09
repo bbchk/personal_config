@@ -1,0 +1,8 @@
+interface ApiTagIndexRequest {
+  page?: number;
+  perPage: number;
+  sort: {
+    created_at?: 'asc' | 'desc';
+    [key: string]: 'asc' | 'desc' | undefined;
+  };
+}

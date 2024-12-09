@@ -1,0 +1,72 @@
+import ConfirmDeleteModal from 'components/ConfirmDeleteModal';
+import EditSubscriptionForm from 'components/EditSubscriptionForm';
+import { HeroProfile } from 'components/Hero';
+import PurchaseHistory from 'components/PurchaseHistory';
+import { SortingOrder } from 'enums';
+import useGetMe from 'hooks/auth/useGetMe';
+import useCancelSubscription from 'hooks/useCancelSubscription';
+import useGetSubscriptions from 'hooks/useGetSubscriptions';
+import { useState } from 'react';
+import { Link } from 'react-router-dom';
+
+const EditSubscription = () => {
+  const { user } = useGetMe();
+
+  const { data: subscriptions } = useGetSubscriptions();
+
+  const [deleteSubscriptionModal, setDeleteSubscriptionModal] = useState(false);
+  const { mutate, isPending } = useCancelSubscription();
+
+  return (
+    <main>
+      {deleteSubscriptionModal && (
+        <ConfirmDeleteModal
+          setIsModal={setDeleteSubscriptionModal}
+          mutate={mutate}
+          isPending={isPending}
+          navigeteTo={`/profile/${user?.id}`}
+          title="Subscription"
+        />
+      )}
+
+      <HeroProfile user={user as User}>
+        <div>
+          <h1 className="mb-4 font-serif text-4xl font-bold">
+            Edit Subscription
+          </h1>
+
+          <Link
+            className="mb-3 block font-bold text-primary"
+            to={`/profile/${user?.id}/edit`}
+          >
+            Edit Profile {'->'}
+          </Link>
+
+          <Link
+            className="block font-bold text-primary"
+            to={`/profile/${user?.id}?${SortingOrder.CREATED_AT_ASC}`}
+          >
+            {'<-'} Back to profile
+          </Link>
+        </div>
+      </HeroProfile>
+
+      <div className="mx-auto max-w-sm py-10">
+        <EditSubscriptionForm userId={user?.id} />
+
+        {user?.active_subscription && (
+          <button
+            onClick={() => setDeleteSubscriptionModal(true)}
+            className="w-full text-[#FF2CB5]"
+          >
+            Remove Subscription
+          </button>
+        )}
+
+        {subscriptions?.data?.length > 0 && <PurchaseHistory />}
+      </div>
+    </main>
+  );
+};
+
+export default EditSubscription;

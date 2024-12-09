@@ -1,0 +1,25 @@
+services:
+  server:
+    deploy:
+      replicas: 1
+    build: .
+    ports:
+      - target: 3000
+        published: 3000
+    depends_on:
+      - mariadb
+    networks:
+      - app-net
+  mariadb:
+    deploy:
+      replicas: 1
+    image: mariadb:latest
+    environment:
+      - MARIADB_DATABASE=levelup_docker
+      - MARIADB_USER=levelup
+      - MARIADB_PASSWORD=levelup
+    networks:
+      - app-net
+networks:
+  app-net:
+    driver: bridge

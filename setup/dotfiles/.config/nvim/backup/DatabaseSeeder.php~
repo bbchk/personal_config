@@ -1,0 +1,44 @@
+<?php
+
+namespace Database\Seeders;
+
+use App\Models\Category;
+use App\Models\Comment;
+use App\Models\User;
+// use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+use Illuminate\Database\Seeder;
+
+class DatabaseSeeder extends Seeder
+{
+    /**
+     * Seed the application's database.
+     */
+    public function run(): void
+    {
+        $users = User::factory(50)->create();
+
+        $popularUsers = [29, 30, 31]; // Example user IDs
+        $followersCount = 9;
+        $followingCount = 9;
+
+        // foreach ($popularUsers as $userId) {
+        //     $user = User::find($userId);
+        //
+        //     // Add followers
+        //     $followers = User::where('id', '!=', $userId)->inRandomOrder()->take($followersCount)->get();
+        //     $user->followers()->attach($followers);
+        //
+        //     // Add following
+        //     $following = User::where('id', '!=', $userId)
+        //         ->whereNotIn('id', $followers->pluck('id'))
+        //         ->inRandomOrder()
+        //         ->take($followingCount)
+        //         ->get();
+        //     $user->following()->attach($following);
+        // }
+
+        $this->call(ArticleSeeder::class);
+        $this->call(TagSeeder::class);
+        $this->call(ArticleTagSeeder::class);
+    }
+}

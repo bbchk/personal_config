@@ -1,0 +1,46 @@
+@use "../../settings/variables/index" as *;
+@use "../../settings/index" as *;
+@use "../../settings/mixins" as *;
+
+.hero {
+  background-image: url("../assets/images/hero_bg.png");
+  background-size: cover;
+  background-position: center;
+  height: 90vh;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.container--hero {
+  @extend .container;
+}
+
+.hero__content {
+  max-width: 620px;
+
+  text-align: center;
+  color: $color-white;
+
+  p {
+    font-family: $font-sans;
+    font-size: 1.2rem;
+  }
+}
+
+.hero__title {
+  font-family: $font-serif;
+  font-size: 3rem;
+
+  span {
+    color: $color-primary;
+  }
+}
+
+.hero__divider {
+  @extend .contextDivider;
+  margin: 25px auto;
+
+  width: 180px;
+}

@@ -1,0 +1,54 @@
+<<<<<<< HEAD
+import React, { createContext, useContext, useMemo, useState } from 'react';
+=======
+import React, { createContext, useContext, useState } from 'react';
+>>>>>>> fa8cb1df (feat(global-ui-state): introduce context for managing modals state)
+
+interface GlobalUIContextType {
+  activeModal: string | null;
+  setActiveModal: React.Dispatch<React.SetStateAction<string | null>>;
+}
+
+const initialContext: GlobalUIContextType = {
+  activeModal: null,
+  setActiveModal: () => {}
+};
+
+const GlobalUIContext = createContext<GlobalUIContextType>(initialContext);
+
+export const GlobalUIProvider = ({
+  children
+}: {
+  children: React.ReactNode;
+}) => {
+  const [activeModal, setActiveModal] = useState<string | null>(null);
+
+<<<<<<< HEAD
+  const value = useMemo(
+    () => ({
+      activeModal,
+      setActiveModal
+    }),
+    [activeModal, setActiveModal]
+  );
+=======
+  const value: GlobalUIContextType = {
+    activeModal,
+    setActiveModal
+  };
+>>>>>>> fa8cb1df (feat(global-ui-state): introduce context for managing modals state)
+
+  return (
+    <GlobalUIContext.Provider value={value}>
+      {children}
+    </GlobalUIContext.Provider>
+  );
+};
+
+export const useGlobalUI = (): GlobalUIContextType => {
+  const context = useContext(GlobalUIContext);
+  if (context === undefined) {
+    throw new Error('useGlobalUI must be used within a GlobalUIProvider');
+  }
+  return context;
+};

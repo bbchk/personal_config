@@ -1,0 +1,19 @@
+- hosts: localhost
+  gather_facts: true
+  become: false
+  pre_tasks:
+    - name: Initial setup
+      include_tasks: setup.yml
+  vars:
+    user: "{{ ansible_env.USER }}"
+  tasks:
+    - name: Include tasks
+      include_tasks: "{{ item }}.yml"
+      loop:
+        - packages/install
+        - packages/config
+        - secrets/index
+        - dotfiles/index
+  post_tasks:
+    - name: On finish
+      include_tasks: onFinish.yml

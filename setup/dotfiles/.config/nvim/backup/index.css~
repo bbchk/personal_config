@@ -1,0 +1,39 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html {
+    overscroll-behavior: none;
+  }
+
+  body {
+    overflow-x: hidden;
+  }
+}
+
+@layer components {
+  .container--card {
+    perspective: '1000px';
+  }
+
+  .card {
+    transform-style: preserve-3d;
+    transform: rotateY(0deg);
+
+    transition: transform 0.4s ease;
+  }
+
+  .card--active {
+    transform: rotateY(180deg);
+  }
+
+  .card__upImage {
+    backface-visibility: hidden;
+    transform: rotateY(180deg);
+  }
+
+  .button--primary {
+    @apply flex items-center justify-center rounded border-2 border-black bg-red-500 px-5 py-4 text-xl font-bold leading-3 text-white hover:bg-red-700;
+  }
+}

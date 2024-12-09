@@ -1,0 +1,22 @@
+import { useEffect } from 'react';
+
+const MemoryVictoryModal = ({ clicks }) => {
+  useEffect(() => {
+    const localScore = localStorage.getItem('bestScore');
+    if (clicks > localScore) {
+      localStorage.setItem('bestScore', clicks);
+    }
+  }, [clicks]);
+
+  return (
+    <div>
+      <div></div>
+    </div>
+  );
+};
+
+export default MemoryVictoryModal;
+
+// Congratulations!!!
+// You have Completed the Game in 30 Moves!
+// New Record !!! - You have the best score now

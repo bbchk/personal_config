@@ -1,0 +1,126 @@
+{
+  "layer": "hide",
+  "position": "right",
+  // "height": 15,
+  "width": 15,
+  "spacing": 4,
+  "modules-left": ["hyprland/workspaces"],
+  "modules-center": ["tray"],
+  "modules-right": [
+    "pulseaudio",
+    "network",
+    "battery",
+    "battery#bat2",
+    "keyboard-state",
+    "hyprland/language",
+    "clock",
+  ],
+  "hyprland/workspaces": {
+    "all-outputs": true,
+    "disable-scroll": true,
+    "format": "{icon}",
+    "format-icons": {
+      "1": "",
+      "2": "",
+      "3": "",
+      "4": "",
+      "5": "",
+      "6": "",
+      "7": "",
+      "8": "",
+      "9": "",
+      "default": ""
+      // "urgent": "",
+      // "focused": "",
+    },
+    "persistent_workspaces": {
+      "1": [],
+      "2": [],
+      "3": [],
+      "4": [],
+      "5": [],
+      "6": [],
+      "7": [],
+      "8": [],
+      "9": []
+    }
+  },
+  "clock": {
+    // "format": "{0:%d-%m}\n{<span overline=\"single\">%M</span>}{0:%H:%M}",
+    "format": "{0:%d-%m\n<span overline=\"single\">%H:%M</span>}",
+    "tooltip-format": "<big>{:%Y %B}</big>\n<tt><small>{calendar}</small></tt>",
+    "calendar": {
+      "format": {
+        "months": "<span color='#ffead3'><b>{}</b></span>",
+        "today": "<span color='#ff6699'><b>{}</b></span>"
+      }
+    }
+  },
+
+  "custom/mymodule": {
+    "format": "{icon}",
+    "return-type": "json",
+    "exec": "echo '{\"icon\":\"~/home/bchk/Downloads/light_50.svg\"}'"
+  },
+
+  "backlight": {
+    "format": "{icon}",
+    // "format-icons": ["", ""]
+    // ~/home/bchk/Downkloads/light_50.svg
+    "format-icons": ["", "", "", "", ""]
+  },
+
+  "hyprland/language": {
+    "format-uk": "uk ",
+    "format-en": "us "
+  },
+
+  "battery": {
+    "states": {
+      "good": 95,
+      "warning": 60,
+      "critical": 40
+    },
+    "format": "{capacity} {icon} ",
+    // "format-charging": "{capacity}% ",
+    // "format-plugged": "{capacity}% ",
+    // "format-alt": "{time} {icon}",
+    // "format-good": "",
+    // "format-full": "",
+    "format-icons": ["", "", "", "", ""],
+    //"rotate": 90
+  },
+  "battery#bat2": {
+    "bat": "BAT2"
+  },
+
+  "network": {
+    // "interface": "wlp2*", // (Optional) To force the use of this interface
+    "format-wifi": "{signalStrength} ",
+    // "format-ethernet": "{ipaddr}/{cidr} ",
+    // "tooltip-format": "{ifname} via {gwaddr} ",
+    // "format-linked": "{ifname}C (No IP) ",
+    "format-disconnected": "⚠"
+    // "format-alt": "{ifname}: {ipaddr}/{cidr}"
+  },
+
+  "pulseaudio": {
+    // "scroll-step": 1, // %, can be a float
+    "format": "{volume} {icon}",
+    // "format-bluetooth": "{volume}% {icon} {format_source}",
+    // "format-bluetooth-muted": " {icon} {format_source}",
+    "format-muted": " {format_source}",
+    "format-source": "{volume}% ",
+    "format-source-muted": "",
+    "format-icons": {
+      "headphone": "",
+      "hands-free": "",
+      "headset": "",
+      "phone": "",
+      "portable": "",
+      "car": "",
+      "default": [""]
+    },
+    "on-click": "pavucontrol"
+  }
+}

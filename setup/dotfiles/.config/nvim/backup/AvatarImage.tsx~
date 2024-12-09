@@ -1,0 +1,28 @@
+import { IMAGE_URL } from 'utils';
+
+type Props = {
+  url: string | undefined;
+  alt: string | undefined;
+};
+
+const AvatarImage = ({ url, alt }: Props) => {
+  return (
+    <>
+      {url ? (
+        <img
+          src={`${IMAGE_URL}=${url}`}
+          alt={alt}
+          className="size-full rounded-full border border-light-100 object-cover"
+        />
+      ) : (
+        <div className="flex size-full items-center justify-center rounded-full border border-light-100 bg-[#495057] text-5xl">
+          <span className="font-serif font-bold">
+            {alt?.slice(0, 2).toUpperCase()}
+          </span>
+        </div>
+      )}
+    </>
+  );
+};
+
+export default AvatarImage;
