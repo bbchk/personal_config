@@ -10,7 +10,8 @@
     - name: Include tasks
       include_tasks: "{{ item }}.yml"
       loop:
-        - packages
+        - packages/install
+        - packages/config
         # - zsh
         # - aliases
         # - git

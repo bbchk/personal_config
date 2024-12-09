@@ -1,4 +1,13 @@
-- name: Remove previous cfg
+---
+- name: Set zsh as default shell
+  shell: chsh -s $(which zsh) "{{ user }}"
+  become: true
+
+# ------------------------------
+# main setup
+# ------------------------------
+
+- name: Remove previous omz cfg
   file:
     path: /home/{{user}}/.oh-my-zsh
     state: absent
@@ -10,9 +19,25 @@
   args:
     executable: /bin/zsh
 
-- name: Set zsh as default shell
-  shell: chsh -s $(which zsh) "{{ user }}"
-  become: true
+# ------------------------------
+# omz plugins
+# ------------------------------
+
+- hosts: localhost
+  tasks:
+    - name: Define plugins
+      set_fact:
+        plugins:
+          - name: git
+            repo: https://github.com/zsh-users/git.git
+          - name: docker
+            repo: https://github.com/robbyrussell/oh-my-zsh/tree/master/plugins/docker
+          - name: zsh-syntax-highlighting
+            repo: https://github.com/zsh-users/zsh-syntax-highlighting.git
+          - name: zsh-autosuggestions
+            repo: https://github.com/zsh-users/zsh-autosuggestions.git
+          - name: you-should-use
+            repo: https://github.com/MichaelAquilina/zsh-you-should-use.git
 
 - name: Install plugins
   git:
@@ -21,35 +46,3 @@
   loop: "{{ plugins }}"
   loop_control:
     loop_var: pl
-# - name: Check if .zshrc exists
-#   stat:
-#     path: "~/.zshrc"
-#   register: zshrc
-#
-# - name: Create .zshrc if it does not exist
-#   file:
-#     path: "~/.zshrc"
-#     state: touch
-#     owner: "{{ user }}"
-#     group: "{{ user }}"
-#     mode: "0644"
-#   when: not zshrc.stat.exists
-#
-# - name: Configure .zshrc
-#   block:
-#     - name: Source oh-my-zsh.sh in .zshrc
-#       lineinfile:
-#         path: "~/.zshrc"
-#         line: "source $HOME/.oh-my-zsh/oh-my-zsh.sh"
-#         insertbefore: "BOF"
-#
-#     - name: Enable plugins in .zshrc
-#       lineinfile:
-#         path: "~/.zshrc"
-#         regexp: "^plugins="
-#         line: "plugins=(git {{ plugins | map(attribute='name') | join(' ') }})"
-#
-# - name: Apply changes to zshrc file
-#   shell: source ~/.zshrc
-#   args:
-#     executable: /bin/zsh

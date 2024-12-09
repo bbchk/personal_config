@@ -15,13 +15,3 @@
 - name: Install Python for Ansible on Arch
   raw: test -e /usr/bin/python || (pacman -Sy --noconfirm python)
 
-- name: Clone yay-git repsitory
-  git:
-    repo: "https://aur.archlinux.org/yay.git"
-    dest: "/tmp/yay-git"
-
-- name: Build and install yay
-  command:
-    cmd: makepkg -sri
-    chdir: /tmp/yay-git
-    creates: /usr/bin/yay

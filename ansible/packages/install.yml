@@ -1,0 +1,60 @@
+---
+# ------------------------------
+# pacman
+# ------------------------------
+
+- name: Define package list
+  set_fact:
+    packages:
+      - "git"
+      - "base-devel"
+      - "keepassxc"
+      - "aws-cli-v2"
+      - "bruno"
+      - "docker-desktop"
+      - "grimshot"
+      - "members"
+      - "ttf-ms-fonts"
+      - "xwaylandvideobridge-git"
+      - "yay"
+      - "tmux"
+      - "neovim"
+      - "openfortivpn"
+      - "fzf"
+      - "github-cli"
+      - "zsh"
+      - "fzf"
+
+- name: Install necessary packages for Arch
+  pacman:
+    name: "{{ packages }}"
+    state: present
+
+# ------------------------------
+# yay
+# ------------------------------
+
+# install yay itself
+- name: Clone yay-git repsitory
+  git:
+    repo: "https://aur.archlinux.org/yay.git"
+    dest: "/tmp/yay-git"
+
+- name: Build and install yay
+  command:
+    cmd: makepkg -sri
+    chdir: /tmp/yay-git
+    creates: /usr/bin/yay
+
+# install packages using yay
+- name: Define aur package list
+  set_fact:
+    packages:
+      - "google-chrome-stable"
+
+- name: Install aur packages using yay
+  become: yes
+  shell: yay -S --noconfirm {{ item }}
+  loop: "{{ packages }}"
+  args:
+    executable: /bin/zsh

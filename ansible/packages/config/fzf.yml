@@ -1,6 +1,0 @@
-Setting up shell integration
-Add the following line to your shell configuration file.
-
-zsh
-# Set up fzf key bindings and fuzzy completion
-source <(fzf --zsh)
