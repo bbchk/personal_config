@@ -72,14 +72,13 @@
 # Install from git, source, etc.
 # ------------------------------
 
----
 - name: Find all files in ./install
   find:
     paths: "{{ playbook_dir }}/packages/install"
     patterns: "*.yml"
   register: pckg_install_files
 
-- name: Include each install file 
+- name: Include each install file
   include_tasks: "{{ pckg_install_file.path }}"
   loop: "{{ pckg_install_files.files }}"
   loop_control:

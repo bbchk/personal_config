@@ -1,10 +1,16 @@
 ---
+- name: Check if keyd is installed
+  stat:
+    path: "/usr/local/bin/keyd"
+  register: keyd_installed
+
 - name: Clone keyd repository
   git:
     repo: "https://github.com/rvaiya/keyd.git"
     dest: "/tmp/keyd"
     clone: yes
     update: yes
+  when: not keyd_installed.stat.exists
 
 - name: Build and install keyd
   command: "{{ command_name }}"
@@ -15,4 +21,4 @@
     - "sudo make install"
   loop_control:
     loop_var: command_name
-
+  when: not keyd_installed.stat.exists
