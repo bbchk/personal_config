@@ -12,7 +12,6 @@
       loop:
         - packages/install
         - packages/config
-        # - keyd
-        # - node
         # - secrets
-        # - dotfiles
+        # - stow dotfiles
+        # source .zshrc
