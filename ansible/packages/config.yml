@@ -1,42 +1,12 @@
 ---
 - name: Find all files in ./config
   find:
-    paths: ./config
+    paths: "{{ playbook_dir }}/packages/config"
     patterns: "*.yml"
-  register: config_files
+  register: pckg_config_files
 
 - name: Include each config file asynchronously
-  include_tasks: "{{ item.path }}"
-  loop: "{{ config_files.files }}"
+  include_tasks: "{{ pckg_config_file.path }}"
+  loop: "{{ pckg_config_files.files }}"
   loop_control:
-    loop_var: item
-  async: 0
-#
-#
-# - hosts: localhost
-#   gather_facts: no
-#   become: false
-#   tasks:
-#     - name: Find all files in ./config
-#       find:
-#         paths: ./config
-#         patterns: "*.yml"
-#       register: config_files
-#
-#     - name: Include each config file asynchronously
-#       include_tasks: "{{ item.path }}"
-#       loop: "{{ config_files.files }}"
-#       loop_control:
-#         loop_var: item
-#       async: 0
-#
-#
-# - name: Wait for all async tasks to finish
-#   async_status:
-#     jid: "{{ item.ansible_job_id }}"
-#   loop: "{{ config_files.files }}"
-#   loop_control:
-#     loop_var: item
-#   until: item.finished
-#   retries: 10
-#   delay: 10
+    loop_var: pckg_config_file

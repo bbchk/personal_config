@@ -23,26 +23,22 @@
 # omz plugins
 # ------------------------------
 
-- hosts: localhost
-  tasks:
-    - name: Define plugins
-      set_fact:
-        plugins:
-          - name: git
-            repo: https://github.com/zsh-users/git.git
-          - name: docker
-            repo: https://github.com/robbyrussell/oh-my-zsh/tree/master/plugins/docker
-          - name: zsh-syntax-highlighting
-            repo: https://github.com/zsh-users/zsh-syntax-highlighting.git
-          - name: zsh-autosuggestions
-            repo: https://github.com/zsh-users/zsh-autosuggestions.git
-          - name: you-should-use
-            repo: https://github.com/MichaelAquilina/zsh-you-should-use.git
+- name: Define plugins
+  set_fact:
+    omz_plugins:
+      - name: zsh-syntax-highlighting
+        repo: https://github.com/zsh-users/zsh-syntax-highlighting.git
+      - name: zsh-autosuggestions
+        repo: https://github.com/zsh-users/zsh-autosuggestions.git
+      - name: you-should-use
+        repo: https://github.com/MichaelAquilina/zsh-you-should-use.git
 
 - name: Install plugins
   git:
-    repo: "{{ pl.repo }}"
-    dest: "~/.oh-my-zsh/custom/plugins/{{ pl.name }}"
-  loop: "{{ plugins }}"
+    repo: "{{ omz_pl.repo }}"
+    dest: "~/.oh-my-zsh/custom/plugins/{{ omz_pl.name }}"
+    update: true
+    depth: 1
+  loop: "{{ omz_plugins }}"
   loop_control:
-    loop_var: pl
+    loop_var: omz_pl

@@ -10,8 +10,7 @@
     owner: root
     group: root
     mode: "0644"
-  become: yes
+  become: true
 
 - name: Install Python for Ansible on Arch
   raw: test -e /usr/bin/python || (pacman -Sy --noconfirm python)
-

@@ -5,7 +5,7 @@
 
 - name: Define package list
   set_fact:
-    packages:
+    pacman_packages:
       - "git"
       - "base-devel"
       - "keepassxc"
@@ -27,7 +27,7 @@
 
 - name: Install necessary packages for Arch
   pacman:
-    name: "{{ packages }}"
+    name: "{{ pacman_packages }}"
     state: present
 
 # ------------------------------
@@ -35,26 +35,35 @@
 # ------------------------------
 
 # install yay itself
-- name: Clone yay-git repsitory
+- name: Check if yay is already installed
+  stat:
+    path: /usr/bin/yay
+  register: yay_installed
+
+- name: Clone yay-git repository
   git:
     repo: "https://aur.archlinux.org/yay.git"
     dest: "/tmp/yay-git"
+  when: not yay_installed.stat.exists
 
 - name: Build and install yay
   command:
     cmd: makepkg -sri
     chdir: /tmp/yay-git
     creates: /usr/bin/yay
+  when: not yay_installed.stat.exists
 
 # install packages using yay
 - name: Define aur package list
   set_fact:
-    packages:
+    yay_packages:
       - "google-chrome-stable"
 
 - name: Install aur packages using yay
-  become: yes
-  shell: yay -S --noconfirm {{ item }}
-  loop: "{{ packages }}"
+  become: true
+  shell: yay -S --noconfirm {{ yay_package }}
+  loop: "{{ yay_packages }}"
+  loop_control:
+    loop_var: yay_package
   args:
-    executable: /bin/zsh
+    executable: /bin/bash
