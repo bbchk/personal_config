@@ -1,0 +1,28 @@
+---
+- name: Enable and start keyd service
+  systemd:
+    name: keyd
+    enabled: yes
+    state: started
+
+- name: Create keyd config directory
+  file:
+    path: "/etc/keyd"
+    state: directory
+    mode: "0755"
+  become: true
+
+- name: Copy keyd.conf to /etc/keyd/default.conf
+  copy:
+    src: "{{ playbook_dir }}/cfg/keyd.conf"
+    dest: "/etc/keyd/default.conf"
+    owner: root
+    group: root
+    mode: "0755"
+  become: true
+
+- name: Restart keyd service
+  systemd:
+    name: keyd
+    state: restarted
+  become: true

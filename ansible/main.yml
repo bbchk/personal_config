@@ -12,9 +12,6 @@
       loop:
         - packages/install
         - packages/config
-        # - zsh
-        # - aliases
-        # - git
         # - keyd
         # - node
         # - secrets

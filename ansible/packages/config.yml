@@ -5,7 +5,7 @@
     patterns: "*.yml"
   register: pckg_config_files
 
-- name: Include each config file asynchronously
+- name: Include each config file
   include_tasks: "{{ pckg_config_file.path }}"
   loop: "{{ pckg_config_files.files }}"
   loop_control:
