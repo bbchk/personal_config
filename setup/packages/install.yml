@@ -72,10 +72,16 @@
       - "xwaylandvideobridge-git"
       - "aws-cli-v2"
 
-- name: Check for package updates and install if needed
+- name: Ensure AUR packages are installed and updated
   shell: |
-    if yay -Qu | grep -q "^{{ item }}"; then
+    if ! yay -Q {{ item }} &>/dev/null; then
+      echo "Installing {{ item }}"
       yay -S --noconfirm {{ item }}
+    elif yay -Qu | grep -q "^{{ item }}"; then
+      echo "Updating {{ item }}"
+      yay -S --noconfirm {{ item }}
+    else
+      echo "{{ item }} is already up-to-date"
     fi
   args:
     executable: /bin/bash
