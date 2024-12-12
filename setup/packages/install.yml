@@ -73,19 +73,21 @@
       - "aws-cli-v2"
 
 - name: Check for package updates and install if needed
+  loop: "{{ yay_packages }}"
   block:
     - name: Check if package needs update
       shell: yay -Qu | grep -q "^{{ item }}"
       register: package_needs_update
       failed_when: false
       changed_when: false
+      args:
+        executable: /bin/bash
 
     - name: Install or update package if needed
       shell: yay -S --noconfirm {{ item }}
       when: package_needs_update.rc == 0
-  args:
-    executable: /bin/bash
-  loop: "{{ yay_packages }}"
+      args:
+        executable: /bin/bash
 
 # ------------------------------
 # Install from git, source, etc.
