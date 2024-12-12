@@ -30,6 +30,7 @@
       - "qbittorrent"
       - "mpv"
       - "go"
+      - "lua"
 
 - name: Install necessary packages for Arch
   pacman:
