@@ -5,6 +5,6 @@
     state: present
 
 - name: Stow all dotfiles to home directory
-  shell: stow -t ~ --ignore='index\.yml' *
+  shell: stow -t ~ --ignore="{{ playbook_dir }}/dotfiles/index\.yml" *
   args:
     chdir: "{{ playbook_dir }}/dotfiles"
