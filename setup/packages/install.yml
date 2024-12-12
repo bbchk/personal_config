@@ -3,9 +3,12 @@
 # pacman
 # ------------------------------
 
+
 - name: Define package list
   set_fact:
     pacman_packages:
+      - "systemd"
+      - "systemd-sysvcompat"
       - "git"
       - "base-devel"
       - "keepassxc"
@@ -32,7 +35,6 @@
   pacman:
     name: "{{ pacman_packages }}"
     state: present
-  become: true
 
 # ------------------------------
 # yay
