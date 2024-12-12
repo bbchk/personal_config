@@ -74,14 +74,8 @@
 
 - name: Ensure AUR packages are installed and updated
   shell: |
-    if ! yay -Q {{ item }} &>/dev/null; then
-      echo "Installing {{ item }}"
+    if ! yay -Q {{ item }} || yay -Qu | grep -q "^{{ item }}"; then
       yay -S --noconfirm {{ item }}
-    elif yay -Qu | grep -q "^{{ item }}"; then
-      echo "Updating {{ item }}"
-      yay -S --noconfirm {{ item }}
-    else
-      echo "{{ item }} is already up-to-date"
     fi
   args:
     executable: /bin/bash
