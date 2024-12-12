@@ -65,7 +65,7 @@
 - name: Define aur package list
   set_fact:
     yay_packages:
-      - "google-chrome-stable"
+      - "google-chrome"
       - "grimshot"
       - "pnpm"
       - "bruno"
