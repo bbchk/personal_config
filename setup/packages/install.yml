@@ -73,7 +73,6 @@
       # - "aws-cli-v2"
 
 - name: Install aur packages using yay
-  become: true
   shell: yay -S --noconfirm {{ yay_package }}
   loop: "{{ yay_packages }}"
   loop_control:
