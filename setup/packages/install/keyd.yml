@@ -8,17 +8,19 @@
   git:
     repo: "https://github.com/rvaiya/keyd.git"
     dest: "/tmp/keyd"
-    clone: yes
     update: yes
   when: not keyd_installed.stat.exists
 
-- name: Build and install keyd
-  command: "{{ command_name }}"
+- name: Build keyd
+  command: make
   args:
     chdir: "/tmp/keyd"
-  loop:
-    - "make"
-    - "sudo make install"
-  loop_control:
-    loop_var: command_name
+  when: not keyd_installed.stat.exists
+
+- name: Install keyd
+  command: make install
+  args:
+    chdir: "/tmp/keyd"
+  become: yes
+  become_user: "{{user}}"
   when: not keyd_installed.stat.exists

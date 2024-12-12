@@ -5,8 +5,7 @@
     nvm_dir: "{{ ansible_env.HOME }}/.nvm"
 
 - name: Check if nvm is installed
-  shell: |
-    [ -s "{{ nvm_dir }}/nvm.sh" ] && . "{{ nvm_dir }}/nvm.sh" && command -v nvm
+  command: nvm --version
   register: nvm_check
   ignore_errors: yes
   changed_when: false
@@ -20,7 +19,7 @@
 
 - name: Install nvm
   shell: |
-    curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/{{ nvm_version.stdout }}/install.sh | zsh
+    curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/{{ nvm_version.stdout }}/install.sh | bash
   args:
     executable: /bin/zsh
   when: nvm_check.rc != 0
