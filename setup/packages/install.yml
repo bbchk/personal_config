@@ -72,13 +72,11 @@
       - "xwaylandvideobridge-git"
       - "aws-cli-v2"
 
-- name: Check for package updates and install if needed
-  shell: |
-    if yay -Qu | grep -q "^{{ item }}"; then
-      yay -S --noconfirm {{ item }}
-    fi
-  args:
-    executable: /bin/bash
+- name: Install or update AUR packages
+  community.general.aur:
+    name: "{{ item }}"
+    state: latest
+    use: yay
   loop: "{{ yay_packages }}"
 
 # ------------------------------
