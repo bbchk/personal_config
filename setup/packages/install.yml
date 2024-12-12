@@ -9,8 +9,6 @@
       - "git"
       - "base-devel"
       - "keepassxc"
-      - "ttf-ms-fonts"
-      - "xwaylandvideobridge-git"
       - "tmux"
       - "neovim"
       - "openfortivpn"
@@ -67,6 +65,7 @@
       - "grimshot"
       - "pnpm"
       - "bruno"
+      - "xwaylandvideobridge-git"
       # - "aws-cli-v2"
 
 - name: Install aur packages using yay
