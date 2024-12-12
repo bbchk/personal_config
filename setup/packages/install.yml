@@ -70,7 +70,7 @@
       - "pnpm"
       - "bruno"
       - "xwaylandvideobridge-git"
-      # - "aws-cli-v2"
+      - "aws-cli-v2"
 
 - name: Install aur packages using yay
   shell: yay -S --noconfirm {{ yay_package }}
