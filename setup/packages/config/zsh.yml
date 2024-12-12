@@ -7,17 +7,24 @@
 # main setup
 # ------------------------------
 
+- name: Check if Oh My Zsh is installed
+  stat:
+    path: /home/{{ user }}/.oh-my-zsh
+  register: oh_my_zsh_installed
+
 - name: Remove previous omz cfg
   file:
-    path: /home/{{user}}/.oh-my-zsh
+    path: /home/{{ user }}/.oh-my-zsh
     state: absent
   become: true
+  when: oh_my_zsh_installed.stat.exists
 
 - name: Install oh-my-zsh
   shell: |
     sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
   args:
     executable: /bin/zsh
+  when: not oh_my_zsh_installed.stat.exists
 
 # ------------------------------
 # omz plugins
