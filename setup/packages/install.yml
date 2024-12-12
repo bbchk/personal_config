@@ -29,6 +29,7 @@
       - "mako"
       - "qbittorrent"
       - "mpv"
+      - "go"
 
 - name: Install necessary packages for Arch
   pacman:
