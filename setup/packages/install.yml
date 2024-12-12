@@ -9,7 +9,6 @@
       - "git"
       - "base-devel"
       - "keepassxc"
-      - "members"
       - "ttf-ms-fonts"
       - "xwaylandvideobridge-git"
       - "tmux"
@@ -68,7 +67,6 @@
       - "grimshot"
       - "pnpm"
       - "bruno"
-      # TODO: include
       # - "aws-cli-v2"
 
 - name: Install aur packages using yay
