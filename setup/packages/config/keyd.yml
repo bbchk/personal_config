@@ -5,6 +5,7 @@
     enabled: yes
     state: started
   become: true
+  become_method: sudo
   become_user: "{{user}}"
 
 - name: Create keyd config directory
