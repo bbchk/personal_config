@@ -12,13 +12,6 @@
     path: /home/{{ user }}/.oh-my-zsh
   register: oh_my_zsh_installed
 
-- name: Remove previous omz cfg
-  file:
-    path: /home/{{ user }}/.oh-my-zsh
-    state: absent
-  become: true
-  when: oh_my_zsh_installed.stat.exists
-
 - name: Install oh-my-zsh
   shell: |
     sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
@@ -39,6 +32,7 @@
         repo: https://github.com/zsh-users/zsh-autosuggestions.git
       - name: you-should-use
         repo: https://github.com/MichaelAquilina/zsh-you-should-use.git
+  when: not oh_my_zsh_installed.stat.exists
 
 - name: Install plugins
   git:
@@ -49,3 +43,4 @@
   loop: "{{ omz_plugins }}"
   loop_control:
     loop_var: omz_pl
+  when: not oh_my_zsh_installed.stat.exists
