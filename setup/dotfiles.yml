@@ -6,6 +6,6 @@
 
 - name: Stow all dotfiles to home directory
   # shell: stow -t ~ --ignore="{{ playbook_dir }}/dotfiles/index\.yml" *
-  shell: stow --adopt -t ~ .
+  shell: stow --override -t ~ .
   args:
     chdir: "{{ playbook_dir }}/dotfiles"
