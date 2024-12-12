@@ -3,7 +3,6 @@
 # pacman
 # ------------------------------
 
-
 - name: Define package list
   set_fact:
     pacman_packages:
@@ -35,6 +34,7 @@
   pacman:
     name: "{{ pacman_packages }}"
     state: present
+  become: true
 
 # ------------------------------
 # yay
@@ -56,7 +56,7 @@
 
 - name: Build and install yay
   command:
-    cmd: makepkg -sri
+    cmd: makepkg -sri --noconfirm
     chdir: /tmp/yay-git
     creates: /usr/bin/yay
   when: not yay_installed.stat.exists

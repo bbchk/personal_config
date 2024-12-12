@@ -4,11 +4,6 @@
     update_cache: yes
     upgrade: yes
 
-- name: Update Arch Linux
-  pacman:
-    update_cache: yes
-    upgrade: yes
-
 - name: Copy pacman.conf to /etc
   copy:
     src: "{{ playbook_dir }}/cfg/pacman.conf"
