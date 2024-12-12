@@ -4,6 +4,8 @@
     name: keyd
     enabled: yes
     state: started
+  become: true
+  become_user: "{{user}}"
 
 - name: Create keyd config directory
   file:

@@ -18,7 +18,7 @@
   when: not keyd_installed.stat.exists
 
 - name: Install keyd
-  command: make install
+  command: sudo make install
   args:
     chdir: "/tmp/keyd"
   become: yes
