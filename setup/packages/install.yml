@@ -32,6 +32,7 @@
   pacman:
     name: "{{ pacman_packages }}"
     state: present
+  become: true
 
 # ------------------------------
 # yay
@@ -47,6 +48,8 @@
   git:
     repo: "https://aur.archlinux.org/yay.git"
     dest: "/tmp/yay-git"
+    depth: 1
+    update: true
   when: not yay_installed.stat.exists
 
 - name: Build and install yay
