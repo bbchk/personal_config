@@ -13,7 +13,7 @@
         - packages/install
         - packages/config
         - secrets/index
-        - dotfiles/index
+        - dotfiles
   post_tasks:
     - name: On finish
       include_tasks: onFinish.yml
