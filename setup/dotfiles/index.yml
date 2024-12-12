@@ -5,6 +5,6 @@
     state: present
 
 - name: Stow all dotfiles to home directory
-  command: stow -t ~ *
+  command: stow -t ~ "*"
   args:
     chdir: "{{ playbook_dir }}/dotfiles"
