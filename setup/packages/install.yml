@@ -73,6 +73,7 @@
       - "bruno"
       - "xwaylandvideobridge-git"
       - "aws-cli-v2"
+      - "sioyek"
 
 - name: Ensure AUR packages are installed and updated
   shell: |
