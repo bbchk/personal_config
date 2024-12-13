@@ -1,0 +1,21 @@
+import { useQueryClient, useMutation } from '@tanstack/react-query';
+import useGetMe from 'features/authentication/server/useGetMe';
+import { deleteArticle } from 'utils/axios';
+
+const useDeleteArticle = () => {
+  const queryClient = useQueryClient();
+  const { data: user } = useGetMe();
+
+  const mutation = useMutation({
+    mutationFn: deleteArticle,
+    onSuccess: () => {
+      queryClient.invalidateQueries({
+        queryKey: ['articles']
+      });
+    }
+  });
+
+  return mutation;
+};
+
+export default useDeleteArticle;

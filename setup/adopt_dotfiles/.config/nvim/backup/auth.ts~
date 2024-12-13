@@ -1,0 +1,41 @@
+import { ApiLoginResponse, LoginForm, RegisterForm, User } from 'types';
+import { httpClient } from '../http';
+
+const register = async (data: RegisterForm) => {
+  const response = await httpClient({
+    method: 'POST',
+    url: '/auth/register',
+    data
+  });
+
+  return response.data;
+};
+
+const login = async (data: LoginForm) => {
+  console.log(data);
+  const response = await httpClient<ApiLoginResponse>({
+    method: 'POST',
+    url: '/auth/login',
+    data
+  });
+
+  return response.data;
+};
+
+const logout = async () => {
+  await httpClient({
+    method: 'POST',
+    url: '/auth/logout'
+  });
+};
+
+const getMe = async () => {
+  const response = await httpClient<User>({
+    method: 'POST',
+    url: '/auth/me'
+  });
+
+  return response.data;
+};
+
+export { register, login, getMe, logout };

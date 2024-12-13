@@ -1,0 +1,22 @@
+
+FROM alpine:3.17
+
+RUN apk update
+RUN apk add git
+RUN apk add vim nano
+RUN apk add openssh
+RUN apk add openssh-keygen
+RUN apk add bash
+
+RUN adduser -D -s /bin/ash candidate
+
+WORKDIR /tmp/git-certification
+RUN chown candidate .
+
+USER candidate
+
+RUN git config --global init.defaultBranch main
+RUN git config --global user.email "git-certification-candidate@internetbrands.com"
+RUN git config --global user.name "Git Certification Candidate"
+
+CMD [ "ash" ]

@@ -1,0 +1,15 @@
+import { useDisclosure } from '@mantine/hooks';
+
+const ArticleHistorySelect = () => {
+  return (
+    <Select
+      label="Your favorite library"
+      placeholder="Pick value"
+      data={['React', 'Angular', 'Vue', 'Svelte']}
+      defaultValue="React"
+      clearable
+    />
+  );
+};
+
+export default ArticleHistoryList;

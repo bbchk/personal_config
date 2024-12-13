@@ -1,0 +1,9 @@
+const MemoryCard = ({ id }) => {
+  return (
+    <div>
+      <img src=`https://picsum.photos/id/{id}/200/300` />
+    </div>
+  );
+};
+
+export default MemoryCard;

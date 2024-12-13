@@ -1,0 +1,19 @@
+<?php
+
+namespace App\Traits;
+
+use Illuminate\Database\Query\Builder;
+
+
+trait PaginateAndSortTrait
+{
+
+    protected function sortByDirectModelAttribute(Builder $query, array $sort): Builder
+    {
+        foreach ($sort as $key => $direction) {
+            $query = $query->orderBy($key, $direction);
+        }
+
+        return $query;
+    }
+}

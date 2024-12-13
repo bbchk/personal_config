@@ -1,0 +1,12 @@
+export function playSound(sound: HTMLAudioElement, volume: number): void {
+  if (volume < 0 || volume > 1) {
+    console.warn('Volume should be between 0 and 1. Using default volume.');
+    volume = 1;
+  }
+
+  sound.currentTime = 0;
+  sound.volume = volume;
+  sound.play().catch((error: Error) => {
+    console.error('Error playing sound:', error);
+  });
+}

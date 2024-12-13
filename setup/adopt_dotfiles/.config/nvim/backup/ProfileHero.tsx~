@@ -1,0 +1,11 @@
+import { ReactNode } from 'react';
+
+const ProfileHero = ({ children }: { children?: ReactNode }) => {
+  return (
+    <section className="profileHero">
+      <div className="container--profileHero">{children}</div>
+    </section>
+  );
+};
+
+export default ProfileHero;

@@ -1,0 +1,50 @@
+import { Outlet, useNavigation } from 'react-router-dom';
+import Header from './Header';
+import { NotPremiumMember } from './PremiumMember';
+import Footer from './Footer';
+import useGetMe from 'hooks/auth/useGetMe';
+<<<<<<< HEAD
+import useGoogleLogin from 'hooks/auth/useGoogleLogin';
+=======
+import NotificationsModal from './NotificationsModal';
+
+import { useGlobalUI } from 'contexts/GlobalUIContext';
+import { Modals } from 'enums';
+>>>>>>> e845f779 (feat(notifications): introduce modal for listing user notifications)
+
+const Layout = () => {
+  const { state } = useNavigation();
+  const { user } = useGetMe();
+<<<<<<< HEAD
+  useGoogleLogin();
+=======
+
+  const { activeModal } = useGlobalUI();
+
+>>>>>>> e845f779 (feat(notifications): introduce modal for listing user notifications)
+  return (
+    <div className="relative flex min-h-screen flex-col">
+      <Header />
+
+      {activeModal === Modals.NOTIFICATIONS && <NotificationsModal />}
+
+      {state === 'loading' && (
+        <div className="fixed z-50 w-full">
+          <div className="h-1.5 w-full overflow-hidden bg-transparent">
+            <div className="progress left-right size-full bg-primary"></div>
+          </div>
+        </div>
+      )}
+
+      <div className="grow bg-dark-100">
+        <Outlet />
+      </div>
+
+      {!user?.active_subscription && <NotPremiumMember />}
+
+      <Footer />
+    </div>
+  );
+};
+
+export default Layout;

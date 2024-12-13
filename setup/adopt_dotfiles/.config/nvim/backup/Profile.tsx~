@@ -1,0 +1,56 @@
+import ArticlesList from 'components/ArticlesList';
+import ArticleSort from 'components/ArticleSort';
+import { OwnHeroProfile, PublicHeroProfile } from 'components/Hero';
+import Pagination from 'components/Pagination';
+import useGetMe from 'hooks/auth/useGetMe';
+import useGetArticleByUser from 'hooks/useGetArticleByUser';
+import { Link, useParams } from 'react-router-dom';
+import FollowersModal from 'components/FollowersModal';
+import { useGlobalUI } from 'contexts/GlobalUIContext';
+import { Modals } from 'enums';
+import FollowingModal from 'components/FollowingModal';
+
+const Profile = () => {
+  const { userId } = useParams();
+  // const { user, isLoading: isMeLoading, error: meError } = useGetMe();
+  const { activeModal } = useGlobalUI();
+
+  const { data } = useGetArticleByUser();
+  //
+  // if (isMeLoading) {
+  //   return <div>Loading...</div>;
+  // }
+  //
+  // if (meError) {
+  //   return <div>Sorry, error occured...</div>;
+  // }
+  //
+  // const isProfileOwnedByCurrentUser = userId === user?.id.toString();
+
+  return (
+    <main>
+      {activeModal === Modals.FOLLOWERS && <FollowersModal />}
+
+      {activeModal === Modals.FOLLOWING && <FollowingModal />}
+
+      <section className="app-container py-14 text-light-100">
+        {false && (
+          <Link
+            className="button-primary mb-11 inline-block px-9 py-2"
+            to={`/profile/${user?.id}/article/create`}
+          >
+            Create new post
+          </Link>
+        )}
+
+        <ArticleSort articles={data} />
+
+        <ArticlesList articles={data?.data} userId={user?.id} />
+
+        <Pagination links={data?.links} />
+      </section>
+    </main>
+  );
+};
+
+export default Profile;

@@ -1,0 +1,133 @@
+import { useGlobalUI } from 'contexts/GlobalUIContext';
+import Modal from './Modal';
+import useGetUser from 'hooks/useGetUser';
+import { User } from 'types';
+import { useNavigate } from 'react-router-dom';
+import AvatarImage from './AvatarImage';
+import useGetFollowing from 'hooks/useGetFollwing';
+import { Button } from '@mantine/core';
+
+const FollowingModal = () => {
+  const navigate = useNavigate();
+  const { user, isUserLoading, userError } = useGetUser();
+
+  // const [followingPaginationParams, setFollowingPaginationParams] =
+  //   useState(() => {
+  //     return {
+  //       page: 1,
+  //     };
+  //   });
+
+  const {
+    data: following,
+    isLoading: isFollowingLoading,
+    error: followingError
+  } = useGetFollowing();
+
+  const { setActiveModal } = useGlobalUI();
+
+  //TODO: introduce better ui/ux for handling
+  if (isUserLoading || isFollowingLoading) {
+    return <div>Loading...</div>;
+  }
+
+  //TODO: introduce better ui/ux for handling
+  if (userError || followingError) {
+    return <div>Sorry, an error occurred...</div>;
+  }
+
+  const handleNavigate = (f: User) => {
+    setActiveModal(null);
+    navigate(`/profile/${f.id}`);
+  };
+
+  // const handlePageChange = (page: number) => {
+  //   setParams({
+  //     ...params,
+  //     page
+  //   });
+  // };
+
+  return (
+    <Modal
+      title={`Following of  ${user?.name}`}
+      closeModal={() => setActiveModal(null)}
+    >
+      <ul className="flex h-[40vh] w-full min-w-max flex-col overflow-scroll overflow-x-hidden py-5">
+        {following?.data?.map((f: User) => {
+          return (
+            <li
+              key={`following-${f.id}`}
+              className="border-b border-gray-700 p-4 last:border-none"
+            >
+              <button
+                onClick={() => handleNavigate(f)}
+                className="link-primary flex w-full shrink-0 items-center gap-4 font-sans text-2xl"
+              >
+                <div className="size-12 text-xl text-white">
+                  <AvatarImage url={f.image_url} alt={f.name} />
+                </div>
+
+                <span className="max-w-[50vw] overflow-hidden truncate">
+                  {f.name}
+                </span>
+              </button>
+            </li>
+          );
+        })}
+      </ul>
+
+      <ul className="m-auto flex justify-center gap-2 p-4 pt-8">
+        {following?.links?.map((link, index) => {
+          // Always show first and last page
+          if (index === 0 || index === following.links.length - 1) {
+            return (
+              <li key={link.label}>
+                <Button
+                  onClick={() => {
+                    /* Handle page change */
+                  }}
+                  className={`block rounded-full text-center font-bold leading-7 text-dark-200 ${
+                    link.active ? 'bg-primary' : 'bg-light-100'
+                  }`}
+                >
+                  {link.label}
+                </Button>
+              </li>
+            );
+          }
+
+          // Show ellipsis for skipped pages
+          if (link.url === null) {
+            return (
+              <li
+                className="block rounded-full bg-primary text-center font-bold leading-7 text-dark-200"
+                key={index}
+              >
+                ...
+              </li>
+            );
+          }
+
+          // Show other pages
+          return (
+            <li key={link.label}>
+              <Button
+                onClick={() => {
+                  /* Handle page change */
+                }}
+                className={`block rounded-full text-center font-bold leading-7 text-dark-200 ${
+                  link.active ? 'bg-primary' : 'bg-light-100'
+                }`}
+              >
+                {link.label}
+              </Button>
+            </li>
+          );
+        })}
+      </ul>
+    </Modal>
+  );
+};
+
+export default FollowingModal;

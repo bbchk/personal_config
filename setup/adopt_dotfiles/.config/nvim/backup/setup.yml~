@@ -1,0 +1,17 @@
+- name: Update cache (Arch)
+  become: true
+  pacman:
+    update_cache: yes
+
+- name: Copy pacman.conf to /etc
+  copy:
+    src: "{{ playbook_dir }}/cfg/pacman.conf"
+    dest: "/etc/pacman.conf"
+    owner: root
+    group: root
+    mode: "0644"
+  become: yes
+
+- name: Install Python for Ansible on Arch
+  raw: test -e /usr/bin/python || (pacman -Sy --noconfirm python)
+

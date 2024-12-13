@@ -1,0 +1,53 @@
+import { UserWithArticles } from 'types';
+import SocialMediaLinks from './SocialMediaLinks';
+import { Link } from 'react-router-dom';
+import AvatarImage from './AvatarImage';
+import { linkTo } from 'utils';
+
+type Props = {
+  author: UserWithArticles | undefined;
+};
+
+const ArticleAuthor = ({ author }: Props) => {
+  return (
+    <div className="col-span-2 col-start-8 mb-6">
+      <h5 className="mb-2 font-bold text-dust-600">Article Author</h5>
+
+      <div className="mb-5 flex items-center gap-4">
+        <div className="size-12 text-2xl">
+          <AvatarImage url={author?.image_url} alt={author?.name} />
+        </div>
+
+        <h4 className="font-bold">{author?.name}</h4>
+      </div>
+
+      <p className="text-sm font-bold text-dust-600">Posted by author:</p>
+
+      <h3 className="mb-5 font-bold">
+        <ul>
+          {author?.articles.map((article) => (
+            <li key={article.id}>
+              <Link to={linkTo(article)} className="hover:text-primary">
+                {article.title}
+              </Link>
+            </li>
+          ))}
+        </ul>
+
+        <br />
+
+        {author?.email}
+      </h3>
+
+      <p className="mb-3 text-sm font-bold text-dust-600">
+        Share on socoal media
+      </p>
+
+      <div className="flex gap-4 [&>a]:size-4">
+        <SocialMediaLinks />
+      </div>
+    </div>
+  );
+};
+
+export default ArticleAuthor;

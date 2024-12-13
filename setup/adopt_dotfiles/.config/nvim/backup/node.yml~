@@ -1,0 +1,40 @@
+---
+- name: Define node version var
+  set_fact:
+    node_version: 14.17.0
+
+- name: Check if nvm is installed
+  shell: |
+    command -v nvm
+  register: nvm_check
+  ignore_errors: yes
+
+- name: Get latest NVM version
+  shell: |
+    curl -s https://api.github.com/repos/nvm-sh/nvm/releases/latest | grep '"tag_name":' | sed -E 's/.*"([^"]+)".*/\1/'
+  register: nvm_version
+  when: nvm_check.rc != 0
+
+- name: Install nvm
+  shell: |
+    curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/{{ nvm_version.stdout }}/install.sh | zsh
+  args:
+    executable: /bin/zsh
+  when: nvm_check.rc != 0
+
+- name: Check if Node.js is installed
+  shell: |
+    nvm list | grep -q {{ node_version }}
+  register: node_check
+  args:
+    executable: /bin/zsh
+  ignore_errors: yes
+
+- name: Install Node.js and npm
+  shell: |
+    source ~/.zshrc
+    nvm install {{ node_version }}
+    nvm alias default {{ node_version }}
+  args:
+    executable: /bin/zsh
+  when: node_check.rc != 0

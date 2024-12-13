@@ -1,0 +1,14 @@
+\set VERBOSE on
+\x on
+
+\pset pager always
+\setenv PAGER 'nvim -R'
+
+\timing
+
+\pset null '∎'
+\set COMP_KEYWORD_CASE lower
+\set HISTCONTROL ignoredups
+
+
+\set PROMPT1 '%[%033[32;1m%]%x%[%033[0m%]%[%033[1m%]%/%[%033[0m%]-> '

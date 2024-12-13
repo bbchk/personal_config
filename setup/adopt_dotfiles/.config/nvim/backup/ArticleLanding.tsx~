@@ -1,0 +1,25 @@
+import { useLoaderData } from 'react-router-dom';
+import Article from 'types/Article';
+
+//TODO: rename!
+function ArticleLanding() {
+  const { title, content, created_at } = useLoaderData() as Article;
+
+  return (
+    <div className="landingArticle">
+      <div className="landingArticle__imgBox">
+        <img
+          className="landingArticle__image"
+          src="https://picsum.photos/500/380"
+          alt="article hero"
+        />
+      </div>
+      <div className="tag--articleCard">Design</div>
+      <h1>{title}</h1>
+      <p>{content}</p>
+      <p>{created_at}</p>
+    </div>
+  );
+}
+
+export default ArticleLanding;

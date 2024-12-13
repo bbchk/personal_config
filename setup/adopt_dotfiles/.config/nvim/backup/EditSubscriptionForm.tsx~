@@ -1,0 +1,197 @@
+import { Button, Input, InputBase, TextInput } from '@mantine/core';
+import { notifications } from '@mantine/notifications';
+import { SortingOrder, SubscriptionType } from 'enums';
+import { User } from 'types';
+import { useUpdateSubscriptionForm } from 'hooks/useAppForm';
+import useSubscriptionUpdate from 'hooks/useSubscriptionUpdate';
+import { useState } from 'react';
+import { IMaskInput } from 'react-imask';
+import { useNavigate } from 'react-router-dom';
+
+type Props = {
+  userId: number | undefined;
+};
+
+const EditSubscriptionForm = ({ userId }: Props) => {
+  const [subscriptionType, setSubscriptionType] = useState<SubscriptionType>(
+    SubscriptionType.MONTHLY
+  );
+
+  const navigate = useNavigate();
+
+  const { updateSubscriptionForm } = useUpdateSubscriptionForm();
+
+  const { mutate, isPending } = useSubscriptionUpdate();
+
+  const pricingDetails = {
+    monthly: { perMonth: 10, total: 10 },
+    yearly: { perMonth: 5, total: 60 }
+  };
+
+  const onSubmit = async (values: typeof updateSubscriptionForm.values) => {
+    if (updateSubscriptionForm.isValid()) {
+      mutate(
+        {
+          ...values,
+          total: pricingDetails[subscriptionType].total,
+          type: subscriptionType
+        },
+        {
+          onSuccess: () => {
+            navigate(`/profile/${userId}?${SortingOrder.CREATED_AT_ASC}`);
+          },
+          onError: (error) => {
+            notifications.show({
+              title: 'Info',
+              message: `${error.message}`,
+              color: '#2cbcff',
+              autoClose: 3000
+            });
+          }
+        }
+      );
+    }
+  };
+  return (
+    <section>
+      <form
+        onSubmit={updateSubscriptionForm.onSubmit(onSubmit)}
+        className="mx-auto mb-6 flex max-w-sm flex-col gap-6"
+      >
+        <div className="flex">
+          <Button
+            onClick={() => setSubscriptionType(SubscriptionType.MONTHLY)}
+            className={`grow rounded-none text-dark-200 ${
+              subscriptionType === 'monthly' ? 'bg-primary' : 'bg-light-100'
+            }`}
+          >
+            Monthly
+          </Button>
+
+          <Button
+            onClick={() => setSubscriptionType(SubscriptionType.YEARLY)}
+            className={`grow rounded-none text-dark-200 ${
+              subscriptionType === 'yearly' ? 'bg-primary' : 'bg-light-100'
+            }`}
+          >
+            Yearly
+          </Button>
+        </div>
+
+        <div className="flex justify-between gap-2 text-sm font-bold">
+          <div className="text-light-100">
+            <span className="text-primary">
+              ${pricingDetails[subscriptionType].perMonth}
+            </span>{' '}
+            Per Month
+          </div>
+
+          <div className="text-light-100">
+            Total:$
+            <span className="text-primary">
+              {pricingDetails[subscriptionType].total}
+            </span>
+          </div>
+        </div>
+
+        <InputBase
+          label="Card Number"
+          placeholder="xxxx xxxx xxxx xxxx"
+          component={IMaskInput}
+          mask="0000000000000000000"
+          required
+          withAsterisk={false}
+          classNames={{
+            label: 'text-light-100'
+          }}
+          {...updateSubscriptionForm.getInputProps('card')}
+        />
+
+        <div className="flex gap-6">
+          <InputBase
+            label="CVC"
+            component={IMaskInput}
+            mask="000"
+            placeholder="xxx"
+            type="password"
+            required
+            withAsterisk={false}
+            classNames={{
+              label: 'text-light-100'
+            }}
+            {...updateSubscriptionForm.getInputProps('cvc')}
+          />
+
+          <Input.Wrapper
+            label="Expiry Date"
+            classNames={{ label: 'text-light-100' }}
+            className="w-1/2"
+          >
+            <div className="flex gap-6">
+              <InputBase
+                component={IMaskInput}
+                mask="00"
+                placeholder="MM"
+                required
+                classNames={{
+                  label: 'text-light-100'
+                }}
+                {...updateSubscriptionForm.getInputProps('month')}
+              />
+
+              <InputBase
+                component={IMaskInput}
+                mask="00"
+                placeholder="YY"
+                required
+                classNames={{
+                  label: 'text-light-100'
+                }}
+                {...updateSubscriptionForm.getInputProps('year')}
+              />
+            </div>
+          </Input.Wrapper>
+        </div>
+
+        <TextInput
+          label="Name"
+          placeholder="John"
+          required
+          withAsterisk={false}
+          classNames={{
+            label: 'text-light-100'
+          }}
+          {...updateSubscriptionForm.getInputProps('name')}
+        />
+
+        <TextInput
+          label="Surname"
+          placeholder="Doe"
+          required
+          withAsterisk={false}
+          classNames={{
+            label: 'text-light-100'
+          }}
+          {...updateSubscriptionForm.getInputProps('surname')}
+        />
+
+        <TextInput
+          label="Adress"
+          placeholder="1234 Elm Street"
+          required
+          withAsterisk={false}
+          classNames={{
+            label: 'text-light-100'
+          }}
+          {...updateSubscriptionForm.getInputProps('address')}
+        />
+
+        <Button loading={isPending} className="button-primary" type="submit">
+          Update
+        </Button>
+      </form>
+    </section>
+  );
+};
+
+export default EditSubscriptionForm;

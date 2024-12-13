@@ -1,0 +1,6 @@
+#!/bin/bash
+
+
+sudo true
+sudo openfortivpn --config=/home/bchk/scripts/openforti.cfg --otp=$1 &
+disown

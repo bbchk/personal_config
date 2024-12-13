@@ -1,0 +1,18 @@
+import { useMutation, useQueryClient } from '@tanstack/react-query';
+import { markAllMeNotificationsRead } from 'api/profile';
+
+const useMarkAllMeNotificationsRead = () => {
+  const queryClient = useQueryClient();
+
+  return useMutation({
+    mutationFn: markAllMeNotificationsRead,
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ['article', articleId] });
+      queryClient.invalidateQueries({
+        queryKey: ['meNotifications', articleId]
+      });
+    }
+  });
+};
+
+export default useMarkAllMeNotificationsRead;

@@ -1,0 +1,6 @@
+/* ul class="smallLinkTree"> */
+/*               <li class="smallLinkTree__item"> */
+
+.smallLinkTree {}
+
+.smallLinkTree__item {}

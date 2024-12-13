@@ -1,0 +1,105 @@
+import { QueryClient } from '@tanstack/react-query';
+import Layout from 'components/Layout';
+import ErrorPage from './ErrorPage';
+import loaderMe from 'loaders/auth';
+import Root from './Root';
+import {
+  loaderArticle,
+  loaderArticles,
+  loaderArticlesByUser,
+  loaderEditArticle,
+  loaderPremiumArticlesByTag,
+  loaderRoot
+} from 'loaders/articles';
+import Articles from './Articles';
+import Article from './Article';
+import RequireAuth from 'components/RequireAuth';
+import Profile from './Profile';
+import EditProfile from './EditProfile';
+import ArticleMutation from './ArticleMutation';
+import PremiumArticles from './PremiumArticles';
+import EditSubscription from './EditSubscription';
+import ArticlesFeatured from './ArticlesFeatured';
+<<<<<<< HEAD
+import { loaderSubscriptions } from 'loaders/subscriptions';
+=======
+>>>>>>> 88d68ea0 (fix: refactor featured and premium articles as per requiremt. Imlement simple Featured Articles page with pagination and search.)
+
+const getRouteObjects = (queryClient_: QueryClient) => {
+  return [
+    {
+      element: <Layout />,
+      errorElement: <ErrorPage />,
+      loader: loaderMe(queryClient_),
+      children: [
+        {
+          path: '/',
+          element: <Root />,
+          loader: loaderRoot(queryClient_)
+        },
+        {
+          path: '/articles',
+          element: <Articles />,
+          loader: loaderArticles(queryClient_)
+        },
+        {
+          path: '/premium',
+          element: <PremiumArticles />,
+          loader: loaderPremiumArticlesByTag(queryClient_)
+        },
+        {
+          path: '/featured-articles',
+          element: <ArticlesFeatured />,
+          loader: loaderArticles(queryClient_)
+        },
+        {
+          path: '/articles/:id',
+          element: <Article />,
+          loader: loaderArticle(queryClient_)
+        },
+        {
+          path: '/premium/:id',
+          element: <Article />,
+          loader: loaderArticle(queryClient_)
+        },
+        {
+          path: '/profile/:userId',
+          element: (
+            <RequireAuth>
+              <Profile />
+            </RequireAuth>
+          ),
+          loader: loaderArticlesByUser(queryClient_)
+        },
+        {
+          path: '/profile/:userId/edit',
+          element: (
+            <RequireAuth>
+              <EditProfile />
+            </RequireAuth>
+          )
+        },
+        {
+          path: '/subscription/:userId/edit',
+          element: (
+            <RequireAuth>
+              <EditSubscription />
+            </RequireAuth>
+          ),
+          loader: loaderSubscriptions(queryClient_)
+        },
+        {
+          path: '/profile/:userId/article/:id',
+          loader: loaderEditArticle(queryClient_),
+          element: (
+            <RequireAuth>
+              <ArticleMutation />
+            </RequireAuth>
+          )
+        }
+      ]
+    }
+  ];
+};
+
+export default getRouteObjects;

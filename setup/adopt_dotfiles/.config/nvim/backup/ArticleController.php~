@@ -1,0 +1,218 @@
+<?php
+
+namespace App\Http\Controllers;
+
+use App\DTO\SearchParamsDTO;
+use Illuminate\Http\Request;
+use App\DTO\ArticleMutationDTO;
+use Illuminate\Support\Facades\Auth;
+use App\Models\Services\ImageService;
+use App\Models\Services\ArticleService;
+use App\Models\Services\CommentService;
+use App\Http\Requests\ArticleIndexRequest;
+use App\Notifications\CommentNotification;
+use App\Http\Requests\ArticleMutationRequest;
+<<<<<<< HEAD
+use App\Models\ArticleDraft;
+=======
+use App\Notifications\AlsoCommentNotification;
+>>>>>>> 43a26ef3 (feat(notification): Implement comment notification for authors of previous comments)
+use App\Notifications\ArticleCreatedNotification;
+use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
+
+class ArticleController
+{
+    use AuthorizesRequests;
+
+    public function __construct(
+        protected ArticleService $articleService,
+        protected CommentService $commentService,
+        protected ImageService $imageService
+    ) {}
+
+    public function index(ArticleIndexRequest $request)
+    {
+        $params = new SearchParamsDTO($request);
+
+        $articles = $this->articleService->listAllArticles($params);
+
+        return $articles;
+    }
+
+    public function show(int $articleId, ArticleIndexRequest $request)
+    {
+        $article = $this->articleService->findArticle($articleId);
+        $user = $request->user();
+
+        $isUserSubscribed = $user?->activeSubscription;
+        $isUserArticleAuthor = $user?->id === $article->user_id;
+
+        if ($article->is_premium && !$isUserSubscribed  && !$isUserArticleAuthor) {
+            $article->content = substr($article->content, 0, 50) . '...';
+            return $article;
+        }
+
+        $params = new SearchParamsDTO($request);
+
+        $comments = $this->articleService->getCommentsForArticle(
+            $article,
+            $params
+        );
+
+        $article->setRelation('comments', $comments);
+
+        return $article;
+    }
+
+    public function premium(ArticleIndexRequest $request)
+    {
+        $params = new SearchParamsDTO($request);
+
+        $premiumArticles = $this->articleService->getPremiumArticles($params);
+
+        return $premiumArticles;
+    }
+
+    public function articlesByUser(int $userId, ArticleIndexRequest $request)
+    {
+        $params = new SearchParamsDTO($request);
+
+        $articles = $this->articleService->listArticleByAuthor(
+            $userId,
+            $params
+        );
+
+        return $articles;
+    }
+
+    public function comments(int $articleId, ArticleIndexRequest $request)
+    {
+        $article = $this->articleService->findArticle($articleId);
+
+        $params = new SearchParamsDTO($request);
+
+        $comments = $this->articleService->getCommentsForArticle(
+            $article,
+            $params
+        );
+
+        return $comments;
+    }
+
+    public function store(ArticleMutationRequest $request)
+    {
+        $data = new ArticleMutationDTO($request);
+
+        $user = Auth::user();
+        $article = $this->articleService->storeArticle(
+            $data,
+            $user
+        );
+
+        $this->articleService->syncTags($article, $request->validated('tags'));
+
+        $this->imageService->updateArticleImage($article, $request->file('image'));
+
+        $followers = $user->followers;
+        foreach ($followers as $follower) {
+            $follower->notify(new ArticleCreatedNotification($article));
+        }
+
+        return response()->json([
+            'message' => 'Article was successfully created',
+            'articleId' => $article->id,
+        ], 201);
+    }
+
+    public function update(ArticleMutationRequest $request, int $articleId)
+    {
+        $article = $this->articleService->findArticle($articleId);
+
+        $this->authorize('update', $article);
+
+        $data = new ArticleMutationDTO($request);
+
+        $this->articleService->updateArticle(
+            $data,
+            $article
+        );
+
+        $this->articleService->syncTags($article, $request->validated('tags'));
+
+        $this->imageService->deleteUpdatedArticleImage($article);
+
+        $this->imageService->updateArticleImage($article, $request->file('image'));
+
+        return response()->json([
+            'message' => 'Article was successfully updated',
+            'articleId' => $article->id,
+        ]);
+    }
+
+    public function storeComment(Request $request, int $articleId)
+    {
+        //TODO: Make policy for storing comments for premium articles
+
+        $request->validate([
+            'content' => 'required|string',
+        ]);
+
+        $article = $this->articleService->findArticle($articleId);
+        $user = Auth::user();
+        $this->commentService->storeComment(
+            $request->content,
+            $article,
+            $user
+        );
+
+        $article->author->notify(new CommentNotification($user, $article));
+
+        $comments = $article->comments;
+        $notifiedAuthors = [];
+
+        foreach($comments as $comment) {
+            if ($comment->author->id !== $user->id && !in_array($comment->author->id, $notifiedAuthors))  {
+                $comment->author->notify(new AlsoCommentNotification($user, $article));
+                $notifiedAuthors[] = $comment->author->id;
+            }
+        }
+
+        return response()->json(['message' => 'Comment was successfully created', 'articleId' => $article->id], 201);
+    }
+
+    public function destroy(int $articleId)
+    {
+        $article = $this->articleService->findArticle($articleId);
+
+        $this->authorize('delete', $article);
+
+        $article->delete();
+
+        return response()->json(['message' => 'Article was successfully deleted']);
+    }
+
+    public function saveDraftArticle(Request $request)
+    {
+        $request->validate([
+            'content' => 'required|string',
+        ]);
+
+        $user = Auth::user();
+
+        $draft = new ArticleDraft();
+        $draft->content = $request->content;
+        $draft->user_id = $user->id;
+        $draft->save();
+
+        return response()->json(['message' => 'Draft was successfully saved', 'draft_id' => $draft->id], 201);
+    }
+
+    public function getArticleDrafts()
+    {
+        $user = Auth::user();
+
+        $drafts = $user->articleDrafts;
+
+        return $drafts;
+    }
+}

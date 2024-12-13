@@ -1,0 +1,13 @@
+
+[ids]
+*
+[main]
+capslock = backspace
+leftalt= layer(movement_layer)
+[movement_layer:C]
+k = up
+h = left
+j = down
+l = right
+u = home
+o = end

@@ -1,0 +1,18 @@
+$black-chocolate: #181c14;
+$black-rich: #040d12;
+$black-gunmetal: #2b3137;
+
+$white-cultured: #f5f5f5;
+$white-bone: #eae4dd;
+$white-lightsilv: #d5dadd; // Light Silver
+
+$blue-navy: #1e2a5e;
+$blue-gray: #295f98;
+$blue-dark-gray: #31363f;
+
+$dark-blue: #2f4858;
+$light-peach: #fff7e9;
+$peach: #ffeccc;
+$orange-stroke: #ffa500;
+
+$green-charleston: #222831;

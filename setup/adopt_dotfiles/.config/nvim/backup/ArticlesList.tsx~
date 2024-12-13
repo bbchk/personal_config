@@ -1,0 +1,91 @@
+import { Article } from 'types';
+import { formatDate, IMAGE_URL, linkTo } from 'utils';
+import Placeholder from '/assets/placeholder.png';
+import Diamond from '/assets/diamond-svgrepo-com.svg';
+import Pencil from '/assets/Pencil.svg';
+import { Link } from 'react-router-dom';
+
+type Props = {
+  articles: Article[] | undefined;
+  userId?: number;
+};
+
+const ArticlesList = ({ articles, userId }: Props) => {
+  return (
+    <>
+      <ul className="mb-12 flex grid-cols-2 flex-col gap-4 lg:grid">
+        {articles?.map((article) => (
+          <Link
+            to={linkTo(article)}
+            key={article.id}
+            className="flex flex-col transition-transform duration-100 hover:scale-105 sm:flex-row"
+          >
+            <div className="relative flex-[1]">
+              <div className="fadded rounded-t-[10px] sm:rounded-l-[10px] sm:rounded-r-none" />
+
+              <img
+                src={
+                  article.image_url
+                    ? `${IMAGE_URL}=${article.image_url}`
+                    : Placeholder
+                }
+                className="size-full rounded-t-[10px] object-cover sm:rounded-l-[10px] sm:rounded-r-none"
+                alt="Image of article"
+              />
+
+<<<<<<< HEAD
+              {article.is_premium && (
+=======
+              {article.premium && (
+>>>>>>> 88d68ea0 (fix: refactor featured and premium articles as per requiremt. Imlement simple Featured Articles page with pagination and search.)
+                <span className="absolute left-3 top-3 rounded-full bg-light-100 p-1">
+                  <img src={Diamond} alt="Icon of BLue Diamond" />
+                </span>
+              )}
+
+              {userId === article.author.id && (
+                <Link
+                  to={`/profile/${userId}/article/${article.id}`}
+                  className="absolute bottom-3 left-3 rounded-full"
+                >
+                  <img
+                    src={Pencil}
+                    alt="Icon of Pencil"
+                    className="hover:animate-spin"
+                  />
+                </Link>
+              )}
+            </div>
+
+            <div className="flex-[2] bg-dark-200 p-4 sm:rounded-r-[10px]">
+              <ul className="mb-4 flex gap-2">
+                {article.tags.map((tag) => (
+                  <li
+                    key={tag.id}
+                    className="button-primary inline-block px-3 text-xs md:text-sm"
+                  >
+                    {tag.name}
+                  </li>
+                ))}
+              </ul>
+
+              <p className="text-xs text-light-300 md:text-sm">
+                {formatDate(article.created_at)}
+              </p>
+
+              <h3 className="font-serif font-bold lg:text-2xl">
+                {article.title}
+              </h3>
+
+              <p className="text-xs text-light-300 md:text-sm">
+                By: {article.author.name}
+              </p>
+            </div>
+          </Link>
+        ))}
+      </ul>
+    </>
+  );
+};
+
+export default ArticlesList;

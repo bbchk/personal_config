@@ -1,0 +1,26 @@
+#!/usr/bin/env bash
+
+# Find the directory to work with
+session=$(find ~ ~/dev -mindepth 1 -maxdepth 1 -type d ! -name '.*' | fzf)
+session_name=$(basename "$session" | tr . _)
+
+# Check if the tmux server is running
+if ! tmux ls &> /dev/null; then
+  # If the tmux server is not running, start it
+  tmux start-server
+fi
+
+# Check if the session exists
+if ! tmux has-session -t "$session_name" 2> /dev/null; then
+  # Create a new tmux session if it doesn't exist
+  tmux new-session -s "$session_name" -c "$session" -d
+fi
+
+# Attach to the tmux session or switch to it
+if [ -z "$TMUX" ]; then
+  # If not inside a tmux session, attach to the session
+  tmux attach-session -t "$session_name"
+else
+  # If inside a tmux session, switch to the session
+  tmux switch-client -t "$session_name"
+fi

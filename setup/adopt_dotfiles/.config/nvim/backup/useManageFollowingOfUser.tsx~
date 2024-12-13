@@ -1,0 +1,34 @@
+import { useMutation, useQueryClient } from '@tanstack/react-query';
+import { followUser, unfollowUser } from 'api/profile';
+import useGetMe from './auth/useGetMe';
+
+enum FollowAction {
+  Follow = 'follow',
+  Unfollow = 'unfollow'
+}
+
+const useManageFollowingOfUser = (action: FollowAction) => {
+  const queryClient = useQueryClient();
+  const { user: me } = useGetMe();
+
+  return useMutation({
+    mutationFn: action === FollowAction.Follow ? followUser : unfollowUser,
+    onSuccess: (_, variables) => {
+      //TODO import build queries and get keys from them
+      //if follow invalidate my following list and their user followers list
+      queryClient.invalidateQueries({
+        queryKey: ['userFollowing', me?.id]
+      });
+      queryClient.invalidateQueries({
+        queryKey: ['userFollowers', variables.userId]
+      });
+      queryClient.invalidateQueries({ queryKey: ['user', variables.userId] });
+      queryClient.invalidateQueries({ queryKey: ['me'] });
+    }
+  });
+};
+
+export const useFollowUser = () =>
+  useManageFollowingOfUser(FollowAction.Follow);
+export const useUnfollowUser = () =>
+  useManageFollowingOfUser(FollowAction.Unfollow);

@@ -1,0 +1,54 @@
+[core]
+	repositoryformatversion = 0
+	filemode = true
+	bare = false
+    logallrefupdates = true
+[user]
+	email = bohdanbuchok@gmail.com
+	name = Bohdan Buchok
+[remote "origin"]
+	url = git@git.internetbrands.com:bbuchok/buchok-level-up-2024.git
+	fetch = +refs/heads/*:refs/remotes/origin/*
+[branch "main"]
+	remote = origin
+	merge = refs/heads/main
+[branch "feat/protect-article-routes-with-auth"]
+	remote = origin
+	merge = refs/heads/feat/protect-article-routes-with-auth
+[branch "feat/paginate-and-sort"]
+	vscode-merge-base = origin/feat/protect-article-routes-with-auth
+	remote = origin
+	merge = refs/heads/feat/paginate-and-sort
+[branch "test/api"]
+	remote = origin
+	merge = refs/heads/test/api
+[remote "upstream"]
+	url = git@git.internetbrands.com:LevelUp-Academy/levelup-2024.git
+	fetch = +refs/heads/*:refs/remotes/upstream/*
+[branch "feat/integrate-upstream"]
+	remote = origin
+	merge = refs/heads/feat/integrate-upstream
+[branch "feat/routing-data_fetching-forms"]
+	remote = origin
+	merge = refs/heads/feat/routing-data_fetching-forms
+[branch "feat/file-handling"]
+	remote = origin
+	merge = refs/heads/feat/file-handling
+[branch "fix/articles-index-by-tag-pagination"]
+	remote = origin
+	merge = refs/heads/fix/articles-index-by-tag-pagination
+[branch "feat/return-article-on-store"]
+	remote = origin
+	merge = refs/heads/feat/return-article-on-store
+[branch "feat/cascade-delete-comments-on-article-id"]
+	remote = origin
+	merge = refs/heads/feat/cascade-delete-comments-on-article-id
+[branch "feat/ci-cd"]
+	remote = origin
+	merge = refs/heads/feat/ci-cd
+[branch "feat/routing-react-query"]
+	remote = origin
+	merge = refs/heads/feat/routing-react-query
+[branch "feat/design-patterns"]
+	remote = origin
+	merge = refs/heads/feat/design-patterns

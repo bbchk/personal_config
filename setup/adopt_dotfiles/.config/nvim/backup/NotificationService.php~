@@ -1,0 +1,43 @@
+<?php
+
+namespace App\Models\Services;
+
+
+use Exception;
+use App\Models\User;
+use App\Models\Article;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
+use App\Services\CloudinaryServiceInterface;
+use CloudinaryLabs\CloudinaryLaravel\Facades\Cloudinary;
+use Illuminate\Support\Facades\Log;
+
+class NotificationService
+{
+    public function getNotifications()
+    {
+        $user = Auth::user();
+        $notifications = $user->notifications()->latest()->paginate(10);
+        $unreadNotifications = $user->unreadNotifications()->latest()->paginate(10);
+
+        return $notifications;
+    }
+
+
+    public function markAllRead()
+    {
+        $user = Auth::user();
+        $user->unreadNotifications->markAsRead();
+    }
+
+    public function markNotificationAsRead($notificationId)
+    {
+        $user = Auth::user();
+        $notification = $user->notifications()->findOrFail($notificationId);
+
+        $notification->markAsRead();
+
+        return response()->json(['message' => 'Notification marked as read']);
+    }
+}
