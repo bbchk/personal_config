@@ -1,2 +1,40 @@
-# - "docker-desktop"
 ---
+- block:
+    - name: Download Docker client binary
+      get_url:
+        url: https://download.docker.com/linux/static/stable/x86_64/docker-27.4.0.tgz
+        dest: /tmp/docker.tgz
+
+    - name: Extract Docker client binary
+      unarchive:
+        src: /tmp/docker.tgz
+        dest: /tmp/
+        remote_src: yes
+        extra_opts: [--strip-components=1]
+        creates: /tmp/docker
+
+    - name: Move Docker client binary to /usr/local/bin
+      command: mv /tmp/docker /usr/local/bin/docker
+      args:
+        creates: /usr/local/bin/docker
+
+    - name: Get latest Docker Desktop release information
+      uri:
+        url: https://api.github.com/repos/docker/desktop/releases/latest
+        return_content: yes
+      register: release_info
+
+    - name: Set Docker Desktop package URL
+      set_fact:
+        docker_desktop_url: "{{ release_info.json.assets | selectattr('name', 'search', 'arch') | map(attribute='browser_download_url') | first }}"
+
+    - name: Download Docker Desktop package
+      get_url:
+        url: "{{ docker_desktop_url }}"
+        dest: /tmp/docker-desktop-x86_64.pkg.tar.zst
+
+    - name: Install Docker Desktop package
+      pacman:
+        name: /tmp/docker-desktop-x86_64.pkg.tar.zst
+        state: present
+  tags: docker_setup

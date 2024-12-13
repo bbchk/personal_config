@@ -9,3 +9,20 @@
   shell: stow --override='.*' -t ~ .
   args:
     chdir: "{{ playbook_dir }}/dotfiles"
+
+---
+- name: Ensure GNU Stow is installed
+  package:
+    name: stow
+    state: present
+
+- name: Remove existing dotfiles in home directory
+  shell: |
+    stow --simulate --override='.*' -t ~ . | grep 'LINK' | awk '{print $2}' | xargs rm -rf
+  args:
+    chdir: "{{ playbook_dir }}/dotfiles"
+
+- name: Stow all dotfiles to home directory
+  shell: stow --override='.*' -t ~ .
+  args:
+    chdir: "{{ playbook_dir }}/dotfiles"
