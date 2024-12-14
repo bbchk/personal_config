@@ -1,4 +1,5 @@
 ansible ver. and deps ver
+df
 
 ansible [core 2.18.1]
 config file = None
