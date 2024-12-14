@@ -28,6 +28,7 @@ export ARCHFLAGS="-arch x86_64"
 bindkey -s '^f' 'tmux-sessionizer\n'
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+source <(fzf --zsh)
 
 export PATH="$HOME/pers/scripts:$PATH"
 

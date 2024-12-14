@@ -32,6 +32,7 @@
       - "go"
       - "lua"
       - "acpi"
+      - "keychain"
 
 - name: Install necessary packages for Arch
   pacman:
