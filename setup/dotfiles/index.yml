@@ -1,0 +1,16 @@
+- name: Ensure gnu stow is installed
+  package:
+    name: stow
+    state: present
+  become: true
+
+- name: stow all dotfiles to home directory (adopt)
+  shell: stow --adopt -t ~ .
+  args:
+    chdir: "{{ playbook_dir }}/dotfiles"
+
+- name: Change to destination directory and checkout current branch
+  shell: |
+    git checkout .
+  args:
+    chdir: "{{ playbook_dir }}/.."

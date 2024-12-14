@@ -1,9 +1,0 @@
-const CreateNewComment = () => {
-  return (
-    <div className="newComment">
-      <></>
-    </div>
-  );
-};
-
-export default CreateNewComment;

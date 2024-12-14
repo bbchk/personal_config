@@ -10,7 +10,7 @@
     - name: Include tasks
       include_tasks: "{{ item }}.yml"
       loop:
-        - dotfiles
+        - dotfiles/index
         - packages/install
         - packages/config
         - secrets/index
