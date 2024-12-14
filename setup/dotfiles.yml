@@ -30,6 +30,7 @@
   loop: "{{ dotfiles_list.files }}"
   when: confirm_deletion.user_input | lower in ['yes', 'y']
   tags: dotfiles
+  become: true
 
 - name: Pause before stowing
   pause:
