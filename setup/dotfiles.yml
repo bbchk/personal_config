@@ -12,8 +12,15 @@
 - name: List files that will be deleted
   debug:
     # msg: "The following files and directories will be deleted: {{ item.path | regex_replace('^' + playbook_dir + '/dotfiles', '~') }}"
+    msg: "The following files and directories will be deleted: {{ item }}"
+  loop: "{{ dotfiles_list }}"
+  tags: dotfiles
+
+- name: List files that will be deleted
+  debug:
+    # msg: "The following files and directories will be deleted: {{ item.path | regex_replace('^' + playbook_dir + '/dotfiles', '~') }}"
     msg: "The following files and directories will be deleted: {{ item.path }}"
-  loop: "{{ dotfiles_list.files }}"
+  loop: "{{ dotfiles_list }}"
   tags: dotfiles
 
 - name: Confirm deletion
