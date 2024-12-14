@@ -19,15 +19,10 @@
         creates: /usr/local/bin/docker
       become: true
 
-    - name: Get latest Docker Desktop release information
-      uri:
-        url: https://api.github.com/repos/docker/desktop/releases/latest
-        return_content: yes
-      register: release_info
-
+    # TODO: pull the last desktop package available
     - name: Set Docker Desktop package URL
       set_fact:
-        docker_desktop_url: "{{ release_info.json.assets | selectattr('name', 'search', 'arch') | map(attribute='browser_download_url') | first }}"
+        docker_desktop_url: "https://desktop.docker.com/linux/main/amd64/178034/docker-desktop-x86_64.pkg.tar.zst"
 
     - name: Download Docker Desktop package
       get_url:
