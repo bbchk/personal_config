@@ -27,7 +27,10 @@ export ARCHFLAGS="-arch x86_64"
 
 bindkey -s '^f' 'tmux-sessionizer\n'
 
+# upgrade fzf
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+
+# include fzf bindings into zsh shell 
 source <(fzf --zsh)
 
 export PATH="$HOME/pers/scripts:$PATH"
