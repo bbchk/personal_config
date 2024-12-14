@@ -18,7 +18,6 @@
       args:
         creates: /usr/local/bin/docker
       become: true
-      become_user: "{{user}}"
 
     - name: Get latest Docker Desktop release information
       uri:
