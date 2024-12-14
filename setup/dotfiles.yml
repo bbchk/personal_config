@@ -5,7 +5,7 @@
         state: present
 
     - name: Stow all dotfiles to home directory (adopt)
-      shell: stow --adopt --override='.*' --restow -t ~ .
+      shell: stow --delete -t ~ .
       args:
         chdir: "{{ playbook_dir }}/adopt_dotfiles"
 
