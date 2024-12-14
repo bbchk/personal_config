@@ -19,6 +19,7 @@
 
 - name: Print list of files to be deleted
   shell: "echo {{ deleted_files.results | map(attribute='stdout') | join('\n') }}"
+  become: true
   tags: dotfiles
 
 - name: Confirm deletion
