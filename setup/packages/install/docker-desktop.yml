@@ -33,4 +33,5 @@
       pacman:
         name: /tmp/docker-desktop-x86_64.pkg.tar.zst
         state: present
+      become: true
   tags: docker_setup
