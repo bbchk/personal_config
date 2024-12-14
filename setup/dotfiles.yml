@@ -12,8 +12,7 @@
   register: dotfiles_list
 
 - name: List files that will be deleted
-  debug:
-    msg: "The following files and directories will be deleted: {{ item.path | regex_replace('^' + playbook_dir + '/dotfiles', '/home/' + user) }}"
+  shell: "echo The following files and directories will be deleted: {{ item.path | regex_replace('^' + playbook_dir + '/dotfiles', '/home/' + user) }}"
   loop: "{{ dotfiles_list.files }}"
   tags: dotfiles
 
