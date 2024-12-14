@@ -37,3 +37,4 @@
   args:
     chdir: "{{ playbook_dir }}/dotfiles"
   when: confirm_deletion.user_input | lower in ['yes', 'y']
+  ignore_errors: true
