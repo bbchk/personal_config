@@ -12,7 +12,7 @@
   register: dotfiles_list
 
 - name: List files that will be deleted
-  shell: echo "{{ item.path | regex_replace('^' + playbook_dir + '/dotfiles', '/home/' + user) }}"
+  shell: echo "{{ file_item.path | regex_replace('^' + playbook_dir + '/dotfiles', '/home/' + user) }}"
   loop: "{{ dotfiles_list.files }}"
   loop_control:
     loop_var: file_item
