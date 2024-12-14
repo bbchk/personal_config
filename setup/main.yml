@@ -3,7 +3,7 @@
   become: false
   pre_tasks:
     - name: Initial setup
-      include_tasks: setup.yml
+      include_tasks: lifecycle/setup.yml
   vars:
     user: "{{ ansible_env.USER }}"
   tasks:
@@ -16,4 +16,4 @@
         - secrets/index
   post_tasks:
     - name: On finish
-      include_tasks: onFinish.yml
+      include_tasks: lifecycle/finish.yml
