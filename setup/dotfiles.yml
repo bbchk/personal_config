@@ -31,7 +31,14 @@
   when: confirm_deletion.user_input | lower in ['yes', 'y']
   tags: dotfiles
 
+- name: Pause before stowing
+  pause:
+    seconds: 10
+  when: confirm_deletion.user_input | lower in ['yes', 'y']
+  tags: dotfiles
+
 - name: stow all dotfiles to home directory (override)
   shell: stow --override='.*' -t ~ .
   args:
     chdir: "{{ playbook_dir }}/dotfiles"
+  when: confirm_deletion.user_input | lower in ['yes', 'y']
