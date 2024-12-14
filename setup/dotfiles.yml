@@ -12,9 +12,9 @@
   register: dotfiles_list
 
 - name: List files that will be deleted
-  debug: var={{ item.path | regex_replace('^' + playbook_dir + '/dotfiles', '/home/' + user) }}
+  debug:
+    msg: "{{ item.path | regex_replace('^' + playbook_dir + '/dotfiles', '/home/' + user) }}"
   loop: "{{ dotfiles_list.files }}"
-  tags: dotfiles
 
 - name: Confirm deletion
   pause:
