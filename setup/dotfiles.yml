@@ -32,12 +32,6 @@
   tags: dotfiles
   become: true
 
-- name: stow all dotfiles to home directory (adopt)
-  shell: stow --adopt -t ~ .
-  args:
-    chdir: "{{ playbook_dir }}/adopt_dotfiles"
-  when: confirm_deletion.user_input | lower in ['yes', 'y']
-
 - name: stow all dotfiles to home directory (override)
   shell: stow --override='.*' -t ~ .
   args:
