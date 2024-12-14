@@ -5,7 +5,7 @@
         state: present
 
     - name: Stow all dotfiles to home directory (adopt)
-      shell: stow --delete -t ~ .
+      shell: stow --delete --adopt -t ~ .
       args:
         chdir: "{{ playbook_dir }}/adopt_dotfiles"
 
