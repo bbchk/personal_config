@@ -1,16 +1,35 @@
-- block:
-    - name: Ensure GNU Stow is installed
-      package:
-        name: stow
-        state: present
+- name: ensure gnu stow is installed
+  package:
+    name: stow
+    state: present
 
-    - name: Stow all dotfiles to home directory (adopt)
-      shell: stow --delete --adopt -t ~ .
-      args:
-        chdir: "{{ playbook_dir }}/adopt_dotfiles"
+- name: Find all files in dotfiles directory
+  find:
+    paths: "{{ playbook_dir }}/dotfiles"
+    file_type: any
+  register: dotfiles_list
 
-    - name: Stow all dotfiles to home directory (override)
-      shell: stow --override='.*' -t ~ .
-      args:
-        chdir: "{{ playbook_dir }}/dotfiles"
+- name: List files that will be deleted
+  debug:
+    msg: "The following files and directories will be deleted: {{ item.path | regex_replace('^' + playbook_dir + '/dotfiles', '~') }}"
+  loop: "{{ dotfiles_list.files + dotfiles_list.directories }}"
   tags: dotfiles
+
+- name: Confirm deletion
+  pause:
+    prompt: "Are you sure you want to delete these files? (yes/no)"
+  register: confirm_deletion
+  tags: dotfiles
+
+- name: Delete dotfiles from home directory
+  file:
+    path: "{{ item.path | regex_replace('^' + playbook_dir + '/dotfiles', '~') }}"
+    state: absent
+  loop: "{{ dotfiles_list.files + dotfiles_list.directories }}"
+  when: confirm_deletion.user_input | lower == 'yes'
+  tags: dotfiles
+
+- name: stow all dotfiles to home directory (override)
+  shell: stow --override='.*' -t ~ .
+  args:
+    chdir: "{{ playbook_dir }}/dotfiles"
