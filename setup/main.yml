@@ -17,3 +17,6 @@
   post_tasks:
     - name: On finish
       include_tasks: onFinish.yml
+  tags:
+    - dotfiles
+    - docker_setup
