@@ -1,7 +1,8 @@
-- name: ensure gnu stow is installed
+- name: Ensure gnu stow is installed
   package:
     name: stow
     state: present
+  become: true
 
 - name: Find all files in dotfiles directory
   find:
@@ -12,21 +13,13 @@
 
 - name: List files that will be deleted
   debug:
-    # msg: "The following files and directories will be deleted: {{ item.path | regex_replace('^' + playbook_dir + '/dotfiles', '~') }}"
-    msg: "The following files and directories will be deleted: {{ item }}"
-  loop: "{{ dotfiles_list.files }}"
-  tags: dotfiles
-
-- name: List files that will be deleted
-  debug:
-    # msg: "The following files and directories will be deleted: {{ item.path | regex_replace('^' + playbook_dir + '/dotfiles', '~') }}"
     msg: "The following files and directories will be deleted: {{ item.path }}"
   loop: "{{ dotfiles_list.files }}"
   tags: dotfiles
 
 - name: Confirm deletion
   pause:
-    prompt: "Are you sure you want to delete these files? (yes/no)"
+    prompt: "Are you sure you want to delete these files? (y/n)"
   register: confirm_deletion
   tags: dotfiles
 
@@ -35,7 +28,7 @@
     path: "{{ item.path | regex_replace('^' + playbook_dir + '/dotfiles', '~') }}"
     state: absent
   loop: "{{ dotfiles_list.files }}"
-  when: confirm_deletion.user_input | lower == 'yes'
+  when: confirm_deletion.user_input | lower in ['yes', 'y']
   tags: dotfiles
 
 - name: stow all dotfiles to home directory (override)
