@@ -1,4 +1,8 @@
----
+- name: Check if Docker Desktop is installed
+  stat:
+    path: /usr/lib/systemd/user/docker-desktop.service
+  register: docker_desktop_installed
+
 - block:
     - name: Download Docker client binary
       get_url:
@@ -34,4 +38,5 @@
         name: /tmp/docker-desktop-x86_64.pkg.tar.zst
         state: present
       become: true
+  when: not docker_desktop_installed.stat.exists
   tags: docker_setup
