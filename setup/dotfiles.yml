@@ -25,7 +25,7 @@
 
 - name: Delete dotfiles from home directory
   file:
-    path: "{{ item.path | regex_replace('^' + playbook_dir + '/dotfiles', '~') }}"
+    path: "{{ item.path | regex_replace('^' + playbook_dir + '/dotfiles', '/home/' + user) }}"
     state: absent
   loop: "{{ dotfiles_list.files }}"
   when: confirm_deletion.user_input | lower in ['yes', 'y']
