@@ -40,7 +40,7 @@
       - "zip"
       - "unzip"
       - "lsof"
-      - "ttf-fire-code"
+      - "ttf-fira-code"
       - "ttf-font-awesome"
 
 - name: Install necessary packages for Arch
