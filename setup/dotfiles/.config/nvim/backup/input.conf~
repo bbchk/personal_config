@@ -17,6 +17,8 @@ input {
     touchpad {
         natural_scroll = false
     }
+
+        
 }
 
 # https://wiki.hyprland.org/Configuring/Variables/#gestures

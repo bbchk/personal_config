@@ -25,7 +25,7 @@ fi
 # Compilation flags
 export ARCHFLAGS="-arch x86_64"
 
-bindkey -s '^f' '^u^ktmux-sessionizer\n'
+bindkey -s '^f' 'tmux-sessionizer\n'
 
 # upgrade fzf
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh

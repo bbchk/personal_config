@@ -1,0 +1,7 @@
+---
+# it comes prepacked with arch, i use nautilus instead
+- name: Uninstall dolphin file manager
+  pacman:
+    name: dolphin
+    state: absent
+  become: true
