@@ -47,6 +47,7 @@ alias code="code --profile main"
 
 # Misc
 alias open="xdg-open"
+alias clear="echo 'clear command is disabled'"
 
 # ------------------------------
 # end aliases 
