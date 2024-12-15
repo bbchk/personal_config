@@ -15,7 +15,7 @@
   lineinfile:
     path: "{{ google_chrome_desktop_file.path }}"
     regexp: "^Exec=.*"
-    line: "Exec=/usr/bin/google-chrome-stable --force-device-scale-factor=2 %U"
+    line: "Exec=/usr/bin/google-chrome-stable --force-device-scale-factor=2 --start-fullscreen %U"
     backup: yes
   loop: "{{ chrome_desktop_file.files }}"
   loop_control:
