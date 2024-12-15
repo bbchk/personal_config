@@ -1,0 +1,2 @@
+pacman -S pipewire wireplumber pipewire-pulse pipewire-alsa
+systemctl --user enable --now pipewire.service wireplumber.service pipewire-pulse.service 
