@@ -1,7 +1,0 @@
-import ProfileContainer from 'features/profile/ProfileContainer';
-const ProfileEditPage = () => {
-
-  return <ProfileContainer />;
-};
-
-export default ProfileEditPage;

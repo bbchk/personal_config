@@ -1,7 +1,0 @@
----
-# it comes prepacked with arch, i use nautilus instead
-- name: Uninstall dolphin package
-  pacman:
-    name: dolphin
-    state: absent
-  become: true

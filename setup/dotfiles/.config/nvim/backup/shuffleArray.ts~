@@ -1,3 +1,0 @@
-export default function shuffleArray(arr) {
-  return Array.from(arr).sort(() => Math.random() - 0.5);
-}

@@ -1,9 +1,0 @@
-[Desktop Entry]
-Name=Sioyek
-Comment=PDF Viewer
-Exec=/usr/local/bin/sioyek %f
-Icon=/usr/local/bin/sioyek-dir/icon.png  
-Type=Application
-Categories=Office;Viewer;
-Terminal=false
-MimeType=application/pdf;

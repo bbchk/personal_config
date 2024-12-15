@@ -1,4 +1,0 @@
-// We need add this restriction for non-auth users for premium articles.
-// We don’t have design for case when user is auth, but don’t have premium. In my opinion it should looks the same with different text and contain button “start premium”
-//
-// Cutting of article should be done on Backend to avoid getting full article from network

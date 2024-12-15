@@ -1,7 +1,0 @@
-import { ReactNode } from 'react';
-
-const MemoryTable = ({ children }: ReactNode) => {
-  return <div className="w-screen p-10">{children}</div>;
-};
-
-export default MemoryTable;
