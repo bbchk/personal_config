@@ -3,12 +3,25 @@
 # ------------------------------
 
 # git
-	# shl = log --pretty=oneline --abbrev-commit
- #  ci = commit -v
- #  dl = -c diff.external=difft log -p --ext-diff
- #  ds = -c diff.external=difft show --ext-diff
- #  dft = -c diff.external=difft diff
 
+
+alias gci="git commit -v"
+
+# log
+alias gshl="git log --pretty=oneline --abbrev-commit"
+
+# difftastic
+alias gdl="git -c diff.external=difft log -p --ext-diff"
+alias gds="git -c diff.external=difft show --ext-diff"
+alias gds="git dft = -c diff.external=difft diff"
+
+
+# end git
+
+# Github Copilot 
+alias gpilot="gh copilot"
+alias ghs="ghs copilot suggest"
+alias ghe="ghe copilot explain"
 
 # Node
 alias nr="npm run"
@@ -30,10 +43,6 @@ alias samf="sail artisan migrate:fresh"
 alias sacc="sail artisan cache:clear && sail artisan view:clear && sail artisan route:clear"
 alias tinker="sail artisan tinker"
 
-# Github Copilot 
-alias gpilot="gh copilot"
-alias ghs="ghs copilot suggest"
-alias ghe="ghe copilot explain"
 
 # Ruby
 alias irb='irb --simple-prompt'
