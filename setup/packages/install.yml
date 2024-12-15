@@ -34,6 +34,9 @@
       - "acpi"
       - "keychain"
       - "difftastic"
+      - "man"
+      - "zip"
+      - "unzip"
 
 - name: Install necessary packages for Arch
   pacman:

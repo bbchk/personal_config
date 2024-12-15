@@ -2,6 +2,14 @@
 # aliases 
 # ------------------------------
 
+# git
+	# shl = log --pretty=oneline --abbrev-commit
+ #  ci = commit -v
+ #  dl = -c diff.external=difft log -p --ext-diff
+ #  ds = -c diff.external=difft show --ext-diff
+ #  dft = -c diff.external=difft diff
+
+
 # Node
 alias nr="npm run"
 alias nrd="npm run dev"
