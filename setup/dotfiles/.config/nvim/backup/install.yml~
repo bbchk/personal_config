@@ -3,26 +3,22 @@
 # pacman
 # ------------------------------
 
+# TODO: delete dolphin file manager
+
 - name: Define package list
   set_fact:
     pacman_packages:
+      - "systemd"
+      - "systemd-sysvcompat"
       - "git"
       - "base-devel"
       - "keepassxc"
-      - "aws-cli-v2"
-      - "bruno"
-      - "grimshot"
-      - "members"
-      - "ttf-ms-fonts"
-      - "xwaylandvideobridge-git"
-      - "yay"
       - "tmux"
       - "neovim"
       - "openfortivpn"
       - "fzf"
       - "github-cli"
       - "zsh"
-      - "fzf"
       - "hyprpaper"
       - "grim"
       - "brightnessctl"
@@ -31,12 +27,31 @@
       - "stow"
       - "android-tools"
       - "code"
-      - "steam"
+      - "nautilus"
+      - "mako"
+      - "qbittorrent"
+      - "mpv"
+      - "go"
+      - "lua"
+      - "acpi"
+      - "keychain"
+      - "difftastic"
+      - "man"
+      - "zip"
+      - "unzip"
+      - "lsof"
+      - "ttf-fira-code"
+      - "ttf-font-awesome"
+      - "libcamera"
+      - "bluez"
+      - "bluez-utils"
+      - "sof-firmware"
 
 - name: Install necessary packages for Arch
   pacman:
     name: "{{ pacman_packages }}"
     state: present
+  become: true
 
 # ------------------------------
 # yay
@@ -52,11 +67,13 @@
   git:
     repo: "https://aur.archlinux.org/yay.git"
     dest: "/tmp/yay-git"
+    depth: 1
+    update: true
   when: not yay_installed.stat.exists
 
 - name: Build and install yay
   command:
-    cmd: makepkg -sri
+    cmd: makepkg -sri --noconfirm
     chdir: /tmp/yay-git
     creates: /usr/bin/yay
   when: not yay_installed.stat.exists
@@ -65,18 +82,22 @@
 - name: Define aur package list
   set_fact:
     yay_packages:
-      - "google-chrome-stable"
+      - "google-chrome"
       - "grimshot"
       - "pnpm"
+      - "bruno"
+      - "xwaylandvideobridge-git"
+      - "aws-cli-v2"
+      - "sioyek"
 
-- name: Install aur packages using yay
-  become: true
-  shell: yay -S --noconfirm {{ yay_package }}
-  loop: "{{ yay_packages }}"
-  loop_control:
-    loop_var: yay_package
+- name: Ensure AUR packages are installed and updated
+  shell: |
+    if ! yay -Q {{ item }} || yay -Qu | grep -q "^{{ item }}"; then
+      yay -S --noconfirm {{ item }}
+    fi
   args:
     executable: /bin/bash
+  loop: "{{ yay_packages }}"
 
 # ------------------------------
 # Install from git, source, etc.

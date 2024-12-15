@@ -42,6 +42,12 @@
       - "lsof"
       - "ttf-fira-code"
       - "ttf-font-awesome"
+      - "libcamera"
+      - "bluez"
+      - "bluez-utils"
+      - "sof-firmware"
+
+# sudo modprobe sof-audio-pci-intel-tgl
 
 - name: Install necessary packages for Arch
   pacman:
