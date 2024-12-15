@@ -20,7 +20,6 @@ return {
 				"tailwindcss",
 				"intelephense",
 				"gopls",
-				"jdtls",
 				"sqlls",
 			},
 		})
