@@ -33,6 +33,7 @@
       - "lua"
       - "acpi"
       - "keychain"
+      - "difftastic"
 
 - name: Install necessary packages for Arch
   pacman:

@@ -1,5 +1,6 @@
+---
 - name: Ensure gnu stow is installed
-  package:
+  pacman:
     name: stow
     state: present
   become: true
