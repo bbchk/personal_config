@@ -20,5 +20,6 @@
 # TODO:
 # - set default input device
 # - setup dev dir and pull the most improtant projects
-# -
-# -
+# - install rust
+# - install xidlehook
+# - install and configure hyprpicker

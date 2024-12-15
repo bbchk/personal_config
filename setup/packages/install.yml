@@ -46,6 +46,8 @@
       - "bluez"
       - "bluez-utils"
       - "sof-firmware"
+      - "hypridle"
+      - "hyprlock"
 
 # sudo modprobe sof-audio-pci-intel-tgl
 
