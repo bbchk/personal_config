@@ -3,6 +3,8 @@
 # pacman
 # ------------------------------
 
+# TODO: delete dolphin file manager
+
 - name: Define package list
   set_fact:
     pacman_packages:
