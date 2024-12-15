@@ -7,6 +7,7 @@
 	rebase = true
 [core]
 	editor = nvim
+	sshCommand = ssh -i ~/.ssh/github-2
 [alias]
 	shl = log --pretty=oneline --abbrev-commit
   ci = commit -v
