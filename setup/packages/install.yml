@@ -39,6 +39,7 @@
       - "man"
       - "zip"
       - "unzip"
+      - "lsof"
 
 - name: Install necessary packages for Arch
   pacman:
