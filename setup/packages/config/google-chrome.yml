@@ -11,11 +11,11 @@
     msg: "Google Chrome desktop file not found."
   when: chrome_desktop_file.matched == 0
 
-- name: Update Exec line in Google Chrome desktop file
-  lineinfile:
+- name: Update all Exec lines in Google Chrome desktop file
+  replace:
     path: "{{ google_chrome_desktop_file.path }}"
     regexp: "^Exec=.*"
-    line: "Exec=/usr/bin/google-chrome-stable --force-device-scale-factor=2 --start-fullscreen %U"
+    replace: "Exec=/usr/bin/google-chrome-stable --force-device-scale-factor=2 --start-fullscreen %U"
     backup: yes
   loop: "{{ chrome_desktop_file.files }}"
   loop_control:

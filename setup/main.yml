@@ -17,3 +17,8 @@
   post_tasks:
     - name: On finish
       include_tasks: lifecycle/finish.yml
+# TODO:
+# - set default input device
+# - setup dev dir and pull the most improtant projects
+# -
+# -
