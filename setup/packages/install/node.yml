@@ -1,7 +1,8 @@
 ---
+# TODO: install just lts version
 - name: Define node version var
   set_fact:
-    node_version: 20.9.0
+    node_version: 22.12.0
     nvm_dir: "{{ ansible_env.HOME }}/.nvm"
 
 - name: Check if nvm is installed

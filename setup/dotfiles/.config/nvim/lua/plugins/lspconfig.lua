@@ -100,6 +100,12 @@ return {
 					capabilities = capabilities,
 				})
 			end,
+			["ts_ls"] = function()
+				nvim_lsp["ts_ls"].setup({
+					on_attach = on_attach,
+					capabilities = capabilities,
+				})
+			end,
 		})
 	end,
 }

@@ -21,6 +21,7 @@ return {
 				"intelephense",
 				"gopls",
 				"sqlls",
+				"ts_ls",
 			},
 		})
 
