@@ -23,4 +23,4 @@
 # - install rust
 # - install xidlehook
 # - install and configure hyprpicker
-# - install ts and ts lang server
+# - install ts and ts lang server ╰$ npm install -g typescript typescript-language-server
