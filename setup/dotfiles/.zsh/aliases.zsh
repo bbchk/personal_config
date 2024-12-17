@@ -15,6 +15,9 @@ alias gdl="git -c diff.external=difft log -p --ext-diff"
 alias gds="git -c diff.external=difft show --ext-diff"
 alias gds="git dft = -c diff.external=difft diff"
 
+# remote
+alias gclone='git clone'
+
 
 # end git
 
