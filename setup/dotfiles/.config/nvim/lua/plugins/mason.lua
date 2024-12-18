@@ -22,6 +22,7 @@ return {
 				"gopls",
 				"sqlls",
 				"ts_ls",
+				"stylelint_lsp",
 			},
 		})
 
