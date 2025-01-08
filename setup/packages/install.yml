@@ -48,6 +48,8 @@
       - "sof-firmware"
       - "hypridle"
       - "hyprlock"
+      - "postgresql"
+      - "ppp"
 
 # sudo modprobe sof-audio-pci-intel-tgl
 

@@ -28,6 +28,8 @@ alias ghe="ghe copilot explain"
 
 # Node
 alias nr="npm run"
+
+alias nri="npm install"
 alias nrd="npm run dev"
 alias nrw="npm run watch"
 alias nrb="npm run build"
