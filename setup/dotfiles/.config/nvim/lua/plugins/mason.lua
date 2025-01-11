@@ -23,6 +23,7 @@ return {
 				"sqlls",
 				"ts_ls",
 				"stylelint_lsp",
+				"bashls",
 			},
 		})
 

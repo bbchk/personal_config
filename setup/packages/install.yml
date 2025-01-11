@@ -50,6 +50,8 @@
       - "hyprlock"
       - "postgresql"
       - "ppp"
+      - "man-pages"
+      - "shellcheck"
 
 # sudo modprobe sof-audio-pci-intel-tgl
 
