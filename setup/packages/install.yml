@@ -52,6 +52,8 @@
       - "ppp"
       - "man-pages"
       - "shellcheck"
+      - "kubectl"
+      - "net-tools"
 
 # sudo modprobe sof-audio-pci-intel-tgl
 

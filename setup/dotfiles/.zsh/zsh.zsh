@@ -13,6 +13,7 @@ precmd() {
 zstyle ':vcs_info:git:*' formats '[%b]'
 
 setopt prompt_subst
+setopt histignorespace 
 
 # Prompt config
 PROMPT='%F{92} ╭─%f%B%F{220}%~%f %F{92}${vcs_info_msg_0_}%f%b
