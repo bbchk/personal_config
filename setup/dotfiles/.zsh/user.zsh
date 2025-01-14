@@ -27,8 +27,7 @@ export ARCHFLAGS="-arch x86_64"
 
 # Scripts keybindings 
 bindkey -s '^f' '^u^ktmux-sessionizer\n'
-# bindkey -s '^h' '^u^ktmux neww -n "cheat-sheet" zsh -c "source cheat-sheet; exec zsh"\n'
-bindkey -s '^h' 'if [[ "$(tmux display-message -p "#W")" == "cheat-sheet" ]]; then source cheat-sheet; exec zsh; else tmux neww -n "cheat-sheet" zsh -c "source cheat-sheet; exec zsh"; fi\n'
+bindkey -s '^h' '^u^kcheat-sheet-tmux-integration\n' 
 
 # upgrade fzf
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
