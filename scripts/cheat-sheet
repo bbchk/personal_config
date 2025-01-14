@@ -81,19 +81,19 @@ while :; do
   fi
 
   echo 'Selected:' "$selected"
-  echo -n "Enter Query: "
+  echo -n "Query: "
   read -r query
 
   printDelimeter
 
   if grep -qs "$selected" <<< "$languages"; then
-      echo "cht.sh/$selected/$query"
+      echo "To be found: cht.sh/$selected/$query"
       printDelimeter "\n"
 
       query=$(echo "$query" | tr ' ' '+')
       curl cht.sh/"$selected"/"$query" 
   else 
-      echo "cht.sh/$selected~$query"
+      echo "To be found: cht.sh/$selected~$query"
       printDelimeter
 
       curl cht.sh/"$selected"~"$query" 
