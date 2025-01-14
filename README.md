@@ -1,6 +1,20 @@
-ansible ver. and deps ver
-df
+<div align="center" style="display: flex; flex-direction: column;">
+<img src=".github/images/main_gif.gif" width="100">
+</div>
 
+<h1 align="center">
+  <div >
+<span > Personal config </span>
+  </div>
+  <br>
+<span align="center">Automated personal config (Ansible) for arch linux</span>
+</h3>
+
+## WIP
+*Upcoming documentation*
+
+### Additional info
+ansible ver. and deps versions
 ansible [core 2.18.1]
 config file = None
 configured module search path = ['/home/bchk/.ansible/plugins/modules', '/usr/share/ansible/plugins/modules']
