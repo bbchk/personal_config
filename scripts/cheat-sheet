@@ -94,15 +94,16 @@ while :; do
       curl cht.sh/"$selected"/"$query" 
   else 
       echo "To be found: cht.sh/$selected~$query"
-      printDelimeter
+      printDelimeter "\n"
 
       curl cht.sh/"$selected"~"$query" 
   fi
 
-  printDelimeter "\n\n"
+  printDelimeter
 
-  echo -n "Press Enter to continue quering cheat.sh..."
+  echo "Press Enter to continue quering cheat.sh..."
   read -r
+  printDelimeter
 done
 
 
