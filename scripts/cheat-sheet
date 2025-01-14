@@ -1,5 +1,6 @@
 #!/usr/bin/env bash
 
+
 utils=$(cat <<EOF
 find
 man
@@ -67,6 +68,10 @@ gdb
 EOF
 )
 
+function printDelimeter() {
+  echo -e "------------------------------------------------ $*"
+}
+
 
 selected=$(echo -e "$languages\n$utils" | fzf)
 
@@ -74,21 +79,25 @@ if [[ -z $selected ]]; then
     exit 0
 fi
 
-echo "Selected: $selected"
+echo 'Selected:' "$selected"
+echo -n "Enter Query: "
+read -r query
 
-read -rp "Enter Query: " query
+printDelimeter
 
 if grep -qs "$selected" <<< "$languages"; then
+    echo "cht.sh/$selected/$query"
+    printDelimeter "\n"
 
-  query=$(echo "$query" | tr ' ' '+')
-  tmux neww bash -c "echo \"curl cht.sh/$selected/$query/\" & curl cht.sh/$selected/$query & while [ : ]; do sleep 1; done"
+    query=$(echo "$query" | tr ' ' '+')
+    curl cht.sh/"$selected"/"$query" 
 else 
-  tmux neww bash -c "echo \"curl cht.sh/$selected~$query/\" & curl cht.sh/$selected~$query & while [ : ]; do sleep 1; done"
+    echo "cht.sh/$selected~$query"
+    printDelimeter
+
+    curl cht.sh/"$selected"~"$query" 
 fi
 
-# learn:slice
-# :learnslice
-#
-# cht.sh/lang/descri+of+operation
-# cht.sh/something~operation
+printDelimeter "\n\n"
+
 

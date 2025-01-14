@@ -1,0 +1,14 @@
+#!/usr/bin/env bash
+
+# Get the name of the current tmux window
+current_window_name=$(tmux display-message -p "#W")
+
+# Check if the current window is named "cheat-sheet"
+if [[ "$current_window_name" == "cheat-sheet" ]]; then
+    # If it is, source the cheat-sheet and start a new zsh session
+    source cheat-sheet
+    exec zsh
+else
+    # If not, create a new window named "cheat-sheet" and execute the command
+    tmux neww -n "cheat-sheet" zsh -c "source cheat-sheet; exec zsh"
+fi
