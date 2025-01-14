@@ -54,6 +54,7 @@
       - "shellcheck"
       - "kubectl"
       - "net-tools"
+      - "shfmt" # bash formatter
 
 # sudo modprobe sof-audio-pci-intel-tgl
 

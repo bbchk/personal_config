@@ -36,6 +36,7 @@ return {
 				"pylint",
 				"eslint_d",
 				"php-cs-fixer", -- PHP formatter
+				"shfmt", -- bash, mksh, shell
 			},
 		})
 	end,
