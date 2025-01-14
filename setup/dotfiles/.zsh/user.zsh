@@ -25,7 +25,9 @@ fi
 # Compilation flags
 export ARCHFLAGS="-arch x86_64"
 
+# Scripts keybindings 
 bindkey -s '^f' '^u^ktmux-sessionizer\n'
+bindkey -s '^h' '^u^kcheat-sheet\n'
 
 # upgrade fzf
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
