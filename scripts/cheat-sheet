@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
-
-utils=$(cat <<EOF
+utils=$(
+  cat <<EOF
 find
 man
 tldr
@@ -42,8 +42,8 @@ make
 EOF
 )
 
-
-languages=$(cat <<EOF
+languages=$(
+  cat <<EOF
 golang
 solidity
 vlang
@@ -72,12 +72,11 @@ function printDelimeter() {
   echo -e "------------------------------------------------ $*"
 }
 
-
 while :; do
   selected=$(echo -e "$languages\n$utils" | fzf)
 
   if [[ -z $selected ]]; then
-      exit 0
+    exit 0
   fi
 
   echo 'Selected:' "$selected"
@@ -86,17 +85,17 @@ while :; do
 
   printDelimeter
 
-  if grep -qs "$selected" <<< "$languages"; then
-      echo "To be found: cht.sh/$selected/$query"
-      printDelimeter "\n"
+  if grep -qs "$selected" <<<"$languages"; then
+    echo "To be found: cht.sh/$selected/$query"
+    printDelimeter "\n"
 
-      query=$(echo "$query" | tr ' ' '+')
-      curl cht.sh/"$selected"/"$query" 
-  else 
-      echo "To be found: cht.sh/$selected~$query"
-      printDelimeter "\n"
+    query=$(echo "$query" | tr ' ' '+')
+    curl cht.sh/"$selected"/"$query"
+  else
+    echo "To be found: cht.sh/$selected~$query"
+    printDelimeter "\n"
 
-      curl cht.sh/"$selected"~"$query" 
+    curl cht.sh/"$selected"~"$query"
   fi
 
   printDelimeter
@@ -105,5 +104,3 @@ while :; do
   read -r
   printDelimeter
 done
-
-
