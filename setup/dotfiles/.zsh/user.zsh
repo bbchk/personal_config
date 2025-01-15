@@ -36,6 +36,7 @@ bindkey -s '^h' '^u^kcheat-sheet-tmux-integration\n'
 source <(fzf --zsh)
 
 export PATH="$HOME/pers/scripts:$PATH"
+export PATH="$HOME/pers/programs/sioyek/:$PATH"
 
 # ------------------------------
 # end user configuration 
