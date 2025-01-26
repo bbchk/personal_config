@@ -11,9 +11,11 @@
 </h3>
 
 ## WIP
-*Upcoming documentation*
+
+_Upcoming documentation_
 
 ### Additional info
+
 ansible ver. and deps versions
 ansible [core 2.18.1]
 config file = None
@@ -24,3 +26,6 @@ executable location = /usr/bin/ansible
 python version = 3.12.7 (main, Oct 1 2024, 11:15:50) [GCC 14.2.1 20240910] (/usr/bin/python)
 jinja version = 3.1.4
 libyaml = True
+
+todo
+connect vpn on interval

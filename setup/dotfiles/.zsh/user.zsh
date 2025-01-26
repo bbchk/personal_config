@@ -34,6 +34,7 @@ bindkey -s '^h' '^u^kcheat-sheet-tmux-integration\n'
 
 # include fzf bindings into zsh shell 
 source <(fzf --zsh)
+source <(kubectl completion zsh)
 
 export PATH="$HOME/pers/scripts:$PATH"
 export PATH="$HOME/pers/programs/sioyek/:$PATH"
