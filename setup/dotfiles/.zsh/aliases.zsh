@@ -56,20 +56,39 @@ alias irb='irb --simple-prompt'
 # other
 alias k='kubectl'
 
+alias kr='k run'
+
+# work on this
+export ns="-n secret-ops"
+# export droy="-oyaml --dry-run=client"
+export kyaml="-oyaml"
+export kdrn='--dry-run=client'
+
+
+alias kap='k apply -f'
+
 alias kl='k logs'
 alias kexec='k exec -it'
 alias kpf='k port-forward'
-alias kaci='k auth can-i'
+alias kaci='k auth can-i' 
 alias kat='k attach'
 alias kapir='k api-resources'
 alias kapiv='k api-versions'
 
+# create
+alias kc='k create'
+
 # get
 alias kg='k get'
+alias kga='k get all'
+
 alias kgns='k get ns'
 alias kgp='k get pods'
 alias kgs='k get secrets'
+
+
 alias kgd='k get deploy'
+
 alias kgrs='k get rs'
 alias kgss='k get sts'
 alias kgds='k get ds'
@@ -96,7 +115,7 @@ alias keds='k edit ds'
 alias kesvc='k edit svc'
 alias kecm='k edit cm'
 alias kecj='k edit cj'
-alias ker='k edit roles'
+alias ker='kedit roles'
 alias kecr='k edit clusterroles'
 alias kerb='k edit clusterrolebindings'
 alias kesa='k edit sa'
