@@ -4,6 +4,8 @@
 
 # git
 
+# alias docker-compose='docker compose' 
+
 
 alias gci="git commit -v"
 
@@ -58,9 +60,8 @@ alias k='kubectl'
 
 alias kr='k run'
 
-# work on this
+# TODO: work on this
 export ns="-n secret-ops"
-# export droy="-oyaml --dry-run=client"
 export kyaml="-oyaml"
 export kdrn='--dry-run=client'
 
@@ -190,6 +191,17 @@ alias kcfgv='k config view'
 # alias kssbomsl='k -n kubescape get sbomsummaries --show-labels'
 # alias ksvulnsl='k -n kubescape get vulnerabilitymanifestsummaries --show-labels'
 # alias ksvulnl='k -n kubescape get vulnerabilitymanifests --show-labels'
+#
+## ARCH-OS pacman aliases
+alias pac='pacman -S'   # install
+alias pacu='pacman -Syu'    # update, add 'a' to the list of letters to update AUR packages if you use yaourt
+alias pacr='pacman -Rs'   # remove
+alias pacs='pacman -Ss'      # search
+alias paci='pacman -Si'      # info
+alias paclo='pacman -Qdt'    # list orphans
+alias pacro='paclo && sudo pacman -Rns $(pacman -Qtdq)' # remove orphans
+alias pacc='pacman -Scc'    # clean cache
+alias paclf='pacman -Ql'   # list files
  
 
 # Editors

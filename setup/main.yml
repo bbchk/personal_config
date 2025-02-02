@@ -24,3 +24,6 @@
 # - install xidlehook
 # - install and configure hyprpicker
 # - install ts and ts lang server ╰$ npm install -g typescript typescript-language-server
+#
+# vpm west1
+# global

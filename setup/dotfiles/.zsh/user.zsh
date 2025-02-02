@@ -2,6 +2,8 @@
 # user configuration 
 # ------------------------------
 
+export JAVA_HOME="/usr/lib/jvm/java-21-openjdk"
+export PATH="$PATH:/usr/lib/docker/cli-plugins"
 export DOCKER_CLI_EXPERIMENTAL=enabled
 
 export GPG_TTY=$(tty)

@@ -102,6 +102,7 @@
       - "xwaylandvideobridge-git"
       - "aws-cli-v2"
       - "sioyek"
+      - "postman"
 
 - name: Ensure AUR packages are installed and updated
   shell: |
