@@ -57,6 +57,8 @@
       - "shfmt" # bash formatter
       - "jre17-openjdk"
       - "jre21-openjdk"
+      - "docker"
+      - "desktop"
 
 # sudo modprobe sof-audio-pci-intel-tgl
 
