@@ -193,15 +193,15 @@ alias kcfgv='k config view'
 # alias ksvulnl='k -n kubescape get vulnerabilitymanifests --show-labels'
 #
 ## ARCH-OS pacman aliases
-alias pac='pacman -S'   # install
-alias pacu='pacman -Syu'    # update, add 'a' to the list of letters to update AUR packages if you use yaourt
-alias pacr='pacman -Rs'   # remove
-alias pacs='pacman -Ss'      # search
-alias paci='pacman -Si'      # info
-alias paclo='pacman -Qdt'    # list orphans
+alias pac='_ pacman -S'   # install
+alias pacu='_ pacman -Syu'    # update, add 'a' to the list of letters to update AUR packages if you use yaourt
+alias pacr='_ pacman -Rs'   # remove
+alias pacs='_ pacman -Ss'      # search
+alias paci='_ pacman -Si'      # info
+alias paclo='_ pacman -Qdt'    # list orphans
 alias pacro='paclo && sudo pacman -Rns $(pacman -Qtdq)' # remove orphans
-alias pacc='pacman -Scc'    # clean cache
-alias paclf='pacman -Ql'   # list files
+alias pacc='_ pacman -Scc'    # clean cache
+alias paclf='_ pacman -Ql'   # list files
  
 
 # Editors
