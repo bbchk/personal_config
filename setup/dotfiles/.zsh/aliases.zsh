@@ -12,10 +12,13 @@ alias gci="git commit -v"
 # log
 alias gshl="git log --pretty=oneline --abbrev-commit"
 
+alias gshn='git show --name-only'
+
 # difftastic
 alias gdl="git -c diff.external=difft log -p --ext-diff"
+alias gdsh="git -c diff.external=difft -c difftool.prompt=false show --ext-diff"
 alias gds="git -c diff.external=difft show --ext-diff"
-alias gds="git dft = -c diff.external=difft diff"
+# alias gds="git dft = -c diff.external=difft diff"
 
 # remote
 alias gclone='git clone'

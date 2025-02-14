@@ -24,6 +24,7 @@ return {
 				"ts_ls",
 				"stylelint_lsp",
 				"bashls",
+				"dockerls",
 			},
 		})
 

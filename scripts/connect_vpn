@@ -1,5 +1,6 @@
 #!/usr/bin/env bash
 
 sudo true
+sudo killall openfortivpn 2>/dev/null
 sudo openfortivpn --config=/home/bchk/secrets/vpn_credentials.cfg --otp="$1" &
 disown

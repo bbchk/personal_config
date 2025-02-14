@@ -10,6 +10,7 @@
     pacman_packages:
       - "systemd"
       - "systemd-sysvcompat"
+      - "tree"
       - "git"
       - "base-devel"
       - "keepassxc"
