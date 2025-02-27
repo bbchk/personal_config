@@ -4,6 +4,7 @@ local o = vim.opt
 -- Editor options
 -- vim.o.timeoutlen = 150 -- Default is 1000ms, you can try reducing it to 300ms or less
 
+o.fixendofline = true
 -- Set persistent undo
 o.undofile = true -- Enable undo files
 o.undodir = vim.fn.expand("~/.config/nvim/undo")

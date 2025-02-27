@@ -2,6 +2,7 @@
 
 utils=$(
   cat <<EOF
+cut
 find
 man
 tldr
