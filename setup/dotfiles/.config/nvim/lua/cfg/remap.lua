@@ -9,11 +9,20 @@ end
 vim.g.mapleader = " "
 vim.g.maplocalleader = " "
 
+-- map('n', '<leader>cp', ':let @+ = expand("%:p")<CR>', { noremap = true, silent = true })
+map('n', '<leader>cp', ':let @+ = expand("%:.")<CR>', { noremap = true, silent = true })
+
 -- tmux
 map("n", "<C-f>", ":silent !tmux neww tmux-sessionizer<CR>")
 
 -- Save
-map("n", "<leader>w", "<CMD>update<CR>")
+map("n", "<leader>ww", "<CMD>write<CR>")
+
+-- Save with no formatting
+map("n", "<leader>w", "<CMD>noautocmd write<CR>")
+
+-- Nohl
+map("n", "<leader>h", "<CMD>nohlsearch<CR>")
 
 -- Quit
 map("n", "<leader>q", "<CMD>q!<CR>")
@@ -27,7 +36,7 @@ map("n", "<leader>r", "<CMD>Neotree focus<CR>")
 
 -- New Windows
 map("n", "<leader>v", "<CMD>vsplit<CR>")
-map("n", "<leader>h", "<CMD>split<CR>")
+-- map("n", "<leader>h", "<CMD>split<CR>")
 
 -- Window Navigation
 map("n", "<C-h>", "<C-w>h")

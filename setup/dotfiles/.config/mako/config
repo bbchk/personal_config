@@ -19,7 +19,7 @@ max-visible=5
 
 # Timeouts (in milliseconds)
 # # # # # # # # # timeout=10000             # 10 seconds for non-urgent notifications
-default-timeout=3000
+# default-timeout=3000
 
 # Urgency levels (low, normal, critical)
 [urgency=low]
@@ -31,12 +31,12 @@ border-color=#44475a
 background-color=#44475a
 text-color=#f8f8f2
 border-color=#bd93f9
-default-timeout=5000          # Critical notifications will stay until dismissed
+# default-timeout=5000          # Critical notifications will stay until dismissed
 
 [urgency=critical]
 background-color=#ff5555
 text-color=#ffffff
 border-color=#ff79c6
-default-timeout=5000          # Critical notifications will stay until dismissed
+# default-timeout=5000          # Critical notifications will stay until dismissed
 
 # Miscellaneous

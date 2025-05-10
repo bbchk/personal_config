@@ -48,7 +48,6 @@
       - "bluez-utils"
       - "sof-firmware"
       - "hypridle"
-      - "hyprlock"
       - "postgresql"
       - "ppp"
       - "man-pages"
