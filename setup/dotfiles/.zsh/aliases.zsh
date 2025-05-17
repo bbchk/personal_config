@@ -1,54 +1,29 @@
-# ------------------------------
-# aliases 
-# ------------------------------
+#Docker
+alias doc='docker' 
+alias docc='docker compose' 
 
-alias docker-compose='docker compose' 
-
-# git
-
-# Github Copilot 
+# Git
+alias g='git'
 # alias gpilot="gh copilot"
 # alias ghs="ghs copilot suggest"
 # alias ghe="ghe copilot explain"
 
 # Node
-# alias nr="npm run"
-# alias nri="npm install"
-# alias nrd="npm run dev"
-# alias nrw="npm run watch"
-# alias nrb="npm run build"
-# alias nrs="npm run start"
-# alias nrt="npm run test"
-# alias nrl="npm run lint"
-
-# Laravel
-# alias sail='[ -f sail ] && sh sail || sh vendor/bin/sail'
-# alias sail='sh $([ -f sail ] && echo sail || echo vendor/bin/sail)'
-# alias saup="sail up -d"
-# alias sado="sail down"
-# alias sart="sail artisan"
-# alias saop="sail artisan optimize"
-# alias samf="sail artisan migrate:fresh"
-# alias sacc="sail artisan cache:clear && sail artisan view:clear && sail artisan route:clear"
-# alias tinker="sail artisan tinker"
+alias n="npm"
+alias p="pnpm"
 
 # Ruby
 alias irb='irb --simple-prompt'
 
-# k8s
-# other
+# K8s
 alias k='kubectl'
 
-alias kr='k run'
-
-# Editors
+# IDEs
 alias vim='nvim'
 alias v='nvim'
 alias vi='nvim'
-
 alias code="code --profile main"
 
 # Misc
 alias open="xdg-open"
-
 alias clear="echo 'clear command is disabled'"
