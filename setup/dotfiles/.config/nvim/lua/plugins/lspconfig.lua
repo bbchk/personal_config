@@ -8,6 +8,13 @@ return {
 		"williamboman/mason-lspconfig.nvim",
 	},
 	config = function()
+-- require'lspconfig'.jdtls.setup{
+--   cmd = { 'jdtls' },
+--   root_dir = function(fname)
+--     return require'lspconfig'.util.root_pattern('pom.xml', 'build.gradle', '.git')(fname)
+--   end
+-- }
+
 		-- Setup mason first
 		require("mason").setup()
 		require("mason-lspconfig").setup()
@@ -145,4 +152,5 @@ return {
 			end,
 		})
 	end,
+
 }
