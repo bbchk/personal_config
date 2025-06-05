@@ -1,3 +1,6 @@
+
+-- I want to have shortcut for opening `vim .`, as i do it too often
+
 vim.g.mapleader = " "
 vim.g.maplocalleader = " "
 
