@@ -1,0 +1,38 @@
+[user]
+	email = bohdan.buchok@internetbrands.com
+	name = Bohdan Buchok
+[init]
+	defaultbranch = main
+[pull]
+	rebase = true
+[core]
+	editor = nvim
+	sshCommand = ssh -i ~/.ssh/github-2
+[alias]
+	shl = log --pretty=oneline --abbrev-commit
+  ci = commit -v
+  dl = -c diff.external=difft log -p --ext-diff
+  ds = -c diff.external=difft show --ext-diff
+  dft = -c diff.external=difft diff
+  dl = -c diff.external=difft log -p --ext-diff
+  dsh = -c diff.external=difft -c difftool.prompt=false show --ext-diff
+[pager]
+	branch = false
+[color]
+  diff = auto
+  status = auto
+  branch = auto
+  interactive = auto
+  ui = true
+  pager = true
+[color "branch"]
+  remote = yellow
+[status]
+	hints = false
+[advice]
+  statusHints = false
+  detachedHead = false
+[push]
+	autoSetupRemote = true
+[credential]
+	helper = store
