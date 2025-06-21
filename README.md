@@ -27,5 +27,6 @@ python version = 3.12.7 (main, Oct 1 2024, 11:15:50) [GCC 14.2.1 20240910] (/usr
 jinja version = 3.1.4
 libyaml = True
 
-todo
+## todo
 connect vpn on interval
+create collection of git hooks for quality of life that will be copied in every repo cloned
