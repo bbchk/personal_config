@@ -1,0 +1,15 @@
+#!/usr/bin/env bash
+
+set -euo pipefail
+
+PASSWORD_FILE="password.txt"
+
+FILES_TO_ENCRYPT=($(find secrets/ -type f))
+
+echo "Encrypting sensitive files in pre-commit hook"
+
+ansible-vault encrypt --vault-password-file "${PASSWORD_FILE}" -- "${FILES_TO_ENCRYPT[@]}"
+
+git add "${FILES_TO_ENCRYPT[@]}"
+
+echo "All files were successfully encrypted and added to commit."

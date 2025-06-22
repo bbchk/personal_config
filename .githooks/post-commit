@@ -1,0 +1,16 @@
+#!/usr/bin/env bash
+
+set -euo pipefail
+
+PASSWORD_FILE="password.txt"
+
+# ask user if he wants to shred it
+# trap 'shred -u -n 5 "${PASSWORD_FILE}"' EXIT SIGINT SIGTERM
+
+FILES_TO_DECRYPT=($(find secrets/ -type f))
+
+echo "Decrypting sensitive files in post-commit hook"
+
+ansible-vault decrypt --vault-password-file "${PASSWORD_FILE}" -- "${FILES_TO_DECRYPT[@]}"
+
+echo "All files were successfully decrypted for further usage."
