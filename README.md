@@ -30,3 +30,21 @@ libyaml = True
 ## todo
 connect vpn on interval
 create collection of git hooks for quality of life that will be copied in every repo cloned
+
+# TODO:
+# - set default input device for microphone 
+#
+# - setup dev dir and pull the most improtant projects
+# - install rust
+# - install ts and ts lang server ╰$ npm install -g typescript typescript-language-server
+#
+# install desktop postman agent
+# install sioyek
+
+we need to link .zsh_history from secrets/ to dotfiles and from dotfiles we link it to ~
+
+make it so every pane in tmux would be named after file name
+
+make shortcut for ``````
+
+add fzf plugin to commands in nvim

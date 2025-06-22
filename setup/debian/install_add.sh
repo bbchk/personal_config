@@ -11,13 +11,6 @@ sudo apt install -y "${PKGS[@]}"
 # Extra tools/packages installs
 
 # 1. Visual Studio Code
-if ! command -v code >/dev/null 2>&1; then
-  echo "Installing Visual Studio Code..."
-  wget -qO- https://packages.microsoft.com/keys/microsoft.asc | gpg --dearmor | sudo tee /usr/share/keyrings/ms_vscode.gpg > /dev/null
-  echo "deb [arch=amd64 signed-by=/usr/share/keyrings/ms_vscode.gpg] https://packages.microsoft.com/repos/vscode stable main" | sudo tee /etc/apt/sources.list.d/vscode.list
-  sudo apt update
-  sudo apt install -y code
-fi
 
 # 2. shfmt
 if ! command -v shfmt >/dev/null 2>&1; then
@@ -93,4 +86,9 @@ if ! command -v sioyek >/dev/null 2>&1; then
   rm /tmp/sioyek.tar.xz
 fi
 
-# 11. shellcheck (Debian repo), lua (lua5.4), keychain (keychain), bluez-tools used for bluez-utils, etc.
+
+Install Qt 5 and make sure qmake is in PATH.
+sudo apt install libharfbuzz-dev
+git clone --recursive https://github.com/ahrm/sioyek
+cd sioyek
+./build_linux.sh

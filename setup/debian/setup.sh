@@ -36,21 +36,7 @@ done
 # =========================================
 # =========================================
 
-- dotfiles/index
-- packages/install
-- packages/config
-- secrets/index
-include_tasks: lifecycle/finish.yml
 
-# TODO:
-# - set default input device for microphone 
-#
-# - setup dev dir and pull the most improtant projects
-# - install rust
-# - install ts and ts lang server ╰$ npm install -g typescript typescript-language-server
-#
-# install desktop postman agent
-# install sioyek
 
 
   sudo -S true

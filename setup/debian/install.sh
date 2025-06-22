@@ -47,7 +47,11 @@ PKGS=(
   docker.io
   desktop-base
   curl
+  fd-find
+  ripgrep
+  fzf
 )
+
 
 # Install available Debian packages
 echo "Installing packages..."

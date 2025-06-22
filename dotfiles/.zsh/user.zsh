@@ -37,7 +37,10 @@ bindkey -s '^h' '^u^kcheat-sheet-tmux-integration\n'
 # upgrade fzf
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
-# include fzf bindings into zsh shell 
+if [[ ! "$PATH" == */home/bchk/.fzf/bin* ]]; then
+  PATH="${PATH:+${PATH}:}/home/bchk/.fzf/bin"
+fi
+
 source <(fzf --zsh)
 source <(kubectl completion zsh)
 
