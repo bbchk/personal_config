@@ -19,7 +19,6 @@ return {
 				"pyright",
 				"tailwindcss",
 				"intelephense",
-				"gopls",
 				"sqlls",
 				"ts_ls",
 				"stylelint_lsp",
@@ -32,9 +31,6 @@ return {
 			ensure_installed = {
 				"prettier",
 				"stylua", -- lua formatter
-				"isort", -- python formatter
-				"black", -- python formatter
-				"pylint",
 				"eslint_d",
 				"php-cs-fixer", -- PHP formatter
 				"shfmt", -- bash, mksh, shell
