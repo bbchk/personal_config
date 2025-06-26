@@ -9,8 +9,8 @@ PASSWORD_FILE="password.txt"
 
 FILES_TO_DECRYPT=($(find secrets/ -type f))
 
-echo "Decrypting sensitive files in post-commit hook"
+echo "=== DECRYPTION =========================="
 
 ansible-vault decrypt --vault-password-file "${PASSWORD_FILE}" -- "${FILES_TO_DECRYPT[@]}"
 
-echo "All files were successfully decrypted for further usage."
+echo "=== DECRYPTION SUCCESS =================="
