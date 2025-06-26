@@ -12,3 +12,5 @@ FILES_TO_DECRYPT=($(find secrets/ -type f))
 echo "=== DECRYPTION =========================="
 
 ansible-vault decrypt --vault-password-file "${PASSWORD_FILE}" -- "${FILES_TO_DECRYPT[@]}"
+
+echo -e "\n"
