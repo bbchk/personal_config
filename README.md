@@ -48,3 +48,5 @@ make it so every pane in tmux would be named after file name
 make shortcut for ``````
 
 add fzf plugin to commands in nvim
+
+TODO: make it so I could wrap any word anywhere in `` using some shortcut

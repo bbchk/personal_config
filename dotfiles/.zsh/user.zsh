@@ -27,14 +27,11 @@ else
   export MANPAGER="nvim +Man!!"
 fi
 
-# Compilation flags
-export ARCHFLAGS="-arch x86_64"
-
-# Scripts keybindings 
+# keybindings 
 bindkey -s '^f' '^u^ktmux-sessionizer\n'
 bindkey -s '^h' '^u^kcheat-sheet-tmux-integration\n' 
+bindkey -s '^n' '^u^knvim .\n' 
 
-# upgrade fzf
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
 if [[ ! "$PATH" == */home/bchk/.fzf/bin* ]]; then
@@ -45,7 +42,6 @@ source <(fzf --zsh)
 source <(kubectl completion zsh)
 
 export PATH="$HOME/pers/scripts:$PATH"
-export PATH="$HOME/pers/programs/sioyek/:$PATH"
 
 # ------------------------------
 # end user configuration 
