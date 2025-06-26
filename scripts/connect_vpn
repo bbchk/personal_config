@@ -2,5 +2,17 @@
 
 sudo true
 sudo killall openfortivpn 2>/dev/null
-sudo openfortivpn --config=/home/bchk/pers/secrets/vpn/credentials.cfg --otp="$1" &
-disown
+
+sudo openfortivpn --config=/home/bchk/pers/secrets/vpn/credentials.cfg --otp="$1" --use-syslog &
+VPN_PID=$!
+
+sleep 5
+
+if kill -0 $VPN_PID 2>/dev/null; then
+    echo "✓ VPN connected successfully (check syslog for details)"
+    disown
+    exit 0
+else
+    echo "✗ VPN connection failed (check syslog for details)"
+    exit 1
+fi

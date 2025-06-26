@@ -50,3 +50,5 @@ make shortcut for ``````
 add fzf plugin to commands in nvim
 
 TODO: make it so I could wrap any word anywhere in `` using some shortcut
+
+delete battery from tmux, put vpn from tmux to gnome extension...somehow
