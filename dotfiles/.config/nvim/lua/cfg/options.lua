@@ -3,7 +3,6 @@ local o = vim.opt
 
 -- Editor options
 -- vim.o.timeoutlen = 150 -- Default is 1000ms, you can try reducing it to 300ms or less
-
 o.fixendofline = true
 -- Set persistent undo
 o.undofile = true -- Enable undo files
@@ -25,7 +24,10 @@ o.tabstop = 2 -- Number of spaces that a <Tab> in the file counts for.
 o.encoding = "UTF-8" -- Sets the character encoding used inside Vim.
 o.ruler = true -- Show the line and column number of the cursor position, separated by a comma.
 o.mouse = "a" -- Enable the use of the mouse. "a" you can use on all modes
+
 o.title = true -- When on, the title of the window will be set to the value of 'titlestring'
+o.titlestring = "%t" -- Just the filename
+
 o.hidden = true -- When on a buffer becomes hidden when it is |abandon|ed
 o.ttimeoutlen = 0 -- The time in milliseconds that is waited for a key code or mapped key sequence to complete.
 o.wildmenu = true -- When 'wildmenu' is on, command-line completion operates in an enhanced mode.

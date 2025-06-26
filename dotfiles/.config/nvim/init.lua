@@ -1,6 +1,4 @@
 
--- I want to have shortcut for opening `vim .`, as i do it too often
--- I want to have panes named after filename it has open in tmux
 
 vim.g.mapleader = " "
 vim.g.maplocalleader = " "
@@ -25,4 +23,23 @@ vim.filetype.add({
 		["%.env%.[%w_.-]+"] = "dotenv",
 		["Dockerfile.*"] = "dockerfile",
 	},
+})
+
+-- Automatically set tmux pane title when opening files in Neovim
+vim.api.nvim_create_autocmd({"BufEnter", "BufWinEnter"}, {
+  pattern = "*",
+  callback = function()
+    local filename = vim.fn.expand("%:t")
+    if filename ~= "" then
+      vim.fn.system("tmux rename-window " .. filename .. "")
+    end
+  end,
+})
+
+-- Reset when leaving Neovim
+vim.api.nvim_create_autocmd("VimLeave", {
+  pattern = "*",
+  callback = function()
+    vim.fn.system("tmux rename-window 'nvim'")
+  end,
 })
