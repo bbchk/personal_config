@@ -2,7 +2,7 @@
 # user configuration 
 # ------------------------------
 
-gsettings set org.gnome.desktop.interface enable-animations false
+# gsettings set org.gnome.desktop.interface enable-animations false
 
 export PATH="$HOME/.symfony5/bin:$PATH"
 export JAVA_HOME="/usr/lib/jvm/java-21-openjdk"
