@@ -11,5 +11,3 @@ echo "=== ENCRYPTION =========================="
 ansible-vault encrypt --vault-password-file "${PASSWORD_FILE}" -- "${FILES_TO_ENCRYPT[@]}"
 
 git add "${FILES_TO_ENCRYPT[@]}"
-
-echo "=== ENCRYPTION SUCCESS =================="
