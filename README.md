@@ -53,3 +53,9 @@ TODO: make it so I could wrap any word anywhere in `` using some shortcut
 
 delete battery from tmux, put vpn from tmux to gnome extension...somehow
 TODO: learn jq and learn to copy into clipboard programmatically its output
+make tmux pane name display name of the folder or file we are in nvim
+
+testing, linux, js, k8s, kafka
+
+switch panes in tmux via just numbers in normal mode of nvim? that would be so much easier
+I need to optimize my keybindings in nvim (telescope) and tmux (workplaces switch)
