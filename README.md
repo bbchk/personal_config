@@ -4,32 +4,15 @@
 
 <h1 align="center">
   <div >
-<span > Personal config </span>
+<span > Personal configuration files </span>
   </div>
   <br>
-<span align="center">Automated personal config (Ansible) for arch linux</span>
-</h3>
+</h1>
 
 ## WIP
 
-_Upcoming documentation_
-
-### Additional info
-
-ansible ver. and deps versions
-ansible [core 2.18.1]
-config file = None
-configured module search path = ['/home/bchk/.ansible/plugins/modules', '/usr/share/ansible/plugins/modules']
-ansible python module location = /usr/lib/python3.12/site-packages/ansible
-ansible collection location = /home/bchk/.ansible/collections:/usr/share/ansible/collections
-executable location = /usr/bin/ansible
-python version = 3.12.7 (main, Oct 1 2024, 11:15:50) [GCC 14.2.1 20240910] (/usr/bin/python)
-jinja version = 3.1.4
-libyaml = True
-
 ## todo
 connect vpn on interval
-create collection of git hooks for quality of life that will be copied in every repo cloned
 
 # TODO:
 # - set default input device for microphone 
@@ -41,21 +24,35 @@ create collection of git hooks for quality of life that will be copied in every 
 # install desktop postman agent
 # install sioyek
 
-we need to link .zsh_history from secrets/ to dotfiles and from dotfiles we link it to ~
+<!-- create collection of git hooks for quality of life that will be copied in every repo cloned -->
 
+<!-- TODO: automate: -->
+<!-- we need to link .zsh_history from secrets/ to ~ -->
+
+
+<!-- TODO: nvim : -->
+- add fzf plugin to commands in nvim
+- MR reviewing in nvim? There are tools for other editors (VSCode, etc.) What about nvim then?
+- I need to learn how to use debuggers in nvim 
+- make esc not close telescope, not work with oil, instead use ctrl c or any other shorcutr 
+- enable to clear out input in nvim telescope
+
+<!-- TODO: tmux: -->
+delete battery from tmux, put vpn from tmux to gnome extension...somehow
+make tmux pane name display name of the folder or file we are in nvim
 make it so every pane in tmux would be named after file name
 
-make shortcut for ``````
-
-add fzf plugin to commands in nvim
-
-TODO: make it so I could wrap any word anywhere in `` using some shortcut
-
-delete battery from tmux, put vpn from tmux to gnome extension...somehow
+<!-- TODO: to learn: -->
 TODO: learn jq and learn to copy into clipboard programmatically its output
-make tmux pane name display name of the folder or file we are in nvim
+<!-- limit your search to the certain site, e.g. adding site:stackoverflow.com to your search phrase will limit the search to this site, or site:reddit.com inurl:/r/php to even a single subreddit! -->
+- Learn how to use harpoon
 
-testing, linux, js, k8s, kafka
+<!-- TODO: QoL: -->
+- switch panes in tmux via just numbers in normal mode of nvim? that would be so much easier
+- I need to optimize my keybindings in nvim (telescope) and tmux (workplaces switch)
+- I don't want to presss space all the time in normal mode! we need to define diffrent leader. normal mode specifically for actions. make single leader key in both zsh and nvim
+- keybindings to open nvim in new tmux pane or open zsh in new tmux panem (ctrl+b is too slow, same time don't remap ctrl+b to keep it as standart)
+- I need git delta to review the diff locally efficiently. 
 
-switch panes in tmux via just numbers in normal mode of nvim? that would be so much easier
-I need to optimize my keybindings in nvim (telescope) and tmux (workplaces switch)
+
+

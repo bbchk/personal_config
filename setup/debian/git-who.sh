@@ -21,7 +21,7 @@ rake
 ./git-who --version
 
 # Install globally
-# sudo cp git-who /usr/local/bin/
+sudo cp git-who /usr/local/bin/
 #
 echo "Installation complete!"
 git-who --version

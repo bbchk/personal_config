@@ -1,2 +1,2 @@
 require("cfg.options")
-require("cfg.remap")
+require("cfg.keymap")

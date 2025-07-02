@@ -8,22 +8,30 @@ return {
 
 		conform.setup({
 			formatters_by_ft = {
-				javascript = { { "prettier", "--config-precedence", "prefer-file" } },
-				typescript = { { "prettier", "--config-precedence", "prefer-file" } },
-				javascriptreact = { { "prettier", "--config-precedence", "prefer-file" } },
-				typescriptreact = { { "prettier", "--config-precedence", "prefer-file" } },
-				css = { { "prettier", "--config-precedence", "prefer-file" } },
-				scss = { { "prettier", "--config-precedence", "prefer-file" } },
-				html = { { "prettier", "--config-precedence", "prefer-file" } },
-				json = { { "prettier", "--config-precedence", "prefer-file" } },
-				yaml = { { "prettier", "--config-precedence", "prefer-file" } },
-				markdown = { { "prettier", "--config-precedence", "prefer-file" } },
+				javascript = { "prettier" },
+				typescript = { "prettier" },
+				javascriptreact = { "prettier" },
+				typescriptreact = { "prettier" },
+				css = { "prettier" },
+				scss = { "prettier" },
+				html = { "prettier" },
+				json = { "prettier" },
+				yaml = { "prettier" },
+				markdown = { "prettier" },
 				lua = { "stylua" },
 				python = { "isort", "black" },
-				-- Added Ruby, Go, and Rust
-				ruby = { "rubocop -a" },
-				go = { "gofmt" }, -- `gofmt` is the default Go formatter
-				rust = { "rustfmt" }, -- `rustfmt` is the official Rust formatter
+				ruby = { "rubocop" },
+				go = { "gofmt" },
+				rust = { "rustfmt" },
+			},
+			-- Configure prettier with custom options
+			formatters = {
+				prettier = {
+					args = { "--config-precedence", "prefer-file", "--stdin-filepath", "$FILENAME" },
+				},
+				rubocop = {
+					args = { "-a", "--stdin", "$FILENAME", "--format", "quiet", "--stderr" },
+				},
 			},
 			format_on_save = {
 				lsp_fallback = true,

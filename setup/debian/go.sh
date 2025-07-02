@@ -1,22 +1,20 @@
-# TODO: install go
-#
-#
-# #!/usr/bin/env bash
-#
-# # Remove old Go
-# sudo apt remove golang-go
-#
-# # Download and install Go 1.23
-# cd /tmp
-# wget https://go.dev/dl/go1.23.4.linux-amd64.tar.gz
-# sudo rm -rf /usr/local/go
-# sudo tar -C /usr/local -xzf go1.23.4.linux-amd64.tar.gz
-#
-# # Add to PATH (add this to your ~/.bashrc or ~/.zshrc)
-# export PATH=$PATH:/usr/local/go/bin
-#
-# # Reload PATH
-# source ~/.bashrc  # or source ~/.zshrc
-#
-# # Verify Go version
-# go version
+#!/usr/bin/env bash
+
+# Remove any previous Go installation by deleting the /usr/local/go folder (if it exists), then extract the archive you just downloaded into /usr/local, creating a fresh Go tree in /usr/local/go:
+rm -rf /usr/local/go && tar -C /usr/local -xzf /home/bchk/Downloads/go1.24.4.linux-amd64.tar.gz
+
+
+# Add /usr/local/go/bin to the PATH environment variable.
+# You can do this by adding the following line to your $HOME/.profile or /etc/profile (for a system-wide installation):
+export PATH=$PATH:/usr/local/go/bin
+
+# Verify that you've installed Go by opening a command prompt and typing the following command:
+go version
+
+curl -sSL https://git.io/g-install | sh -s
+
+g install 1.23.4
+g use 1.23.4
+
+# Verify
+go version

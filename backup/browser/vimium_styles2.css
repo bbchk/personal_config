@@ -1,0 +1,163 @@
+div>.vimiumHintMarker {
+  /* linkhint boxes */
+  background: -webkit-gradient(linear,
+      left top,
+      left bottom,
+      color-stop(0%, #fff785),
+      color-stop(100%, #ffc542));
+  border: 1px solid #e3be23;
+}
+
+div>.vimiumHintMarker span {
+  /* linkhint text */
+  color: black;
+  font-weight: bold;
+  font-size: 12px;
+}
+
+div>.vimiumHintMarker>.matchingCharacter {}
+
+/* #omni */
+#vomnibar {
+  background-color: #181c14;
+  border: none;
+}
+
+#vomnibar .vomnibarSearchArea {
+  position: relative;
+
+  background-color: #181c14;
+
+  border: none;
+}
+
+#vomnibar .vomnibarSearchArea::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+
+  left: 50%;
+  transform: translateX(-50%);
+
+  width: 95%;
+  border-bottom: 1px solid #3c3d37;
+}
+
+#vomnibar .vomnibarSearchArea input {
+  outline: none;
+  border: none;
+  box-shadow: none;
+
+  color: #eeeeee;
+  background-color: #3c3d37;
+}
+
+#vomnibar ul {
+  padding: 10px;
+  margin: 0;
+
+  background-color: #181c14;
+}
+
+#vomnibar ul li:first-child {
+  border-radius: 4px 4px 0 0;
+  overflow: hidden;
+
+  /* padding-top: 20px; */
+  pointer-events: none;
+  user-select: none;
+  outline: none;
+}
+
+#vomnibar ul li:last-child {
+  border-radius: 0 0 4px 4px;
+  overflow: hidden;
+}
+
+#vomnibar li {
+  display: flex;
+  flex-flow: row nowrap;
+  gap: 10px;
+  border: none;
+
+  position: relative;
+
+  transition: background-color 0.25s ease;
+}
+
+#vomnibar li .vomnibarTopHalf {
+  display: flex;
+  flex: 1 1 50%;
+  justify-content: center;
+  align-items: center;
+
+  margin: 0;
+  padding: 0;
+  order: 1;
+
+  padding-left: 25px;
+}
+
+#vomnibar li .vomnibarBottomHalf {
+  display: flex;
+  flex: 1 1 50%;
+  justify-content: center;
+  align-items: center;
+
+  margin: 0;
+  padding: 0;
+  order: 2;
+}
+
+/* it is icon which i set style below, refactor, unite style definitions */
+#vomnibar li.vomnibarBottomHalf img {
+  width: 100%;
+  height: 100%;
+
+  display: block;
+  box-shadow: 0 0 5px 10px #3c3d37;
+}
+
+#vomnibar li.vomnibarSelected {
+  background-color: #31363f;
+  background-color: #525252;
+}
+
+#vomnibar li:not(.vomnibarSelected) {
+  background-color: #3c3d37;
+}
+
+#vomnibar li .vomnibarTitle {
+  display: inline-block;
+
+  line-height: 100%;
+  height: 100%;
+
+  color: #eeeeee;
+  font-size: 1.2rem;
+
+  white-space: nowrap;
+  /* Prevents text from wrapping */
+  overflow: hidden;
+  /* Hides the overflow text */
+  text-overflow: ellipsis;
+  /* Displays ellipsis (...) for truncated text */
+}
+
+#vomnibar li .vomnibarIcon {
+  position: absolute;
+  top: 25%;
+  left: 0;
+}
+
+#vomnibar .vomnibarSource {
+  display: none;
+}
+
+#vomnibar li .vomnibarUrl {
+  display: block;
+
+  /* width: 150px; */
+
+  color: #eeeeee;
+}

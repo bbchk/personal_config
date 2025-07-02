@@ -10,7 +10,6 @@ export NVM_DIR="$HOME/.nvm"
 # Load nvm bash completion if it exists
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"
 
-
 export PNPM_HOME="/home/bchk/.local/share/pnpm"
 case ":$PATH:" in
   *":$PNPM_HOME:"*) ;;

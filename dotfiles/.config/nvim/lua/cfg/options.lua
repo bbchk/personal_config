@@ -29,7 +29,7 @@ o.title = true -- When on, the title of the window will be set to the value of '
 o.titlestring = "%t" -- Just the filename
 
 o.hidden = true -- When on a buffer becomes hidden when it is |abandon|ed
-o.ttimeoutlen = 0 -- The time in milliseconds that is waited for a key code or mapped key sequence to complete.
+o.ttimeoutlen = 50 -- The time in milliseconds that is waited for a key code or mapped key sequence to complete.
 o.wildmenu = true -- When 'wildmenu' is on, command-line completion operates in an enhanced mode.
 o.showcmd = true -- Show (partial) command in the last line of the screen. Set this option off if your terminal is slow.
 o.showmatch = true -- When a bracket is inserted, briefly jump to the matching one.
@@ -59,4 +59,4 @@ global.netrw_liststyle = 3
 vim.o.timeout = true
 vim.o.timeoutlen = 150
 vim.o.ttimeout = true
-vim.o.ttimeoutlen = 50
+-- vim.o.ttimeouthen = 50

@@ -1,12 +1,12 @@
-dotfiles/.config/nvim/undo
-dotfiles/.config/nvim/backup
+**/nvim/undo
+**/nvim/backup
 setup/dotfiles/.config/keepassxc/
 
 programs/Postman Agent/
 
-password.txt
+**/password.txt
 
 dotfiles/.oh-my-zsh/*
 !dotfiles/.oh-my-zsh/custom/
 
-xdg/Pictures/Screenshots/*
+**/xdg/Pictures/Screenshots/*
