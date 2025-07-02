@@ -55,5 +55,5 @@ TODO: learn jq and learn to copy into clipboard programmatically its output
 - keybindings to open nvim in new tmux pane or open zsh in new tmux panem (ctrl+b is too slow, same time don't remap ctrl+b to keep it as standart)
 - I need git delta to review the diff locally efficiently. 
 
-
-
+<!-- vimium -->
+on omnibar it would be beneficial to give glimpse of how page looks like in small window, it would allow jump faster
