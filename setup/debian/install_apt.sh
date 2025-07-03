@@ -8,6 +8,9 @@ sudo apt upgrade -y
 
 # Debian package equivalents (where available)
 PKGS=(
+  maven
+  openjdk-17-jdk
+  sioyek
   tree
   git
   keepassxc

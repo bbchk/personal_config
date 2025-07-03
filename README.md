@@ -36,6 +36,9 @@ connect vpn on interval
 - I need to learn how to use debuggers in nvim 
 - make esc not close telescope, not work with oil, instead use ctrl c or any other shorcutr 
 - enable to clear out input in nvim telescope
+- when i press nvim C+space, I can press it again to enlarge the scope. Same thing should be done with vi + [{(
+- /usr/share/nvim/runtime/lua/vim/lsp/_transport.lua:68: Spawning language server with cmd: `{ "jdtls", "-configuration", "/home/bchk/.cache/jdtls/config", "-data", "/home/bchk
+/.cache/jdtls/workspace" }` failed. The language server is either not installed, missing from PATH, or not executable.
 
 <!-- TODO: tmux: -->
 delete battery from tmux, put vpn from tmux to gnome extension...somehow
@@ -47,6 +50,7 @@ ctrl + f in zsh => open nvim with telescope activated
 TODO: learn jq and learn to copy into clipboard programmatically its output
 <!-- limit your search to the certain site, e.g. adding site:stackoverflow.com to your search phrase will limit the search to this site, or site:reddit.com inurl:/r/php to even a single subreddit! -->
 - Learn how to use harpoon
+- How to use GIT worktrees!
 
 <!-- TODO: QoL: -->
 - switch panes in tmux via just numbers in normal mode of nvim? that would be so much easier
