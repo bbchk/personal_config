@@ -9,6 +9,7 @@ sudo apt upgrade -y
 # Debian package equivalents (where available)
 PKGS=(
   maven
+  dnsutils
   openjdk-17-jdk
   sioyek
   tree

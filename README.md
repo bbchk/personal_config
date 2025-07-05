@@ -12,8 +12,6 @@
 ## WIP
 
 ## todo
-connect vpn on interval
-
 # TODO:
 # - set default input device for microphone 
 #
@@ -39,6 +37,7 @@ connect vpn on interval
 - when i press nvim C+space, I can press it again to enlarge the scope. Same thing should be done with vi + [{(
 - /usr/share/nvim/runtime/lua/vim/lsp/_transport.lua:68: Spawning language server with cmd: `{ "jdtls", "-configuration", "/home/bchk/.cache/jdtls/config", "-data", "/home/bchk
 /.cache/jdtls/workspace" }` failed. The language server is either not installed, missing from PATH, or not executable.
+- I want to try out using nvim buffer as terminal, I need to make it default, so when I open new zsh in tmux it is nvim terminal buffer
 
 <!-- TODO: tmux: -->
 delete battery from tmux, put vpn from tmux to gnome extension...somehow
@@ -61,3 +60,15 @@ TODO: learn jq and learn to copy into clipboard programmatically its output
 
 <!-- vimium -->
 on omnibar it would be beneficial to give glimpse of how page looks like in small window, it would allow jump faster
+
+<!-- browser: -->
+- I want tabs to be open only when I press t? after some period I pressed that I want tabs to collapse
+- I                  
+
+
+create installation script for postman desktop agent
+https://learning.postman.com/docs/getting-started/installation/installation-and-updates/#installing-the-postman-desktop-agent/
+
+dual-boot windows and create windows dev config
+
+how to modify etc hosts only temporary is there a way?
