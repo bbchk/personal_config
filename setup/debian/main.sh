@@ -17,13 +17,28 @@
 # gsettings set org.gnome.desktop.wm.keybindings switch-to-workspace-10 "['<Super>0']"
 #
 #gsettings set org.gnome.settings-daemon.plugins.media-keys home "[]"
-
-gsettings set org.gnome.desktop.wm.keybindings switch-to-workspace-10 "['<Super>0']"
+# gsettings set org.gnome.settings-daemon.plugins.media-keys email "['']"
 
 # Set the command
-gsettings set org.gnome.settings-daemon.plugins.media-keys.custom-keybinding:/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0/ name 'Rofi Launcher'
-gsettings set org.gnome.settings-daemon.plugins.media-keys.custom-keybinding:/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0/ command 'rofi -show drun -normal-window'
-gsettings set org.gnome.settings-daemon.plugins.media-keys.custom-keybinding:/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0/ binding '<Super>d'
+# gsettings set org.gnome.settings-daemon.plugins.media-keys.custom-keybinding:/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0/ name 'Rofi Launcher'
+# gsettings set org.gnome.settings-daemon.plugins.media-keys.custom-keybinding:/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0/ command 'rofi -show drun -normal-window'
+# gsettings set org.gnome.settings-daemon.plugins.media-keys.custom-keybinding:/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0/ binding '<Super>d'
+#
+# # Enable the custom keybinding
+# gsettings set org.gnome.settings-daemon.plugins.media-keys custom-keybindings "['/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0/']"
 
-# Enable the custom keybinding
-gsettings set org.gnome.settings-daemon.plugins.media-keys custom-keybindings "['/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0/']"
+# RUN in the end 
+# git submodule update --init --recursive
+#
+#
+# --- keyd app remapp
+usermod -aG keyd bchk 
+
+sudo apt install python3-xlib
+
+
+#
+#
+# ---
+
+gsettings set org.gnome.shell.keybindings show-screenshot-ui "['<Super>p']"

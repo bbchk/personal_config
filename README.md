@@ -22,21 +22,25 @@
 # install desktop postman agent
 # install sioyek
 
+
+  
+
 <!-- create collection of git hooks for quality of life that will be copied in every repo cloned -->
 
 <!-- TODO: automate: -->
 <!-- we need to link .zsh_history from secrets/ to ~ -->
 
+browser specific shortcuts that will set shift+X to ctlr tab, etc.
+also S->> and S-<<
 
 <!-- TODO: nvim : -->
-- add fzf plugin to commands in nvim
-- MR reviewing in nvim? There are tools for other editors (VSCode, etc.) What about nvim then?
-- I need to learn how to use debuggers in nvim 
-- make esc not close telescope, not work with oil, instead use ctrl c or any other shorcutr 
+- add fzf plugin to commands in nvim | Telescope has this functionality, research it's readme
+
+- I need to learn how to use debuggers in nvim !
+
 - enable to clear out input in nvim telescope
 - when i press nvim C+space, I can press it again to enlarge the scope. Same thing should be done with vi + [{(
-- /usr/share/nvim/runtime/lua/vim/lsp/_transport.lua:68: Spawning language server with cmd: `{ "jdtls", "-configuration", "/home/bchk/.cache/jdtls/config", "-data", "/home/bchk
-/.cache/jdtls/workspace" }` failed. The language server is either not installed, missing from PATH, or not executable.
+
 - I want to try out using nvim buffer as terminal, I need to make it default, so when I open new zsh in tmux it is nvim terminal buffer
 
 <!-- TODO: tmux: -->
@@ -72,3 +76,7 @@ https://learning.postman.com/docs/getting-started/installation/installation-and-
 dual-boot windows and create windows dev config
 
 how to modify etc hosts only temporary is there a way?
+
+windows get shuffeled on relogin to debian, need to fix this ASAP, irritating behaviour
+
+<!-- create fzf openfortivpn script and share with others -->

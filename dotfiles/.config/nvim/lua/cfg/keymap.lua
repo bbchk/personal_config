@@ -8,13 +8,11 @@ local function keymap(mode, lhs, rhs, opts)
 	vim.keymap.set(mode, lhs, rhs, opts)
 end
 
-local default_opts = 
-
--- TODO: command for copying path to current buffer from root
--- keymap('n', '<leader>cp', ':let @+ = expand("%:p")<CR>', { noremap = true, silent = true })
-
--- TMUX
-keymap("n", "<C-f>", ":silent !tmux neww tmux-sessionizer<CR>")
+local default_opts =
+	-- TODO: command for copying path to current buffer from root
+	-- keymap('n', '<leader>cp', ':let @+ = expand("%:p")<CR>', { noremap = true, silent = true })
+	-- TMUX
+	keymap("n", "<C-f>", ":silent !tmux neww tmux-sessionizer<CR>")
 
 ----- QoL ------
 keymap("n", "<leader>h", "<CMD>nohlsearch<CR>") -- Nohl
@@ -22,7 +20,7 @@ keymap("n", "<leader>q", "<CMD>q!<CR>") -- Quit
 -- Create shorctut for not saving, but default leader q should save
 -- keymap("n", "<leader>q", "<CMD>q!<CR>") --
 keymap("i", "jk", "<ESC>") -- Exit insert mode
-keymap("n", "<leader>ww", "<CMD>write<CR>") -- Format and Save 
+keymap("n", "<leader>ww", "<CMD>write<CR>") -- Format and Save
 keymap("n", "<leader>w", "<CMD>noautocmd write<CR>") -- Save with no formatting
 
 ----- Windows ------
