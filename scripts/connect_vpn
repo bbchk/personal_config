@@ -1,6 +1,12 @@
 #!/usr/bin/env bash
 
-sudo true
-sudo killall openfortivpn 2>/dev/null
-sudo openfortivpn --config=/home/bchk/pers/secrets/vpn/credentials.cfg --otp="$1"  &
+sudo -v || exit 1
+
+regions=("east1" "east2" "west1" "west2" "global")
+region=$(printf "%s\n" "${regions[@]}" | fzf --tmux left,25%,border-native)
+
+one_time_password="${1}"
+config_file='/home/bchk/pers/secrets/vpn/credentials.cfg'
+sudo openfortivpn "vpn-${region}.internetbrands.com:443" -c "${config_file}" -o "${one_time_password}"  &
 disown
+
