@@ -48,6 +48,7 @@ delete battery from tmux, put vpn from tmux to gnome extension...somehow
 make tmux pane name display name of the folder or file we are in nvim
 make it so every pane in tmux would be named after file name
 ctrl + f in zsh => open nvim with telescope activated
+start kitty with open tmux-sessioniser
 
 <!-- TODO: to learn: -->
 TODO: learn jq and learn to copy into clipboard programmatically its output

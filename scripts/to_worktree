@@ -1,0 +1,10 @@
+#!/usr/bin/env bash
+
+trees=$(git worktree list --porcelain | grep -i "worktree" | sed '1d' | awk '{print $2}' | xargs -n1 basename)
+echo "${trees[@]}"
+tree=$(echo "${trees[@]}" | fzf --tmux left,25%,border-native)
+
+# cd $tree
+
+# session=$(find ~ ~/dev -mindepth 1 -maxdepth 1 -type d ! -name '.*' | fzf)
+# session_name=$(basename "$session" | tr . _)
