@@ -6,8 +6,41 @@ set -euo pipefail
 sudo apt update
 sudo apt upgrade -y
 
+# TODO: include
+# sudo apt install -y \
+#   build-essential \
+#   libssl-dev \
+#   libreadline-dev \
+#   zlib1g-dev \
+#   libyaml-dev \
+#   libffi-dev \
+#   libgdbm-dev \
+#   libncurses5-dev \
+#   libgdbm6 \
+#   libdb-dev \
+#   uuid-dev
+#
+# #sudo apt install -y \
+#   libssh2-1-dev \
+#   libgit2-dev \
+#   cmake \
+#   pkg-config
+# #   sudo apt install -y \
+#   build-essential \
+#   libssh2-1-dev \
+#   libgit2-dev \
+#   libssl-dev \
+#   zlib1g-dev \
+#   cmake \
+#   pkg-config
+#
 # Debian package equivalents (where available)
 PKGS=(
+  libyaml-dev
+  rbenv
+  ruby-dev
+  luarocks
+  traceroute
   netcat-openbsd
   maven
   dnsutils

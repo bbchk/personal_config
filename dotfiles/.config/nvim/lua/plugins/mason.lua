@@ -25,6 +25,7 @@ return {
 				"stylelint_lsp",
 				"bashls",
 				"dockerls",
+				"solargraph",
 			},
 		})
 

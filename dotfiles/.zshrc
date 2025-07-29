@@ -13,3 +13,12 @@ kitty_startup_hook() {
 
 # Run the hook when zsh starts
 kitty_startup_hook
+
+# >>> juliaup initialize >>>
+
+# !! Contents within this block are managed by juliaup !!
+
+path=('/home/bchk/.juliaup/bin' $path)
+export PATH
+
+# <<< juliaup initialize <<<
