@@ -36,6 +36,7 @@ sudo apt upgrade -y
 #
 # Debian package equivalents (where available)
 PKGS=(
+  python3-venv
   libyaml-dev
   rbenv
   ruby-dev

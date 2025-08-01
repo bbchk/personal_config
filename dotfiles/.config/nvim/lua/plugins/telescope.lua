@@ -31,7 +31,7 @@ return {
 
 		keymap.set(
 			"n",
-			"<leader>_",
+			"<leader>g",
 			"<cmd>lua require'telescope.builtin'.live_grep()<cr>",
 			{ desc = "Fuzzy find recent files" }
 		)
