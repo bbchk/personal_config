@@ -1,0 +1,61 @@
+#!/usr/bin/env bash
+
+set -e
+
+if ! git rev-parse --git-dir > /dev/null 2>&1; then
+    echo "Error: Not in a git repository" >&2
+    exit 1
+fi
+
+# Get all git references
+get_all_refs() {
+    {
+        git for-each-ref refs/heads/ --format='%(refname:short)|branch'
+        git for-each-ref refs/remotes/ --format='%(refname:short)|remote' | grep -v '/HEAD$'
+        git for-each-ref refs/tags/ --format='%(refname:short)|tag'
+    }
+}
+
+main() {
+    local selected_ref
+    selected_ref=$(get_all_refs | fzf --height=15 --border --delimiter='|' --with-nth=1)
+    
+    if [[ -z "$selected_ref" ]]; then
+        echo "Operation cancelled"
+        exit 0
+    fi
+    
+    local ref_name
+    ref_name=$(echo "$selected_ref" | cut -d'|' -f1)
+    local ref_type
+    ref_type=$(echo "$selected_ref" | cut -d'|' -f2)
+    
+    # Generate worktree path
+    local worktree_path
+    worktree_path="./worktrees/$(basename "$ref_name" | sed 's/[^a-zA-Z0-9._-]/-/g')"
+    
+    # Check if path exists
+    if [[ -e "$worktree_path" ]]; then
+        echo "Error: Path '$worktree_path' already exists"
+        exit 1
+    fi
+    
+    # Create worktree based on type
+    case "$ref_type" in
+        "branch")
+            git worktree add "$worktree_path" "$ref_name"
+            ;;
+        "remote")
+            local branch_name=$(basename "$ref_name")
+            git worktree add "$worktree_path" -b "$branch_name" "$ref_name"
+            ;;
+        "tag")
+            git worktree add "$worktree_path" "$ref_name"
+            ;;
+    esac
+    
+    echo "Worktree created at: $worktree_path"
+    echo "cd $worktree_path"
+}
+
+main "$@"

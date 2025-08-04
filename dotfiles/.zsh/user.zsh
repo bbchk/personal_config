@@ -34,7 +34,8 @@ bindkey -s '^f' '^u^ktmux-sessionizer\n'
 bindkey -s '^h' '^u^kcheat-sheet-tmux-integration\n' 
 bindkey -s '^n' '^u^knvim .\n' 
 bindkey -s '^p' '^u^kconnect_vpn\n' 
-# bindkey -s '^g' '^u^kchange_worktree\n' 
+bindkey -s '^b' '^u^kto_worktree\n' 
+bindkey -s '^w' '^u^kcreate_worktree\n' 
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
