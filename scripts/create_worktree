@@ -18,7 +18,7 @@ get_all_refs() {
 
 main() {
     local selected_ref
-    selected_ref=$(get_all_refs | fzf --height=15 --border --delimiter='|' --with-nth=1)
+    selected_ref=$(get_all_refs | fzf --height=15 --border)
     
     if [[ -z "$selected_ref" ]]; then
         echo "Operation cancelled"
@@ -46,16 +46,14 @@ main() {
             git worktree add "$worktree_path" "$ref_name"
             ;;
         "remote")
-            local branch_name=$(basename "$ref_name")
+            local branch_name
+            branch_name=$(basename "$ref_name")
             git worktree add "$worktree_path" -b "$branch_name" "$ref_name"
             ;;
         "tag")
             git worktree add "$worktree_path" "$ref_name"
             ;;
     esac
-    
-    echo "Worktree created at: $worktree_path"
-    echo "cd $worktree_path"
 }
 
 main "$@"
