@@ -100,9 +100,9 @@ PKGS=(
 )
 
 echo "Installing packages..."
-sudo dnf install -y "${PKGS[@]}"
+sudo dnf install -y "${PKGS[@]}" --skip-unavailable
 
 # Enable and start Docker service
 sudo systemctl enable docker
 sudo systemctl start docker
-sudo usermod -aG docker $USER
+sudo usermod -aG docker "$USER"
