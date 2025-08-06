@@ -29,7 +29,6 @@ return {
 				"stylelint_lsp", -- Stylelint Language Server (CSS/SCSS linting)
 				"bashls",       -- Bash Language Server
 				"dockerls",     -- Docker Language Server (Dockerfile support)
-				"solargraph",   -- Ruby Language Server
 			},
 		})
 

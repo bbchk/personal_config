@@ -31,13 +31,13 @@ fi
 
 # keybindings 
 bindkey -s '^f' '^u^ktmux-sessionizer\n'
-bindkey -s '^h' '^u^kcheat-sheet-tmux-integration\n' 
+# bindkey -s '^h' '^u^kcheat-sheet-tmux-integration\n' 
 
 bindkey -s '^n' '^u^knvim .\n' 
 bindkey -s '^p' '^u^kconnect_vpn\n' 
 
-bindkey -s '^b' '^u^k. to_worktree\n' 
-bindkey -s '^w' '^u^kcreate_worktree\n' 
+bindkey -s '^_' '^u^k. to_worktree\n'
+bindkey -s '^h' '^u^kcreate_worktree\n' 
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 

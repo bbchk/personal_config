@@ -2,9 +2,13 @@
 
 set -euo pipefail
 
+# gem install rails
+
 # Update system and install essentials
 sudo apt update
 sudo apt upgrade -y
+
+ # ╰$ sudo apt-get install libmariadb-dev
 
 # TODO: include
 # sudo apt install -y \
