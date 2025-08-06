@@ -40,6 +40,7 @@ sudo apt upgrade -y
 #
 # Debian package equivalents (where available)
 PKGS=(
+  kubectx
   python3-venv
   libyaml-dev
   rbenv

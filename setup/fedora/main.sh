@@ -32,6 +32,7 @@ PKGS=(
   git
   maven
   golang
+  julia
   
   # Development Libraries
   openssl-devel
