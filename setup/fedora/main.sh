@@ -2,6 +2,18 @@
 
 set -euo pipefail
 
+
+#  POST CLONE in pers local git repo
+ # ╰$ git config core.hooksPath .githooks
+ #
+ # PRE PULL 
+ # git stash push -u -m 'secrets' 
+ # POST PULL 
+ # git stash pop
+ # git checkout --theirs .
+ #
+ #
+
 # Update system and install essentials
 # sudo dnf update -y
 
@@ -10,80 +22,87 @@ set -euo pipefail
 #   https://download1.rpmfusion.org/free/fedora/rpmfusion-free-release-$(rpm -E %fedora).noarch.rpm \
 #   https://download1.rpmfusion.org/nonfree/fedora/rpmfusion-nonfree-release-$(rpm -E %fedora).noarch.rpm
 
-# TODO: include development dependencies
-# sudo dnf install -y \
-#   gcc \
-#   gcc-c++ \
-#   make \
-#   openssl-devel \
-#   readline-devel \
-#   zlib-devel \
-#   libyaml-devel \
-#   libffi-devel \
-#   gdbm-devel \
-#   ncurses-devel \
-#   libuuid-devel
-#
-# sudo dnf install -y \
-#   libssh2-devel \
-#   libgit2-devel \
-#   cmake \
-#   pkgconf-pkg-config
-#
-# Fedora package equivalents
 PKGS=(
-  python3-venv
+  # Development Tools & Build Dependencies
+  gcc
+  gcc-c++
+  make
+  cmake
+  pkgconf-pkg-config
+  git
+  maven
+  golang
+  
+  # Development Libraries
+  openssl-devel
+  readline-devel
+  zlib-devel
   libyaml-devel
-  rbenv
+  libffi-devel
+  gdbm-devel
+  ncurses-devel
+  libuuid-devel
+  libssh2-devel
+  libgit2-devel
   ruby-devel
+  
+  # Programming Languages & Runtimes
+  python3-venv
+  java-17-openjdk
+  lua
   luarocks
+  rbenv
+  
+  # System Administration & DevOps
+  ansible
+  docker
+  ShellCheck
+  
+  # Text Editors & Development Environment
+  neovim
+  tmux
+  fzf
+  gh
+  tree
+  
+  # Shell & Terminal
+  zsh
+  man-pages
+  
+  # Network Tools
   traceroute
   nmap-ncat
   bind-utils
-  java-17-openjdk
-  sioyek
-  tree
-  git
-  tmux
-  neovim
   openfortivpn
-  fzf
-  gh
-  zsh
-  brightnessctl
-  pavucontrol
-  blueman
-  stow
-  android-tools
-  nautilus
-  qbittorrent
-  mpv
-  golang
-  lua
-  acpi
-  man-pages
+  net-tools
+  curl
+  
+  # File Management & Search
+  fd-find
+  ripgrep
   zip
   unzip
   lsof
+  stow
+  
+  # Desktop Environment & GUI Applications
+  sioyek
+  qbittorrent
+  
+  # System Control & Hardware
+  ppp
+  
+  # Mobile Development
+  android-tools
+  
+  # Fonts
   fira-code-fonts
   fontawesome-fonts
-  bluez
-  bluez-tools
+  
+  # Firmware & Drivers
   sof-firmware
-  ppp
-  man-pages
-  ShellCheck
-  net-tools
-  java-17-openjdk-headless
-  docker
-  fedora-backgrounds-base
-  curl
-  fd-find
-  ripgrep
-  fzf
 )
 
-# Install available Fedora packages
 echo "Installing packages..."
 sudo dnf install -y "${PKGS[@]}"
 
@@ -91,18 +110,3 @@ sudo dnf install -y "${PKGS[@]}"
 sudo systemctl enable docker
 sudo systemctl start docker
 sudo usermod -aG docker $USER
-
-# # Enable and start PostgreSQL service
-# sudo systemctl enable postgresql
-# sudo systemctl start postgresql
-
-echo
-echo "Fedora 42 package installation script complete."
-echo "Manual steps may be needed for packages not directly available or with no clear alternative (hyprpaper, mako, hypridle, xwaylandvideobridge-git, grim, grimshot)."
-echo "Consider: Flatpak, Copr repositories, or compiling from source for these."
-echo ""
-echo "Additional notes:"
-echo "- Docker service has been enabled and started"
-echo "- User added to docker group (logout/login required for group changes)"
-echo "- PostgreSQL service has been enabled and started"
-echo "- RPM Fusion repositories have been enabled for additional packages"
