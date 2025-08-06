@@ -3,6 +3,11 @@
 set -euo pipefail
 
 
+
+chsh -s "$(which zsh)" # For this to take effect we need to log out and log in back
+gnome-session-quit --logout
+
+
 #  POST CLONE in pers local git repo
  # ╰$ git config core.hooksPath .githooks
  #
@@ -65,6 +70,7 @@ PKGS=(
   fzf
   gh
   tree
+  kitty
   
   # Shell & Terminal
   zsh
