@@ -33,14 +33,14 @@ else
 fi
 
 # keybindings 
-bindkey -s '^f' '^u^ktmux-sessionizer\n'
-# bindkey -s '^h' '^u^kcheat-sheet-tmux-integration\n' 
+bindkey -s '^f' '^utmux-sessionizer\n'
+# bindkey -s '^h' '^ucheat-sheet-tmux-integration\n' 
 
-bindkey -s '^n' '^u^knvim .\n' 
-bindkey -s '^p' '^u^kconnect_vpn\n' 
+bindkey -s '^n' '^unvim .\n' 
+bindkey -s '^p' '^uconnect_vpn\n' 
 
-bindkey -s '^_' '^u^k. to_worktree\n'
-bindkey -s '^h' '^u^kcreate_worktree\n' 
+bindkey -s '^_' '^u. to_worktree\n'
+bindkey -s '^h' '^ucreate_worktree\n' 
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
@@ -48,11 +48,9 @@ if [[ ! "$PATH" == */home/bchk/.fzf/bin* ]]; then
   PATH="${PATH:+${PATH}:}/home/bchk/.fzf/bin"
 fi
 
-
 autoload -U +X compinit && compinit
 source <(fzf --zsh)
 source <(kubectl completion zsh)
-
 
 export PATH="$HOME/pers/scripts:$PATH"
 

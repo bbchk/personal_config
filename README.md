@@ -61,6 +61,7 @@ TODO: learn jq and learn to copy into clipboard programmatically its output
 - I need to optimize my keybindings in nvim (telescope) and tmux (workplaces switch)
 - I don't want to presss space all the time in normal mode! we need to define diffrent leader. normal mode specifically for actions. make single leader key in both zsh and nvim
 - keybindings to open nvim in new tmux pane or open zsh in new tmux panem (ctrl+b is too slow, same time don't remap ctrl+b to keep it as standart)
+- speed up new zsh shell creation
 - I need git delta to review the diff locally efficiently. 
 
 <!-- vimium -->
