@@ -86,7 +86,6 @@ PKGS=(
   stow
   
   # Desktop Environment & GUI Applications
-  sioyek
   qbittorrent
   
   # System Control & Hardware
