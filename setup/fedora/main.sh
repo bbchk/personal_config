@@ -97,9 +97,6 @@ PKGS=(
   # Fonts
   fira-code-fonts
   fontawesome-fonts
-  
-  # Firmware & Drivers
-  sof-firmware
 )
 
 echo "Installing packages..."
