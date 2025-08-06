@@ -2,6 +2,8 @@
 
 set -euo pipefail
 
+# TODO: stow dotfiles
+# TODO: stow ssh 
 
 
 chsh -s "$(which zsh)" # For this to take effect we need to log out and log in back
