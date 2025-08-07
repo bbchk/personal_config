@@ -4,6 +4,12 @@ set -euo pipefail
 
 # TODO: stow dotfiles
 # TODO: stow ssh 
+#
+# ${HOME}
+# rm -rf Desktop Documents Music Pictures Public Templates Videos
+#
+# sudo hostnamectl set-hostname --pretty "Emily's 2nd dev laptop"
+# sudo hostnamectl set-hostname --static emily-dev-2
 
 
 chsh -s "$(which zsh)" # For this to take effect we need to log out and log in back
@@ -85,6 +91,7 @@ PKGS=(
   openfortivpn
   net-tools
   curl
+  nmap
   
   # File Management & Search
   fd-find

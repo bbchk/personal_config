@@ -82,3 +82,5 @@ how to modify etc hosts only temporary is there a way?
 windows get shuffeled on relogin to debian, need to fix this ASAP, irritating behaviour
 
 <!-- create fzf openfortivpn script and share with others -->
+
+point docker to my config/deamon.json

@@ -29,6 +29,7 @@ return {
 				"stylelint_lsp", -- Stylelint Language Server (CSS/SCSS linting)
 				"bashls",       -- Bash Language Server
 				"dockerls",     -- Docker Language Server (Dockerfile support)
+        "ruby_lsp"
 			},
 		})
 
@@ -41,7 +42,8 @@ return {
 				"php-cs-fixer",  -- PHP code style fixer and formatter
 				"shfmt",         -- Shell script formatter (bash, mksh, POSIX shell)
         "black",
-        "isort"
+        "isort",
+        "rubocop"
 			},
 		})
 	end,

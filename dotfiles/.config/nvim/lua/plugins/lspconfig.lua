@@ -65,7 +65,7 @@ return {
 			python = "pyright",
 
 			-- Ruby
-			ruby = "solargraph",
+			ruby = "ruby_lsp",
 
 			-- PHP
 			php = "intelephense",

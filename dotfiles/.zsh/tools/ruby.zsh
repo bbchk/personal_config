@@ -4,6 +4,7 @@
 
 export PATH="$HOME/.rbenv/bin:$PATH"
 eval "$(rbenv init -)" 
+# gem install ruby-lsp
 
 # ------------------------------
 # End Ruby config 
