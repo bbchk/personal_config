@@ -49,6 +49,7 @@ PKGS=(
   
   # Development Libraries
   openssl-devel
+  openssl
   readline-devel
   zlib-devel
   libyaml-devel

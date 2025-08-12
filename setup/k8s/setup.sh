@@ -4,11 +4,12 @@ su
 
 apt update
 apt install sudo vim
-sudo update-alternatives --config editor
+
+update-alternatives --config editor
 
 # visudo thing
 
-sudo systemctl mask  "dev-*.swap"
+systemctl mask  "dev-*.swap"
 
 
 
@@ -18,4 +19,16 @@ sudo systemctl mask  "dev-*.swap"
 # IdleAction=ignore              # Can be suspend, poweroff, etc.
 # IdleActionSec=30min            # Time before IdleAction triggers
 
-sudo systemctl restart systemd-logind
+systemctl restart systemd-logind
+
+wifi_device=$(basename $(echo /sys/class/net/wlp*))
+ip link set "${wifi_device}" down
+
+
+# /etc/network/interfaces
+# auto enp3s0
+# iface enp3s0 inet static
+#     address 192.168.1.10
+#     netmask 255.255.255.0
+#     gateway 192.168.1.1
+#     metric 100
