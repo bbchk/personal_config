@@ -74,7 +74,7 @@ return {
 			go = "gopls",
 
 			-- Java
-			java = "jdtls",
+			-- java = "jdtls",
 
 			-- SQL
 			sql = "sqlls",

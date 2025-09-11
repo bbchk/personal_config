@@ -1,0 +1,11 @@
+#!/usr/bin/env bash
+
+trees=$(git worktree list --porcelain | grep -i "worktree" | sed '1d' | awk '{print $2}')
+
+if [ -z "${trees}" ]; then
+  echo "No worktrees"
+else 
+  tree=$(echo "${trees[@]}" | fzf --height=15 --border --delimiter='/' --with-nth='7..')
+
+  cd "${tree}" || exit
+fi

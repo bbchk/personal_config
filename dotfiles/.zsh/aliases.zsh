@@ -12,3 +12,4 @@ alias code="code --profile main"
 
 # Misc
 alias open="xdg-open"
+alias gs="gst"

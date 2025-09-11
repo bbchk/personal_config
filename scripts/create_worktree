@@ -30,9 +30,12 @@ main() {
     local ref_type
     ref_type=$(echo "$selected_ref" | cut -d'|' -f2)
     
+    local git_common_dir
+    git_common_dir=$(git rev-parse --git-common-dir)
+#
     # Generate worktree path
     local worktree_path
-    worktree_path="./worktrees/$(basename "$ref_name" | sed 's/[^a-zA-Z0-9._-]/-/g')"
+    worktree_path="${git_common_dir}/wks/$(basename "$ref_name" | sed 's/[^a-zA-Z0-9._-]/-/g')"
     
     # Check if path exists
     if [[ -e "$worktree_path" ]]; then
@@ -57,3 +60,19 @@ main() {
 }
 
 main "$@"
+
+
+# implement forcing
+#     -f, --[no-]force      checkout <branch> even if already checked out in other worktree
+#
+# -b <branch>           create a new branch
+# -B <branch>           create or reset a branch
+# -d, --[no-]detach     detach HEAD at named commit
+
+## Issues
+ # ╰$ cd docker
+ # ╭─~/dev/domreg.git/worktrees/PORT-26708/worktrees/docker [feature/docker]
+ #
+ # ike/master and master will be having same path!
+ #
+ #

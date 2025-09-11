@@ -40,8 +40,8 @@ bindkey -s '^f' '^utmux-sessionizer\n'
 bindkey -s '^n' '^unvim .\n' 
 bindkey -s '^p' '^uconnect_vpn\n' 
 
-bindkey -s '^_' '^u. to_worktree\n'
-bindkey -s '^h' '^ucreate_worktree\n' 
+bindkey -s '^h' '^u. hop_to_worktree\n'
+bindkey -s '^k' '^ucreate_worktree\n' 
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 

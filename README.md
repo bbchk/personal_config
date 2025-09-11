@@ -84,3 +84,7 @@ windows get shuffeled on relogin to debian, need to fix this ASAP, irritating be
 <!-- create fzf openfortivpn script and share with others -->
 
 point docker to my config/deamon.json
+
+make no formatting save in nvim remove whitespaces in the end of file
+
+point .ssh from .ssh to pers/secrets/ssh. Viable?

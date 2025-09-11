@@ -16,7 +16,7 @@ return {
 		require("mason-lspconfig").setup({
 			automatic_installation = true, -- Auto-install LSP servers when you open files
 			ensure_installed = {
-				"jdtls",        -- Java Language Server (Eclipse JDT)
+				-- "jdtls",        -- Java Language Server (Eclipse JDT)
 				"cssls",        -- CSS Language Server
 				"eslint",       -- ESLint Language Server (JavaScript/TypeScript linting)
 				"html",         -- HTML Language Server
