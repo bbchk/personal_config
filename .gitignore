@@ -3,9 +3,8 @@
 setup/dotfiles/.config/keepassxc/
 
 programs/Postman Agent/
-
+/
 **/password.txt
-
 dotfiles/.oh-my-zsh/*
 !dotfiles/.oh-my-zsh/custom/
 

@@ -13,6 +13,7 @@ export PATH="${KREW_ROOT:-$HOME/.krew}/bin:$PATH"
 
 export PATH="$PATH:/usr/lib/docker/cli-plugins"
 export DOCKER_CLI_EXPERIMENTAL=enabled
+export KUBE_PS1_ENABLED=off
 
 export GPG_TTY=$(tty)
 

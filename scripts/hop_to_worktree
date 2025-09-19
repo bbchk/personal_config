@@ -1,11 +1,70 @@
 #!/usr/bin/env bash
 
-trees=$(git worktree list --porcelain | grep -i "worktree" | sed '1d' | awk '{print $2}')
+set -euo pipefail
 
-if [ -z "${trees}" ]; then
-  echo "No worktrees"
-else 
-  tree=$(echo "${trees[@]}" | fzf --height=15 --border --delimiter='/' --with-nth='7..')
+main() {
+  local branch_name="$1"
 
-  cd "${tree}" || exit
-fi
+  if ! git rev-parse --is-inside-work-tree >/dev/null 2>&1; then
+    echo "Error: Not in a git repository" >&2
+    return 1
+  fi
+
+  if [[ -n "${branch_name:-}" ]]; then
+    hop_to "${branch_name}"
+  else
+    # Display all worktrees with fzf if user hasn't provided input
+    hop_to_interactive
+  fi
+}
+
+hop_to() {
+  local branch_name="$1"
+  local path
+
+  path=$(
+    git worktree list --porcelain | awk -v branch="$branch_name" '
+        /^worktree / { path = $2 }
+        /^branch / && $2 == "refs/heads/" branch { print path; exit }
+    '
+  )
+
+  if [[ -z "${path}" ]]; then
+    echo "Error: No worktree found for branch '${branch_name}'" >&2
+    return 1
+  fi
+
+  if [[ ! -d "${path}" ]]; then
+    echo "Error: Worktree path '${path}' does not exist" >&2
+    return 1
+  fi
+
+  cd "${path}" || {
+    echo "Error: Failed to change to directory '${path}'" >&2
+    return 1
+  }
+}
+
+hop_to_interactive() {
+  local trees tree
+
+  trees=$(git worktree list --porcelain | grep -i "worktree" | sed '1d' | awk '{print $2}')
+
+  if [[ -z "${trees}" ]]; then
+    echo "No worktrees found. Please create one"
+    return 0
+  fi
+
+  tree=$(echo "${trees}" | fzf --height=15 --border --delimiter='/' --with-nth='4..' --prompt="Select worktree: ")
+
+  if [[ -n "${tree}" ]]; then
+    cd "${tree}" || {
+      echo "Error: Failed to change to directory '${tree}'" >&2
+      return 1
+    }
+  else
+    echo "No worktree selected"
+  fi
+}
+
+main "${1:-}"

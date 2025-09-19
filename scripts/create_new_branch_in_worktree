@@ -1,0 +1,173 @@
+#!/usr/bin/env bash
+
+set -e
+
+show_help() {
+    cat << EOF
+Usage: $(basename "$0") [OPTIONS] <branch_name> [base_ref]
+
+Create a new branch in its own worktree and switch to it.
+
+Arguments:
+    branch_name     Name of the new branch to create
+    base_ref        Base reference to branch from (default: current HEAD)
+
+Options:
+    -f, --force     Force creation even if worktree path exists
+    -B, --reset     Create or reset branch (like git branch -B)
+    -h, --help      Show this help message
+
+Examples:
+    $(basename "$0") feature/new-feature
+    $(basename "$0") hotfix/bug-123 main
+    $(basename "$0") -f feature/existing origin/develop
+    $(basename "$0") -B release/v2.0 v1.9.0
+
+EOF
+}
+
+cleanup_and_exit() {
+    local exit_code=${1:-1}
+    local error_msg="$2"
+    
+    if [[ -n "$error_msg" ]]; then
+        echo "Error: $error_msg" >&2
+    fi
+    
+    # Cleanup: remove worktree if it was created but we're exiting with error
+    if [[ -n "$worktree_created" && "$worktree_created" == "true" && -n "$worktree_path" ]]; then
+        echo "Cleaning up worktree at $worktree_path" >&2
+        git worktree remove --force "$worktree_path" 2>/dev/null || true
+    fi
+    
+    exit "$exit_code"
+}
+
+main() {
+    # Check if we're in a git repository
+    if ! git rev-parse --git-dir > /dev/null 2>&1; then
+        cleanup_and_exit 1 "Not in a git repository"
+    fi
+    
+    # Parse command line arguments
+    local force=false
+    local reset_branch=false
+    local branch_name=""
+    local base_ref=""
+    
+    while [[ $# -gt 0 ]]; do
+        case $1 in
+            -f|--force)
+                force=true
+                shift
+                ;;
+            -B|--reset)
+                reset_branch=true
+                shift
+                ;;
+            -h|--help)
+                show_help
+                exit 0
+                ;;
+            -*)
+                cleanup_and_exit 1 "Unknown option: $1"
+                ;;
+            *)
+                if [[ -z "$branch_name" ]]; then
+                    branch_name="$1"
+                elif [[ -z "$base_ref" ]]; then
+                    base_ref="$1"
+                else
+                    cleanup_and_exit 1 "Too many arguments"
+                fi
+                shift
+                ;;
+        esac
+    done
+    
+    # Validate branch name
+    if [[ -z "$branch_name" ]]; then
+        cleanup_and_exit 1 "Branch name is required"
+    fi
+    
+    # Validate branch name format
+    if ! git check-ref-format "refs/heads/$branch_name"; then
+        cleanup_and_exit 1 "Invalid branch name: $branch_name"
+    fi
+    
+    # Set default base reference
+    if [[ -z "$base_ref" ]]; then
+        base_ref="HEAD"
+    fi
+    
+    # Verify base reference exists
+    if ! git rev-parse --verify "$base_ref" >/dev/null 2>&1; then
+        cleanup_and_exit 1 "Base reference '$base_ref' does not exist"
+    fi
+    
+    local git_common_dir
+    git_common_dir=$(git rev-parse --git-common-dir)
+    
+    # Generate worktree path using just the branch basename to avoid issues with slashes
+    local worktree_name
+    worktree_name=$(basename "$branch_name" | sed 's/[^a-zA-Z0-9._-]/-/g')
+    
+    local worktree_path
+    worktree_path="${git_common_dir}/wks/${worktree_name}"
+    
+    # Check if worktree path already exists
+    if [[ -e "$worktree_path" ]] && [[ "$force" != "true" ]]; then
+        cleanup_and_exit 1 "Worktree path '$worktree_path' already exists. Use -f to force."
+    fi
+    
+    # Check if branch already exists
+    if git show-ref --verify --quiet "refs/heads/$branch_name"; then
+        if [[ "$reset_branch" != "true" ]]; then
+            cleanup_and_exit 1 "Branch '$branch_name' already exists. Use -B to reset it."
+        else
+            echo "Resetting existing branch '$branch_name'"
+        fi
+    fi
+    
+    # Remove existing worktree if forcing
+    if [[ -e "$worktree_path" ]] && [[ "$force" == "true" ]]; then
+        echo "Removing existing worktree at '$worktree_path'"
+        if git worktree list | grep -q "$worktree_path"; then
+            git worktree remove --force "$worktree_path"
+        else
+            rm -rf "$worktree_path"
+        fi
+    fi
+    
+    # Create the worktree with new branch
+    echo "Creating worktree at '$worktree_path' with branch '$branch_name'"
+    
+    local worktree_created=""
+    if [[ "$reset_branch" == "true" ]]; then
+        git worktree add "$worktree_path" -B "$branch_name" "$base_ref"
+    else
+        git worktree add "$worktree_path" -b "$branch_name" "$base_ref"
+    fi
+    worktree_created="true"
+    
+    # Change to the new worktree directory
+    echo "Switching to worktree: $worktree_path"
+    cd "$worktree_path"
+    
+    # Verify we're in the right place
+    local current_branch
+    current_branch=$(git branch --show-current)
+    echo "Successfully created and switched to branch '$current_branch' in worktree '$worktree_path'"
+    
+    # Show current status
+    echo
+    echo "Current location: $(pwd)"
+    echo "Current branch: $current_branch"
+    echo "Worktree status:"
+    git status --short --branch
+}
+
+# Set up trap for cleanup
+trap 'cleanup_and_exit 130 "Script interrupted"' INT TERM
+
+main "$@"
