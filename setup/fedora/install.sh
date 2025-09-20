@@ -99,6 +99,7 @@ sudo dnf install -y "${PKGS[@]}" --skip-unavailable
 sudo systemctl enable docker
 sudo systemctl start docker
 sudo usermod -aG docker "$USER"
+# TODO: copy deamon.json to it's locations
 
 # K8s below
 
@@ -163,4 +164,21 @@ fi
 read -rp "Do you want to install julia? (y/n): " julia_res
 if [[ "$julia_res" =~ ^[Yy]$ ]]; then
   curl -fsSL https://install.julialang.org | sh
+fi
+
+read -rp "Do you want to install keyd? (y/n): " keyd_res
+if [[ "$keyd_res" =~ ^[Yy]$ ]]; then
+
+  cd "/tmp"
+  git clone https://github.com/rvaiya/keyd
+  cd keyd
+
+  make && sudo make install
+
+  cd -
+  sudo systemctl enable keyd --now
+  sudo cp "$HOME/pers/config/keyd.conf" /etc/keyd/default.conf
+  sudo keyd reload
+
+  sudo usermod -aG keyd bchk
 fi

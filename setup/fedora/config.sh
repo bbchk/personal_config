@@ -48,6 +48,3 @@ if [[ "$networking_res" =~ ^[Yy]$ ]]; then
   read -rp "Enter static hostname: " static_hostname
   sudo hostnamectl set-hostname --static "$static_hostname"
 fi
-
-#TODO keyd settings
-# usermod -aG keyd bchk
