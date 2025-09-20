@@ -132,19 +132,20 @@ if [[ "$github_cli_res" =~ ^[Yy]$ ]]; then
   sudo dnf install gh --repo gh-cli
 fi
 
-read -rp "Do you want to install git-who? (y/n): " git_who_res
-if [[ "$git_who_res" =~ ^[Yy]$ ]]; then
-
-  cd "/tmp"
-  git clone git@github.com:sinclairtarget/git-who.git
-  cd git-who
-  rake
-
-  sudo cp git-who /usr/local/bin/
-
-  cd -
-  git-who --version
-fi
+# TODO: implement
+# read -rp "Do you want to install git-who? (y/n): " git_who_res
+# if [[ "$git_who_res" =~ ^[Yy]$ ]]; then
+#
+#   cd "/tmp"
+#   git clone git@github.com:sinclairtarget/git-who.git
+#   cd git-who
+#   rake
+#
+#   sudo cp git-who /usr/local/bin/
+#
+#   cd -
+#   git-who --version
+# fi
 
 read -rp "Do you want to install google-chrome? (y/n): " google_chrome_res
 if [[ "$google_chrome_res" =~ ^[Yy]$ ]]; then
