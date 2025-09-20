@@ -2,7 +2,7 @@
 
 set -euo pipefail
 
-PASSWORD_FILE="password.txt"
+PASSWORD_FILE="password"
 
 # ask user if he wants to shred it
 # trap 'shred -u -n 5 "${PASSWORD_FILE}"' EXIT SIGINT SIGTERM

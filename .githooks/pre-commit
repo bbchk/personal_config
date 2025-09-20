@@ -2,7 +2,7 @@
 
 set -euo pipefail
 
-PASSWORD_FILE="password.txt"
+PASSWORD_FILE="password"
 
 FILES_TO_ENCRYPT=($(find secrets/ -type f))
 
