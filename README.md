@@ -101,4 +101,4 @@ point .ssh from .ssh to pers/secrets/ssh. Viable?
  #
  #
 
-I want coloring of diff in diff files and git commit file
+I want coloring of diff in diff files and git commit file COMMIT_EDITMSG
