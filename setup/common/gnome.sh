@@ -2,60 +2,59 @@
 
 set -euo pipefail
 
+gset() {
+  local schema="$1"
+  local key="$2"
+  local value="$3"
+  gsettings set "$schema" "$key" "$value"
+}
+
 # ====================================
-#
-gsettings set org.gnome.desktop.interface enable-animations false
 
-gsettings set org.gnome.desktop.wm.preferences num-workspaces 10
-gsettings set org.gnome.desktop.wm.preferences workspace-names "['1', '2', '3', '4', '5', '6', '7', '8', '9', '10']"
+# ---- Workspaces below -------------------------------
 
-gsettings set org.gnome.shell.keybindings switch-to-application-1 "[]"
-gsettings set org.gnome.shell.keybindings switch-to-application-2 "[]"
-gsettings set org.gnome.shell.keybindings switch-to-application-3 "[]"
-gsettings set org.gnome.shell.keybindings switch-to-application-4 "[]"
-gsettings set org.gnome.shell.keybindings switch-to-application-5 "[]"
-gsettings set org.gnome.shell.keybindings switch-to-application-6 "[]"
-gsettings set org.gnome.shell.keybindings switch-to-application-7 "[]"
-gsettings set org.gnome.shell.keybindings switch-to-application-8 "[]"
-gsettings set org.gnome.shell.keybindings switch-to-application-9 "[]"
-gsettings set org.gnome.shell.keybindings toggle-application-view "[]"
+gset org.gnome.desktop.wm.preferences num-workspaces "10"
+gset org.gnome.desktop.wm.preferences workspace-names "['1', '2', '3', '4', '5', '6', '7', '8', '9', '10']"
 
-gsettings set org.gnome.desktop.wm.keybindings switch-to-workspace-1 "['<Super>1']"
-gsettings set org.gnome.desktop.wm.keybindings switch-to-workspace-2 "['<Super>2']"
-gsettings set org.gnome.desktop.wm.keybindings switch-to-workspace-3 "['<Super>3']"
-gsettings set org.gnome.desktop.wm.keybindings switch-to-workspace-4 "['<Super>4']"
-gsettings set org.gnome.desktop.wm.keybindings switch-to-workspace-5 "['<Super>5']"
-gsettings set org.gnome.desktop.wm.keybindings switch-to-workspace-6 "['<Super>6']"
-gsettings set org.gnome.desktop.wm.keybindings switch-to-workspace-7 "['<Super>7']"
-gsettings set org.gnome.desktop.wm.keybindings switch-to-workspace-8 "['<Super>8']"
-gsettings set org.gnome.desktop.wm.keybindings switch-to-workspace-9 "['<Super>9']"
-gsettings set org.gnome.desktop.wm.keybindings switch-to-workspace-10 "['<Super>0']"
+for i in {1..9}; do
+  gset org.gnome.shell.keybindings "switch-to-application-$i" "[]"
+done
 
-gsettings set org.gnome.desktop.wm.keybindings move-to-workspace-10 "['<Shift><Super>0']"
-gsettings set org.gnome.desktop.wm.keybindings move-to-workspace-9 "['<Shift><Super>9']"
-gsettings set org.gnome.desktop.wm.keybindings move-to-workspace-8 "['<Shift><Super>8']"
-gsettings set org.gnome.desktop.wm.keybindings move-to-workspace-7 "['<Shift><Super>7']"
-gsettings set org.gnome.desktop.wm.keybindings move-to-workspace-6 "['<Shift><Super>6']"
-gsettings set org.gnome.desktop.wm.keybindings move-to-workspace-5 "['<Shift><Super>5']"
-gsettings set org.gnome.desktop.wm.keybindings move-to-workspace-4 "['<Shift><Super>4']"
-gsettings set org.gnome.desktop.wm.keybindings move-to-workspace-3 "['<Shift><Super>3']"
-gsettings set org.gnome.desktop.wm.keybindings move-to-workspace-2 "['<Shift><Super>2']"
-gsettings set org.gnome.desktop.wm.keybindings move-to-workspace-1 "['<Shift><Super>1']"
+for i in {1..10}; do
+  gset org.gnome.desktop.wm.keybindings "switch-to-workspace-$i" "['<Super>$i']"
+  gset org.gnome.desktop.wm.keybindings "move-to-workspace-$i" "['<Shift><Super>$i']"
+done
 
-gsettings set org.gnome.shell.keybindings toggle-message-tray "[]"
-gsettings set org.gnome.desktop.wm.keybindings toggle-maximized "['<Super>m']"
+# ---- Windows below -------------------------------
 
-#TODO
-# gsettings set org.gnome.settings-daemon.plugins.media-keys home "[]"
-# gsettings set org.gnome.settings-daemon.plugins.media-keys email "['']"
+gset org.gnome.shell.keybindings toggle-message-tray "[]"
+gset org.gnome.desktop.wm.keybindings toggle-maximized "['<Super>m']"
 
-#TODO keyd settings
-# usermod -aG keyd bchk
+# ---- Utlis below -------------------------------
 
-gsettings set org.gnome.shell.keybindings show-screenshot-ui "['<Super>p']"
+gset org.gnome.shell.keybindings show-screenshot-ui "['<Super>p']"
 
-# TODO: set wellbeing options
-#
+# ---- Wellbeing below -------------------------------
+
+gset org.gnome.desktop.screen-time-limits daily-limit-enabled "true"
+gset org.gnome.desktop.screen-time-limits daily-limit-seconds "uint32 28800"
+gset org.gnome.desktop.screen-time-limits grayscale "true"
+gset org.gnome.desktop.screen-time-limits history-enabled "true"
+
+gset org.gnome.desktop.break-reminders selected-breaks "['eyesight']"
+gset org.gnome.desktop.break-reminders.eyesight countdown "false"
+gset org.gnome.desktop.break-reminders.eyesight delay-seconds "uint32 180"
+gset org.gnome.desktop.break-reminders.eyesight duration-seconds "uint32 20"
+gset org.gnome.desktop.break-reminders.eyesight fade-screen "true"
+gset org.gnome.desktop.break-reminders.eyesight interval-seconds "uint32 1200"
+gset org.gnome.desktop.break-reminders.eyesight lock-screen "false"
+gset org.gnome.desktop.break-reminders.eyesight notify "true"
+gset org.gnome.desktop.break-reminders.eyesight notify-overdue "true"
+gset org.gnome.desktop.break-reminders.eyesight notify-upcoming "false"
+gset org.gnome.desktop.break-reminders.eyesight play-sound "true"
+
+# ---- Extensions below -------------------------------
+
 # TODO: install all extensions programmatically
 #wget https://extensions.gnome.org/extension-data/instantworkspaceswitcheramalantony.net.v10.shell-extension.zip
 # gnome-extensions install <zip>

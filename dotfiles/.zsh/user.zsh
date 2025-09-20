@@ -2,8 +2,7 @@
 # user configuration 
 # ------------------------------
 
-# gsettings set org.gnome.desktop.interface enable-animations false
-# HISTFILE="${HOME}/pers/secrets/.zsh_history"
+HISTFILE="${HOME}/pers/secrets/.zsh_history"
 
 export PATH="$HOME/.symfony5/bin:$PATH"
 export JAVA_HOME="/usr/lib/jvm/java-17-openjdk-amd64"

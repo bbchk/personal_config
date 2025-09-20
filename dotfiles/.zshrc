@@ -18,7 +18,7 @@ kitty_startup_hook
 
 # !! Contents within this block are managed by juliaup !!
 
-path=('/home/bchk/.juliaup/bin' $path)
+path=('/home/bohdana/.juliaup/bin' $path)
 export PATH
 
 # <<< juliaup initialize <<<

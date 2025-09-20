@@ -61,21 +61,6 @@ if ! command -v aws >/dev/null 2>&1; then
   rm -rf /tmp/aws /tmp/awscliv2.zip
 fi
 
-# 8. Postman
-if ! command -v postman >/dev/null 2>&1; then
-  echo "Installing Postman (as snap)..."
-  sudo snap install postman
-fi
-
-# 9. Bruno (https://github.com/usebruno/bruno)
-if ! command -v bruno >/dev/null 2>&1; then
-  echo "Installing Bruno..."
-  BRUNO_DEB=$(curl -s https://api.github.com/repos/usebruno/bruno/releases/latest | grep browser_download_url | grep deb | cut -d '"' -f 4 | head -n1)
-  wget "$BRUNO_DEB" -O /tmp/bruno.deb
-  sudo apt install -y /tmp/bruno.deb || true
-  rm -f /tmp/bruno.deb
-fi
-
 # 10. Sioyek PDF viewer
 if ! command -v sioyek >/dev/null 2>&1; then
   echo "Installing Sioyek..."
