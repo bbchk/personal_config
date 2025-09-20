@@ -44,3 +44,5 @@ gsettings set org.gnome.desktop.wm.keybindings toggle-maximized "['<Super>m']"
 gsettings set org.gnome.shell.keybindings show-screenshot-ui "['<Super>p']"
 
 # TODO: set wellbeing options
+#
+# TODO: install all extensions programmatically

@@ -1,8 +1,9 @@
 #!/usr/bin/env bash
 
-set -euo pipefail
+# set -euo pipefail
 
 # ====================================
+echo -e "\n\n ======= install.sh is starting ======= \n\n"
 
 # Enable RPM Fusion repositories for additional packages
 sudo dnf install -y \
@@ -20,7 +21,7 @@ PKGS=(
   maven
   golang
   julia
-  
+
   # Development Libraries
   openssl-devel
   openssl
@@ -34,19 +35,19 @@ PKGS=(
   libssh2-devel
   libgit2-devel
   ruby-devel
-  
+
   # Programming Languages & Runtimes
   python3-venv
   java-17-openjdk
   lua
   luarocks
   rbenv
-  
+
   # System Administration & DevOps
   ansible
   docker
   ShellCheck
-  
+
   # Text Editors & Development Environment
   neovim
   tmux
@@ -54,11 +55,11 @@ PKGS=(
   gh
   tree
   kitty
-  
+
   # Shell & Terminal
   zsh
   man-pages
-  
+
   # Network Tools
   traceroute
   nmap-ncat
@@ -67,7 +68,7 @@ PKGS=(
   net-tools
   curl
   nmap
-  
+
   # File Management & Search
   fd-find
   ripgrep
@@ -75,16 +76,16 @@ PKGS=(
   unzip
   lsof
   stow
-  
+
   # Desktop Environment & GUI Applications
   qbittorrent
-  
+
   # System Control & Hardware
   ppp
-  
+
   # Mobile Development
   android-tools
-  
+
   # Fonts
   fira-code-fonts
   fontawesome-fonts
@@ -93,14 +94,18 @@ PKGS=(
 echo "Installing packages..."
 sudo dnf install -y "${PKGS[@]}" --skip-unavailable
 
-
 # OMZ below
+rm -rf "$HOME/.oh-my-zsh"
+# sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
+# git submodule add -f https://github.com/zsh-users/zsh-autosuggestions.git zsh-autosuggestions
+# git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions
+# git submodule add -f https://github.com/zsh-users/zsh-syntax-highlighting.git zsh-syntax-highlighting
 
-sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
+cd "$HOME/pers/dotfiles/.oh-my-zsh"
+git submodule update --init --recursive
+cd -
 
 # Docker below
-
-# Enable and start Docker service
 sudo systemctl enable docker
 sudo systemctl start docker
 sudo usermod -aG docker "$USER"
@@ -128,7 +133,6 @@ kubectl version --client
 #
 # kubectl krew install ns
 # kubectl krew install ctx
-
 
 # todo below?
 #

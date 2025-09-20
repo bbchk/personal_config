@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-set -euo pipefail
+# set -euo pipefail
 
 # ====================================
 
@@ -41,15 +41,15 @@ main() {
   case "$choice" in
   1)
     echo "You selected Debian."
-    ./debian/main.sh
+    "$HOME/pers/setup/debian/main.sh"
     ;;
   2)
     echo "You selected Fedora."
-    ./fedora/main.sh
+    "$HOME/pers/setup/fedora/main.sh"
     ;;
   3)
     echo "You selected Kubernetes."
-    ./k8s/main.sh
+    "$HOME/pers/setup/k8s/main.sh"
     ;;
   *)
     echo "Wrong input, please try again."
@@ -58,3 +58,4 @@ main() {
 }
 
 main
+"$HOME/pers/setup/teardown.sh"
