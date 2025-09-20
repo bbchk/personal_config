@@ -131,3 +131,8 @@ kubectl version --client
 
 
 # todo below?
+#
+# install postmna agent
+# kubio
+# submodules innit nad update in omz config
+# deal with omz
