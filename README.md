@@ -88,3 +88,16 @@ point docker to my config/deamon.json
 make no formatting save in nvim remove whitespaces in the end of file
 
 point .ssh from .ssh to pers/secrets/ssh. Viable?
+
+
+#
+
+ #
+ # PRE PULL 
+ # git stash push -u -m 'secrets' 
+ # POST PULL 
+ # git stash pop
+ # git checkout --theirs .
+ #
+ #
+

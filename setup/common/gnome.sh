@@ -1,8 +1,4 @@
 
-# TODO:
-# create ~/dev
-# rename Downloads to downloads
-#
 gsettings set org.gnome.desktop.wm.preferences num-workspaces 10
 gsettings set org.gnome.desktop.wm.preferences workspace-names "['1', '2', '3', '4', '5', '6', '7', '8', '9', '10']"
 
