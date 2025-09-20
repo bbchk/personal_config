@@ -3,38 +3,41 @@
 # create ~/dev
 # rename Downloads to downloads
 #
-#
-#
-# gsettings set org.gnome.desktop.wm.keybindings switch-to-workspace-1 "['<Super>1']"
-# gsettings set org.gnome.desktop.wm.keybindings switch-to-workspace-2 "['<Super>2']"
-# gsettings set org.gnome.desktop.wm.keybindings switch-to-workspace-3 "['<Super>3']"
-# gsettings set org.gnome.desktop.wm.keybindings switch-to-workspace-4 "['<Super>4']"
-# gsettings set org.gnome.desktop.wm.keybindings switch-to-workspace-5 "['<Super>5']"
-# gsettings set org.gnome.desktop.wm.keybindings switch-to-workspace-6 "['<Super>6']"
-# gsettings set org.gnome.desktop.wm.keybindings switch-to-workspace-7 "['<Super>7']"
-# gsettings set org.gnome.desktop.wm.keybindings switch-to-workspace-8 "['<Super>8']"
-# gsettings set org.gnome.desktop.wm.keybindings switch-to-workspace-9 "['<Super>9']"
-# gsettings set org.gnome.desktop.wm.keybindings switch-to-workspace-10 "['<Super>0']"
-#
-#gsettings set org.gnome.settings-daemon.plugins.media-keys home "[]"
+gsettings set org.gnome.desktop.wm.preferences num-workspaces 10
+gsettings set org.gnome.desktop.wm.preferences workspace-names "['1', '2', '3', '4', '5', '6', '7', '8', '9', '10']"
+
+gsettings set org.gnome.shell.keybindings switch-to-application-1 "[]"
+gsettings set org.gnome.shell.keybindings switch-to-application-2 "[]"
+gsettings set org.gnome.shell.keybindings switch-to-application-3 "[]"
+gsettings set org.gnome.shell.keybindings switch-to-application-4 "[]"
+gsettings set org.gnome.shell.keybindings switch-to-application-5 "[]"
+gsettings set org.gnome.shell.keybindings switch-to-application-6 "[]"
+gsettings set org.gnome.shell.keybindings switch-to-application-7 "[]"
+gsettings set org.gnome.shell.keybindings switch-to-application-8 "[]"
+gsettings set org.gnome.shell.keybindings switch-to-application-9 "[]"
+gsettings set org.gnome.shell.keybindings toggle-application-view "[]"
+
+gsettings set org.gnome.desktop.wm.keybindings switch-to-workspace-1 "['<Super>1']"
+gsettings set org.gnome.desktop.wm.keybindings switch-to-workspace-2 "['<Super>2']"
+gsettings set org.gnome.desktop.wm.keybindings switch-to-workspace-3 "['<Super>3']"
+gsettings set org.gnome.desktop.wm.keybindings switch-to-workspace-4 "['<Super>4']"
+gsettings set org.gnome.desktop.wm.keybindings switch-to-workspace-5 "['<Super>5']"
+gsettings set org.gnome.desktop.wm.keybindings switch-to-workspace-6 "['<Super>6']"
+gsettings set org.gnome.desktop.wm.keybindings switch-to-workspace-7 "['<Super>7']"
+gsettings set org.gnome.desktop.wm.keybindings switch-to-workspace-8 "['<Super>8']"
+gsettings set org.gnome.desktop.wm.keybindings switch-to-workspace-9 "['<Super>9']"
+gsettings set org.gnome.desktop.wm.keybindings switch-to-workspace-10 "['<Super>0']"
+
+gsettings set org.gnome.shell.keybindings toggle-message-tray "[]"
+gsettings set org.gnome.desktop.wm.keybindings toggle-maximized "['<Super>m']"
+
+#TODO
+# gsettings set org.gnome.settings-daemon.plugins.media-keys home "[]"
 # gsettings set org.gnome.settings-daemon.plugins.media-keys email "['']"
 
-# Set the command
-# gsettings set org.gnome.settings-daemon.plugins.media-keys.custom-keybinding:/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0/ name 'Rofi Launcher'
-# gsettings set org.gnome.settings-daemon.plugins.media-keys.custom-keybinding:/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0/ command 'rofi -show drun -normal-window'
-# gsettings set org.gnome.settings-daemon.plugins.media-keys.custom-keybinding:/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0/ binding '<Super>d'
-#
-# # Enable the custom keybinding
-# gsettings set org.gnome.settings-daemon.plugins.media-keys custom-keybindings "['/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0/']"
-
-# RUN in the end 
-# git submodule update --init --recursive
-#
-#
-# --- keyd app remapp
+#TODO keyd settings
 usermod -aG keyd bchk 
 
-sudo apt install python3-xlib
 
 
 #

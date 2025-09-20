@@ -2,6 +2,10 @@
 
 set -euo pipefail
 
+sudo true
+sudo dnf update -y --skip-unavailable --exclude=openh264
+sudo dnf install zsh
+
 # TODO: stow dotfiles
 # TODO: stow ssh 
 #
@@ -28,12 +32,11 @@ gnome-session-quit --logout
  #
 
 # Update system and install essentials
-# sudo dnf update -y
 
 # Enable RPM Fusion repositories for additional packages
-# sudo dnf install -y \
-#   https://download1.rpmfusion.org/free/fedora/rpmfusion-free-release-$(rpm -E %fedora).noarch.rpm \
-#   https://download1.rpmfusion.org/nonfree/fedora/rpmfusion-nonfree-release-$(rpm -E %fedora).noarch.rpm
+sudo dnf install -y \
+  https://download1.rpmfusion.org/free/fedora/rpmfusion-free-release-$(rpm -E %fedora).noarch.rpm \
+  https://download1.rpmfusion.org/nonfree/fedora/rpmfusion-nonfree-release-$(rpm -E %fedora).noarch.rpm
 
 PKGS=(
   # Development Tools & Build Dependencies
