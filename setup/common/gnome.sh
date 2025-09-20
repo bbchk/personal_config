@@ -1,3 +1,10 @@
+#!/usr/bin/env bash
+
+set -euo pipefail
+
+# ====================================
+#
+gsettings set org.gnome.desktop.interface enable-animations false
 
 gsettings set org.gnome.desktop.wm.preferences num-workspaces 10
 gsettings set org.gnome.desktop.wm.preferences workspace-names "['1', '2', '3', '4', '5', '6', '7', '8', '9', '10']"
@@ -32,12 +39,8 @@ gsettings set org.gnome.desktop.wm.keybindings toggle-maximized "['<Super>m']"
 # gsettings set org.gnome.settings-daemon.plugins.media-keys email "['']"
 
 #TODO keyd settings
-usermod -aG keyd bchk 
-
-
-
-#
-#
-# ---
+# usermod -aG keyd bchk
 
 gsettings set org.gnome.shell.keybindings show-screenshot-ui "['<Super>p']"
+
+# TODO: set wellbeing options

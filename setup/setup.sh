@@ -21,7 +21,15 @@ validate_choice() {
   return 0
 }
 
+validate_prerequisites() {
+  if [ ! -f "$HOME/pers/password" ]; then
+    echo "ERROR: $HOME/pers/password missing. Please create the file containing password from ansible-vault"
+    exit 1
+  fi
+}
+
 main() {
+  validate_prerequisites
   show_menu
   read -rp "Enter your choice: " choice
 
