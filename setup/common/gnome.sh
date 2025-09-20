@@ -46,3 +46,5 @@ gsettings set org.gnome.shell.keybindings show-screenshot-ui "['<Super>p']"
 # TODO: set wellbeing options
 #
 # TODO: install all extensions programmatically
+#wget https://extensions.gnome.org/extension-data/instantworkspaceswitcheramalantony.net.v10.shell-extension.zip
+# gnome-extensions install <zip>

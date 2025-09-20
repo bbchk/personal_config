@@ -94,29 +94,36 @@ PKGS=(
 echo "Installing packages..."
 sudo dnf install -y "${PKGS[@]}" --skip-unavailable
 
-# OMZ below
-rm -rf "$HOME/.oh-my-zsh"
-# sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
-# git submodule add -f https://github.com/zsh-users/zsh-autosuggestions.git zsh-autosuggestions
-# git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions
-# git submodule add -f https://github.com/zsh-users/zsh-syntax-highlighting.git zsh-syntax-highlighting
-
-cd "$HOME/pers/dotfiles/.oh-my-zsh"
-git submodule update --init --recursive
-cd -
-
 # Docker below
+
 sudo systemctl enable docker
 sudo systemctl start docker
 sudo usermod -aG docker "$USER"
 
 # K8s below
 
-curl -LO "https://dl.k8s.io/release/$(curl -L -s https://dl.k8s.io/release/stable.txt)/bin/linux/amd64/kubectl"
-curl -LO "https://dl.k8s.io/release/$(curl -L -s https://dl.k8s.io/release/stable.txt)/bin/linux/amd64/kubectl.sha256"
-echo "$(cat kubectl.sha256)  kubectl" | sha256sum --check
-sudo install -o root -g root -m 0755 kubectl /usr/local/bin/kubectl
-kubectl version --client
+read -rp "Do you want to install kubectl? (y/n): " response
+if [[ "$response" =~ ^[Yy]$ ]]; then
+  echo "Installing kubectl..."
+
+  # Download kubectl and its sha256 checksum
+  curl -LO "https://dl.k8s.io/release/$(curl -L -s https://dl.k8s.io/release/stable.txt)/bin/linux/amd64/kubectl"
+  curl -LO "https://dl.k8s.io/release/$(curl -L -s https://dl.k8s.io/release/stable.txt)/bin/linux/amd64/kubectl.sha256"
+
+  # Verify the downloaded file's checksum
+  echo "$(cat kubectl.sha256)  kubectl" | sha256sum --check
+
+  # Install kubectl to /usr/local/bin
+  sudo install -o root -g root -m 0755 kubectl /usr/local/bin/kubectl
+
+  # Verify kubectl installation
+  kubectl version --client
+
+  echo "kubectl has been installed successfully."
+
+else
+  echo "Skipping kubectl installation."
+fi
 
 # TODO:I am not sure about krew
 # (
