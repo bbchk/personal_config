@@ -3,8 +3,8 @@
 # ------------------------------
 
 # Path to your oh-my-zsh installation.
-export ZSH="$HOME/.oh-my-zsh"
-export ZSH_CUSTOM="$HOME/pers/dotfiles/.oh-my-zsh/custom"
+export ZSH="$HOME/pers/dotfiles/.oh-my-zsh"
+export ZSH_CUSTOM="$HOME/pers/config/omz"
 
 ZSH_THEME="strug"
 
