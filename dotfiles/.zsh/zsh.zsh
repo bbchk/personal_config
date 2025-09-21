@@ -15,10 +15,12 @@ zstyle ':vcs_info:git:*' formats '[%b]'
 setopt prompt_subst
 setopt histignorespace 
 
+# 155
+# 130
 # Prompt config
-PROMPT='%F{92} ╭─%f%B%F{220}%~%f %F{92}${vcs_info_msg_0_}%f%b
-%F{92} ╰$ %f'
-RPROMPT='%B%F{92}%f%b'
+PROMPT='%F{155} ╭─%f%B%F{227}%~%f %F{155}${vcs_info_msg_0_}%f%b
+%F{155} ╰$ %f'
+RPROMPT='%B%F{155}%f%b'
 
 # ------------------------------
 # end zsh config 

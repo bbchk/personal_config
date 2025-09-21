@@ -7,7 +7,7 @@ done
 kitty_startup_hook() {
     if [[ "$TERM" == "xterm-kitty" && -z "$KITTY_STARTUP_DONE" ]]; then
         export KITTY_STARTUP_DONE=1
-        /home/bchk/pers/scripts/tmux-sessionizer
+        "$HOME/pers/scripts/tmux-sessionizer"
     fi
 }
 
@@ -18,7 +18,7 @@ kitty_startup_hook
 
 # !! Contents within this block are managed by juliaup !!
 
-path=('/home/bohdana/.juliaup/bin' $path)
+path=("$HOME/.juliaup/bin" $path)
 export PATH
 
 # <<< juliaup initialize <<<
