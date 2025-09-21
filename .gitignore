@@ -5,8 +5,6 @@ setup/dotfiles/.config/keepassxc/
 programs/Postman Agent/
 /
 **password
-dotfiles/.oh-my-zsh/*
-!dotfiles/.oh-my-zsh/custom/
 
 **/xdg/Pictures/Screenshots/*
 

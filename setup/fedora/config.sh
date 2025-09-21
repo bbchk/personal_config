@@ -20,6 +20,8 @@ if [[ "$dotfiles_res" =~ ^[Yy]$ ]]; then
 
   # omz config below
 
+
+  git submodule add https://github.com/ohmyzsh/ohmyzsh.git ~/.oh-my-zsh
   cd "$HOME/pers/dotfiles/.oh-my-zsh"
   git submodule update --init --recursive
   cd -

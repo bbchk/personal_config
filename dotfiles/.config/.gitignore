@@ -1,6 +1,7 @@
 .gsd-keyboard.settings-ported
-yelp
-pulse
+yelp/
+go/
+pulse/
 evolution/
 gnome-initial-setup-done
 gtk-3.0/
