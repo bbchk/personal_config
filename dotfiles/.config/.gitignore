@@ -1,5 +1,12 @@
 
 
+.gsd-keyboard.settings-ported
+evolution/
+gnome-initial-setup-done
+gtk-3.0/
+ibus/
+user-dirs.dirs
+user-dirs.locale
 google-chrome
 dconf
 mimeapps.list

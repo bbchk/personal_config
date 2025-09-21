@@ -13,3 +13,6 @@ mv "$HOME/Pictures" "$HOME/pers/xdg/Pictures"
 mv "$HOME/Public" "$HOME/pers/xdg/Public"
 mv "$HOME/Templates" "$HOME/pers/xdg/Templates"
 mv "$HOME/Videos" "$HOME/pers/xdg/Videos"
+
+mv "$HOME/Downloads" "$HOME/downloads"
+

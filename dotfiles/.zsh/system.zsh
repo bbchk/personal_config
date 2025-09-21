@@ -6,7 +6,7 @@ export PATH="/usr/bin:$PATH"
 export LD_LIBRARY_PATH="/usr/lib:$LD_LIBRARY_PATH"
 
 export XDG_DESKTOP_DIR="$HOME/pers/xdg/Desktop"
-export XDG_DOWNLOAD_DIR="$HOME/Downloads"
+export XDG_DOWNLOAD_DIR="$HOME/downloads"
 export XDG_TEMPLATES_DIR="$HOME/pers/xdg/Templates"
 export XDG_PUBLICSHARE_DIR="$HOME/pers/xdg/Public"
 export XDG_DOCUMENTS_DIR="$HOME/pers/xdg/Documents"
