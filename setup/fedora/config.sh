@@ -2,6 +2,8 @@
 
 # set -euo pipefail
 
+git submodule update --init --recursive
+
 # ====================================
 echo -e "\n\n ======= config.sh is starting ======= \n\n"
 
@@ -19,12 +21,6 @@ if [[ "$dotfiles_res" =~ ^[Yy]$ ]]; then
   done
 
   # omz config below
-
-
-  git submodule add https://github.com/ohmyzsh/ohmyzsh.git ~/.oh-my-zsh
-  cd "$HOME/pers/dotfiles/.oh-my-zsh"
-  git submodule update --init --recursive
-  cd -
 fi
 
 # ---- secrets below ---------------------------
@@ -61,3 +57,5 @@ case "$user_image_y_n" in
   sudo busctl call org.freedesktop.Accounts /org/freedesktop/Accounts/User$(id -u) org.freedesktop.Accounts.User SetIconFile s "$default_user_image_path"
   ;;
 esac
+
+# ---- teardown below ---------------------------
