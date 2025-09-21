@@ -45,7 +45,7 @@ main() {
     ;;
   2)
     echo "You selected Fedora."
-    "$HOME/pers/setup/fedora/main.sh" && "$HOME/pers/setup/common/gnome.sh"
+    "$HOME/pers/setup/fedora/main.sh" && "$HOME/pers/setup/common/gnome.sh" && "$HOME/pers/setup/common/filesystem.sh"
     ;;
   3)
     echo "You selected Kubernetes."

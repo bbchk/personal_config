@@ -180,5 +180,5 @@ if [[ "$keyd_res" =~ ^[Yy]$ ]]; then
   sudo cp "$HOME/pers/config/keyd.conf" /etc/keyd/default.conf
   sudo keyd reload
 
-  sudo usermod -aG keyd bchk
+  sudo usermod -aG keyd "$USER"
 fi

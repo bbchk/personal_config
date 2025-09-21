@@ -8,3 +8,5 @@ echo -e "\n\n ======= main.sh is starting ======= \n\n"
 sudo dnf update -y --skip-unavailable --exclude=openh264
 
 "$HOME/pers/setup/fedora/install.sh" && "$HOME/pers/setup/fedora/config.sh"
+
+# TODO: can import vimium setting automatically?

@@ -21,7 +21,7 @@ if [ -f "$temp_file" ]; then
     rm "$temp_file"
 fi
 
-config_file='/home/bchk/pers/secrets/vpn/credentials.cfg'
+config_file="$HOME/pers/secrets/vpn/credentials.cfg"
 sudo openfortivpn "vpn-${region}.internetbrands.com:443" -c "${config_file}" -o "${one_time_password}" &
 disown
 
