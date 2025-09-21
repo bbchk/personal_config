@@ -38,7 +38,7 @@ gset org.gnome.shell.keybindings show-screenshot-ui "['<Super>p']"
 
 gset org.gnome.desktop.screen-time-limits daily-limit-enabled "true"
 gset org.gnome.desktop.screen-time-limits daily-limit-seconds "uint32 28800"
-gset org.gnome.desktop.screen-time-limits grayscale "true"
+gset org.gnome.desktop.screen-time-limits grayscale "false"
 gset org.gnome.desktop.screen-time-limits history-enabled "true"
 
 gset org.gnome.desktop.break-reminders selected-breaks "['eyesight']"
@@ -51,10 +51,30 @@ gset org.gnome.desktop.break-reminders.eyesight lock-screen "false"
 gset org.gnome.desktop.break-reminders.eyesight notify "true"
 gset org.gnome.desktop.break-reminders.eyesight notify-overdue "true"
 gset org.gnome.desktop.break-reminders.eyesight notify-upcoming "false"
-gset org.gnome.desktop.break-reminders.eyesight play-sound "true"
+gset org.gnome.desktop.break-reminders.eyesight play-sound "false"
 
 # ---- Extensions below -------------------------------
 
-# TODO: install all extensions programmatically
-#wget https://extensions.gnome.org/extension-data/instantworkspaceswitcheramalantony.net.v10.shell-extension.zip
-# gnome-extensions install <zip>
+read -rp "Do you want to install gnome extensions? (y/n)" extensions_y_n
+case "$extensions_y_n" in
+[Yy]*)
+  flatpak install flathub org.gnome.Extensions
+  # flatpak run org.gnome.Extensions
+
+  extensions=(
+    "https://extensions.gnome.org/extension-data/just-perfection-desktopjust-perfection.v35.shell-extension.zip"
+    "https://extensions.gnome.org/extension-data/instantworkspaceswitcheramalantony.net.v10.shell-extension.zip"
+    "https://extensions.gnome.org/extension-data/VitalsCoreCoding.com.v73.shell-extension.zip"
+    "https://extensions.gnome.org/extension-data/bluetooth-quick-connectbjarosze.gmail.com.v53.shell-extension.zip"
+  )
+
+  # Loop through each URL
+  for url in "${extensions[@]}"; do
+    filename=$(basename "$url")
+
+    wget -P /tmp "$url"
+    gnome-extensions install --force "/tmp/$filename"
+    rm "/tmp/$filename"
+  done
+  ;;
+esac
