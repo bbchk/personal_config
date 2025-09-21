@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 # Find the directory to work with
-session=$(find ~ ~/dev -mindepth 1 -maxdepth 1 -type d ! -name '.*' | fzf --height=25 --border --delimiter='/' --with-nth='4..' --prompt="Select workdir: ")
+session=$(find ~ ~/dev -mindepth 1 -maxdepth 1 -type d ! -name '.*' | fzf --height=25 --border --delimiter='/' --with-nth='4..' --prompt="Workdir?: ")
 session_name=$(basename "$session" | tr . _)
 
 # Check if the tmux server is running

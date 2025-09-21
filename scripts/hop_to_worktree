@@ -55,7 +55,7 @@ hop_to_interactive() {
     return 0
   fi
 
-  tree=$(echo "${trees}" | fzf --height=15 --border --delimiter='/' --with-nth='4..' --prompt="Select worktree: ")
+  tree=$(echo "${trees}" | fzf --height=15 --border --delimiter='/' --with-nth='4..' --prompt="Worktree?: ")
 
   if [[ -n "${tree}" ]]; then
     cd "${tree}" || {
