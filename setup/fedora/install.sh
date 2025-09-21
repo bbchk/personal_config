@@ -99,7 +99,9 @@ sudo dnf install -y "${PKGS[@]}" --skip-unavailable
 sudo systemctl enable docker
 sudo systemctl start docker
 sudo usermod -aG docker "$USER"
-# TODO: copy deamon.json to it's locations
+
+sudo mkdir -p /etc/docker
+sudo cp "$HOME/pers/config/deamon.json" /etc/docker/deamon.json
 
 # K8s below
 

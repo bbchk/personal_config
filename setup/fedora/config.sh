@@ -48,3 +48,14 @@ if [[ "$networking_res" =~ ^[Yy]$ ]]; then
   read -rp "Enter static hostname: " static_hostname
   sudo hostnamectl set-hostname --static "$static_hostname"
 fi
+
+# ---- personalization below ---------------------------
+
+read -rp "Do you set default user image? (y/n): " user_image_y_n
+case "$user_image_y_n" in
+[Yy]*)
+  default_user_image_path="$HOME/pers/xdg/Pictures/default/sun-with-face.png"
+  magick "$default_user_image_path" -resize 512x512 -gravity center -extent 512x512 "$default_user_image_path"
+  sudo busctl call org.freedesktop.Accounts /org/freedesktop/Accounts/User$(id -u) org.freedesktop.Accounts.User SetIconFile s "$default_user_image_path"
+  ;;
+esac

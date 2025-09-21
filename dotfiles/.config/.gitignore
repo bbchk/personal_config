@@ -1,10 +1,11 @@
-
-
 .gsd-keyboard.settings-ported
 evolution/
 gnome-initial-setup-done
 gtk-3.0/
 ibus/
+
 google-chrome
+!google-chrome/Default/Extensions/Sync Extension Settings/dbepggeogbaibhgnhhndojpepiihcmeb
+
 dconf
 mimeapps.list
