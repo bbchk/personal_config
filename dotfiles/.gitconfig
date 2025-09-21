@@ -19,14 +19,32 @@
 [pager]
 	branch = false
 [color]
-  diff = auto
+  diff = 34
   status = auto
   branch = auto
   interactive = auto
   ui = true
   pager = true
 [color "branch"]
-  remote = yellow
+  remote = 89
+  current = 214
+  local = white
+[color "diff"]
+    new = 155
+    old = 124 
+    meta = 214
+    frag = 214 
+    whitespace = reverse
+[color "status"]
+    added = 155
+    changed = 124
+    untracked = 124
+    branch = white
+; [color "interactive"]
+;   header = "yellow bold"
+;   prompt = "green"
+;   selector = "cyan bold"
+
 [status]
 	hints = false
 [advice]

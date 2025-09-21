@@ -16,7 +16,7 @@ setopt prompt_subst
 setopt histignorespace 
 
 # Prompt config
-PROMPT='%F{155} ╭─%f%B%F{227}%~%f %F{155}${vcs_info_msg_0_}%f%b
+PROMPT='%F{155} ╭─%f%B%F{227}%~%f %F{214}${vcs_info_msg_0_}%f%b
 %F{155} ╰$ %f'
 RPROMPT='%B%F{155}%f%b'
 
