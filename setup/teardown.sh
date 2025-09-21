@@ -8,7 +8,7 @@ git remote remove origin
 git remote add origin git@github.com:bbchk/personal_config.git
 git config core.hooksPath .githooks
 
+xdg-user-dirs-update
+
 chsh -s "$(which zsh)"
 gnome-session-quit --logout
-
-xdg-user-dirs-update

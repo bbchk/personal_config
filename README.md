@@ -52,3 +52,10 @@ TODO: learn jq and learn to copy into clipboard programmatically its output
 <!-- vimium -->
 
 - on t, in vimum's omnibar it would be beneficial to give glimpse of how page looks like in small window, it would allow jump faster
+
+change red and green on omz you should use
+
+╭─~/pers [main]
+╰$ sfdhfsdfhjdc
+╭─~/pers [main]
+╰$ echo
