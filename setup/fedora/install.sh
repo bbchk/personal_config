@@ -101,7 +101,7 @@ sudo systemctl start docker
 sudo usermod -aG docker "$USER"
 
 sudo mkdir -p /etc/docker
-sudo cp "$HOME/pers/config/deamon.json" /etc/docker/deamon.json
+sudo ln -sf "$HOME/pers/config/deamon.json" /etc/docker/deamon.json
 
 # K8s below
 

@@ -23,6 +23,18 @@ keymap("i", "jk", "<ESC>") -- Exit insert mode
 keymap("n", "<leader>ww", "<CMD>write<CR>") -- Format and Save
 keymap("n", "<leader>w", "<CMD>noautocmd write<CR>") -- Save with no formatting
 
+-- -- Define a user command to remove trailing whitespace
+-- vim.api.nvim_create_user_command('RemoveTrailingWhitespace', function()
+--   local view = vim.fn.getcurpos()
+--   vim.cmd.keepjumps([[
+--     %s/\s\+$//e
+--   ]])
+--   vim.fn.setpos('.', view)
+-- end, {})
+--
+-- -- Keymap to save without formatting and remove trailing whitespace
+-- vim.keymap.set("n", "<leader>w", ":RemoveTrailingWhitespace | noautocmd write<CR>")
+
 ----- Windows ------
 ----- Window Creation
 keymap("n", "<leader>v", "<CMD>vsplit<CR>")

@@ -7,8 +7,23 @@ return {
 	config = function()
 		require("telescope").setup({
 			defaults = {
+				layout_strategy = "horizontal",
+				layout_config = {
+					height = 0.95,
+					width = 0.95,
+					preview_width = 0.50,
+					anchor = center,
+					prompt_position = bottom,
+					mirror = true,
+				},
 				file_ignore_patterns = { "node_modules/" },
 				hidden = true,
+				mappings = {
+					i = {
+						-- To enable clear out input like in shell
+						["<C-u>"] = false,
+					},
+				},
 			},
 			extensions = {
 				fzf = {

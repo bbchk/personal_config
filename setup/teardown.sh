@@ -10,3 +10,5 @@ git config core.hooksPath .githooks
 
 chsh -s "$(which zsh)"
 gnome-session-quit --logout
+
+xdg-user-dirs-update

@@ -4,6 +4,15 @@
 
 HISTFILE="${HOME}/pers/secrets/.zsh_history"
 
+HISTSIZE=100000
+SAVEHIST=100000
+
+# History-related options
+setopt SHARE_HISTORY
+setopt INC_APPEND_HISTORY
+setopt HIST_IGNORE_DUPS
+setopt HIST_IGNORE_ALL_DUPS
+
 export PATH="$HOME/.symfony5/bin:$PATH"
 export JAVA_HOME="/usr/lib/jvm/java-17-openjdk-amd64"
 export PATH=$JAVA_HOME/bin:$PATH

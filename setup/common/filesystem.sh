@@ -4,7 +4,7 @@ set -euo pipefail
 
 # ====================================
 
-mkdir -p "$HOME/dev"
+# Create new xdg directories
 
 mv "$HOME/Desktop" "$HOME/pers/xdg/Desktop"
 mv "$HOME/Documents" "$HOME/pers/xdg/Documents"
@@ -15,4 +15,7 @@ mv "$HOME/Templates" "$HOME/pers/xdg/Templates"
 mv "$HOME/Videos" "$HOME/pers/xdg/Videos"
 mv "$HOME/Downloads" "$HOME/downloads"
 
-xdg-user-dirs-update
+# Clone frequently worked on projects
+
+mkdir -p "$HOME/dev"
+git clone git@github.com:bbchk/jv-fr.git "$HOME/dev/jv-fr"
