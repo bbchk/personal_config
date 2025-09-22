@@ -4,8 +4,8 @@
 
 # ====================================
 
-git remote remove origin
-git remote add origin git@github.com:bbchk/personal_config.git
+git remote add origin-ssh git@github.com:bbchk/personal_config.git
+
 git config core.hooksPath .githooks
 
 xdg-user-dirs-update
