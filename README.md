@@ -18,6 +18,13 @@
 <!-- - neovim terminal -->
 <!-- ctrl + f in zsh => open nvim with telescope activated -->
 <!-- dual-boot windows and create windows dev config -->
+<!-- - I need git delta to review the diff locally efficiently. but as seperate command, other that git diff -->
+<!-- - speed up new zsh shell creation? -->
+<!-- switch panes in tmux via just numbers in normal mode of nvim? that would be so much easier maybe we get rid of tmux -->
+<!-- - Learn how to use harpoon -->
+
+<!-- TODO: P1 -->
+<!-- - keybindings to open nvim in new tmux pane or open zsh in new tmux panem (ctrl+b is too slow, same time don't remap ctrl+b to keep it as standart) -->
 
 ## todo
 
@@ -37,25 +44,9 @@ TODO: learn jq and learn to copy into clipboard programmatically its output
 
 <!-- limit your search to the certain site, e.g. adding site:stackoverflow.com to your search phrase will limit the search to this site, or site:reddit.com inurl:/r/php to even a single subreddit! -->
 
-- Learn how to use harpoon
 - How to use GIT worktrees!
 
 <!-- TODO: QoL: -->
 
-- switch panes in tmux via just numbers in normal mode of nvim? that would be so much easier
 - I need to optimize my keybindings in nvim (telescope) and tmux (workplaces switch)
 - I don't want to presss space all the time in normal mode! we need to define diffrent leader. normal mode specifically for actions. make single leader key in both zsh and nvim
-- keybindings to open nvim in new tmux pane or open zsh in new tmux panem (ctrl+b is too slow, same time don't remap ctrl+b to keep it as standart)
-- speed up new zsh shell creation
-- I need git delta to review the diff locally efficiently.
-
-<!-- vimium -->
-
-- on t, in vimum's omnibar it would be beneficial to give glimpse of how page looks like in small window, it would allow jump faster
-
-change red and green on omz you should use
-
-╭─~/pers [main]
-╰$ sfdhfsdfhjdc
-╭─~/pers [main]
-╰$ echo

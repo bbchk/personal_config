@@ -18,6 +18,7 @@ PKGS=(
   cmake
   pkgconf-pkg-config
   git
+  git-delta
   maven
   golang
   julia
