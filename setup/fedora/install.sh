@@ -36,6 +36,9 @@ PKGS=(
   libssh2-devel
   libgit2-devel
   ruby-devel
+  @virtualization
+  virt-manager
+  virt-viewer
 
   # Programming Languages & Runtimes
   python3-venv
@@ -87,6 +90,7 @@ PKGS=(
 
   # Mobile Development
   android-tools
+  scrcpy
 
   # Fonts
   fira-code-fonts
