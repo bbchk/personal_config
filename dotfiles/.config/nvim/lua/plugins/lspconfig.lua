@@ -14,12 +14,16 @@ return {
 --     return require'lspconfig'.util.root_pattern('pom.xml', 'build.gradle', '.git')(fname)
 --   end
 -- }
+ 
+-- The `require('lspconfig')` "framework" is deprecated, use vim.lsp.config (see :help lspconfig-nvim-0.11) instead.
+-- Feature will be removed in nvim-lspconfig v3.0.0
+-- Press ENTER or type command to continue
 
 		-- Setup mason first
 		require("mason").setup()
 		require("mason-lspconfig").setup()
 
-		local lspconfig = require("lspconfig")
+		local lspconfig = vim.lsp.config
 		local protocol = require("vim.lsp.protocol")
 
 		local on_attach = function(client, bufnr)
