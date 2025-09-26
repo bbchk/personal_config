@@ -37,8 +37,6 @@
 
 ### TODO: tmux:
 
-- make tmux open same worktree in new pane, when git worktrees are used
-
 ### TODO: to learn:
 
 <!-- limit your search to the certain site, e.g. adding site:stackoverflow.com to your search phrase will limit the search to this site, or site:reddit.com inurl:/r/php to even a single subreddit! -->
@@ -51,4 +49,4 @@
 - I don't want to presss space all the time in normal mode! we need to define diffrent leader. normal mode specifically for actions. make single leader key in both zsh and nvim
 
 - make it so when CI_COOMIT file closed, run git status
-hotkeys for the most frequetn git commands
+- hotkeys for the most frequetn git commands
