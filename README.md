@@ -50,5 +50,4 @@
 - I need to optimize my keybindings in nvim (telescope) and tmux (workplaces switch)
 - I don't want to presss space all the time in normal mode! we need to define diffrent leader. normal mode specifically for actions. make single leader key in both zsh and nvim
 
-
-- I want to include in commit only those secrets that were commited 
+<!-- - I want to include in commit only those secrets that were commited  -->
