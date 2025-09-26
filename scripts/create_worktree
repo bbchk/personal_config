@@ -1,13 +1,5 @@
 #!/usr/bin/env bash
 
-set -e
-
-if ! git rev-parse --git-dir > /dev/null 2>&1; then
-    echo "Error: Not in a git repository" >&2
-    exit 1
-fi
-
-# Get all git references
 get_all_refs() {
     {
         git for-each-ref refs/heads/ --format='%(refname:short)|branch'
@@ -17,44 +9,46 @@ get_all_refs() {
 }
 
 main() {
-    local selected_ref
-    selected_ref=$(get_all_refs | fzf --height=15 --border)
-    
+    if ! git rev-parse --git-dir > /dev/null 2>&1; then
+        echo "Error: Not in a git repository" >&2
+        return 1
+    fi
+
+    mapfile -t all_refs < <(get_all_refs)
+    all_refs+=("NEW|branch" "NEW|tag")
+
+    local selected_ref=$(all_refs | fzf --height=15 --border)
+
     if [[ -z "$selected_ref" ]]; then
         echo "Operation cancelled"
-        exit 0
+        return 0
+    else if [[ "$selected_ref" -eq "NEW_TAG|NEW_BRANCH" ]]; then
+        echo "Operation new is invoked. WIP"
+        # create_worktree TODO
     fi
-    
-    local ref_name
-    ref_name=$(echo "$selected_ref" | cut -d'|' -f1)
-    local ref_type
-    ref_type=$(echo "$selected_ref" | cut -d'|' -f2)
-    
-    local git_common_dir
-    git_common_dir=$(git rev-parse --git-common-dir)
-#
-    # Generate worktree path
-    local worktree_path
-    worktree_path="${git_common_dir}/wks/$(basename "$ref_name" | sed 's/[^a-zA-Z0-9._-]/-/g')"
-    
-    # Check if path exists
-    if [[ -e "$worktree_path" ]]; then
-        echo "Error: Path '$worktree_path' already exists"
-        exit 1
+
+    local ref_type=$(echo "$selected_ref" | cut -d'|' -f2)
+    local ref_name=$(echo "$selected_ref" | cut -d'|' -f1)
+
+    local git_common_dir=$(git rev-parse --git-common-dir)
+
+    local worktree_name="${ref_type}-$(sed 's/\//_/g; s/[^a-zA-Z0-9._-]/-/g' <<< ${ref_name})"
+    local absolute_worktree_path="${git_common_dir}/wk/${worktree_name}"
+
+    if [[ -e "$absolute_worktree_path" ]]; then
+        echo "Error: Path '$absolute_worktree_path' already exists"
+        return 1
     fi
-    
-    # Create worktree based on type
+
     case "$ref_type" in
         "branch")
-            git worktree add "$worktree_path" "$ref_name"
+            git worktree add "$absolute_worktree_path" "$ref_name"
             ;;
         "remote")
-            local branch_name
-            branch_name=$(basename "$ref_name")
-            git worktree add "$worktree_path" -b "$branch_name" "$ref_name"
+            git worktree add "$absolute_worktree_path" -b "$ref_name" "$ref_name"
             ;;
         "tag")
-            git worktree add "$worktree_path" "$ref_name"
+            git worktree add "$absolute_worktree_path" "$ref_name"
             ;;
     esac
 }
