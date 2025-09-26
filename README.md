@@ -40,8 +40,6 @@
 
 ### TODO: to learn:
 
-TODO: learn jq and learn to copy into clipboard programmatically its output
-
 <!-- limit your search to the certain site, e.g. adding site:stackoverflow.com to your search phrase will limit the search to this site, or site:reddit.com inurl:/r/php to even a single subreddit! -->
 
 - How to use GIT worktrees!

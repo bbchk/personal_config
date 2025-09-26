@@ -19,7 +19,9 @@ return {
 		local cmp = require("cmp")
 		local lspkind = require("lspkind")
 		local luasnip = require("luasnip")
-		local lspconfig = require("lspconfig")
+
+		local lspconfig = vim.lsp.config 
+
 		local cmp_nvim_lsp = require("cmp_nvim_lsp")
 
 		-- Setup for LuaSnip
@@ -57,9 +59,9 @@ return {
 		local capabilities = cmp_nvim_lsp.default_capabilities()
 
 		-- HTML LSP setup
-		lspconfig.html.setup({
-			capabilities = capabilities,
-		})
+		-- lspconfig.setup({
+		-- 	capabilities = capabilities,
+		-- })
 
 		-- (Optional) Other LSP servers can be set up here
 		-- lspconfig.tsserver.setup({
