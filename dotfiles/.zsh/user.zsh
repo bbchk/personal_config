@@ -56,6 +56,10 @@ bindkey -s '^p' '^uconnect_vpn\n'
 bindkey -s '^h' '^u. hop_to_worktree\n'
 bindkey -s '^k' '^ucreate_worktree\n' 
 
+bindkey -s '^a' '^ugit add .\n' 
+bindkey -s '^s' '^ugit status\n' 
+
+
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
 if [[ ! "$PATH" == */home/bchk/.fzf/bin* ]]; then

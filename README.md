@@ -37,8 +37,7 @@
 
 ### TODO: tmux:
 
-- make tmux pane name display name of the folder or file we are in nvim
-- make it so every pane in tmux would be named after file name
+- make tmux open same worktree in new pane, when git worktrees are used
 
 ### TODO: to learn:
 
@@ -50,4 +49,6 @@
 
 - I need to optimize my keybindings in nvim (telescope) and tmux (workplaces switch)
 - I don't want to presss space all the time in normal mode! we need to define diffrent leader. normal mode specifically for actions. make single leader key in both zsh and nvim
-hello
+
+- make it so when CI_COOMIT file closed, run git status
+hotkeys for the most frequetn git commands
