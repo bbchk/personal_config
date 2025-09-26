@@ -14,17 +14,26 @@ main() {
         return 1
     fi
 
-    mapfile -t all_refs < <(get_all_refs)
+    local all_refs_output=$(get_all_refs)
+    local all_refs=()
+
+    # Read into array using a while loop (portable)
+    while IFS= read -r line; do
+        all_refs+=("$line")
+    done <<< "$all_refs_output"
+
+    # Add the NEW options
     all_refs+=("NEW|branch" "NEW|tag")
 
-    local selected_ref=$(all_refs | fzf --height=15 --border)
+    local selected_ref=$(printf '%s\n' "${all_refs[@]}" | fzf --height=15 --border)
 
     if [[ -z "$selected_ref" ]]; then
         echo "Operation cancelled"
         return 0
-    else if [[ "$selected_ref" -eq "NEW_TAG|NEW_BRANCH" ]]; then
+    elif [[ "$selected_ref" == "NEW|branch" ]] || [[ "$selected_ref" == "NEW|tag" ]]; then
         echo "Operation new is invoked. WIP"
         # create_worktree TODO
+        return 0
     fi
 
     local ref_type=$(echo "$selected_ref" | cut -d'|' -f2)
@@ -32,7 +41,7 @@ main() {
 
     local git_common_dir=$(git rev-parse --git-common-dir)
 
-    local worktree_name="${ref_type}-$(sed 's/\//_/g; s/[^a-zA-Z0-9._-]/-/g' <<< ${ref_name})"
+    local worktree_name="${ref_type}-$(sed 's/\//_/g; s/[^a-zA-Z0-9._-]/-/g' <<< "${ref_name}")"
     local absolute_worktree_path="${git_common_dir}/wk/${worktree_name}"
 
     if [[ -e "$absolute_worktree_path" ]]; then
@@ -42,13 +51,16 @@ main() {
 
     case "$ref_type" in
         "branch")
-            git worktree add "$absolute_worktree_path" "$ref_name"
+            git worktree add "$absolute_worktree_path" "${ref_name}"
             ;;
         "remote")
-            git worktree add "$absolute_worktree_path" -b "$ref_name" "$ref_name"
+            # local branch_name=$(echo "$ref_name" | sed 's/.*\///')
+            # git worktree add "$absolute_worktree_path" -b "$branch_name" "$ref_name"
+            #
+            # git worktree add "$absolute_worktree_path" -b "${ref_name}" "${ref_name}"
             ;;
         "tag")
-            git worktree add "$absolute_worktree_path" "$ref_name"
+            git worktree add "$absolute_worktree_path" "${ref_name}"
             ;;
     esac
 }
