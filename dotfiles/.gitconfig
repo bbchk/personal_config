@@ -5,6 +5,9 @@
 	defaultbranch = main
 [pull]
 	rebase = true
+[diff]
+  wsErrorHighlight = all
+  renames = true
 [core]
 	editor = nvim
   ; pager = delta

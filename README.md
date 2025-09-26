@@ -32,7 +32,8 @@
 
 
 - I need to learn how to use debuggers in nvim !
-- make no formatting save in nvim remove whitespaces in the end of file
+- make no formatting save in nvim remove whitespaces in the end of file | how to w or ww only the selected area?
+- research other usefull configurations for .gitconfig that make default git tools better not to install anything third-party 
 
 ### TODO: tmux:
 
