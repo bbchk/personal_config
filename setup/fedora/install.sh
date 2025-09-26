@@ -47,6 +47,7 @@ PKGS=(
   # System Administration & DevOps
   ansible
   docker
+  docker-compose
   ShellCheck
 
   # Text Editors & Development Environment
