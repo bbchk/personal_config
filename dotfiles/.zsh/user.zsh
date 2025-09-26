@@ -1,5 +1,5 @@
 # ------------------------------
-# user configuration 
+# user configuration
 # ------------------------------
 
 HISTFILE="${HOME}/pers/secrets/.zsh_history"
@@ -46,18 +46,21 @@ else
   export MANPAGER="nvim +Man!!"
 fi
 
-# keybindings 
+# keybindings
 bindkey -s '^f' '^utmux-sessionizer\n'
-# bindkey -s '^h' '^ucheat-sheet-tmux-integration\n' 
+# bindkey -s '^h' '^ucheat-sheet-tmux-integration\n'
 
-bindkey -s '^n' '^unvim .\n' 
-bindkey -s '^p' '^uconnect_vpn\n' 
+bindkey -s '^n' '^unvim .\n'
+bindkey -s '^p' '^uconnect_vpn\n'
 
 bindkey -s '^h' '^u. hop_to_worktree\n'
-bindkey -s '^k' '^ucreate_worktree\n' 
+bindkey -s '^k' '^u. create_worktree\n'
 
-bindkey -s '^a' '^ugit add .\n' 
-bindkey -s '^s' '^ugit status\n' 
+# bindkey -s '^m' '^u. create_new_branch_in_worktree\n'
+# bindkey -s '^k' '^u detach_to_commit_in_worktree\n'
+
+bindkey -s '^a' '^ugit add .\n'
+bindkey -s '^s' '^ugit status\n'
 
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
@@ -73,5 +76,5 @@ source <(kubectl completion zsh)
 export PATH="$HOME/pers/scripts:$PATH"
 
 # ------------------------------
-# end user configuration 
+# end user configuration
 # ------------------------------
