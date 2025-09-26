@@ -2,14 +2,46 @@
 
 set -euo pipefail
 
-PASSWORD_FILE="password"
+# ====================================
+#
+# TODO: if there are no files to encrypt or decrypt, we don't need password file and skip hooks altogether
 
-FILES_TO_ENCRYPT=($(find secrets/ -type f))
+main() {
+  echo "======= pre-commit started ======="
 
-echo "=== ENCRYPTION =========================="
+  FILES_TO_ENCRYPT=($(git diff --name-only --cached -- secrets/))
 
-ansible-vault encrypt --vault-password-file "${PASSWORD_FILE}" -- "${FILES_TO_ENCRYPT[@]}"
+  if [ "${#FILES_TO_ENCRYPT[@]}" -eq 0 ]; then
+    echo "No secrets added to commit."
 
-git add "${FILES_TO_ENCRYPT[@]}"
+    echo "Skipping pre-commit hook encryption"
 
-echo -e "\n"
+  else
+
+    PASSWORD_FILE="$HOME/pers/password"
+    if [ ! -s "${PASSWORD_FILE}" ]; then
+      echo "${PASSWORD_FILE} missing. Created now."
+      echo "Enter correct password in the file and try again"
+      touch "${PASSWORD_FILE}" && chmod 600 "${PASSWORD_FILE}"
+      exit 1
+    fi
+
+    echo "Files to be encrypted:"
+    for file in "${FILES_TO_ENCRYPT[@]}"; do
+      echo "  - $file"
+    done
+
+    echo "Encryption..."
+    ansible-vault encrypt --vault-password-file "${PASSWORD_FILE}" -- "${FILES_TO_ENCRYPT[@]}"
+
+    echo "Re-adding to index..."
+    for file in "${FILES_TO_ENCRYPT[@]}"; do
+      git add "$file"
+    done
+  fi
+
+  echo -e "======= pre-commit finished =======\n"
+
+}
+
+main

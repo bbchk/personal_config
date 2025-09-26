@@ -2,15 +2,41 @@
 
 set -euo pipefail
 
-PASSWORD_FILE="password"
+# ====================================
 
-# ask user if he wants to shred it
-# trap 'shred -u -n 5 "${PASSWORD_FILE}"' EXIT SIGINT SIGTERM
+main() {
+  echo "======= post-commit started ======="
 
-FILES_TO_DECRYPT=($(find secrets/ -type f))
+  FILES_TO_DECRYPT=($(git show --name-only --oneline HEAD -- secrets/ | sed '1d'))
 
-echo "=== DECRYPTION =========================="
+  if [ "${#FILES_TO_DECRYPT[@]}" -eq 0 ]; then
 
-ansible-vault decrypt --vault-password-file "${PASSWORD_FILE}" -- "${FILES_TO_DECRYPT[@]}"
+    echo "No secrets added to commit."
+    echo "Skipping post-commit hook decryption"
 
-echo -e "\n"
+  else
+
+    PASSWORD_FILE="$HOME/pers/password"
+    if [ ! -s "${PASSWORD_FILE}" ]; then
+      echo "${PASSWORD_FILE} missing. Created now."
+      echo "Enter correct password in the file and try again"
+      touch "${PASSWORD_FILE}" && chmod 600 "${PASSWORD_FILE}"
+      exit 1
+    fi
+
+    echo "Files to be decrypted:"
+    for file in "${FILES_TO_DECRYPT[@]}"; do
+        echo "  - $file"
+    done
+
+    echo "Decryption..."
+    ansible-vault decrypt --vault-password-file "${PASSWORD_FILE}" -- "${FILES_TO_DECRYPT[@]}"
+
+    trap 'shred -u -n 5 "${PASSWORD_FILE}"' EXIT SIGINT SIGTERM
+
+  fi
+
+  echo -e "======= post-commit finished =======\n"
+}
+
+main
