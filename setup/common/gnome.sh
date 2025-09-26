@@ -59,7 +59,8 @@ read -rp "Do you want to install gnome extensions? (y/n)" extensions_y_n
 case "$extensions_y_n" in
 [Yy]*)
   flatpak install flathub org.gnome.Extensions
-  # flatpak run org.gnome.Extensions
+
+  gnome-extensions enable launch-new-instance@gnome-shell-extensions.gcampax.github.com
 
   extensions=(
     "https://extensions.gnome.org/extension-data/just-perfection-desktopjust-perfection.v35.shell-extension.zip"
