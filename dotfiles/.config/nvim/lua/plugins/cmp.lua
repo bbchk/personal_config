@@ -19,7 +19,7 @@ return {
 		local cmp = require("cmp")
 		local lspkind = require("lspkind")
 		local luasnip = require("luasnip")
-		local lspconfig = vim.lsp.config
+		local lspconfig = require("lspconfig")
 		local cmp_nvim_lsp = require("cmp_nvim_lsp")
 
 		-- Setup for LuaSnip
