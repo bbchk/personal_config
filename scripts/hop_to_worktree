@@ -1,62 +1,12 @@
 #!/usr/bin/env bash
 
 main() {
-  local ref_name="$1"
-
   if ! git rev-parse --is-inside-work-tree >/dev/null 2>&1; then
     echo "Error: Not in a git repository" >&2
     return 1
   fi
 
-  if [[ -n "${ref_name:-}" ]]; then
-    hop_to "${ref_name}"
-  else
-    # Display all worktrees with fzf if user hasn't provided input
-    hop_to_inter
-  fi
-}
-
-hop_to() {
-  local ref_name="$1"
-  local path
-
-  path=$(
-    git worktree list --porcelain | awk -v ref="$ref_name" '
-        /^worktree / { path = $2 }
-        /^branch / && $2 == "refs/heads/" ref { print path; exit }
-        /^detached / && $2 == ref { print path; exit }
-    '
-  )
-
-  # If not found by exact match, try to find by tag
-  if [[ -z "${path}" ]]; then
-    local tag_commit
-    tag_commit=$(git rev-parse --verify "refs/tags/${ref_name}" 2>/dev/null)
-
-    if [[ -n "${tag_commit}" ]]; then
-      path=$(
-        git worktree list --porcelain | awk -v commit="$tag_commit" '
-            /^worktree / { path = $2 }
-            /^HEAD / && $2 == commit { print path; exit }
-        '
-      )
-    fi
-  fi
-
-  if [[ -z "${path}" ]]; then
-    echo "Error: No worktree found for branch or tag '${ref_name}'" >&2
-    return 1
-  fi
-
-  if [[ ! -d "${path}" ]]; then
-    echo "Error: Worktree path '${path}' does not exist" >&2
-    return 1
-  fi
-
-  cd "${path}" || {
-    echo "Error: Failed to change to directory '${path}'" >&2
-    return 1
-  }
+  hop_to_inter
 }
 
 hop_to_inter() {

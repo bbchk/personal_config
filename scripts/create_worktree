@@ -1,8 +1,8 @@
 #!/usr/bin/env bash
 # shellcheck disable=SC2155
 
-SCRIPT_DIR=$(dirname "$(realpath "$0")")
-source "$SCRIPT_DIR/utils"
+source "$HOME/pers/scripts/utils"
+source "$HOME/pers/scripts/hop_to_worktree"
 
 get_all_refs() {
   {
@@ -85,6 +85,8 @@ main() {
     git worktree add "$absolute_worktree_path" -b "$ref_name" HEAD
     ;;
   esac
+
+  cd "${absolute_worktree_path}" || log "cd failed"
 }
 
 main "$@"
