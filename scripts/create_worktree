@@ -32,7 +32,20 @@ main() {
         return 0
     elif [[ "$selected_ref" == "NEW|branch" ]] || [[ "$selected_ref" == "NEW|tag" ]]; then
         echo "Operation new is invoked. WIP"
-        # create_worktree TODO
+
+        local branch_name
+        branch_name=$(printf '' | fzf --print-query --height=3 --border --prompt="New branch name: " | head -n1)
+
+        if [[ -z "$branch_name" ]]; then
+            echo "Operation cancelled"
+            return 0
+        fi
+
+        local git_common_dir=$(git rev-parse --git-common-dir)
+        local worktree_name="branch-$(sed 's/\//_/g; s/[^a-zA-Z0-9._-]/-/g' <<< "${branch_name}")"
+        local absolute_worktree_path="${git_common_dir}/wk/${worktree_name}"
+
+        git worktree add -b "$branch_name" "$absolute_worktree_path" HEAD
         return 0
     fi
 
