@@ -43,7 +43,9 @@ return {
 				"shfmt",         -- Shell script formatter (bash, mksh, POSIX shell)
         "black",
         "isort",
-        "rubocop"
+        "rubocop",
+        "php-debug-adapter",
+        "js-debug-adapter",
 			},
 		})
 	end,

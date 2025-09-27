@@ -20,8 +20,56 @@ keymap("n", "<leader>q", "<CMD>q!<CR>") -- Quit
 -- Create shorctut for not saving, but default leader q should save
 -- keymap("n", "<leader>q", "<CMD>q!<CR>") --
 keymap("i", "jk", "<ESC>") -- Exit insert mode
+keymap("i", "ол", "<ESC>") -- Exit insert mode
+
+keymap("n", "ш", "i")
+
 keymap("n", "<leader>ww", "<CMD>write<CR>") -- Format and Save
 keymap("n", "<leader>w", "<CMD>noautocmd write<CR>") -- Save with no formatting
+
+keymap("n", "<leader>ц", "<CMD>noautocmd write<CR>") -- Save with no formatting
+
+-- Normal Mode Keymaps with Ukrainian Letters
+-- Based on shared keyboard button (e.g., 'a' and 'ф' are on the same key)
+-- Note: This is a partial list for demonstration purposes.
+
+-- 'ф' (on the 'a' key) for "виділити все" (select all)
+keymap("n", "ф", "ggVG")
+
+-- -- 'і' (on the 's' key) for "зберегти" (save)
+-- keymap("n", "і", ":w<CR>")
+
+-- 'в' (on the 'd' key) for "видалити" (delete line)
+keymap("n", "в", "dd")
+
+-- 'у' (on the 'g' key) for "шукати" (global search)
+-- keymap("n", "у", ":%s//g<Left><Left>")
+
+-- 'й' (on the 'q' key) for "вийти" (quit)
+-- keymap("n", "й", ":qa<CR>")
+
+-- 'ц' (on the 'w' key) for "наступне слово" (next word)
+keymap("n", "ц", "w")
+
+-- 'т' (on the 'e' key) for "кінець слова" (end of word)
+keymap("n", "т", "e")
+keymap("n", "и", "b")
+
+-- 'н' (on the 'n' key) for "наступний збіг" (next match)
+keymap("n", "н", "n")
+
+-- 'о' (on the 'o' key) for "новий рядок знизу" (new line below)
+keymap("n", "щ", "o")
+
+-- 'к' (on the 'r' key) for "замінити" (replace character)
+keymap("n", "к", "r")
+
+-- 'л' (on the 'l' key) for "рух праворуч" (move right)
+keymap("n", "д", "l")
+keymap("n", "л", "k")
+keymap("n", "ш", "i")
+keymap("n", "о", "j")
+keymap("n", "р", "h")
 
 -- vim.api.nvim_create_user_command('RemoveTrailingWhitespace', function()
 --   local view = vim.fn.getcurpos()
