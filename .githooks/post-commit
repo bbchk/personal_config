@@ -7,7 +7,13 @@ set -euo pipefail
 main() {
   echo "======= post-commit started ======="
 
-  FILES_TO_DECRYPT=($(git show --name-only --oneline HEAD -- secrets/ | sed '1d'))
+ local FILES_TO_DECRYPT=()
+
+  if [[ "${1:-}" == "--all" ]]; then
+    FILES_TO_DECRYPT=($(find secrets/ -type f))
+  else
+    FILES_TO_DECRYPT=($(git show --name-only --oneline HEAD -- secrets/ | sed '1d'))
+  fi
 
   if [ "${#FILES_TO_DECRYPT[@]}" -eq 0 ]; then
 
@@ -39,4 +45,4 @@ main() {
   echo -e "======= post-commit finished =======\n"
 }
 
-main
+main "$@"
