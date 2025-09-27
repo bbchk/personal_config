@@ -1,7 +1,8 @@
 #!/usr/bin/env bash
 # shellcheck disable=SC2155
 
-source ./utils
+SCRIPT_DIR=$(dirname "$(realpath "$0")")
+source "$SCRIPT_DIR/utils"
 
 get_all_refs() {
   {
@@ -28,10 +29,10 @@ main() {
 
   local query selected_ref
   query=$(echo "$fzf_output" | head -n1)
-  echo "DEBUG: query: [$query]"
+  log "query: [$query]"
 
   selected_ref=$(echo "$fzf_output" | sed -n '2p')
-  echo "DEBUG: selected_ref: [$selected_ref]"
+  log "selected_ref: [$selected_ref]"
 
   if [[ -z "$selected_ref" && -z "$query" ]]; then
     echo "Operation cancelled"
@@ -40,7 +41,7 @@ main() {
 
   local ref_name ref_type
   if [[ -n "$query" && -z "$selected_ref" ]]; then
-      echo "DEBUG: new branch: [$query]"
+      log "new branch: [$query]"
       ref_name="$query"
       ref_type="NEWBRANCH"
   else
@@ -48,51 +49,42 @@ main() {
       ref_name=$(echo "$selected_ref" | cut -d'|' -f1)
   fi
 
-  echo "DBG ref_type=[$ref_type]"
-  echo "DBG ref_name=[$ref_name]"
+  log "ref_type=[$ref_type]"
+  log "ref_name=[$ref_name]"
 
-  local git_common_dir=$(git rev-parse --git-common-dir)
+  local git_common_dir
+  git_common_dir=$(git rev-parse --git-common-dir)
 
-  local worktree_name=$(sed 's/\//_/g; s/[^a-zA-Z0-9._-]/-/g' <<<"${ref_name}")
-  echo "WORKTREE_NAME: $worktree_name"
+  local worktree_name
+  worktree_name=$(sed 's/\//_/g; s/[^a-zA-Z0-9._-]/-/g' <<<"${ref_name}")
+  log "WORKTREE_NAME: $worktree_name"
 
   local absolute_worktree_path="${git_common_dir}/wk/${worktree_name}"
-  echo "ABSOLUTE_WORKTREE_PATH: $absolute_worktree_path"
+  log "ABSOLUTE_WORKTREE_PATH: $absolute_worktree_path"
 
   if [[ -e "$absolute_worktree_path" ]]; then
-    echo "Error: Path '$absolute_worktree_path' already exists"
+    log "Error: Path '$absolute_worktree_path' already exists"
     return 1
   fi
 
   case "$ref_type" in
   "branch")
-    echo "Creating branch"
+    log "Creating branch"
     git worktree add "$absolute_worktree_path" "${ref_name}"
     ;;
   "remote")
-    echo "Creating remote"
-    # TODO: No use case found yet
-    # local branch_name=$(echo "$ref_name" | sed 's/.*\///')
-    # git worktree add "$absolute_worktree_path" -b "$branch_name" "$ref_name"
-    #
-    # git worktree add "$absolute_worktree_path" -b "${ref_name}" "${ref_name}"
+    log "Creating remote"
+    # TODO: implement remote handling if needed
     ;;
   "tag")
-    echo "Creating tag"
+    log "Creating tag"
     git worktree add "$absolute_worktree_path" "${ref_name}"
     ;;
   "NEWBRANCH")
-    echo "Creating new branch"
-    # Create new branch on HEAD
+    log "Creating new branch"
     git worktree add "$absolute_worktree_path" -b "$ref_name" HEAD
     ;;
   esac
 }
 
 main "$@"
-
-# implement forcing
-#     -f, --[no-]force      checkout <branch> even if already checked out in other worktree
-# -b <branch>           create a new branch
-# -B <branch>           create or reset a branch
-# -d, --[no-]detach     detach HEAD at named commit
