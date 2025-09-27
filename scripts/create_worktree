@@ -2,7 +2,6 @@
 # shellcheck disable=SC2155
 
 source "$HOME/pers/scripts/utils"
-source "$HOME/pers/scripts/hop_to_worktree"
 
 get_all_refs() {
   {

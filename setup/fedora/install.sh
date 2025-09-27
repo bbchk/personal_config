@@ -22,6 +22,7 @@ PKGS=(
   maven
   golang
   julia
+  php-xdebug
 
   # Development Libraries
   openssl-devel

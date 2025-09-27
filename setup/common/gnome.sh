@@ -20,10 +20,13 @@ for i in {1..9}; do
   gset org.gnome.shell.keybindings "switch-to-application-$i" "[]"
 done
 
-for i in {1..10}; do
+for i in {1..9}; do
   gset org.gnome.desktop.wm.keybindings "switch-to-workspace-$i" "['<Super>$i']"
   gset org.gnome.desktop.wm.keybindings "move-to-workspace-$i" "['<Shift><Super>$i']"
 done
+
+gset org.gnome.desktop.wm.keybindings "switch-to-workspace-10" "['<Super>0']"
+gset org.gnome.desktop.wm.keybindings "move-to-workspace-10" "['<Shift><Super>0']"
 
 # ---- Windows below -------------------------------
 
