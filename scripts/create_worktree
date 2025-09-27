@@ -1,97 +1,98 @@
 #!/usr/bin/env bash
+# shellcheck disable=SC2155
+
+source ./utils
 
 get_all_refs() {
-    {
-        git for-each-ref refs/heads/ --format='%(refname:short)|branch'
-        git for-each-ref refs/remotes/ --format='%(refname:short)|remote' | grep -v '/HEAD$'
-        git for-each-ref refs/tags/ --format='%(refname:short)|tag'
-    }
+  {
+    git for-each-ref refs/heads/ --format='%(refname:short)|branch'
+    git for-each-ref refs/remotes/ --format='%(refname:short)|remote' | grep -v '/HEAD$'
+    git for-each-ref refs/tags/ --format='%(refname:short)|tag'
+  }
 }
 
 main() {
-    if ! git rev-parse --git-dir > /dev/null 2>&1; then
-        echo "Error: Not in a git repository" >&2
-        return 1
-    fi
+  if ! git rev-parse --git-dir >/dev/null 2>&1; then
+    echo "Error: Not in a git repository" >&2
+    return 1
+  fi
 
-    local all_refs_output=$(get_all_refs)
-    local all_refs=()
+  local all_refs_output=$(get_all_refs)
+  local all_refs=()
 
-    # Read into array using a while loop (portable)
-    while IFS= read -r line; do
-        all_refs+=("$line")
-    done <<< "$all_refs_output"
+  while IFS= read -r line; do
+      all_refs+=("$line")
+  done <<< "$all_refs_output"
 
-    # Add the NEW options
-    all_refs+=("NEW|branch" "NEW|tag")
+  fzf_output=$(printf '%s\n' "${all_refs[@]}" | fzf --height=15 --print-query --border)
 
-    local selected_ref=$(printf '%s\n' "${all_refs[@]}" | fzf --height=15 --border)
+  local query selected_ref
+  query=$(echo "$fzf_output" | head -n1)
+  echo "DEBUG: query: [$query]"
 
-    if [[ -z "$selected_ref" ]]; then
-        echo "Operation cancelled"
-        return 0
-    elif [[ "$selected_ref" == "NEW|branch" ]] || [[ "$selected_ref" == "NEW|tag" ]]; then
-        echo "Operation new is invoked. WIP"
+  selected_ref=$(echo "$fzf_output" | sed -n '2p')
+  echo "DEBUG: selected_ref: [$selected_ref]"
 
-        local branch_name
-        branch_name=$(printf '' | fzf --print-query --height=3 --border --prompt="New branch name: " | head -n1)
+  if [[ -z "$selected_ref" && -z "$query" ]]; then
+    echo "Operation cancelled"
+    return 0
+  fi
 
-        if [[ -z "$branch_name" ]]; then
-            echo "Operation cancelled"
-            return 0
-        fi
+  local ref_name ref_type
+  if [[ -n "$query" && -z "$selected_ref" ]]; then
+      echo "DEBUG: new branch: [$query]"
+      ref_name="$query"
+      ref_type="NEWBRANCH"
+  else
+      ref_type=$(echo "$selected_ref" | cut -d'|' -f2)
+      ref_name=$(echo "$selected_ref" | cut -d'|' -f1)
+  fi
 
-        local git_common_dir=$(git rev-parse --git-common-dir)
-        local worktree_name="branch-$(sed 's/\//_/g; s/[^a-zA-Z0-9._-]/-/g' <<< "${branch_name}")"
-        local absolute_worktree_path="${git_common_dir}/wk/${worktree_name}"
+  echo "DBG ref_type=[$ref_type]"
+  echo "DBG ref_name=[$ref_name]"
 
-        git worktree add -b "$branch_name" "$absolute_worktree_path" HEAD
-        return 0
-    fi
+  local git_common_dir=$(git rev-parse --git-common-dir)
 
-    local ref_type=$(echo "$selected_ref" | cut -d'|' -f2)
-    local ref_name=$(echo "$selected_ref" | cut -d'|' -f1)
+  local worktree_name=$(sed 's/\//_/g; s/[^a-zA-Z0-9._-]/-/g' <<<"${ref_name}")
+  echo "WORKTREE_NAME: $worktree_name"
 
-    local git_common_dir=$(git rev-parse --git-common-dir)
+  local absolute_worktree_path="${git_common_dir}/wk/${worktree_name}"
+  echo "ABSOLUTE_WORKTREE_PATH: $absolute_worktree_path"
 
-    local worktree_name="${ref_type}-$(sed 's/\//_/g; s/[^a-zA-Z0-9._-]/-/g' <<< "${ref_name}")"
-    local absolute_worktree_path="${git_common_dir}/wk/${worktree_name}"
+  if [[ -e "$absolute_worktree_path" ]]; then
+    echo "Error: Path '$absolute_worktree_path' already exists"
+    return 1
+  fi
 
-    if [[ -e "$absolute_worktree_path" ]]; then
-        echo "Error: Path '$absolute_worktree_path' already exists"
-        return 1
-    fi
-
-    case "$ref_type" in
-        "branch")
-            git worktree add "$absolute_worktree_path" "${ref_name}"
-            ;;
-        "remote")
-            # local branch_name=$(echo "$ref_name" | sed 's/.*\///')
-            # git worktree add "$absolute_worktree_path" -b "$branch_name" "$ref_name"
-            #
-            # git worktree add "$absolute_worktree_path" -b "${ref_name}" "${ref_name}"
-            ;;
-        "tag")
-            git worktree add "$absolute_worktree_path" "${ref_name}"
-            ;;
-    esac
+  case "$ref_type" in
+  "branch")
+    echo "Creating branch"
+    git worktree add "$absolute_worktree_path" "${ref_name}"
+    ;;
+  "remote")
+    echo "Creating remote"
+    # TODO: No use case found yet
+    # local branch_name=$(echo "$ref_name" | sed 's/.*\///')
+    # git worktree add "$absolute_worktree_path" -b "$branch_name" "$ref_name"
+    #
+    # git worktree add "$absolute_worktree_path" -b "${ref_name}" "${ref_name}"
+    ;;
+  "tag")
+    echo "Creating tag"
+    git worktree add "$absolute_worktree_path" "${ref_name}"
+    ;;
+  "NEWBRANCH")
+    echo "Creating new branch"
+    # Create new branch on HEAD
+    git worktree add "$absolute_worktree_path" -b "$ref_name" HEAD
+    ;;
+  esac
 }
 
 main "$@"
 
-
 # implement forcing
 #     -f, --[no-]force      checkout <branch> even if already checked out in other worktree
-#
 # -b <branch>           create a new branch
 # -B <branch>           create or reset a branch
 # -d, --[no-]detach     detach HEAD at named commit
-
-## Issues
- # ╰$ cd docker
- # ╭─~/dev/domreg.git/worktrees/PORT-26708/worktrees/docker [feature/docker]
- #
- # ike/master and master will be having same path!
- #
- #
