@@ -1,10 +1,1 @@
-setup/dotfiles/.config/keepassxc/
-
-programs/Postman Agent/
-/
-**password
-dotfiles/.oh-my-zsh/*
-
-**/xdg/Pictures/Screenshots/*
-
-**/kubectl*
+password
