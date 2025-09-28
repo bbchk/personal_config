@@ -8,16 +8,8 @@ return {
 			options = {
 				icons_enabled = true,
 				theme = "auto",
-				-- component_separators = { left = "", right = "" },
-				-- section_separators = { left = "", right = "" },
-
-				component_separators = { left = "│", right = "│" },
-				section_separators = { left = "│", right = "│" },
-				--
-				-- -- Option 4: A more stylized, tall bar
-				-- component_separators = { left = "┃", right = "┃" },
-				-- section_separators = { left = "┃", right = "┃" },
-
+				component_separators = { left = "", right = "" },
+				section_separators = { left = "", right = "" },
 				disabled_filetypes = {},
 				always_divide_middle = true,
 				globalstatus = false,
@@ -26,7 +18,7 @@ return {
 				lualine_a = {
 					{
 						"mode",
-						color = { fg = "#FFFF5F", bg = "transparent", gui = "bold" },
+						color = { fg = "#FFFF5F", bg = "#2E3440", gui = "bold" },
 					},
 				},
 				lualine_b = {
@@ -36,14 +28,13 @@ return {
 					},
 					{
 						"location",
-						color = { fg = "#A6E22E", bg = "transparent" },
+						color = { fg = "#A6E22E", bg = "#2E3440" },
 					},
 				},
 
 				lualine_c = {},
-				-- Right side of the status line
+
 				lualine_x = {
-					-- Network status: Check for 'ppp0' interface
 					{
 						function()
 							local handle = io.popen('ip a | grep -q ppp0 && echo "vpn" || echo "home"')
@@ -51,7 +42,7 @@ return {
 							handle:close()
 							return "🖧" .. string.gsub(result, "\n", "")
 						end,
-						color = { fg = "#A6E22E", bg = "transparent" },
+						color = { fg = "#A6E22E", bg = "#2E3440" },
 					},
 				},
 				lualine_y = {
@@ -71,9 +62,9 @@ return {
 				lualine_z = {
 					{
 						function()
-							return "⏲ " .. os.date("%m/%d %-I:%-M %p")
+							return "⏲ " .. os.date("%-I:%-M %p %m/%d")
 						end,
-						color = { fg = "#A6E22E", bg = "transparent" },
+						color = { fg = "#A6E22E", bg = "#2E3440" },
 					},
 				},
 			},
@@ -88,3 +79,10 @@ return {
 		})
 	end,
 }
+
+-- component_separators = { left = "│", right = "│" },
+-- section_separators = { left = "│", right = "│" },
+-- --
+-- -- -- Option 4: A more stylized, tall bar
+-- component_separators = { left = "┃", right = "┃" },
+-- section_separators = { left = "┃", right = "┃" },

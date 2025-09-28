@@ -44,21 +44,23 @@ map("n", "<C-Down>", "<C-w>-")
 map("n", "<leader>c", "<C-w>c", { desc = "Close window" })
 map("n", "<leader>=", "<C-w>=", { desc = "Equalize windows" })
 
+
 -- -- Buffer Management (using leader key)
 -- vim.keymap.set("n", "<leader>bn", ":bnext<CR>", { desc = "Next buffer" })
 -- vim.keymap.set("n", "<leader>bp", ":bprevious<CR>", { desc = "Previous buffer" })
 -- vim.keymap.set("n", "<leader>bd", ":bd<CR>", { desc = "Delete buffer" })
 -- vim.keymap.set("n", "<leader>bl", ":ls<CR>", { desc = "List buffers" })
 --
+--
 -- Tab Management (if you use tabs)
--- map("n", "<leader>tn", ":tabnext<CR>", { desc = "Next tab" })
--- map("n", "<leader>tp", ":tabprevious<CR>", { desc = "Previous tab" })
--- map("n", "<leader>tc", ":tabclose<CR>", { desc = "Close tab" })
-
+map("n", "<leader>tn", ":tabnext<CR>", { desc = "Next tab" })
+map("n", "<leader>tp", ":tabprevious<CR>", { desc = "Previous tab" })
+map("n", "<leader>tc", ":tabclose<CR>", { desc = "Close tab" })
 map("n", "<leader>b", ":tabnew<CR>", { desc = "New tab" })
 
 for i = 1, 9 do
-	map("n", tostring(i), i .. "gt", { desc = "Go to tab " .. i })
+	-- map("n", ">" .. i, i .. "gt", { desc = "Go to tab " .. i })
+	map("n", "<leader>" .. i, i .. "gt", { desc = "Go to tab " .. i })
 end
 
 -----------------------------------
@@ -105,5 +107,7 @@ map("n", "N", "Nzzzv")
 -- Yank and paste without overwriting the register
 map("x", "p", '"_dP')
 
+--
+--
 -- TODO: command for copying path to current buffer from root
 -- keymap('n', '<leader>cp', ':let @+ = expand("%:p")<CR>', { noremap = true, silent = true })
