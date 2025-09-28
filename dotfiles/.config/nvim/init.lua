@@ -39,44 +39,6 @@ vim.filetype.add({
 	},
 })
 
--- vim.api.nvim_create_autocmd({ "BufEnter", "BufWinEnter" }, {
--- 	pattern = "*",
--- 	callback = function()
--- 		local filetype = vim.bo.filetype
--- 		local filename = vim.fn.expand("%:t")
---
--- 		if filetype == "oil" then
--- 			local dirname = vim.fn.expand("%:h:t")
--- 			if dirname ~= "" then
--- 				vim.fn.system(string.format("tmux rename-window 'D %s'", dirname))
--- 			else
--- 				vim.fn.system("tmux rename-window dir-view")
--- 			end
--- 		elseif filename ~= "" then
--- 			vim.fn.system(string.format("tmux rename-window 'F %s'", filename))
--- 		end
--- 	end,
--- })
---
--- -- Reset when leaving Neovim
--- vim.api.nvim_create_autocmd("VimLeave", {
--- 	pattern = "*",
--- 	callback = function()
--- 		vim.fn.system("tmux rename-window 'nvim'")
--- 	end,
--- })
-
--- vim.lsp.enable({'clangd'})
-
-vim.api.nvim_create_autocmd("LspAttach", {
-	callback = function(ev)
-		local client = vim.lsp.get_client_by_id(ev.data.client_id)
-		if client:supports_method("textDocument/completion") then
-			vim.lsp.completion.enable(true, client.id, ev.buf, { autotrigger = true })
-		end
-	end,
-})
-
 vim.api.nvim_create_autocmd("TermOpen", {
 	group = vim.api.nvim_create_augroup("custom-term-open", {}),
 	callback = function()
