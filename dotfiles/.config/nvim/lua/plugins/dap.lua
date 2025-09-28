@@ -12,7 +12,7 @@ return {
 		config = function()
 			local dap = require("dap")
 			local ui = require("dapui")
-      local dap_virt_text = require("nvim-dap-virtual-text")
+			local dap_virt_text = require("nvim-dap-virtual-text")
 
 			ui.setup()
 			dap_virt_text.setup({})
@@ -25,8 +25,7 @@ return {
 					command = "bash",
 
 					args = {
-						os.getenv("HOME")
-							.. "/.local/share/nvim/mason/packages/js-debug-adapter/js-debug-adapter",
+						os.getenv("HOME") .. "/.local/share/nvim/mason/packages/js-debug-adapter/js-debug-adapter",
 						"${port}",
 					},
 				},
@@ -42,41 +41,44 @@ return {
 				},
 			}
 
-      dap.adapters.php = {
-        type = 'executable',
-        command = 'bash',
-        args = {
-          os.getenv("HOME")
-            .. "/.local/share/nvim/mason/packages/php-debug-adapter/php-debug-adapter",
-          "${port}",
-        },
-      }
+			dap.adapters.php = {
+				type = "executable",
+				command = "bash",
+				args = {
+					os.getenv("HOME") .. "/.local/share/nvim/mason/packages/php-debug-adapter/php-debug-adapter",
+					"${port}",
+				},
+			}
 
-      dap.configurations.php = {
-        {
-          type = 'php',
-          request = 'launch',
-          name = 'Listen for Xdebug',
-          port = 9003
-        }
-      }
+			dap.configurations.php = {
+				{
+					type = "php",
+					request = "launch",
+					name = "Listen for Xdebug",
+					port = 9003,
+				},
+			}
 
-			vim.keymap.set("n", "<space>b", dap.toggle_breakpoint)
-			vim.keymap.set("n", "<space>gb", dap.run_to_cursor)
+			-- #TODO: pick better color
+			vim.api.nvim_set_hl(0, "RedCursor", { fg = "#AF0000", bg = None })
+			vim.fn.sign_define("DapBreakpoint", { text = "⦿", texthl = "RedCursor", linehl = "", numhl = "" })
 
-			-- Eval var under cursor
-			vim.keymap.set("n", "<space>e", function()
-				require("dapui").eval(nil, { enter = true })
-			end)
-
-			vim.keymap.set("n", "<F1>", dap.continue)
-			vim.keymap.set("n", "<F2>", dap.step_into)
-			vim.keymap.set("n", "<F3>", dap.step_over)
-			vim.keymap.set("n", "<F4>", dap.step_out)
-			vim.keymap.set("n", "<F5>", dap.step_back)
-			vim.keymap.set("n", "<F12>", dap.restart)
-
-			vim.keymap.set("n", "<F11>", dap.disconnect)
+			-- vim.keymap.set("n", "<space>b", dap.toggle_breakpoint)
+			-- vim.keymap.set("n", "<space>gb", dap.run_to_cursor)
+			--
+			-- -- Eval var under cursor
+			-- vim.keymap.set("n", "<space>e", function()
+			-- 	require("dapui").eval(nil, { enter = true })
+			-- end)
+			--
+			-- vim.keymap.set("n", "<F1>", dap.continue)
+			-- vim.keymap.set("n", "<F2>", dap.step_into)
+			-- vim.keymap.set("n", "<F3>", dap.step_over)
+			-- vim.keymap.set("n", "<F4>", dap.step_out)
+			-- vim.keymap.set("n", "<F5>", dap.step_back)
+			-- vim.keymap.set("n", "<F12>", dap.restart)
+			--
+			-- vim.keymap.set("n", "<F11>", dap.disconnect)
 
 			dap.listeners.before.attach.dapui_config = function()
 				ui.open()
@@ -90,9 +92,6 @@ return {
 			dap.listeners.before.event_exited.dapui_config = function()
 				ui.close()
 			end
-
-			vim.api.nvim_set_hl(0, "YellowCursor", { fg = "#FFCC00", bg = None })
-			vim.fn.sign_define("DapBreakpoint", { text = "⦿", texthl = "YellowCursor", linehl = "", numhl = "" })
 		end,
 	},
 }

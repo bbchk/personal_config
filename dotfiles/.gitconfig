@@ -42,9 +42,9 @@
   local = white
 [color "diff"]
     new = 155
-    old = 124 
+    old = 124
     meta = 214
-    frag = 214 
+    frag = 214
     whitespace = reverse
 [color "status"]
     added = 155

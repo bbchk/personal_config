@@ -1,125 +1,109 @@
--- global leader keys
+-- Global leader keys
 vim.g.mapleader = " "
 vim.g.maplocalleader = " "
 
-local function keymap(mode, lhs, rhs, opts)
+-- Helper function for key mappings
+local function map(mode, lhs, rhs, opts)
 	opts = opts or {}
 	opts.silent = true
 	vim.keymap.set(mode, lhs, rhs, opts)
 end
 
-local default_opts =
-	-- TODO: command for copying path to current buffer from root
-	-- keymap('n', '<leader>cp', ':let @+ = expand("%:p")<CR>', { noremap = true, silent = true })
-	-- TMUX
-	keymap("n", "<C-f>", ":silent !tmux neww tmux-sessionizer<CR>")
+-----------------------------------
+-- Quality of Life Keymaps
+-----------------------------------
 
------ QoL ------
-keymap("n", "<leader>h", "<CMD>nohlsearch<CR>") -- Nohl
-keymap("n", "<leader>q", "<CMD>q!<CR>") -- Quit
--- Create shorctut for not saving, but default leader q should save
--- keymap("n", "<leader>q", "<CMD>q!<CR>") --
-keymap("i", "jk", "<ESC>") -- Exit insert mode
-keymap("i", "ол", "<ESC>") -- Exit insert mode
+map("i", "jk", "<ESC>")
 
-keymap("n", "ш", "i")
+map("n", "<leader>h", "<CMD>nohlsearch<CR>")
 
-keymap("n", "<leader>ww", "<CMD>write<CR>") -- Format and Save
-keymap("n", "<leader>w", "<CMD>noautocmd write<CR>") -- Save with no formatting
+map("n", "<leader>q", "<CMD>q!<CR>")
 
-keymap("n", "<leader>ц", "<CMD>noautocmd write<CR>") -- Save with no formatting
+map("n", "<leader>ww", "<CMD>write<CR>")
+map("n", "<leader>w", "<CMD>noautocmd write<CR>")
 
--- Normal Mode Keymaps with Ukrainian Letters
--- Based on shared keyboard button (e.g., 'a' and 'ф' are on the same key)
--- Note: This is a partial list for demonstration purposes.
+map("n", "<C-f>", ":silent !tmux neww tmux-sessionizer<CR>")
 
--- 'ф' (on the 'a' key) for "виділити все" (select all)
-keymap("n", "ф", "ggVG")
+-----------------------------------
+-- Window Management
+-----------------------------------
 
--- -- 'і' (on the 's' key) for "зберегти" (save)
--- keymap("n", "і", ":w<CR>")
+map("n", "<leader>v", "<CMD>vsplit<CR>")
+map("n", "<leader>s", "<CMD>split<CR>")
 
--- 'в' (on the 'd' key) for "видалити" (delete line)
-keymap("n", "в", "dd")
+map("n", "<C-h>", "<C-w>h")
+map("n", "<C-l>", "<C-w>l")
+map("n", "<C-k>", "<C-w>k")
+map("n", "<C-j>", "<C-w>j")
 
--- 'у' (on the 'g' key) for "шукати" (global search)
--- keymap("n", "у", ":%s//g<Left><Left>")
+map("n", "<C-Left>", "<C-w>>")
+map("n", "<C-Right>", "<C-w><")
+map("n", "<C-Up>", "<C-w>+")
+map("n", "<C-Down>", "<C-w>-")
 
--- 'й' (on the 'q' key) for "вийти" (quit)
--- keymap("n", "й", ":qa<CR>")
+map("n", "<leader>c", "<C-w>c", { desc = "Close window" })
+map("n", "<leader>=", "<C-w>=", { desc = "Equalize windows" })
 
--- 'ц' (on the 'w' key) for "наступне слово" (next word)
-keymap("n", "ц", "w")
-
--- 'т' (on the 'e' key) for "кінець слова" (end of word)
-keymap("n", "т", "e")
-keymap("n", "и", "b")
-
--- 'н' (on the 'n' key) for "наступний збіг" (next match)
-keymap("n", "н", "n")
-
--- 'о' (on the 'o' key) for "новий рядок знизу" (new line below)
-keymap("n", "щ", "o")
-
--- 'к' (on the 'r' key) for "замінити" (replace character)
-keymap("n", "к", "r")
-
--- 'л' (on the 'l' key) for "рух праворуч" (move right)
-keymap("n", "д", "l")
-keymap("n", "л", "k")
-keymap("n", "ш", "i")
-keymap("n", "о", "j")
-keymap("n", "р", "h")
-
--- vim.api.nvim_create_user_command('RemoveTrailingWhitespace', function()
---   local view = vim.fn.getcurpos()
+-- -- Buffer Management (using leader key)
+-- vim.keymap.set("n", "<leader>bn", ":bnext<CR>", { desc = "Next buffer" })
+-- vim.keymap.set("n", "<leader>bp", ":bprevious<CR>", { desc = "Previous buffer" })
+-- vim.keymap.set("n", "<leader>bd", ":bd<CR>", { desc = "Delete buffer" })
+-- vim.keymap.set("n", "<leader>bl", ":ls<CR>", { desc = "List buffers" })
 --
---   vim.cmd([[
---     %s/\s\+$//e
---   ]])
---
---   vim.fn.setpos('.', view)
--- end, {})
---
--- -- Keymap for triggering both commands
--- vim.keymap.set("n", "<leader>w", function()
---   vim.cmd("RemoveTrailingWhitespace")
---   vim.cmd("noautocmd write")
--- end)
+-- Tab Management (if you use tabs)
+-- map("n", "<leader>tn", ":tabnext<CR>", { desc = "Next tab" })
+-- map("n", "<leader>tp", ":tabprevious<CR>", { desc = "Previous tab" })
+-- map("n", "<leader>tc", ":tabclose<CR>", { desc = "Close tab" })
 
--- vim.cmd [[highlight ExtraWhitespace ctermbg=red guibg=red]]
--- vim.cmd [[autocmd Syntax * match ExtraWhitespace /\s\+$/]]
+map("n", "<leader>b", ":tabnew<CR>", { desc = "New tab" })
 
--- vim.opt.list = true
--- vim.opt.listchars = { trail = "·", eol = "↵", tab = ">-" }
+for i = 1, 9 do
+	map("n", tostring(i), i .. "gt", { desc = "Go to tab " .. i })
+end
 
------ Windows ------
------ Window Creation
-keymap("n", "<leader>v", "<CMD>vsplit<CR>")
--- keymap("n", "<leader>h", "<CMD>split<CR>")
------ Window Navigation
-keymap("n", "<C-h>", "<C-w>h")
-keymap("n", "<C-l>", "<C-w>l")
-keymap("n", "<C-k>", "<C-w>k")
-keymap("n", "<C-j>", "<C-w>j")
------ Windows Resize
-keymap("n", "<C-Left>", "<C-w><")
-keymap("n", "<C-Right>", "<C-w>>")
-keymap("n", "<C-Up>", "<C-w>+")
-keymap("n", "<C-Down>", "<C-w>-")
+-----------------------------------
+-- Ukrainian Keyboard Layout Mappings
+-----------------------------------
 
------ Telescope ------
-keymap("n", "<leader>f", "<cmd>Telescope find_filekcr>", { noremap = true, silent = true }) --  find files
-keymap("n", "<leader>fg", "<cmd>Telescope live_grep<cr>", { noremap = true, silent = true }) -- live grep
-keymap("n", "<leader>fb", "<cmd>Telescope buffers<cr>", { noremap = true, silent = true }) -- find buffers
-keymap("n", "<leader>fh", "<cmd>Telescope help_tags<cr>", { noremap = true, silent = true }) -- find help tags
+-- Mappings for normal mode, based on the Ukrainian keyboard layout
+-- Note: These keymaps might conflict with other plugins.
+map("i", "ол", "jk")
+map("n", "ф", "ggVG") -- Select all
+map("n", "в", "d") -- Delete
+map("n", "ц", "w") -- Forward word
+map("n", "т", "e") -- End of word
+map("n", "и", "b") -- Backward word
+map("n", "н", "n") -- Next match
+map("n", "щ", "o") -- New line below
+map("n", "к", "r") -- Replace character
+map("n", "д", "l") -- Move right
+map("n", "л", "k") -- Move up
+map("n", "ш", "i") -- Insert mode
+map("n", "о", "j") -- Move down
+map("n", "р", "h") -- Move left
 
------ Enhance defaults ------
--- keymapping <leader>fh to find help tags
-keymap("n", "<C-u>", "<C-u>zz")
-keymap("n", "<C-u>", "<C-u>zz")
-keymap("n", "n", "nzzzv")
-keymap("n", "N", "Nzzzv")
-keymap("x", "p", function()
-	return 'pgv"' .. vim.v.register .. "y"
-end, { remap = false, expr = true, silent = true })
+-----------------------------------
+-- Telescope Integration
+-----------------------------------
+
+-- # TODO: Should be in telescope file?
+map("n", "<leader>f", "<cmd>Telescope find_files<cr>")
+map("n", "<leader>fg", "<cmd>Telescope live_grep<cr>")
+map("n", "<leader>fb", "<cmd>Telescope buffers<cr>")
+map("n", "<leader>fh", "<cmd>Telescope help_tags<cr>")
+
+-----------------------------------
+-- Enhanced Default Mappings
+-----------------------------------
+
+map("n", "<C-d>", "<C-d>zz")
+map("n", "<C-u>", "<C-u>zz")
+
+map("n", "n", "nzzzv")
+map("n", "N", "Nzzzv")
+
+-- Yank and paste without overwriting the register
+map("x", "p", '"_dP')
+
+-- TODO: command for copying path to current buffer from root
+-- keymap('n', '<leader>cp', ':let @+ = expand("%:p")<CR>', { noremap = true, silent = true })

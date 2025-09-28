@@ -10,6 +10,7 @@
 </h1>
 
 ## WIP
+## WIP
 
 <!-- Cool ideas, but no use yet or no much benefit yet -->
 <!-- * create collection of git hooks for quality of life that will be copied in every repo cloned -->
@@ -30,9 +31,6 @@
 
 ### TODO: nvim :
 
-
-- I need to learn how to use debuggers in nvim !
-- make no formatting save in nvim remove whitespaces in the end of file | how to w or ww only the selected area?
 - research other usefull configurations for .gitconfig that make default git tools better not to install anything third-party 
 
 ### TODO: tmux:
@@ -52,3 +50,10 @@
 - hotkeys for the most frequetn git commands
 
 create git alias for yolo git commiting and pushing
+
+with neovim tabs and neovim terminal, I could fully get rid of tmux?
+
+<!-- how to use terminal in nvim? -->
+
+on sessionizer, 
+open specific folder, open nvim with two tabs, with focus on first tab where terminal is opne and second tab where telescope alrady open
