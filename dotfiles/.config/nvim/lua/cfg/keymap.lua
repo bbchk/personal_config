@@ -44,24 +44,28 @@ map("n", "<C-Down>", "<C-w>-")
 map("n", "<leader>c", "<C-w>c", { desc = "Close window" })
 map("n", "<leader>=", "<C-w>=", { desc = "Equalize windows" })
 
-
--- -- Buffer Management (using leader key)
+-- TODO: Buffer Management?
 -- vim.keymap.set("n", "<leader>bn", ":bnext<CR>", { desc = "Next buffer" })
 -- vim.keymap.set("n", "<leader>bp", ":bprevious<CR>", { desc = "Previous buffer" })
 -- vim.keymap.set("n", "<leader>bd", ":bd<CR>", { desc = "Delete buffer" })
 -- vim.keymap.set("n", "<leader>bl", ":ls<CR>", { desc = "List buffers" })
---
---
--- Tab Management (if you use tabs)
-map("n", "<leader>tn", ":tabnext<CR>", { desc = "Next tab" })
-map("n", "<leader>tp", ":tabprevious<CR>", { desc = "Previous tab" })
-map("n", "<leader>tc", ":tabclose<CR>", { desc = "Close tab" })
-map("n", "<leader>b", ":tabnew<CR>", { desc = "New tab" })
 
-for i = 1, 9 do
-	-- map("n", ">" .. i, i .. "gt", { desc = "Go to tab " .. i })
-	map("n", "<leader>" .. i, i .. "gt", { desc = "Go to tab " .. i })
-end
+-- Tab Management
+map("n", "<S-l>", ":tabnext<CR>", { desc = "Next tab" })
+map("n", "<S-h>", ":tabprevious<CR>", { desc = "Next tab" })
+
+map("n", "<leader>t", ":tabnew | lua require('oil').open(vim.loop.cwd())<CR>", { noremap = true, desc = "New tab with Oil filesystem" })
+
+-- TODO: with telescope open as well
+-- map("n", "<leader>t", ":tabnew | Oil<CR>", { noremap = true, desc = "New tab with Oil filesystem" })
+
+-- map("n", "<leader>TODO", ":tabonly<CR>", { desc = "Tab only" })
+
+-- TODO:
+-- Map <M-1..9> to switch to tabs 1..9
+-- for i = 1, 9 do
+-- 	vim.keymap.set("n", "<M-t>" .. i, i .. "gt", { desc = "Go to tab " .. i })
+-- end
 
 -----------------------------------
 -- Ukrainian Keyboard Layout Mappings
@@ -107,7 +111,5 @@ map("n", "N", "Nzzzv")
 -- Yank and paste without overwriting the register
 map("x", "p", '"_dP')
 
---
---
 -- TODO: command for copying path to current buffer from root
 -- keymap('n', '<leader>cp', ':let @+ = expand("%:p")<CR>', { noremap = true, silent = true })

@@ -79,10 +79,3 @@ return {
 		})
 	end,
 }
-
--- component_separators = { left = "│", right = "│" },
--- section_separators = { left = "│", right = "│" },
--- --
--- -- -- Option 4: A more stylized, tall bar
--- component_separators = { left = "┃", right = "┃" },
--- section_separators = { left = "┃", right = "┃" },

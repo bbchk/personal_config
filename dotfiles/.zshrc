@@ -4,15 +4,15 @@ for config_file in ~/.zsh/*.zsh; do
 done
 
 # Function to run on Kitty startup only
-kitty_startup_hook() {
-    if [[ "$TERM" == "xterm-kitty" && -z "$KITTY_STARTUP_DONE" ]]; then
-        export KITTY_STARTUP_DONE=1
-        "$HOME/pers/scripts/tmux-sessionizer"
-    fi
-}
-
-# Run the hook when zsh starts
-kitty_startup_hook
+# kitty_startup_hook() {
+#     if [[ "$TERM" == "xterm-kitty" && -z "$KITTY_STARTUP_DONE" ]]; then
+#         export KITTY_STARTUP_DONE=1
+#         "$HOME/pers/scripts/tmux-sessionizer"
+#     fi
+# }
+#
+# # Run the hook when zsh starts
+# kitty_startup_hook
 
 # >>> juliaup initialize >>>
 

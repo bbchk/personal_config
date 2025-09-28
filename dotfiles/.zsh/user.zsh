@@ -48,6 +48,7 @@ fi
 
 # keybindings
 bindkey -s '^f' '^utmux-sessionizer\n'
+bindkey -s '^o' '^usessionizer\n'
 # bindkey -s '^h' '^ucheat-sheet-tmux-integration\n'
 
 bindkey -s '^n' '^unvim .\n'

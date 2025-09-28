@@ -1,0 +1,15 @@
+#!/usr/bin/env bash
+
+# Pick a directory interactively
+session=$(find ~ ~/dev -mindepth 1 -maxdepth 1 -type d ! -name '.*' \
+  | fzf --height=25 --border --delimiter='/' --with-nth='4..' --prompt="Workdir?: ")
+
+[ -z "$session" ] && exit 0
+
+cd "$session" || exit 1
+
+nvim \
+  +terminal \
+  +tabnew \
+  +"lua require('oil').open(vim.loop.cwd())" \
+  +"Telescope find_files"

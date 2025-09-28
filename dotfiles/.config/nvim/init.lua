@@ -38,32 +38,32 @@ vim.filetype.add({
 	},
 })
 
-vim.api.nvim_create_autocmd({ "BufEnter", "BufWinEnter" }, {
-	pattern = "*",
-	callback = function()
-		local filetype = vim.bo.filetype
-		local filename = vim.fn.expand("%:t")
-
-		if filetype == "oil" then
-			local dirname = vim.fn.expand("%:h:t")
-			if dirname ~= "" then
-				vim.fn.system(string.format("tmux rename-window 'D %s'", dirname))
-			else
-				vim.fn.system("tmux rename-window dir-view")
-			end
-		elseif filename ~= "" then
-			vim.fn.system(string.format("tmux rename-window 'F %s'", filename))
-		end
-	end,
-})
-
--- Reset when leaving Neovim
-vim.api.nvim_create_autocmd("VimLeave", {
-	pattern = "*",
-	callback = function()
-		vim.fn.system("tmux rename-window 'nvim'")
-	end,
-})
+-- vim.api.nvim_create_autocmd({ "BufEnter", "BufWinEnter" }, {
+-- 	pattern = "*",
+-- 	callback = function()
+-- 		local filetype = vim.bo.filetype
+-- 		local filename = vim.fn.expand("%:t")
+--
+-- 		if filetype == "oil" then
+-- 			local dirname = vim.fn.expand("%:h:t")
+-- 			if dirname ~= "" then
+-- 				vim.fn.system(string.format("tmux rename-window 'D %s'", dirname))
+-- 			else
+-- 				vim.fn.system("tmux rename-window dir-view")
+-- 			end
+-- 		elseif filename ~= "" then
+-- 			vim.fn.system(string.format("tmux rename-window 'F %s'", filename))
+-- 		end
+-- 	end,
+-- })
+--
+-- -- Reset when leaving Neovim
+-- vim.api.nvim_create_autocmd("VimLeave", {
+-- 	pattern = "*",
+-- 	callback = function()
+-- 		vim.fn.system("tmux rename-window 'nvim'")
+-- 	end,
+-- })
 
 -- vim.lsp.enable({'clangd'})
 
@@ -91,10 +91,65 @@ vim.api.nvim_create_autocmd("TermOpen", {
 vim.keymap.set("t", "<esc><esc>", "<c-\\><c-n>")
 
 -- Open a terminal at the bottom of the screen with a fixed height.
-vim.keymap.set("n", "<space>t", function()
+vim.keymap.set("n", "<leader>k", function()
 	vim.cmd.new()
 	vim.cmd.wincmd("J")
 	vim.api.nvim_win_set_height(0, 12)
 	vim.wo.winfixheight = true
 	vim.cmd.term()
 end)
+
+
+
+
+-- Set a custom tabline
+vim.o.tabline = "%!v:lua.Tabline()"
+
+-- Function to generate tab names based on buffer type / filename
+function _G.Tabline()
+  local s = ""
+  for i = 1, vim.fn.tabpagenr("$") do
+    local buflist = vim.fn.tabpagebuflist(i)
+    local winnr = vim.fn.tabpagewinnr(i)
+    local buf = buflist[winnr]
+    local filetype = vim.bo[buf].filetype
+    local name
+
+    if filetype == "oil" then
+      local dirname = vim.fn.expand("#" .. buf .. ":h:t")
+      if dirname ~= "" then
+        name = "D " .. dirname
+      else
+        name = "dir-view"
+      end
+    else
+      local filename = vim.fn.expand("#" .. buf .. ":t")
+      if filename ~= "" then
+        name = "F " .. filename
+      else
+        name = "[No Name]"
+      end
+    end
+
+    -- Highlight selected tab
+    if i == vim.fn.tabpagenr() then
+      s = s .. "%#TabLineSel#"
+    else
+      s = s .. "%#TabLine#"
+    end
+
+    -- Clickable tab
+    s = s .. "%" .. i .. "T " .. name .. " "
+  end
+
+  s = s .. "%#TabLineFill#"
+  return s
+end
+
+-- Optional: refresh tabline when switching buffers/windows
+vim.api.nvim_create_autocmd({ "BufEnter", "BufWinEnter", "TabEnter" }, {
+  callback = function()
+    vim.cmd("redrawtabline")
+  end,
+})
+
