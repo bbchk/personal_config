@@ -16,8 +16,9 @@
 vim.g.mapleader = " "
 vim.g.maplocalleader = " "
 
-require("cfg")
-require("cfg.lazy")
+require("keymap")
+require("options")
+require("plugin_manager")
 
 vim.filetype.add({
 	extension = {
@@ -79,8 +80,8 @@ vim.api.nvim_create_autocmd("LspAttach", {
 vim.api.nvim_create_autocmd("TermOpen", {
 	group = vim.api.nvim_create_augroup("custom-term-open", {}),
 	callback = function()
-		vim.opt_local.number = true
-		vim.opt_local.relativenumber = true
+		vim.opt_local.number = false
+		vim.opt_local.relativenumber = false
 		vim.opt_local.scrolloff = 0
 
 		vim.bo.filetype = "terminal"
@@ -98,9 +99,6 @@ vim.keymap.set("n", "<leader>k", function()
 	vim.wo.winfixheight = true
 	vim.cmd.term()
 end)
-
-
-
 
 -- Set a custom tabline
 vim.o.tabline = "%!v:lua.Tabline()"

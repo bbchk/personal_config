@@ -1,6 +1,9 @@
 local global = vim.g
 local o = vim.opt
 
+vim.o.cmdheight = 1
+-- vim.o.splitbelow = true
+-- vim.o.splitright = true
 -- Editor options
 -- vim.o.timeoutlen = 150 -- Default is 1000ms, you can try reducing it to 300ms or less
 o.shada = "!,'100,f1,<50,s10,h,:10000"
