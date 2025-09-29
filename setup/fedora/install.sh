@@ -24,6 +24,7 @@ PKGS=(
   julia
   php-xdebug
   xclip
+  glab
 
   # Development Libraries
   openssl-devel

@@ -43,3 +43,10 @@
 - learn fugutive for git in nvim
 
 - make it so sessionizer would take git ssh https or just plain text to create a folder
+
+- make it so when CI_COOMIT file closed, run git status
+- hotkeys for the most frequetn git commands
+
+create git alias for yolo git commiting and pushing
+
+learn glab and don't interact with gitlab if not needed
