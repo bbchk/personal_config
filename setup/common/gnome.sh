@@ -6,20 +6,21 @@ set -euo pipefail
 
 # ---- Workspaces below -------------------------------
 
-gsettings org.gnome.desktop.wm.preferences num-workspaces "10"
-gsettings org.gnome.desktop.wm.preferences workspace-names "['1', '2', '3', '4', '5', '6', '7', '8', '9', '10']"
+gsettings setorg.gnome.mutter dynamic-workspaces false
+gsettings set org.gnome.desktop.wm.preferences num-workspaces "10"
+gsettings set org.gnome.desktop.wm.preferences workspace-names "['1', '2', '3', '4', '5', '6', '7', '8', '9', '10']"
 
 for i in {1..9}; do
-  gsettings org.gnome.shell.keybindings "switch-to-application-$i" "[]"
+  gsettings set org.gnome.shell.keybindings "switch-to-application-$i" "[]"
 done
 
 for i in {1..9}; do
-  gsettings org.gnome.desktop.wm.keybindings "switch-to-workspace-$i" "['<Super>$i']"
-  gsettings org.gnome.desktop.wm.keybindings "move-to-workspace-$i" "['<Shift><Super>$i']"
+  gsettings set org.gnome.desktop.wm.keybindings "switch-to-workspace-$i" "['<Super>$i']"
+  gsettings set org.gnome.desktop.wm.keybindings "move-to-workspace-$i" "['<Shift><Super>$i']"
 done
 
-gsettings org.gnome.desktop.wm.keybindings "switch-to-workspace-10" "['<Super>0']"
-gsettings org.gnome.desktop.wm.keybindings "move-to-workspace-10" "['<Shift><Super>0']"
+gsettings set org.gnome.desktop.wm.keybindings "switch-to-workspace-10" "['<Super>0']"
+gsettings set org.gnome.desktop.wm.keybindings "move-to-workspace-10" "['<Shift><Super>0']"
 
 gsettings set org.gnome.desktop.wm.keybindings switch-to-workspace-left "['<Super><Shift>h']"
 gsettings set org.gnome.desktop.wm.keybindings switch-to-workspace-right "['<Super><Shift>l']"
@@ -30,32 +31,34 @@ gsettings set org.gnome.desktop.wm.keybindings cycle-windows-backward "['<Super>
 
 # ---- Windows below -------------------------------
 
-gsettings org.gnome.shell.keybindings toggle-message-tray "[]"
-gsettings org.gnome.desktop.wm.keybindings toggle-maximized "['<Super>m']"
+gsettings set org.gnome.shell.keybindings toggle-message-tray "[]"
+gsettings set org.gnome.desktop.wm.keybindings toggle-maximized "['<Super>m']"
+
+gsettings set org.gnome.desktop.wm.keybindings close "['<Super>q']"
 
 # ---- Utlis below -------------------------------
 
-gsettings org.gnome.shell.keybindings show-screenshot-ui "['<Super>p']"
-gsettings org.gnome.settings-daemon.plugins.media-keys screensaver "[]"
+gsettings set org.gnome.shell.keybindings show-screenshot-ui "['<Super>p']"
+gsettings set org.gnome.settings-daemon.plugins.media-keys screensaver "[]"
 
 # ---- Wellbeing below -------------------------------
 
-gsettings org.gnome.desktop.screen-time-limits daily-limit-enabled "true"
-gsettings org.gnome.desktop.screen-time-limits daily-limit-seconds "uint32 28800"
-gsettings org.gnome.desktop.screen-time-limits grayscale "false"
-gsettings org.gnome.desktop.screen-time-limits history-enabled "true"
+gsettings set org.gnome.desktop.screen-time-limits daily-limit-enabled "true"
+gsettings set org.gnome.desktop.screen-time-limits daily-limit-seconds "uint32 28800"
+gsettings set org.gnome.desktop.screen-time-limits grayscale "false"
+gsettings set org.gnome.desktop.screen-time-limits history-enabled "true"
 
-gsettings org.gnome.desktop.break-reminders selected-breaks "['eyesight']"
-gsettings org.gnome.desktop.break-reminders.eyesight countdown "false"
-gsettings org.gnome.desktop.break-reminders.eyesight delay-seconds "uint32 180"
-gsettings org.gnome.desktop.break-reminders.eyesight duration-seconds "uint32 20"
-gsettings org.gnome.desktop.break-reminders.eyesight fade-screen "true"
-gsettings org.gnome.desktop.break-reminders.eyesight interval-seconds "uint32 1200"
-gsettings org.gnome.desktop.break-reminders.eyesight lock-screen "false"
-gsettings org.gnome.desktop.break-reminders.eyesight notify "true"
-gsettings org.gnome.desktop.break-reminders.eyesight notify-overdue "true"
-gsettings org.gnome.desktop.break-reminders.eyesight notify-upcoming "false"
-gsettings org.gnome.desktop.break-reminders.eyesight play-sound "false"
+gsettings set org.gnome.desktop.break-reminders selected-breaks "['eyesight']"
+gsettings set org.gnome.desktop.break-reminders.eyesight countdown "false"
+gsettings set org.gnome.desktop.break-reminders.eyesight delay-seconds "uint32 180"
+gsettings set org.gnome.desktop.break-reminders.eyesight duration-seconds "uint32 20"
+gsettings set org.gnome.desktop.break-reminders.eyesight fade-screen "true"
+gsettings set org.gnome.desktop.break-reminders.eyesight interval-seconds "uint32 1200"
+gsettings set org.gnome.desktop.break-reminders.eyesight lock-screen "false"
+gsettings set org.gnome.desktop.break-reminders.eyesight notify "true"
+gsettings set org.gnome.desktop.break-reminders.eyesight notify-overdue "true"
+gsettings set org.gnome.desktop.break-reminders.eyesight notify-upcoming "false"
+gsettings set org.gnome.desktop.break-reminders.eyesight play-sound "false"
 
 # ---- Extensions below -------------------------------
 
