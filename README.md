@@ -33,8 +33,6 @@
 
 - research other usefull configurations for .gitconfig that make default git tools better not to install anything third-party 
 
-### TODO: tmux:
-
 ### TODO: to learn:
 
 <!-- limit your search to the certain site, e.g. adding site:stackoverflow.com to your search phrase will limit the search to this site, or site:reddit.com inurl:/r/php to even a single subreddit! -->
