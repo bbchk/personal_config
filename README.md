@@ -39,11 +39,7 @@
 
 <!-- limit your search to the certain site, e.g. adding site:stackoverflow.com to your search phrase will limit the search to this site, or site:reddit.com inurl:/r/php to even a single subreddit! -->
 
-- How to use GIT worktrees!
-
 <!-- TODO: QoL: -->
 
-- I need to optimize my keybindings in nvim (telescope) and tmux (workplaces switch)
 <!-- - I don't want to presss space all the time in normal mode! we need to define diffrent leader. normal mode specifically for actions. make single leader key in both zsh and nvim -->
-
 - learn fugutive for git in nvim

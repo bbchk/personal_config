@@ -1,40 +1,55 @@
 [user]
 	email = bohdan.buchok@internetbrands.com
 	name = Bohdan Buchok
-[init]
-	defaultbranch = main
-[pull]
-	rebase = true
-[diff]
-  wsErrorHighlight = all
-  renames = true
 [core]
 	editor = nvim
-  ; pager = delta
 	sshCommand = ssh -i ~/.ssh/github-2
-; [interactive]
-;     diffFilter = delta --color-only
-; [delta]
-;     navigate = true  # use n and N to move between diff sections
-;     dark = true      # or light = true, or omit for auto-detection
-; [merge]
-;     conflictStyle = zdiff3
+  fsmonitor = true
 [alias]
 	shl = log --pretty=oneline --abbrev-commit
+
   ci = commit -v
-  dl = -c diff.external=difft log -p --ext-diff
-  ds = -c diff.external=difft show --ext-diff
-  dft = -c diff.external=difft diff
-  dl = -c diff.external=difft log -p --ext-diff
-  dsh = -c diff.external=difft -c difftool.prompt=false show --ext-diff
 
   acp = "!f() { \
       git add . && \
       git commit -m \"$1\" && \
       git push; \
   }; f"
+[init]
+	defaultbranch = main
+
+
+
+[pull]
+	rebase = true
+  ff = only
+[diff]
+  wsErrorHighlight = all
+  renames = true
+  mnemonicprefix = true
+  compactionHeuristic = true
+[status]
+	hints = false
+  showUntrackedFiles = all
+  short = true
+[commit]
+  ; template = ~/.gitmessage.txt
+  cleanup = whitespace
 [pager]
 	branch = false
+[advice]
+  statusHints = false
+  detachedHead = false
+[push]
+	autoSetupRemote = true
+  default = simple
+[credential]
+	helper = store
+[merge]
+  conflictstyle = diff3
+[rerere]
+  enabled = true
+
 [color]
   diff = 34
   status = auto
@@ -57,17 +72,3 @@
     changed = 124
     untracked = 124
     branch = white
-; [color "interactive"]
-;   header = "yellow bold"
-;   prompt = "green"
-;   selector = "cyan bold"
-
-[status]
-	hints = false
-[advice]
-  statusHints = false
-  detachedHead = false
-[push]
-	autoSetupRemote = true
-[credential]
-	helper = store
