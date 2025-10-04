@@ -1,0 +1,36 @@
+# Tabs
+unmap L
+unmap H
+map H previousTab
+map L nextTab
+
+# Link mode
+unmap F
+# unmap default link mode
+unmap f
+map : LinkHints.activateModeToOpenInNewTab
+map ; LinkHints.activateMode
+
+# History
+unmap J
+map J goBack
+unmap K
+map K goForward
+
+# Omnibar
+unmap u
+map u Vomnibar.activateTabSelection
+unmap o
+map o Vomnibar.activateInNewTab
+unmap O
+map O Vomnibar.activate
+
+
+# Utils
+map ap togglePinTab
+map am toggleMuteTab
+
+map e passNextKey
+
+unmap T
+map T createTab
