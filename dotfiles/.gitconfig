@@ -29,6 +29,7 @@
   mnemonicprefix = true
   compactionHeuristic = true
 [status]
+  branch = true
 	hints = false
   showUntrackedFiles = all
   short = true
