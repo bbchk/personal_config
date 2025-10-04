@@ -101,6 +101,10 @@ PKGS=(
 echo "Installing packages..."
 sudo dnf install -y "${PKGS[@]}" --skip-unavailable
 
+# NPM packages below
+
+sudo npm install -g pnpm@latest-10
+
 # Docker below
 
 sudo systemctl enable docker
