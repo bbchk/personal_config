@@ -31,9 +31,6 @@ if [[ "$secrets_res" =~ ^[Yy]$ ]]; then
 
   mv "$HOME/.ssh" "$HOME/.ssh.backup"
   ln -sf "$HOME/pers/secrets/ssh" "$HOME/.ssh"
-
-  mv "$HOME/.zsh_history" "$HOME/.zsh_history.backup"
-  ln -sf "$HOME/pers/secrets/.zsh_history" "$HOME/.zsh_history"
 fi
 
 # ---- networking below ---------------------------

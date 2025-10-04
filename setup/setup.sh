@@ -58,4 +58,6 @@ main() {
 }
 
 main
+"$HOME/pers/setup/common/gnome.sh"
+"$HOME/pers/setup/common/filesystem.sh"
 "$HOME/pers/setup/teardown.sh"
