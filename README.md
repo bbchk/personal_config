@@ -41,3 +41,5 @@
 
 <!-- - I don't want to presss space all the time in normal mode! we need to define diffrent leader. normal mode specifically for actions. make single leader key in both zsh and nvim -->
 - learn fugutive for git in nvim
+
+- make it so sessionizer would take git ssh https or just plain text to create a folder
