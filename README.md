@@ -56,3 +56,4 @@ with neovim tabs and neovim terminal, I could fully get rid of tmux?
 
 on sessionizer, 
 open specific folder, open nvim with two tabs, with focus on first tab where terminal is opne and second tab where telescope alrady open
+

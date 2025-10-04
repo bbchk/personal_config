@@ -21,10 +21,10 @@ main() {
   local all_refs=()
 
   while IFS= read -r line; do
-      all_refs+=("$line")
-  done <<< "$all_refs_output"
+    all_refs+=("$line")
+  done <<<"$all_refs_output"
 
-  fzf_output=$(printf '%s\n' "${all_refs[@]}" | fzf --height=15 --print-query --border)
+  fzf_output=$(printf '%s\n' "${all_refs[@]}" | fzf --height=80% --margin=25% --border=rounded --prompt="Worktree?:" --print-query)
 
   local query selected_ref
   query=$(echo "$fzf_output" | head -n1)
@@ -40,12 +40,12 @@ main() {
 
   local ref_name ref_type
   if [[ -n "$query" && -z "$selected_ref" ]]; then
-      log "new branch: [$query]"
-      ref_name="$query"
-      ref_type="NEWBRANCH"
+    log "new branch: [$query]"
+    ref_name="$query"
+    ref_type="NEWBRANCH"
   else
-      ref_type=$(echo "$selected_ref" | cut -d'|' -f2)
-      ref_name=$(echo "$selected_ref" | cut -d'|' -f1)
+    ref_type=$(echo "$selected_ref" | cut -d'|' -f2)
+    ref_name=$(echo "$selected_ref" | cut -d'|' -f1)
   fi
 
   log "ref_type=[$ref_type]"

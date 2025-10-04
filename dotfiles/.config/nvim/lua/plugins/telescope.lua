@@ -36,11 +36,11 @@ return {
 
     local tb = require('telescope.builtin')
 
-    vim.keymap.set('n', 'f', function()
+    vim.keymap.set('n', '<leader>f', function()
       tb.find_files({ find_command = { 'rg', '--files', '--hidden', '-g', '!.git' } })
     end)
 
-    vim.keymap.set('n', 'g', tb.live_grep)
+    vim.keymap.set('n', '<leader>g', tb.live_grep)
     vim.keymap.set('n', '<leader>fb', tb.buffers)
     vim.keymap.set('n', '<leader>f?', tb.git_commits)
     vim.keymap.set('n', '<leader>fs', tb.git_status)
