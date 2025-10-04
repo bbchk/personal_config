@@ -20,8 +20,7 @@ return {
 				hidden = true,
 				mappings = {
 					i = {
-						-- To enable clear out input like in shell
-						["<C-u>"] = false,
+						["<C-u>"] = false, -- To enable clear out input like in shell
 					},
 				},
 			},
@@ -35,33 +34,17 @@ return {
 			},
 		})
 
-		local keymap = vim.keymap
+    local tb = require('telescope.builtin')
 
-		keymap.set(
-			"n",
-			"<leader>f",
-			"<cmd>lua require'telescope.builtin'.find_files({ find_command = {'rg', '--files', '--hidden', '-g', '!.git' }})<cr>",
-			{ desc = "Find files including hidden, excluding .git" }
-		)
+    vim.keymap.set('n', 'f', function()
+      tb.find_files({ find_command = { 'rg', '--files', '--hidden', '-g', '!.git' } })
+    end)
 
-		keymap.set(
-			"n",
-			"<leader>g",
-			"<cmd>lua require'telescope.builtin'.live_grep()<cr>",
-			{ desc = "Fuzzy find recent files" }
-		)
+    vim.keymap.set('n', 'g', tb.live_grep)
+    vim.keymap.set('n', '<leader>fb', tb.buffers)
+    vim.keymap.set('n', '<leader>f?', tb.git_commits)
+    vim.keymap.set('n', '<leader>fs', tb.git_status)
 
-		keymap.set("n", "<leader>fb", "<cmd>Telescope buffers<cr>", { desc = "Find string in cwd" })
-
-		keymap.set("n", "<leader>f?", "<cmd>Telescope git commits<cr>", { desc = "Find todos" })
-
-		keymap.set(
-			"n",
-			"<leader>fs",
-			"<cmd>lua require'telescope.builtin'.git_status()<cr>",
-			{ desc = "Show git status" }
-		)
-
-		-- keymap.set("n", "<leader>/", ":silent grep ", { desc = "Find todos" })
-	end,
+    -- vim.keymap.set("n", "<leader>/", ":silent grep ", { desc = "Find todos" })
+  end,
 }
