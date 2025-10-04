@@ -32,7 +32,6 @@
   branch = true
 	hints = false
   showUntrackedFiles = all
-  short = true
 [commit]
   ; template = ~/.gitmessage.txt
   cleanup = whitespace
