@@ -3,25 +3,19 @@
 sudo -v || exit 1
 
 regions=("east1" "east2" "west1" "west2" "global")
-region=$(printf "%s\n" "${regions[@]}" | fzf --tmux center,25%,border-native --prompt="Region?: ")
+region=$(printf "%s\n" "${regions[@]}" | fzf --height=10 --border --prompt="Region?: ")
+
+  # | fzf --height=25 --border --delimiter='/' --with-nth='4..' --prompt="Workdir?: ")
 
 if [ -z "$region" ]; then
-    echo "No region selected. Exiting."
-    exit 1
+  echo "No region selected. Exiting."
+  exit 1
 fi
 
-temp_file=$(mktemp)
-tmux display-popup -w 50 -h 10 -E "bash -c '
-    read -p \"OTP: \" user_input
-    echo \"\$user_input\" > '$temp_file'
-'"
-
-if [ -f "$temp_file" ]; then
-    one_time_password=$(cat "$temp_file")
-    rm "$temp_file"
-fi
+read -rp "OTP?: " one_time_password
 
 config_file="$HOME/pers/secrets/vpn/credentials.cfg"
-sudo openfortivpn "vpn-${region}.internetbrands.com:443" -c "${config_file}" -o "${one_time_password}" &
+sudo openfortivpn "vpn-${region}.internetbrands.com:443" \
+  -c "${config_file}" \
+  -o "${one_time_password}" &
 disown
-
