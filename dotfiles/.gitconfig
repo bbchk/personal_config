@@ -27,6 +27,12 @@
   dft = -c diff.external=difft diff
   dl = -c diff.external=difft log -p --ext-diff
   dsh = -c diff.external=difft -c difftool.prompt=false show --ext-diff
+
+  acp = "!f() { \
+      git add . && \
+      git commit -m \"$1\" && \
+      git push; \
+  }; f"
 [pager]
 	branch = false
 [color]

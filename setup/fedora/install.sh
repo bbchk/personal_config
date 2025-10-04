@@ -56,7 +56,6 @@ PKGS=(
 
   # Text Editors & Development Environment
   neovim
-  tmux
   fzf
   gh
   tree

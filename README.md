@@ -47,13 +47,3 @@
 <!-- - I don't want to presss space all the time in normal mode! we need to define diffrent leader. normal mode specifically for actions. make single leader key in both zsh and nvim -->
 - make it so when CI_COOMIT file closed, run git status
 - hotkeys for the most frequetn git commands
-
-create git alias for yolo git commiting and pushing
-
-with neovim tabs and neovim terminal, I could fully get rid of tmux?
-
-<!-- how to use terminal in nvim? -->
-
-on sessionizer, 
-open specific folder, open nvim with two tabs, with focus on first tab where terminal is opne and second tab where telescope alrady open
-

@@ -37,7 +37,8 @@ main() {
   nvim \
     +terminal \
     +tabnew \
-    +"lua require('oil').open(vim.loop.cwd())"
+    +"lua require('oil').open(vim.loop.cwd())" \
+    +"Telescope find_files"
 }
 
 main "$@"
