@@ -23,16 +23,65 @@ return {
 				},
 				lualine_b = {
 					{
+						-- A more efficient and robust function to get the Git repository's root directory name.
+						function()
+							-- Helper function to run a shell command and return its output,
+							-- trimmed of any leading/trailing whitespace.
+							-- Returns nil if the command fails or produces no output.
+							local function run_cmd(cmd)
+								local handle = io.popen(cmd .. " 2>/dev/null") -- Redirect stderr to null
+								if not handle then
+									return nil
+								end
+								local output = handle:read("*a")
+								handle:close()
+
+								if output and output ~= "" then
+									-- Trim whitespace (including the trailing newline)
+									return output:match("^%s*(.-)%s*$")
+								end
+								return nil
+							end
+
+							-- Helper function to extract the last component of a path (basename).
+							local function basename(path)
+								if not path then
+									return nil
+								end
+								-- Matches the last sequence of characters that are not a slash.
+								return path:match("([^/]+)$")
+							end
+
+							-- Main logic:
+							-- git rev-parse --show-toplevel works for both standard and bare repositories,
+							-- returning the root directory path. This avoids running two separate commands.
+							local git_root = run_cmd("git rev-parse --show-toplevel")
+
+							if not git_root then
+								return "" -- Not in a git repo or git command failed, show nothing.
+							end
+
+							local repo_name = basename(git_root)
+							if repo_name then
+								-- Note: Ensure you have a Nerd Font installed for the '' icon to display correctly.
+								return "⌂ " .. repo_name
+							end
+
+							return "" -- Fallback in case basename fails.
+						end,
+						color = { fg = "#A6E22E", bg = "transparent" },
+					},
+					{
 						"branch",
 						color = { fg = "#A6E22E", bg = "transparent" },
 					},
+				},
+				lualine_c = {
 					{
 						"location",
 						color = { fg = "#A6E22E", bg = "#2E3440" },
 					},
 				},
-
-				lualine_c = {},
 
 				lualine_x = {
 					{
