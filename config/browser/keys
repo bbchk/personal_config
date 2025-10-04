@@ -18,8 +18,8 @@ unmap K
 map K goForward
 
 # Omnibar
-unmap u
-map u Vomnibar.activateTabSelection
+unmap m
+map m Vomnibar.activateTabSelection
 unmap o
 map o Vomnibar.activateInNewTab
 unmap O

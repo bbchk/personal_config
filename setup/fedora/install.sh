@@ -53,6 +53,7 @@ PKGS=(
   docker
   docker-compose
   ShellCheck
+  keepassxc
 
   # Text Editors & Development Environment
   neovim
