@@ -24,6 +24,10 @@ gsettings org.gnome.desktop.wm.keybindings "move-to-workspace-10" "['<Shift><Sup
 gsettings set org.gnome.desktop.wm.keybindings switch-to-workspace-left "['<Super><Shift>h']"
 gsettings set org.gnome.desktop.wm.keybindings switch-to-workspace-right "['<Super><Shift>l']"
 
+gsettings set org.gnome.desktop.wm.keybindings minimize "[]"
+gsettings set org.gnome.desktop.wm.keybindings cycle-windows "['<Super>h']"
+gsettings set org.gnome.desktop.wm.keybindings cycle-windows-backward "['<Super>h']"
+
 # ---- Windows below -------------------------------
 
 gsettings org.gnome.shell.keybindings toggle-message-tray "[]"
