@@ -1,0 +1,33 @@
+# == audio ===============
+
+# Alacritty does not have built-in audio bell control.
+# However, you can disable the visual bell in the behavior section.
+bell:
+  enabled: false
+
+# == looks ===============
+
+# Set the font and font size
+font:
+  normal:
+    family: Fira Code, "Font Awesome", "MesloLGS NF"
+    style: Regular
+  size: 14.0
+
+# Background opacity (Alacritty supports opacity settings in colors)
+colors:
+  primary:
+    background: '0x000000'  # Black background
+    foreground: '0xFFFFFF'  # White text
+
+  # Transparent background (full opacity) equivalent to kitty.conf's `background_opacity 1.0`
+  background_opacity: 1.0
+
+# Window decorations (to hide window decorations)
+window:
+  decorations: none
+
+# == behaviour ===============
+
+# Disable OS window close confirmation (Alacritty does not ask for confirmation by default)
+confirm_quit: false

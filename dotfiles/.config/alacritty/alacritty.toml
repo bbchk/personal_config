@@ -1,0 +1,13 @@
+# [colors.primary]
+# background = "0x000000"
+# foreground = "0xFFFFFF"
+#
+[font]
+size = 14.0
+#
+# [font.normal]
+# family = 'Fira Code, "Font Awesome", "MesloLGS NF"'
+# style = "Regular"
+#
+[window]
+decorations = "none"
