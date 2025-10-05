@@ -23,6 +23,7 @@ PKGS=(
   golang
   julia
   php-xdebug
+  xclip
 
   # Development Libraries
   openssl-devel
