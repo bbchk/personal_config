@@ -48,13 +48,16 @@ return {
 								if not path then
 									return nil
 								end
-								-- Matches the last sequence of characters that are not a slash.
-								return path:match("([^/]+)$")
-							end
 
-							-- Main logic:
-							-- git rev-parse --show-toplevel works for both standard and bare repositories,
-							-- returning the root directory path. This avoids running two separate commands.
+                for part in path:gmatch("[^/]+") do
+                  if part:match("%.git$") then
+                    return part:sub(1, -5)  -- Strip the last 4 characters (".git")
+                  end
+                end
+
+                return path:match("([^/]+)$")
+              end
+
 							local git_root = run_cmd("git rev-parse --show-toplevel")
 
 							if not git_root then
