@@ -15,14 +15,14 @@ function _G.Tabline()
       if dirname ~= "" then
         name = "🖿" .. dirname
       else
-        name = "dir-view"
+        name = "[DIR]"
       end
     else
       local filename = vim.fn.expand("#" .. buf .. ":t")
       if filename ~= "" then
         name = "🗎" .. filename
       else
-        name = "[No Name]"
+        name = "[FILE]"
       end
     end
 
