@@ -42,8 +42,8 @@ if [[ -n $SSH_CONNECTION ]]; then
   export EDITOR='vim'
   export MANPAGER="vim +Man!!"
 else
-  export EDITOR='nvim'
-  export MANPAGER="nvim +Man!!"
+  # export EDITOR='nvim'
+  # export MANPAGER="nvim +Man!!"
 fi
 
 # keybindings

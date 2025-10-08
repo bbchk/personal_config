@@ -10,6 +10,7 @@
 </h1>
 
 ## WIP
+
 ## WIP
 
 <!-- Cool ideas, but no use yet or no much benefit yet -->
@@ -31,7 +32,7 @@
 
 ### TODO: nvim :
 
-- research other usefull configurations for .gitconfig that make default git tools better not to install anything third-party 
+- research other usefull configurations for .gitconfig that make default git tools better not to install anything third-party
 
 ### TODO: to learn:
 
@@ -40,6 +41,7 @@
 <!-- TODO: QoL: -->
 
 <!-- - I don't want to presss space all the time in normal mode! we need to define diffrent leader. normal mode specifically for actions. make single leader key in both zsh and nvim -->
+
 - learn fugutive for git in nvim
 
 - make it so sessionizer would take git ssh https or just plain text to create a folder
@@ -50,3 +52,7 @@
 create git alias for yolo git commiting and pushing
 
 learn glab and don't interact with gitlab if not needed
+
+i need to move pager abck to be less
+
+make shift >> << move the tabs in neovim
