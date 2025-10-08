@@ -36,6 +36,8 @@
 
 ### TODO: to learn:
 
+learn glab and don't interact with gitlab if not needed
+
 <!-- limit your search to the certain site, e.g. adding site:stackoverflow.com to your search phrase will limit the search to this site, or site:reddit.com inurl:/r/php to even a single subreddit! -->
 
 <!-- TODO: QoL: -->
@@ -51,8 +53,10 @@
 
 create git alias for yolo git commiting and pushing
 
-learn glab and don't interact with gitlab if not needed
-
 i need to move pager abck to be less
 
-make shift >> << move the tabs in neovim
+put sha into gitsign message
+
+I would like to have java neovim setup
+
+I would like to have containarized neovim setup  

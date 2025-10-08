@@ -1,12 +1,5 @@
 local u = require("utils.index")
 
--- -- Helper function for key mappings
--- local function map(mode, lhs, rhs, opts)
--- 	opts = opts or {}
--- 	opts.silent = true
--- 	vim.keymap.set(mode, lhs, rhs, opts)
--- end
-
 -----------------------------------
 -- Global leader keys
 -----------------------------------
@@ -32,9 +25,8 @@ u.keyset("n", "<C-f>", ":silent !tmux neww tmux-sessionizer<CR>")
 -- GIT
 -----------------------------------
 
+-- TODO: fugitive
 -- map("n", "", ":Gitsigns blame")
---
-
 
 -----------------------------------
 -- Window Management
@@ -69,42 +61,17 @@ u.keyset("n", "<S-h>", ":tabprevious<CR>", { desc = "Next tab" })
 u.keyset("n", "<", ":-tabmove<CR>", { desc = "Move the tab to the left" })
 u.keyset("n", ">", ":+tabmove<CR>", { desc = "Move the tab to the right" })
 
-local function open_oil_in_new_tab()
-    -- Get the name of the buffer where the command was executed (bufnr 0 is the current buffer)
-    local current_file = vim.api.nvim_buf_get_name(0)
-    local buftype = vim.api.nvim_buf_get_option(0, 'buftype')
-    local path_to_open
+u.keyset(
+	"n",
+	"<leader>t",
+	u.fs.open_new_tab_at_same_path,
+	{ remap = false, desc = "Open new tab with at current path" }
+)
 
-    -- Determine the path to open in Oil
-    if current_file ~= "" and buftype ~= 'terminal' and buftype ~= 'nofile' then
-        -- If it's a file buffer, use the file's directory
-        path_to_open = vim.fs.dirname(current_file)
-    else
-        -- If it's a terminal, a new scratch buffer, or an empty buffer, use the current working directory
-        path_to_open = vim.loop.cwd()
-    end
 
-    -- Create a new tab page
-    vim.cmd("tabnew")
-
-    -- Check if the 'oil' plugin is available before calling it
-    if pcall(require, "oil") then
-        require("oil").open(path_to_open)
-    else
-        -- Display an error message if the plugin isn't found
-        vim.cmd('echohl Error | echo "Error: Oil plugin not loaded. Please install oil.nvim." | echohl None')
-    end
-end
-
--- 2. Define the keymap (from your original request)
-vim.keymap.set("n", "<leader>t", open_oil_in_new_tab, { noremap = true, desc = "New tab with Oil filesystem at current path" })
-
--- TODO: with telescope open as well
--- map("n", "<leader>t", ":tabnew | Oil<CR>", { noremap = true, desc = "New tab with Oil filesystem" })
-
+-- TODO: I don't think that I need this because I want to use harpoon
+-- ultimately, so my utilization of tabs should be minimal in the future
 -- map("n", "<leader>TODO", ":tabonly<CR>", { desc = "Tab only" })
-
--- TODO:
 -- Map <M-1..9> to switch to tabs 1..9
 -- for i = 1, 9 do
 -- 	vim.keymap.set("n", "<M-t>" .. i, i .. "gt", { desc = "Go to tab " .. i })

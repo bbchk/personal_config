@@ -3,7 +3,27 @@ local u = require("utils.index")
 return {
 	"lewis6991/gitsigns.nvim",
 	config = function()
+
 		local gitsigns = require("gitsigns")
+
+    -- keymappings ----------------------------
+
+    -- u.keyset('n', '<leader>]', function()
+    --   gitsigns.blame_line({ full = true })
+    -- end)
+    --
+    -- map('n', '<leader>hd', gitsigns.diffthis)
+    --
+    -- map('n', '<leader>hD', function()
+    --   gitsigns.diffthis('~')
+    -- end)
+    --
+    -- map('n', '<leader>hQ', function() gitsigns.setqflist('all') end)
+    -- vim.key.set('n', '<leader>hq', gitsigns.setqflist)
+
+
+    -- config --------------------------------
+
 		gitsigns.setup({
 			signs = {
 				add = { text = "│" },
@@ -51,18 +71,6 @@ return {
 			},
 		})
 
-    -- u.keyset('n', '<leader>]', function()
-    --   gitsigns.blame_line({ full = true })
-    -- end)
-    --
-    -- map('n', '<leader>hd', gitsigns.diffthis)
-    --
-    -- map('n', '<leader>hD', function()
-    --   gitsigns.diffthis('~')
-    -- end)
-    --
-    -- map('n', '<leader>hQ', function() gitsigns.setqflist('all') end)
-    -- vim.key.set('n', '<leader>hq', gitsigns.setqflist)
 
 	end,
 }
