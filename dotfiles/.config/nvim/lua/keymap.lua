@@ -68,7 +68,6 @@ u.keyset(
 	{ remap = false, desc = "Open new tab with at current path" }
 )
 
-
 -- TODO: I don't think that I need this because I want to use harpoon
 -- ultimately, so my utilization of tabs should be minimal in the future
 -- map("n", "<leader>TODO", ":tabonly<CR>", { desc = "Tab only" })
