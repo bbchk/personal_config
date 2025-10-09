@@ -52,9 +52,12 @@ learn glab and don't interact with gitlab if not needed
 
 <!-- for pok openining in new tabs from terminal -->
 <!-- https://github.com/mhinz/neovim-remote -->
+<!-- https://lemmy.world/post/1563173 -->
 
 I would like to have java neovim setup
 fjshdfjhjfdfsj
 I would like to have containarized neovim setup  
 
 we need to bring back tmux sessions
+
+<!-- is there a tool that would check my git messages for proper content? create nvim plugin? -->

@@ -5,6 +5,7 @@
 	editor = nvim
 	sshCommand = ssh -i ~/.ssh/github-2
   fsmonitor = true
+  ; commentChar = ''
 [alias]
 	shl = log --pretty=oneline --abbrev-commit
 
@@ -33,8 +34,8 @@
 	hints = false
   showUntrackedFiles = all
 [commit]
-  ; template = ~/.gitmessage.txt
-  cleanup = whitespace
+  template = ~/pers/dotfiles/.git_commit_msg_template.txt
+  cleanup = strip
 [pager]
 	branch = false
 [advice]
