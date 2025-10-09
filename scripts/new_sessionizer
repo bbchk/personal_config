@@ -1,0 +1,52 @@
+#!/usr/bin/env bash
+# shellcheck disable=SC2155
+
+main() {
+  # Pick a directory interactively
+  session=$(find ~ ~/dev -mindepth 1 -maxdepth 1 -type d ! -name '.*' |
+    fzf --height=80% --margin=25% --border=rounded \
+      --prompt="Workdir?: " --delimiter='/' --with-nth='4..')
+  [ -z "$session" ] && return 0
+
+  # Check if the tmux server is running
+  if ! tmux ls &>/dev/null; then
+    tmux start-server
+  fi
+
+  # Check if the session exists
+  if ! tmux has-session -t "$session" 2>/dev/null; then
+    # tmux new-session -s "$session" -c "$session" -d
+
+    is_bare=$(git rev-parse --is-bare-repository 2>/dev/null)
+
+    if [ "$is_bare" = "true" ]; then
+      source "$HOME/pers/scripts/create_worktree"
+
+      worktree=$(git worktree list --porcelain 2>/dev/null | awk '/worktree /{print $2}' | tail -n1)
+      if [ -n "$worktree" ]; then
+        cd "$worktree" || return 1
+      else
+        echo "Failed to locate a valid worktree."
+        return 1
+      fi
+    fi
+
+    tmux new-session -s "$session" -c "$session" -d
+    tmux send-keys -t "$session" "nvim" C-m
+  fi
+
+  Attach to the tmux session or switch to it
+  if [ -z "$TMUX" ]; then
+    tmux attach-session -t "$session"
+  else
+    tmux switch-client -t "$session"
+  fi
+
+  # nvim \
+  #   +terminal \
+  #   +tabnew \
+  #   +"lua require('oil').open(vim.loop.cwd())" \
+  #   +"Telescope find_files"
+}
+
+main "$@"
