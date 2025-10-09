@@ -63,6 +63,7 @@ PKGS=(
   gh
   tree
   kitty
+  tmux
 
   # Shell & Terminal
   zsh
