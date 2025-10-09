@@ -37,7 +37,14 @@ export LANG=en_US.UTF-8
 
 export LESS='-R'
 
-export EDITOR='vim'
+# Preferred editor for local and remote sessions
+if [[ -n $SSH_CONNECTION ]]; then
+  export EDITOR='vim'
+  export MANPAGER="vim +Man!!"
+else
+  export EDITOR='nvim'
+  export MANPAGER="nvim +Man!!"
+fi
 
 # keybindings
 bindkey -s '^f' '^utmux-sessionizer\n'
