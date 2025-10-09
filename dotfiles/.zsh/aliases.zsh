@@ -5,9 +5,6 @@ alias irb='irb --simple-prompt'
 alias k='kubectl'
 
 # IDEs
-alias vim='nvim'
-alias v='nvim'
-alias vi='nvim'
 alias code="code --profile main"
 
 # Misc

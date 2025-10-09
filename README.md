@@ -27,6 +27,7 @@
 
 <!-- TODO: P1 -->
 <!-- - keybindings to open nvim in new tmux pane or open zsh in new tmux panem (ctrl+b is too slow, same time don't remap ctrl+b to keep it as standart) -->
+<!-- - hotkeys for the most frequetn git commands (with nvim fugitive it is reduntand) -->
 
 ## todo
 
@@ -44,19 +45,16 @@ learn glab and don't interact with gitlab if not needed
 
 <!-- - I don't want to presss space all the time in normal mode! we need to define diffrent leader. normal mode specifically for actions. make single leader key in both zsh and nvim -->
 
-- learn fugutive for git in nvim
 
 - make it so sessionizer would take git ssh https or just plain text to create a folder
+- i need to move pager abck to be less
+- learn fugutive for git in nvim
 
-- make it so when CI_COOMIT file closed, run git status
-- hotkeys for the most frequetn git commands
-
-create git alias for yolo git commiting and pushing
-
-i need to move pager abck to be less
-
-put sha into gitsign message
+<!-- for pok openining in new tabs from terminal -->
+<!-- https://github.com/mhinz/neovim-remote -->
 
 I would like to have java neovim setup
-
+fjshdfjhjfdfsj
 I would like to have containarized neovim setup  
+
+we need to bring back tmux sessions
