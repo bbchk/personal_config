@@ -44,3 +44,4 @@ P1
 
 - make it so sessionizer would take git ssh https or just plain text to create a folder
 - we need to bring back tmux sessions in sessionizer
+- remove default gnome keybind to lock the screen 
