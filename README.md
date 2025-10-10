@@ -25,11 +25,15 @@
 
 ### TODO: nvim :
 
+P0
 - Learn how to use nvim harpoon
 - Learn how to use nvim fugitive
-- Find comfortable leader key instead of <space>.
 - I would like to have java neovim setup
 - I would like to have containarized neovim setup  
+
+P1
+- Find comfortable leader key instead of <space>.
+- make alt+1 work for tabs
 
 ### TODO: to learn:
 
