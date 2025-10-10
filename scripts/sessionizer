@@ -1,35 +1,52 @@
 #!/usr/bin/env bash
 # shellcheck disable=SC2155
 
+NVIM_SERVER=$1
+
 main() {
-  # Pick a directory interactively
-  session=$(find ~ ~/dev -mindepth 1 -maxdepth 1 -type d ! -name '.*' \
-    | fzf --height=80% --margin=25% --border=rounded \
-    --prompt="Workdir?: " --delimiter='/' --with-nth='4..')
-
-  [ -z "$session" ] && return 0
-
-  cd "$session" || return 1
-
-  is_bare=$(git rev-parse --is-bare-repository 2>/dev/null)
-
-  if [ "$is_bare" = "true" ]; then
-    source "$HOME/pers/scripts/create_worktree"
-
-    worktree=$(git worktree list --porcelain 2>/dev/null | awk '/worktree /{print $2}' | tail -n1)
-    if [ -n "$worktree" ]; then
-      cd "$worktree" || return 1
-    else
-      echo "Failed to locate a valid worktree."
-      return 1
-    fi
+  if ! tmux ls &>/dev/null; then
+    tmux start-server
   fi
 
-  nvim \
-    +terminal \
-    +tabnew \
-    +"lua require('oil').open(vim.loop.cwd())" \
-    +"Telescope find_files"
+  session=$(find ~ ~/dev -mindepth 1 -maxdepth 1 -type d ! -name '.*' |
+    fzf --height=80% --margin=25% --border=rounded \
+      --prompt="Workdir?: " --delimiter='/' --with-nth='4..')
+
+  if [ -z "$NVIM_SERVER" ] && [ -z "$session" ]; then
+     return 0
+  fi
+
+  local tmux_session_name=$(basename "$session" | tr '.' '_')
+
+  if ! tmux has-session -t "$tmux_session_name" 2>/dev/null; then
+    tmux new-session -s "$tmux_session_name" -c "$session" -d
+    tmux send-keys -t "$tmux_session_name" "SESSIONIZER_START=true nvim" C-m
+  fi
+
+  if [ -z "$TMUX" ]; then
+    tmux attach-session -t "$tmux_session_name"
+  else
+    current_session_name=$(tmux display-message -p '#S')
+    if [ -n "$NVIM_SERVER" ] && [ "$current_session_name" != "$tmux_session_name" ]; then
+      nvim --server "$NVIM_SERVER" --remote-send '<Esc>:q<CR>'
+    fi
+    tmux switch-client -t "$tmux_session_name"
+  fi
 }
 
 main "$@"
+
+# TODO: implement support for bare repos
+  # is_bare=$(git rev-parse --is-bare-repository 2>/dev/null)
+  #
+  # if [ "$is_bare" = "true" ]; then
+  #   source "$HOME/pers/scripts/create_worktree"
+  #
+  #   worktree=$(git worktree list --porcelain 2>/dev/null | awk '/worktree /{print $2}' | tail -n1)
+  #   if [ -n "$worktree" ]; then
+  #     cd "$worktree" || return 1
+  #   else
+  #     echo "Failed to locate a valid worktree."
+  #     return 1
+  #   fi
+  # fi

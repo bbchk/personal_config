@@ -1,4 +1,4 @@
-local sessionizer_script = vim.fn.expand('~/pers/scripts/new_sessionizer') -- Adjust if your path is different
+local sessionizer_script = vim.fn.expand('~/pers/scripts/sessionizer') -- Adjust if your path is different
 
 -- Create the :Sessionizer user command
 vim.api.nvim_create_user_command('Sessionizer', function()
