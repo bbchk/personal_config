@@ -100,13 +100,12 @@ EOL
   gsettings set org.gnome.settings-daemon.plugins.media-keys.custom-keybinding:$CUSTOM_KEYBINDING_1 binding '<Super>f'
 
   # --- Configure the second shortcut: <Super>d ---
-  gsettings set org.gnome.settings-daemon.plugins.media-keys.custom-keybinding:$CUSTOM_KEYBINDING_2 name 'NEW Sessionizer'
-  gsettings set org.gnome.settings-daemon.plugins.media-keys.custom-keybinding:$CUSTOM_KEYBINDING_2 command "kitty -e $HOME/pers/scripts/new_sessionizer"
-  gsettings set org.gnome.settings-daemon.plugins.media-keys.custom-keybinding:$CUSTOM_KEYBINDING_2 binding '<Super>d'
+  # gsettings set org.gnome.settings-daemon.plugins.media-keys.custom-keybinding:$CUSTOM_KEYBINDING_2 name 'NEW Sessionizer'
+  # gsettings set org.gnome.settings-daemon.plugins.media-keys.custom-keybinding:$CUSTOM_KEYBINDING_2 command "kitty -e $HOME/pers/scripts/new_sessionizer"
+  # gsettings set org.gnome.settings-daemon.plugins.media-keys.custom-keybinding:$CUSTOM_KEYBINDING_2 binding '<Super>d'
 
   echo "Successfully configured two custom keybindings:"
   echo "- <Super>f for 'Sessionizer'"
-  echo "- <Super>d for 'NEW Sessionizer'"
   ;;
 
 esac

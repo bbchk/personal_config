@@ -99,16 +99,6 @@ u.keyset("n", "о", "j") -- Move down
 u.keyset("n", "р", "h") -- Move left
 
 -----------------------------------
--- Telescope Integration
------------------------------------
-
--- # TODO: Should be in telescope file?
-u.keyset("n", "<leader>f", "<cmd>Telescope find_files<cr>")
-u.keyset("n", "<leader>fg", "<cmd>Telescope live_grep<cr>")
-u.keyset("n", "<leader>fb", "<cmd>Telescope buffers<cr>")
-u.keyset("n", "<leader>fh", "<cmd>Telescope help_tags<cr>")
-
------------------------------------
 -- Enhanced Default Mappings
 -----------------------------------
 
