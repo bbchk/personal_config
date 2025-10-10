@@ -26,10 +26,12 @@
 ### TODO: nvim :
 
 P0
+- syntax highlighting for helm go templates
 - Learn how to use nvim harpoon
 - Learn how to use nvim fugitive
 - I would like to have java neovim setup
 - I would like to have containarized neovim setup  
+- Learn how to reload configuration full not exiting the nvim 
 
 P1
 - Find comfortable leader key instead of <space>.

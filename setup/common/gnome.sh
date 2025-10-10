@@ -26,6 +26,7 @@ gsettings set org.gnome.desktop.wm.keybindings switch-to-workspace-left "['<Supe
 gsettings set org.gnome.desktop.wm.keybindings switch-to-workspace-right "['<Super><Shift>l']"
 
 gsettings set org.gnome.desktop.wm.keybindings minimize "[]"
+# we need to unset super l first
 gsettings set org.gnome.desktop.wm.keybindings cycle-windows "['<Super>l']"
 gsettings set org.gnome.desktop.wm.keybindings cycle-windows-backward "['<Super>h']"
 
