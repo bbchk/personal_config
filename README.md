@@ -23,28 +23,20 @@
 <!-- https://github.com/mhinz/neovim-remote -->
 <!-- https://lemmy.world/post/1563173 -->
 
-<!-- TODO: P1 -->
-<!-- - hotkeys for the most frequetn git commands (with nvim fugitive it is reduntand) -->
-
 ### TODO: nvim :
 
-<!-- - Learn how to use nvim harpoon -->
-<!-- - Learn how to use nvim fugitive -->
-<!-- - Find comfortable leader key instead of <space>. -->
+- Learn how to use nvim harpoon
+- Learn how to use nvim fugitive
+- Find comfortable leader key instead of <space>.
+- I would like to have java neovim setup
+- I would like to have containarized neovim setup  
 
 ### TODO: to learn:
 
-<!-- learn glab and don't interact with gitlab if not needed -->
-<!-- limit your search to the certain site, e.g. adding site:stackoverflow.com to your search phrase will limit the search to this site, or site:reddit.com inurl:/r/php to even a single subreddit! -->
+- learn glab and don't interact with gitlab if not needed
+- limit your search to the certain site, e.g. adding site:stackoverflow.com to your search phrase will limit the search to this site, or site:reddit.com inurl:/r/php to even a single subreddit!
 
 ### TODO: QoL:
 
 - make it so sessionizer would take git ssh https or just plain text to create a folder
-- i need to move pager abck to be less
-- learn fugutive for git in nvim
-
-
-I would like to have java neovim setup
-I would like to have containarized neovim setup  
-
-we need to bring back tmux sessions
+- we need to bring back tmux sessions in sessionizer
