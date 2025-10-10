@@ -18,29 +18,32 @@ require("core.filetypes")
 require("core.terminal")
 require("core.tabs")
 
+require("utils.sessionizer")
+
 require("options")
 require("plugin_manager")
 
 
-
-
 if vim.env.SESSIONIZER_START == "true" then
-  -- Create an autocommand that runs only once when the UI is stable
-  vim.api.nvim_create_autocmd("UIEnter", {
+  vim.api.nvim_create_autocmd("VimEnter", {
     pattern = "*",
     once = true,
     callback = function()
+      -- The key change is using "VimEnter" instead of "UIEnter".
+      -- This event fires even when Neovim starts in the background.
+
+      -- 1. Open a terminal in the first tab.
       vim.cmd("terminal")
 
+      -- 2. Open a new tab (Neovim will focus it automatically).
       vim.cmd("tabnew")
 
-      vim.cmd("Oil")
-
-      -- 4. CRITICAL: Defer the interactive command (Telescope)
-      --    to give the UI time to draw the Oil buffer first.
+      -- 3. Defer the interactive command to ensure the UI
+      --    has had a chance to process the previous commands.
       vim.defer_fn(function()
+        vim.cmd("Oil")
         vim.cmd("Telescope find_files")
-      end, 50) -- 50ms is usually a safe delay
+      end, 50) -- 50ms delay is a safe bet
     end,
   })
 end

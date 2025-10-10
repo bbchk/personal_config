@@ -1,8 +1,10 @@
 #!/usr/bin/env bash
 # shellcheck disable=SC2155
 
+# The server name of the calling nvim instance is passed as the first argument
+NVIM_SERVER=$1
+
 main() {
-  # Pick a directory interactively
   session=$(find ~ ~/dev -mindepth 1 -maxdepth 1 -type d ! -name '.*' |
     fzf --height=80% --margin=25% --border=rounded \
       --prompt="Workdir?: " --delimiter='/' --with-nth='4..')
@@ -10,14 +12,37 @@ main() {
 
   local tmux_session_name=$(basename "$session" | tr '.' '_')
 
-  # Check if the tmux server is running
+  if [ -n "$TMUX" ]; then
+    current_session_name=$(tmux display-message -p '#S')
+    if [ "$current_session_name" == "$tmux_session_name" ]; then
+      exit 0 # Do nothing if selecting the current session
+    fi
+  fi
+
   if ! tmux ls &>/dev/null; then
     tmux start-server
   fi
 
-  # Check if the session exists
-  # if ! tmux has-session -t "$session" 2>/dev/null; then
-  # tmux new-session -s "$session" -c "$session" -d
+  if ! tmux has-session -t "$tmux_session_name" 2>/dev/null; then
+    tmux new-session -s "$tmux_session_name" -c "$session" -d
+    tmux send-keys -t "$tmux_session_name" "SESSIONIZER_START=true nvim" C-m
+  fi
+
+  if [ -z "$TMUX" ]; then
+    tmux attach-session -t "$tmux_session_name"
+  else
+    if [ -n "$NVIM_SERVER" ]; then
+      # 2. Tell the original Neovim to quit cleanly.
+      # --server specifies the target instance.
+      # --remote-send sends keystrokes. We send Escape, then :qa, then Enter.
+      nvim --server "$NVIM_SERVER" --remote-send '<Esc>:q<CR>'
+    fi
+    tmux switch-client -t "$tmux_session_name"
+  fi
+}
+
+main "$@"
+
 
   # is_bare=$(git rev-parse --is-bare-repository 2>/dev/null)
   #
@@ -32,29 +57,3 @@ main() {
   #     return 1
   #   fi
   # fi
-
-  # tmux new-session -s "$session" -c "$session" -d
-  # tmux send-keys -t "$session" "nvim +terminal +tabnew +Oil +Telescope" C-m
-  #   tmux send-keys -t "$session" "SESSIONIZER_START=1 nvim +terminal +tabnew +Oil" C-m
-  # fi
-
-  # Check if the session exists
-  if ! tmux has-session -t "$tmux_session_name" 2>/dev/null; then
-    # Create the new session, setting the working directory
-    tmux new-session -s "$tmux_session_name" -c "$session" -d
-
-    # Send the command to Neovim.
-    # We set an environment variable SESSIONIZER_START=1 that our nvim config can detect.
-    # This is more reliable than sending multiple commands.
-    tmux send-keys -t "$tmux_session_name" "SESSIONIZER_START=true nvim" C-m
-  fi
-
-  # Attach to the tmux session or switch to it
-  if [ -z "$TMUX" ]; then
-    tmux attach-session -t "$tmux_session_name"
-  else
-    tmux switch-client -t "$tmux_session_name"
-  fi
-}
-
-main "$@"

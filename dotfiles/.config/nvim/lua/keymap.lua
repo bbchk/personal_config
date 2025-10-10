@@ -20,11 +20,9 @@ u.keyset("n", "<leader>q", "<CMD>q!<CR>")
 u.keyset("n", "<leader>ww", "<CMD>write<CR>")
 u.keyset("n", "<leader>w", "<CMD>noautocmd write<CR>")
 
-u.keyset("n", "<C-f>", ":silent !tmux neww tmux-sessionizer<CR>")
+-- u.keyset("n", "<C-f>", ":silent !tmux neww tmux-sessionizer<CR>")
 
-vim.keymap.set("n", "<C-f>", function()
-    vim.cmd("tabnew | terminal $HOME/pers/scripts/sessionizer")
-end, { desc = "Open tmux sessionizer in new terminal split" })
+u.keyset("n", "<C-f>", "<cmd>Sessionizer<CR>", { desc = "Open [S]essionizer" })
 -- GIT
 -----------------------------------
 
