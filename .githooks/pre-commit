@@ -5,6 +5,7 @@ set -euo pipefail
 # ====================================
 #
 # TODO: if there are no files to encrypt or decrypt, we don't need password file and skip hooks altogether
+# TODO: we don't support deletion of secrets
 
 main() {
   echo "======= pre-commit started ======="
