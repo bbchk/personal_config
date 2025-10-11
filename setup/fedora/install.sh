@@ -25,6 +25,8 @@ PKGS=(
   php-xdebug
   xclip
   glab
+  rustfmt
+  isort
 
   # Development Libraries
   openssl-devel
