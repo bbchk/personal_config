@@ -34,6 +34,7 @@ P0
 - I would like to have containarized neovim setup  
 - Learn how to reload configuration full not exiting the nvim 
 
+
 P1
 - Learn how to use nvim harpoon
 - Learn how to use nvim fugitive
@@ -46,3 +47,5 @@ P1
 <!-- - limit your search to the certain site, e.g. adding site:stackoverflow.com to your search phrase will limit the search to this site, or site:reddit.com inurl:/r/php to even a single subreddit! -->
 <!---->
 ### TODO: QoL:
+
+remap backspace to smth else that caps lock, ban ordianry esc and control
