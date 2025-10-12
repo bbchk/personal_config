@@ -23,7 +23,7 @@
 
 [pull]
 	rebase = true
-  ff = only
+  ; ff = only
 [diff]
   wsErrorHighlight = all
   renames = true
