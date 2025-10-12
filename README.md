@@ -65,7 +65,7 @@ eggs
 
 can i melt glass with gas flame shooter?
 
-- embed in steel frame?
+- embed in steel frame? YES on the middle with resin for vibration resistance
 - we need vibration resistence
 - we need some template that we could fill with resin and cut if off after two glass pieces are bond
 - go to epicenter and ask an advice
