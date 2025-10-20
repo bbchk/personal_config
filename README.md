@@ -50,16 +50,8 @@ P1
 ### TODO: QoL:
 
 remap backspace to smth else that caps lock, ban ordianry esc and control
+use normal lsp and formatter for html
 
-pay taxes - after lunch
-
-pay apartment rent - before lunch
-
-buy groceries for the whole week - after lunch
-
-cook some food for tomorrow - after lunch
-
-eggs
 
 ### logo creation
 

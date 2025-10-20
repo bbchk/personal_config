@@ -14,7 +14,7 @@ setopt HIST_IGNORE_DUPS
 setopt HIST_IGNORE_ALL_DUPS
 
 export PATH="$HOME/.symfony5/bin:$PATH"
-export JAVA_HOME="/usr/lib/jvm/java-17-openjdk-amd64"
+export JAVA_HOME="/usr/lib/jvm/java-21-openjdk"
 export PATH=$JAVA_HOME/bin:$PATH
 
 export GOROOT=/usr/lib

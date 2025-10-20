@@ -17,7 +17,7 @@ return {
 			tb.find_files({ find_command = { "rg", "--files", "--hidden", "-g", "!.git" } })
 		end)
 
-		u.keyset("n", ",", tb.live_grep)
+		u.keyset("n", ".", tb.live_grep)
 
 		u.keyset("n", "<leader>fb", tb.buffers)
 
