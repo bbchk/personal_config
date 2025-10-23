@@ -89,3 +89,20 @@ case "$extensions_y_n" in
   done
   ;;
 esac
+
+# gsettings set org.gnome.shell.extensions.pop-shell activate-launcher "[]"
+# gsettings set org.gnome.shell.extensions.pop-shell focus-down "[]"
+# gsettings set org.gnome.shell.extensions.pop-shell focus-left "[]"
+# gsettings set org.gnome.shell.extensions.pop-shell focus-right "[]"
+# gsettings set org.gnome.shell.extensions.pop-shell focus-up "[]"
+# gsettings set org.gnome.shell.extensions.pop-shell pop-monitor-down "[]"
+# gsettings set org.gnome.shell.extensions.pop-shell pop-monitor-left "[]"
+# gsettings set org.gnome.shell.extensions.pop-shell pop-monitor-right "[]"
+# gsettings set org.gnome.shell.extensions.pop-shell pop-monitor-up "[]"
+# gsettings set org.gnome.shell.extensions.pop-shell pop-workspace-down "[]"
+# gsettings set org.gnome.shell.extensions.pop-shell pop-workspace-up "[]"
+# gsettings set org.gnome.shell.extensions.pop-shell tile-enter "[]"
+# gsettings set org.gnome.shell.extensions.pop-shell tile-orientation "[]"
+# gsettings set org.gnome.shell.extensions.pop-shell toggle-floating "[]"
+# gsettings set org.gnome.shell.extensions.pop-shell toggle-stacking-global "[]"
+# gsettings set org.gnome.shell.extensions.pop-shell toggle-tiling "[]"

@@ -11,6 +11,12 @@
 
 ## WIP
 
+travel
+Сережки довгі
+Гаманець
+Стікери об'ємний
+Фотки наші роздрукувати
+
 ## WIP
 
 <!-- Cool ideas, but no use yet or no much benefit yet -->
@@ -74,3 +80,4 @@ Work flat and level on a padded surface.
 Use temporary supports, clamps, or spacers (e.g
 
 frost the glass for diffused light  
+
