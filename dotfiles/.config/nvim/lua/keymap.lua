@@ -75,7 +75,7 @@ u.keyset(
 -- Map <M-1..9> to switch to tabs 1..9
 
 for i = 1, 9 do
-	vim.keymap.set("n", "<M->" .. i, i .. "gt", { desc = "Go to tab " .. i })
+	u.keyset("n", "<C-" .. i .. ">", i .. "gt", { desc = "Go to tab " .. i })
 end
 
 -----------------------------------
