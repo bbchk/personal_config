@@ -2,7 +2,6 @@
 \x on
 
 \pset pager always
-\setenv PAGER 'nvim -R -c "set nowrap"'
 \timing
 
 \pset null '∎'
