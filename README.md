@@ -57,27 +57,3 @@ P1
 
 remap backspace to smth else that caps lock, ban ordianry esc and control
 use normal lsp and formatter for html
-
-
-### logo creation
-
-can i melt glass with gas flame shooter?
-
-- embed in steel frame? YES on the middle with resin for vibration resistance
-- we need vibration resistence
-- we need some template that we could fill with resin and cut if off after two glass pieces are bond
-- go to epicenter and ask an advice
-
-Structural Silicone Adhesive
-
-Cleanliness determines 80% of bond quality.
-Degrease all glass surfaces using isopropyl alcohol (IPA).
-Dry thoroughly — no dust, fingerprints, or oil.
-Lightly roughen the contact edge (optional) using 400–600 grit sandpaper for stronger adhesion (only if edges are hidden).
-Wipe again with isopropyl alchogol.
-
-Work flat and level on a padded surface.
-Use temporary supports, clamps, or spacers (e.g
-
-frost the glass for diffused light  
-

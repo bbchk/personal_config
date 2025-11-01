@@ -8,7 +8,7 @@ main() {
     tmux start-server
   fi
 
-  session=$(find ~ ~/dev -mindepth 1 -maxdepth 1 -type d ! -name '.*' |
+  session=$(find ~ ~/dev/my ~/dev/ib -mindepth 1 -maxdepth 1 -type d ! -name '.*' |
     fzf --height=80% --margin=25% --border=rounded \
       --prompt="Workdir?: " --delimiter='/' --with-nth='4..')
 
