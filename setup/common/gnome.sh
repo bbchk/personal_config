@@ -6,7 +6,7 @@ set -euo pipefail
 
 # ---- Workspaces below -------------------------------
 
-gsettings setorg.gnome.mutter dynamic-workspaces false
+gsettings set org.gnome.mutter dynamic-workspaces false
 gsettings set org.gnome.desktop.wm.preferences num-workspaces "10"
 gsettings set org.gnome.desktop.wm.preferences workspace-names "['1', '2', '3', '4', '5', '6', '7', '8', '9', '10']"
 
