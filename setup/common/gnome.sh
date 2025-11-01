@@ -39,6 +39,8 @@ gsettings set org.gnome.desktop.wm.keybindings close "['<Super>q']"
 
 # ---- Utlis below -------------------------------
 
+gsettings set org.gnome.desktop.input-sources sources "[('xkb', 'us'), ('xkb', 'ua')]"
+
 gsettings set org.gnome.shell.keybindings show-screenshot-ui "['<Super>p']"
 gsettings set org.gnome.settings-daemon.plugins.media-keys screensaver "[]"
 
