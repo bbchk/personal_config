@@ -1,5 +1,7 @@
 #!/usr/bin/env bash
 # shellcheck disable=SC2155
+#
+# so, we need display already create tmxu windows, 
 
 NVIM_SERVER=$1
 
@@ -8,12 +10,15 @@ main() {
     tmux start-server
   fi
 
-  session=$(find ~ ~/dev/my ~/dev/ib -mindepth 1 -maxdepth 1 -type d ! -name '.*' |
+  dirs_to_rec_search=(~ ~/dev/my ~/dev/ib)
+  dirs_to_open=$(find "${dirs_to_rec_search[@]}" -mindepth 1 -maxdepth 1 -type d ! -name '.*')
+
+  session=$(echo "${dirs_to_open[@]}" |
     fzf --height=80% --margin=25% --border=rounded \
       --prompt="Workdir?: " --delimiter='/' --with-nth='4..')
 
   if [ -z "$NVIM_SERVER" ] && [ -z "$session" ]; then
-     return 0
+    return 0
   fi
 
   local tmux_session_name=$(basename "$session" | tr '.' '_')
@@ -37,16 +42,16 @@ main() {
 main "$@"
 
 # TODO: implement support for bare repos
-  # is_bare=$(git rev-parse --is-bare-repository 2>/dev/null)
-  #
-  # if [ "$is_bare" = "true" ]; then
-  #   source "$HOME/pers/scripts/create_worktree"
-  #
-  #   worktree=$(git worktree list --porcelain 2>/dev/null | awk '/worktree /{print $2}' | tail -n1)
-  #   if [ -n "$worktree" ]; then
-  #     cd "$worktree" || return 1
-  #   else
-  #     echo "Failed to locate a valid worktree."
-  #     return 1
-  #   fi
-  # fi
+# is_bare=$(git rev-parse --is-bare-repository 2>/dev/null)
+#
+# if [ "$is_bare" = "true" ]; then
+#   source "$HOME/pers/scripts/create_worktree"
+#
+#   worktree=$(git worktree list --porcelain 2>/dev/null | awk '/worktree /{print $2}' | tail -n1)
+#   if [ -n "$worktree" ]; then
+#     cd "$worktree" || return 1
+#   else
+#     echo "Failed to locate a valid worktree."
+#     return 1
+#   fi
+# fi

@@ -11,11 +11,6 @@
 
 ## WIP
 
-travel
-Сережки довгі
-Гаманець
-Стікери об'ємний
-Фотки наші роздрукувати
 
 ## WIP
 
@@ -35,6 +30,7 @@ travel
 
 P0
 
+as i enter git with sessionize let users pick worktree (without creating new one, itsis manual)
 - syntax highlighting for helm go templates
 - I would like to have java neovim setup
 - I would like to have containarized neovim setup

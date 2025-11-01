@@ -16,13 +16,14 @@ mv "$HOME/Videos" "$HOME/pers/xdg/Videos"
 mv "$HOME/Downloads" "$HOME/downloads"
 
 # Clone frequently worked on projects
-mkdir -p "$HOME/dev/my" "$HOME/dev/ib"
-git clone git@github.com:bbchk/jv-fr.git     "$HOME/dev/my/jv-fr"
-git clone git@github.com:bbchk/avkfe.git     "$HOME/dev/my/avkfe"
-git clone git@github.com:bbchk/scrape.git    "$HOME/dev/my/scrape"
-git clone git@github.com:bbchk/lvfe.git      "$HOME/dev/my/lvfe"
-git clone git@github.com:bbchk/live.git      "$HOME/dev/my/live"
-git clone git@github.com:bbchk/lvbe.git      "$HOME/dev/my/lvbe"
-git clone git@github.com:bbchk/lvops.git     "$HOME/dev/my/lvops"
-git clone git@github.com:bbchk/train.git     "$HOME/dev/my/train"
-git clone git@github.com:bbchk/slugtrans.git "$HOME/dev/my/slugtrans"
+mkdir -p "$HOME/dev/my"
+my_repos=(jv-fr avkfe scrape lvfe live lvbe lvops train slugtrans)
+for r in "${my_repos[@]}"; do
+  git clone --bare -- "git@github.com:bbchk/${r}.git" "$HOME/dev/my/$r"
+done
+
+# mkdir -p "$HOME/dev/ib"
+# ib_repos=()
+# for r in "${ib_repos[@]}"; do
+#   git clone --bare -- "${r}.git" "$HOME/dev/my/$r"
+# done
