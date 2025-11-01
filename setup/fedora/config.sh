@@ -33,6 +33,12 @@ if [[ "$secrets_res" =~ ^[Yy]$ ]]; then
   ln -sf "$HOME/pers/secrets/ssh" "$HOME/.ssh"
 fi
 
+read -rp "Do you set link keepassxc.ini? (y/n): " keepassxc_ini
+if [[ "$keepassxc_ini" =~ ^[Yy]$ ]]; then
+  mkdir -p "$HOME/pers/dotfiles/.config/keepassxc"
+  ln -sf "$HOME/pers/secrets/passwords/keepassxc.ini" "$HOME/pers/dotfiles/.config/keepassxc/keepassxc.ini"
+fi
+
 # ---- networking below ---------------------------
 
 read -rp "Do you want to tweak networking settings? (y/n): " networking_res
