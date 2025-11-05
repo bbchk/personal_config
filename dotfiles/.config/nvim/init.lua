@@ -1,7 +1,7 @@
 --
 --
 --    The dino is friendly!
---    It could bite just to get know ya.
+--    It could bite just to get know you
 --
 --                __
 --               / _)
