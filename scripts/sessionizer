@@ -1,8 +1,6 @@
 #!/usr/bin/env bash
 # shellcheck disable=SC2155
 
-# let sessionizer start shell and then fzf, so I could enter back to term if I need to
-
 NVIM_SERVER=$1
 
 get_bare_repo_session_name() {
