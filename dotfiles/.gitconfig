@@ -20,8 +20,6 @@
 [init]
 	defaultbranch = main
 
-
-
 [pull]
 	rebase = true
   ; ff = only
