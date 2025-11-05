@@ -60,13 +60,9 @@ main() {
 
   local fzf_input=$(echo "$processed_dirs" | sort)
 
-  # session=$(echo "$fzf_input" |
-  #   fzf --height=80% --margin=25% --border=rounded \
-  #     --prompt="Workdir?: " --delimiter='/' --with-nth='4..')
-  #
   session=$(echo "$fzf_input" |
     fzf --height=80% --margin=25% --border=rounded \
-      --prompt="Workdir?: ")
+      --prompt="Workdir?: " --delimiter='/' --with-nth='4..')
 
   if [ -z "$NVIM_SERVER" ] && [ -z "$session" ]; then
     session="${HOME}"
