@@ -7,6 +7,7 @@
   fsmonitor = true
   ; commentChar = ''
 [alias]
+	clonew = "!sh git_clone_for_worktrees"
 	shl = log --pretty=oneline --abbrev-commit
 
   ci = commit -v
