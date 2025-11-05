@@ -20,7 +20,7 @@ mv "$HOME/Downloads" "$HOME/downloads"
 mkdir -p "$HOME/dev/my"
 my_repos=(jv-fr avkfe scrape lvfe live lvbe lvops train slugtrans)
 for r in "${my_repos[@]}"; do
-  git clone --bare -- "git@github.com:bbchk/${r}.git" "$HOME/dev/my/$r"
+  git clonew --bare -- "git@github.com:bbchk/${r}.git" "$HOME/dev/my/$r"
 done
 
 mkdir -p "$HOME/dev/ib"
@@ -117,5 +117,5 @@ developer-platform/ci-cd-gitlab-manifests
 )
 
 for r in "${ib_repos[@]}"; do
-  git clone --bare -- "${r}.git" "$HOME/dev/ib/$r"
+  git clonew --bare -- "${r}.git" "$HOME/dev/ib/$r"
 done

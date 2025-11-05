@@ -1,6 +1,9 @@
 #!/usr/bin/env bash
 # shellcheck disable=SC2155
 
+# TODO: ignore folders in repos that start with `.`
+# let sessionizer start shell and then fzf, so I could enter back to term if I need to
+
 NVIM_SERVER=$1
 
 get_bare_repo_session_name() {
@@ -23,7 +26,7 @@ get_bare_repo_session_name() {
     local found_worktrees=0
 
     while IFS= read -r worktree_path; do
-      if [ -n "$worktree_path" ]; then
+      if [ -n "$worktree_path" ] && [[ ! "$worktree_path" =~ \.bare$ ]]; then
         echo "${worktree_path}" | tr '.' '_'
         found_worktrees=1
       fi
