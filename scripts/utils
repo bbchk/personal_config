@@ -6,3 +6,128 @@ log () {
         echo "[DEBUG] $*"
     fi
 }
+
+# find ~/dev/ib -mindepth 1 -maxdepth 1 -type d | while read r; do
+#     # echo "REPO ${r}"
+#     cd "${r}"
+#     echo "$(git remote get-url origin)"
+# done
+#
+# git@git.internetbrands.com:patient-portal/appointments.git
+# git@git.internetbrands.com:healthone/appointmentservice.git
+# git@github.com:bbchk/avk.git
+# git@github.com:bbchk/avkfe.git
+# git@git.internetbrands.com:smb-portal/billing-invoicing.git
+# git@git.internetbrands.com:healthone/BOS.git
+# git@git.internetbrands.com:healthone/ui/business-portal.git
+# git@git.internetbrands.com:cp/client/call-log.git
+# git@git.internetbrands.com:bbuchok/catalog-test.git
+# git@git.internetbrands.com:smb-platform-services/cdn.git
+# git@git.internetbrands.com:df-smb-devops/helmcharts/cx/cache-service.git
+# git@git.internetbrands.com:df-smb-devops/helmcharts/cdn.git
+# git@git.internetbrands.com:df-smb-devops/helmcharts/integration.git
+# git@git.internetbrands.com:df-smb-devops/helmcharts/provider.git
+# git@git.internetbrands.com:df-smb-devops/helmcharts/secure-forms.git
+# git@git.internetbrands.com:df-smb-devops/helmcharts/secure-messaging.git
+# git@git.internetbrands.com:df-smb-devops/helmcharts/sonarqube10.git
+# git@git.internetbrands.com:df-smb-devops/helmchart-prod/secure-forms.git
+# git@git.internetbrands.com:df-smb-devops/helmchart-stg/secure-forms.git
+# git@git.internetbrands.com:df-smb-devops/helmchart-stg/secure-messaging.git
+# git@git.internetbrands.com:smb-portal/clamav-ds.git
+# git@git.internetbrands.com:healthone/consumerservice/consumer-api-v2.git
+# git@git.internetbrands.com:yggdrasil/consumer-portal.git
+# git@git.internetbrands.com:smb/dns.git
+# git@git.internetbrands.com:developer-platform/docker-base.git
+# git@git.internetbrands.com:smb/document-store.git
+# git@git.internetbrands.com:smb/domreg.git
+# git@git.internetbrands.com:smb/domreg.git
+# git@git.internetbrands.com:cp/smbdesk/electrodesk.git
+# git@git.internetbrands.com:healthone/elasticsearch-indexer.git
+# git@git.internetbrands.com:cp/smbdesk/electrodesk.git
+# git@git.internetbrands.com:smb/encryptor.git
+# git@git.internetbrands.com:ike-migrations/forno.git
+# git@git.internetbrands.com:smb-portal/standalone/webmd/ga-campaign.git
+# git@git.internetbrands.com:smb-portal/standalone/webmd/ga-overview.git
+# git@git.internetbrands.com:developer-platform/vendor-images/gitlab-cli.git
+# git@git.internetbrands.com:cp/devops/gitlab-templates.git
+# git@github.com:sinclairtarget/git-who.git
+# git@git.internetbrands.com:df-smb-devops/helmcharts/elasticsearch-indexer.git
+# git@git.internetbrands.com:df-smb-devops/helmcharts/form-leads.git
+# git@github.com:SonarSource/helm-chart-sonarqube.git
+# git@git.internetbrands.com:developer-platform/helm-charts/helm-provisioner-shims/hop-provisioner.git
+# git@git.internetbrands.com:smb/ibconnect-client.git
+# git@git.internetbrands.com:df/ib-graph.git
+# git@git.internetbrands.com:df/ib-graph-gateway.git
+# git@git.internetbrands.com:corp/levelup/ib-learning-paths.git
+# git@git.internetbrands.com:cp/ib-not-a-robot.git
+# git@git.internetbrands.com:developer-platform/scripts/ike-cleaner.git
+# git@git.internetbrands.com:healthone/sonarqube.git
+# git@git.internetbrands.com:developer-platform/minimal-examples/ike-laravel-examples.git
+# git@git.internetbrands.com:developer-platform/ike-migrator.git
+# git@git.internetbrands.com:developer-platform/helm-charts/ike-service.git
+# git@git.internetbrands.com:developer-platform/helm-charts/ike-service.git
+# git@git.internetbrands.com:bbuchok/ike-sonarqube.git
+# git@git.internetbrands.com:healthone/integration.git
+# git@git.internetbrands.com:smb-platform-services/iss-checker.git
+# git@git.internetbrands.com:developer-platform/jenkins-build-helpers.git
+# git@git.internetbrands.com:developer-platform/ike/ike-standards/job-server-configuration.git
+# git@github.com:bbchk/jv-fr.git
+# git@git.internetbrands.com:developer-platform/k8s-deploy.git
+# git@git.internetbrands.com:developer-platform/vendor-images/k8s-wait-for.git
+# https://github.com/rvaiya/keyd
+# git@git.internetbrands.com:smb/kiosk.git
+# https://github.com/kubernetes/kubernetes.git
+# https://github.com/kelseyhightower/kubernetes-the-hard-way.git
+# git@git.internetbrands.com:smb/larb.git
+# git@git.internetbrands.com:smb/leads.git
+# fatal: not a git repository (or any parent up to mount point /)
+# Stopping at filesystem boundary (GIT_DISCOVERY_ACROSS_FILESYSTEM not set).
+#
+# git@github.com:bbchk/live.git
+# git@git.internetbrands.com:healthone/live-app-server.git
+# git@github.com:bbchk/lvfe.git
+# git@git.internetbrands.com:smb-platform-services/live-pop-hooks.git
+# git@github.com:bbchk/lvbe.git
+# git@github.com:bbchk/lvops.git
+# git@git.internetbrands.com:smb/pms-adjudicator.git
+# git@git.internetbrands.com:smb/pms-writeback.git
+# git@git.internetbrands.com:smb/secure-forms.git
+# git@git.internetbrands.com:healthone/provider-service.git
+# https://github.com/PatrickTulskie/redis-lock.git
+# https://github.com/leandromoreira/redlock-rb.git
+# git@git.internetbrands.com:df/rules-engine.git
+# git@github.com:bbchk/scrape.git
+# git@git.internetbrands.com:smb/secure-forms.git
+# git@git.internetbrands.com:smb/secure-forms-html-templates.git
+# git@git.internetbrands.com:smb/secure-messaging.git
+# git@git.internetbrands.com:healthone/segmentation.git
+# git@git.internetbrands.com:healthone/service-client/service-client.git
+# git@git.internetbrands.com:smb/secure-forms.git
+# git@git.internetbrands.com:smb/secure-forms.git
+# git@git.internetbrands.com:developer-platform/shared-manifests.git
+# git@git.internetbrands.com:developer-platform/ship_it.git
+# git@git.internetbrands.com:df/shorten-url-api.git
+# git@git.internetbrands.com:patient-portal/signup-api.git
+# git@git.internetbrands.com:smb/skynet.git
+# git@github.com:bbchk/slugtrans.git
+# git@git.internetbrands.com:smb-portal/standalone/smbp-ca.git
+# git@git.internetbrands.com:smb-portal/smb-portal.git
+# git@git.internetbrands.com:yggdrasil/smb-sequencer.git
+# git@git.internetbrands.com:smb-platform-services/smb-websockets.git
+# git@git.internetbrands.com:developer-platform/helm-charts/provisioners/solr-provisioner.git
+# error: No such remote 'origin'
+#
+# git@git.internetbrands.com:bbuchok/sonarqube-shared-component.git
+# git@git.internetbrands.com:cp/bff/text-to-pay.git
+# git@github.com:tjdevries/config.nvim.git
+# git@git.internetbrands.com:healthone/userservice.git
+# git@git.internetbrands.com:developer-platform/vendor-images/dind.git
+# git@git.internetbrands.com:developer-platform/vendor-images/docker.git
+# git@git.internetbrands.com:developer-platform/vendor-images/memcached.git
+# git@git.internetbrands.com:smb/webhook-tester.git
+# git@git.internetbrands.com:smb-portal/webscoket-client.git
+# git@git.internetbrands.com:healthone/websocket-service.git
+# git@git.internetbrands.com:smb/yggdrasil.git
+# git@git.internetbrands.com:healthone/cache-service.git
+# git@git.internetbrands.com:developer-platform/ci-cd-gitlab-manifests.git
+# git@git.internetbrands.com:healthone/cache-service.git
