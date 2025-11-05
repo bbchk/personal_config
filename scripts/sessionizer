@@ -1,7 +1,6 @@
 #!/usr/bin/env bash
 # shellcheck disable=SC2155
 
-# TODO: ignore folders in repos that start with `.`
 # let sessionizer start shell and then fzf, so I could enter back to term if I need to
 
 NVIM_SERVER=$1
@@ -61,12 +60,16 @@ main() {
 
   local fzf_input=$(echo "$processed_dirs" | sort)
 
+  # session=$(echo "$fzf_input" |
+  #   fzf --height=80% --margin=25% --border=rounded \
+  #     --prompt="Workdir?: " --delimiter='/' --with-nth='4..')
+  #
   session=$(echo "$fzf_input" |
     fzf --height=80% --margin=25% --border=rounded \
-      --prompt="Workdir?: " --delimiter='/' --with-nth='4..')
+      --prompt="Workdir?: ")
 
   if [ -z "$NVIM_SERVER" ] && [ -z "$session" ]; then
-    return 0
+    session="${HOME}"
   fi
 
   local tmux_session_name="$session"
