@@ -29,7 +29,6 @@
 ### TODO: nvim :
 
 P0
-
 as i enter git with sessionize let users pick worktree (without creating new one, itsis manual)
 - syntax highlighting for helm go templates
 - I would like to have java neovim setup
@@ -53,3 +52,5 @@ P1
 
 remap backspace to smth else that caps lock, ban ordianry esc and control
 use normal lsp and formatter for html
+
+make git-who work with worktrees 
