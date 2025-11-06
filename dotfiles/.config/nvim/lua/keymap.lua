@@ -78,6 +78,15 @@ for i = 1, 9 do
 	u.keyset("n", "<C-" .. i .. ">", i .. "gt", { desc = "Go to tab " .. i })
 end
 
+-- u.keyset("n", "^[h", "1gt", { desc = "Go to tab " .. 1 })
+-- u.keyset("n", "\x1bh", "1gt", { desc = "Go to tab 1" })
+
+-- nnoremap <silent> ^[h :TmuxNavigateLeft<cr>
+-- nnoremap <silent> ^[j :TmuxNavigateDown<cr>
+-- nnoremap <silent> ^[k :TmuxNavigateUp<cr>
+-- nnoremap <silent> ^[l :TmuxNavigateRight<cr>
+-- nnoremap <silent> ^[\ :TmuxNavigatePrevious<cr>
+
 -----------------------------------
 -- Ukrainian Keyboard Layout Mappings
 -----------------------------------
