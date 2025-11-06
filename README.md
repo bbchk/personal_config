@@ -52,12 +52,15 @@ P1
 ### TODO: to learn:
 
 <!-- - learn glab and don't interact with gitlab if not needed -->
+    can i use glab to navigate directly to pipelines from cli?
+
 <!-- - limit your search to the certain site, e.g. adding site:stackoverflow.com to your search phrase will limit the search to this site, or site:reddit.com inurl:/r/php to even a single subreddit! -->
 <!---->
 
 ### TODO: QoL:
 
 remap backspace to smth else that caps lock, ban ordianry esc and control
+
 use normal lsp and formatter for html
 
 make git-who work with worktrees 
