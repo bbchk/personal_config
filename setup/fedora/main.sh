@@ -1,16 +1,18 @@
 #!/usr/bin/env bash
 
-# set -euo pipefail
+source "$HOME/pers/setup/utils.sh"
 
 # ====================================
 echo -e "\n\n ======= main.sh is starting ======= \n\n"
 
-# create password file and ask for password, write it to the file
-# install ansible first
-# install nvim extensions before opening the nvim
+confirm "Do you want to pre sync all neovim plugins?" do_nvim_pre
+if "$do_nvim_pre"; then
+  nvim --headless "+Lazy! sync" +qa
+fi
 
-sudo dnf update -y --skip-unavailable --exclude=openh264
+confirm "Do you want to run dnf update?" do_dnf_update
+if "$do_dnf_update"; then
+  sudo dnf update -y --skip-unavailable --exclude=openh264
+fi
 
 "$HOME/pers/setup/fedora/install.sh" && "$HOME/pers/setup/fedora/config.sh"
-
-# TODO: can import vimium setting automatically?
