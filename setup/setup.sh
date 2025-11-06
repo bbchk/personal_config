@@ -34,6 +34,14 @@ validate_prerequisites() {
 main() {
   validate_prerequisites
   show_menu
+
+  sudo -v
+  while true; do
+    sudo -n true
+    sleep 60
+    kill -0 "$$" || exit
+  done 2>/dev/null &
+
   read -rp "Enter your choice: " choice
 
   if ! validate_choice "$choice"; then
