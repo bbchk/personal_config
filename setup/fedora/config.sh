@@ -57,34 +57,21 @@ if $do_user_image; then
   sudo busctl call org.freedesktop.Accounts /org/freedesktop/Accounts/User$(id -u) org.freedesktop.Accounts.User SetIconFile s "$default_user_image_path"
 fi
 
-confirm "Do you create desktop entry for sessionizer?" do_sessionizer
-if $do_sessionizer; then
-  APP_NAME=sessionizer
-  APP_CMD="kitty -e $HOME/pers/scripts/sessionizer"
-  APP_ICON="utilities-terminal"
-  APP_COMMENT="Open Neovim session with directory picker"
-  DESKTOP_FILE="$HOME/.local/share/applications/${APP_NAME// /_}.desktop"
-  mkdir -p "$HOME/.local/share/applications"
-
-  cat >"$DESKTOP_FILE" <<EOL
-[Desktop Entry]
-Type=Application
-Name=$APP_NAME
-Exec=$APP_CMD
-Icon=$APP_ICON
-Comment=$APP_COMMENT
-Terminal=true
-Categories=Utility;
-EOL
-
-  chmod +x "$DESKTOP_FILE"
-
+confirm "Do you create custom shorcuts" do_shortcuts
+if $do_shortcuts; then
   CUSTOM_KEYBINDING_1="/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/sessionizer/"
-  CUSTOM_KEYBINDING_2="/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/new_sessionizer/"
+  CUSTOM_KEYBINDING_2="/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/screenshots_swappy/"
   gsettings set org.gnome.settings-daemon.plugins.media-keys custom-keybindings \
     "['$CUSTOM_KEYBINDING_1', '$CUSTOM_KEYBINDING_2']"
+
+  APP_CMD_1="kitty -e $HOME/pers/scripts/sessionizer"
   gsettings set org.gnome.settings-daemon.plugins.media-keys.custom-keybinding:$CUSTOM_KEYBINDING_1 name 'Sessionizer'
-  gsettings set org.gnome.settings-daemon.plugins.media-keys.custom-keybinding:$CUSTOM_KEYBINDING_1 command "$APP_CMD"
+  gsettings set org.gnome.settings-daemon.plugins.media-keys.custom-keybinding:$CUSTOM_KEYBINDING_1 command "$APP_CMD_1"
   gsettings set org.gnome.settings-daemon.plugins.media-keys.custom-keybinding:$CUSTOM_KEYBINDING_1 binding '<Super>f'
+
+  APP_CMD_2='bash -c "gnome-screenshot -f /tmp/screenshot.png && swappy -f /tmp/screenshot.png"'
+  gsettings set org.gnome.settings-daemon.plugins.media-keys.custom-keybinding:$CUSTOM_KEYBINDING_2 name 'Swappy'
+  gsettings set org.gnome.settings-daemon.plugins.media-keys.custom-keybinding:$CUSTOM_KEYBINDING_2 command "$APP_CMD_2"
+  gsettings set org.gnome.settings-daemon.plugins.media-keys.custom-keybinding:$CUSTOM_KEYBINDING_2 binding '<Super>o'
 fi
 
