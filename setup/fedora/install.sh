@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-# set -euo pipefail
+source "$HOME/pers/setup/utils.sh"
 
 # ====================================
 echo -e "\n\n ======= install.sh is starting ======= \n\n"
@@ -121,8 +121,8 @@ sudo ln -sf "$HOME/pers/config/deamon.json" /etc/docker/deamon.json
 
 # K8s below
 
-read -rp "Do you want to install kubectl? (y/n): " response
-if [[ "$response" =~ ^[Yy]$ ]]; then
+confirm "Do you want to install kubectl?" do_kubectl
+if $do_kubectl; then
   echo "Installing kubectl..."
 
   # Download kubectl and its sha256 checksum
@@ -144,16 +144,16 @@ else
   echo "Skipping kubectl installation."
 fi
 
-read -rp "Do you want to install GitHub CLI? (y/n): " github_cli_res
-if [[ "$github_cli_res" =~ ^[Yy]$ ]]; then
+confirm "Do you want to install GitHub CLI?" do_github_cli
+if $do_github_cli; then
   sudo dnf install dnf5-plugins
   sudo dnf config-manager addrepo --from-repofile=https://cli.github.com/packages/rpm/gh-cli.repo
   sudo dnf install gh --repo gh-cli
 fi
 
 # TODO: implement
-# read -rp "Do you want to install git-who? (y/n): " git_who_res
-# if [[ "$git_who_res" =~ ^[Yy]$ ]]; then
+# confirm "Do you want to install git-who?" do_git_who
+# if $do_git_who; then
 #
 #   cd "/tmp"
 #   git clone git@github.com:sinclairtarget/git-who.git
@@ -166,26 +166,26 @@ fi
 #   git-who --version
 # fi
 
-read -rp "Do you want to install google-chrome? (y/n): " google_chrome_res
-if [[ "$google_chrome_res" =~ ^[Yy]$ ]]; then
+confirm "Do you want to install google-chrome?" do_google_chrome
+if $do_google_chrome; then
   sudo dnf install fedora-workstation-repositories
   sudo dnf config-manager setopt google-chrome.enabled=1
   sudo dnf install google-chrome-stable
 fi
 
-read -rp "Do you want to install sioyek? (y/n): " sioyek_res
-if [[ "$sioyek_res" =~ ^[Yy]$ ]]; then
+confirm "Do you want to install sioyek?" do_sioyek
+if $do_sioyek; then
   flatpak install flathub com.github.ahrm.sioyek
   flatpak run com.github.ahrm.sioyek
 fi
 
-read -rp "Do you want to install julia? (y/n): " julia_res
-if [[ "$julia_res" =~ ^[Yy]$ ]]; then
+confirm "Do you want to install julia?" do_julia
+if $do_julia; then
   curl -fsSL https://install.julialang.org | sh
 fi
 
-read -rp "Do you want to install keyd? (y/n): " keyd_res
-if [[ "$keyd_res" =~ ^[Yy]$ ]]; then
+confirm "Do you want to install keyd?" do_keyd
+if $do_keyd; then
 
   cd "/tmp"
   git clone https://github.com/rvaiya/keyd
