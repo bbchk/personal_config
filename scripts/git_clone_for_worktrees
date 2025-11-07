@@ -1,55 +1,31 @@
 #!/usr/bin/env bash
+
 set -e
 
-trap cleanup EXIT
-
-
-# Examples of call:
-# git-clone-bare-for-worktrees git@github.com:name/repo.git
-# => Clones to a /repo directory
+# cleanup() {
+#     rm -rf "$WORK_DELETED_PATH"
+# }
 #
-# git-clone-bare-for-worktrees git@github.com:name/repo.git my-repo
-# => Clones to a /my-repo directory
+# trap cleanup ERR
 
 url=$1
 basename=${url##*/}
 name=${2:-${basename%.*}}
 
-cleanup() {
-    rm -rf "$name"
-}
+mkdir -p "$name"
+WORK_DELETED_PATH=$(readlink -f "$name")
+cd "$WORK_DELETED_PATH"
 
-mkdir "$name"
-cd "$name"
-
-
-# Moves all the administrative git files (a.k.a $GIT_DIR) under .bare directory.
-#
-# Plan is to create worktrees as siblings of this directory.
-# Example targeted structure:
-# .bare
-# main
-# new-awesome-feature
-# hotfix-bug-12
-# ...
 git clone --bare "$url" .bare
-echo "gitdir: ./.bare" > .git
+echo "gitdir: ./.bare" >.git
 
-# Explicitly sets the remote origin fetch so we can fetch remote branches
 git config remote.origin.fetch "+refs/heads/*:refs/remotes/origin/*"
 
-# Gets all branches from origin
 git fetch origin
 
-
-
-most_active_branches=($(git for-each-ref --sort=-committerdate refs/heads/ --format='%(refname:short)' | head -n 5))
+most_active_branches=($(git for-each-ref --sort=-committerdate refs/remotes/origin/ --format='%(refname:short)' | sed 's/origin\///' | head -n 5))
 
 for branch in "${most_active_branches[@]}"; do
-
-  dir=$(echo "$branch" | tr '.' '_')
-
+  dir=$(echo "$branch" | tr '/' '_')
   git worktree add "$dir" "$branch"
 done
-
-
