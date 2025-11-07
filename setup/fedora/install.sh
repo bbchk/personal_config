@@ -168,9 +168,9 @@ fi
 
 confirm "Do you want to install google-chrome?" do_google_chrome
 if $do_google_chrome; then
-  sudo dnf install fedora-workstation-repositories
-  sudo dnf config-manager setopt google-chrome.enabled=1
-  sudo dnf install google-chrome-stable
+  sudo dnf -y install fedora-workstation-repositories
+  sudo dnf -y config-manager setopt google-chrome.enabled=1
+  sudo dnf -y install google-chrome-stable
 fi
 
 confirm "Do you want to install sioyek?" do_sioyek

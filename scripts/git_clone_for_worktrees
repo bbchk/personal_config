@@ -1,6 +1,9 @@
 #!/usr/bin/env bash
 set -e
 
+trap cleanup EXIT
+
+
 # Examples of call:
 # git-clone-bare-for-worktrees git@github.com:name/repo.git
 # => Clones to a /repo directory
@@ -12,8 +15,13 @@ url=$1
 basename=${url##*/}
 name=${2:-${basename%.*}}
 
+cleanup() {
+    rm -rf "$name"
+}
+
 mkdir "$name"
 cd "$name"
+
 
 # Moves all the administrative git files (a.k.a $GIT_DIR) under .bare directory.
 #
@@ -43,3 +51,5 @@ for branch in "${most_active_branches[@]}"; do
 
   git worktree add "$dir" "$branch"
 done
+
+
