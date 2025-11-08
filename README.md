@@ -29,6 +29,7 @@
 ### TODO: nvim :
 
 P0
+- make sessionizer appear in floating window at center of screen
 - Learn how to use nvim harpoon
 - Learn how to use nvim fugitive
 - syntax highlighting for helm go templates
