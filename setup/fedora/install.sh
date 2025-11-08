@@ -90,6 +90,7 @@ PKGS=(
 
   # Desktop Environment & GUI Applications
   qbittorrent
+  swappy
 
   # System Control & Hardware
   ppp

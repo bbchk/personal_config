@@ -69,7 +69,7 @@ main() {
   local tmux_session_name="$session"
   local session_dir=""
 
-  tmux_session_name=$(basename "$session" | tr '.' '_')
+  tmux_session_name=$(echo "$session" | tr './' '_')
   session_dir="$session"
 
   if ! tmux has-session -t "$tmux_session_name" 2>/dev/null; then
