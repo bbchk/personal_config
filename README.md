@@ -29,38 +29,19 @@
 ### TODO: nvim :
 
 P0
+- Learn how to use nvim harpoon
+- Learn how to use nvim fugitive
 - syntax highlighting for helm go templates
+- make alt+1 work for tabs
+use normal lsp and formatter for html
+
+P1
 - I would like to have java neovim setup
 - I would like to have containarized neovim setup
 
-P1
-- Learn how to use nvim harpoon
-- Learn how to use nvim fugitive
-- make alt+1 work for tabs
-
- 2
- 3
- 4
- 5
-
-    ^V1
-<C-Space>
-    
-    
-    
 
 ### TODO: to learn:
 
-<!-- - learn glab and don't interact with gitlab if not needed -->
-    can i use glab to navigate directly to pipelines from cli?
+- learn glab and don't interact with gitlab if not needed. Can i use glab to navigate directly to pipelines from cli?
 
-<!-- - limit your search to the certain site, e.g. adding site:stackoverflow.com to your search phrase will limit the search to this site, or site:reddit.com inurl:/r/php to even a single subreddit! -->
-<!---->
-
-### TODO: QoL:
-
-remap backspace to smth else that caps lock, ban ordianry esc and control
-
-use normal lsp and formatter for html
-
-make git-who work with worktrees 
+- limit your search to the certain site, e.g. adding site:stackoverflow.com to your search phrase will limit the search to this site, or site:reddit.com inurl:/r/php to even a single subreddit!
