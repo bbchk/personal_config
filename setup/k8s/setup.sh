@@ -78,3 +78,82 @@ https://wiki.debian.org/RepackBootableISO
 https://wiki.debian.org/DebianInstaller/Preseed/EditIso
 
 txt.cfg
+
+Here's a breakdown of the 4 parts of a preseed configuration entry:
+
+```
+d-i debian-installer/locale string en_US.UTF-8
+```
+
+## 1. **Owner** (`d-i`)
+- Specifies which package/component "owns" this configuration question
+- Common owners:
+  - `d-i` = debian-installer (core installer)
+  - `netcfg` = network configuration
+  - `partman-auto` = automatic partitioning
+  - `grub-installer` = GRUB bootloader
+  - `tasksel` = task selection
+  - `user-setup-udeb` = user setup
+
+## 2. **Question/Template** (`debian-installer/locale`)
+- The specific configuration question being answered
+- Format: `component/question-name`
+- This identifies what setting you're configuring
+- Example: `debian-installer/locale` = the locale setting for the installer
+
+## 3. **Data Type** (`string`)
+- Defines what kind of value is expected
+- Common types:
+  - `string` = text value
+  - `boolean` = true/false
+  - `select` = choose one option from a list
+  - `multiselect` = choose multiple options from a list
+  - `password` = password value
+  - `note` = informational (no value needed)
+  - `error` = error message (no value needed)
+
+## 4. **Value** (`en_US.UTF-8`)
+- The actual answer/setting you want to apply
+- Must match the expected data type
+- Examples:
+  - For `string`: any text like `en_US.UTF-8`, `debian-server`
+  - For `boolean`: `true` or `false`
+  - For `select`: one of the allowed choices
+
+## More Examples:
+
+```
+netcfg         netcfg/get_hostname         string    myserver
+├─owner        ├─question                  ├─type    ├─value
+
+
+partman-auto   partman-auto/method         string    lvm
+├─owner        ├─question                  ├─type    ├─value
+
+
+clock-setup    clock-setup/utc             boolean   true
+├─owner        ├─question                  ├─type    ├─value
+
+
+tasksel        tasksel/first               multiselect   standard, ssh-server
+├─owner        ├─question                  ├─type        ├─value
+```
+
+## Finding Valid Questions
+
+To see all available questions for a component:
+```bash
+debconf-get-selections | grep component-name
+```
+
+Or during installation with debug enabled:
+```bash
+debconf-get-selections --installer
+```
+
+
+
+d-i netcfg/choose_interface select auto-ethernet                   # Try Ethernet first
+d-i netcfg/dhcp_timeout string 15                                  # Wait 15 seconds for network
+d-i netcfg/dhcp_failed note                                        # Continue on failure
+d-i netcfg/dhcp_options select Retry network autoconfiguration with a DHCP hostname  # Retry once
