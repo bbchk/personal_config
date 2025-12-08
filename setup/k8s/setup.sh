@@ -157,3 +157,8 @@ d-i netcfg/choose_interface select auto-ethernet                   # Try Etherne
 d-i netcfg/dhcp_timeout string 15                                  # Wait 15 seconds for network
 d-i netcfg/dhcp_failed note                                        # Continue on failure
 d-i netcfg/dhcp_options select Retry network autoconfiguration with a DHCP hostname  # Retry once
+
+
+# d-i preseed/late_command string \
+#     cp /cdrom/scripts/network-config/interfaces /target/etc/network/interfaces; \
+#     cp /cdrom/scripts/network-config/resolv.conf /target/etc/resolv.conf
