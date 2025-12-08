@@ -76,3 +76,5 @@ https://wiki.debian.org/ManipulatingISOs#Remaster_an_Installation_Image
 https://wiki.debian.org/RepackBootableISO
 
 https://wiki.debian.org/DebianInstaller/Preseed/EditIso
+
+txt.cfg
