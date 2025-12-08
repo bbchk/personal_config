@@ -60,7 +60,7 @@ mbr_template=isohdpfx.bin
 dd if="$orig_iso" bs=1 count=432 of="$mbr_template"
 
 xorriso -as mkisofs \
-   -r -V 'Debian 13.2.0 amd64 n' \
+   -r -V 'DEBIAN_13_2_0_AMD64' \
    -o "$new_iso" \
    -J -J -joliet-long -cache-inodes \
    -isohybrid-mbr "$mbr_template" \
