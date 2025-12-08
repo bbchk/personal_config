@@ -14,3 +14,207 @@ if vim.env.SESSIONIZER_START == "true" then
     end,
   })
 end
+
+-- ~/.config/nvim/lua/tmux-sessionizer.lua
+
+-- local M = {}
+--
+-- -- Configuration
+-- local config = {
+--   search_dirs = {
+--     vim.fn.expand("~"),
+--     vim.fn.expand("~/dev/my"),
+--     vim.fn.expand("~/dev/ib")
+--   },
+--   use_telescope = true, -- Set to false to use vim.ui.select instead
+-- }
+--
+-- local function get_bare_repo_session_name(dir)
+--   local git_dir_cmd = string.format("git -C '%s' rev-parse --git-dir 2>/dev/null", dir)
+--   local is_bare_cmd = string.format("git -C '%s' rev-parse --is-bare-repository 2>/dev/null", dir)
+--
+--   local git_dir = exec_cmd(git_dir_cmd)
+--   local is_bare = exec_cmd(is_bare_cmd)
+--
+--   if not git_dir or is_bare ~= "true" then
+--     return nil
+--   end
+--
+--   local worktree_cmd = string.format("git -C '%s' worktree list --porcelain 2>/dev/null", dir)
+--   local worktree_list = exec_cmd(worktree_cmd)
+--
+--   if not worktree_list then
+--     return nil
+--   end
+--
+--   local worktree_paths = {}
+--   for line in worktree_list:gmatch("[^\r\n]+") do
+--     if line:match("^worktree ") then
+--       local path = line:match("^worktree (.+)")
+--       if path and not path:match("%.bare$") then
+--         table.insert(worktree_paths, path:gsub("%.", "_"))
+--       end
+--     end
+--   end
+--
+--   return #worktree_paths > 0 and worktree_paths or nil
+-- end
+--
+-- local function get_directories()
+--   local dirs = {}
+--
+--   for _, search_dir in ipairs(config.search_dirs) do
+--     if vim.fn.isdirectory(search_dir) == 1 then
+--       local find_cmd = string.format("find '%s' -mindepth 1 -maxdepth 1 -type d ! -name '.*'", search_dir)
+--       local found_dirs = exec_cmd(find_cmd)
+--
+--       if found_dirs then
+--         for dir in found_dirs:gmatch("[^\r\n]+") do
+--           local bare_names = get_bare_repo_session_name(dir)
+--           if bare_names then
+--             for _, name in ipairs(bare_names) do
+--               table.insert(dirs, name)
+--             end
+--           else
+--             table.insert(dirs, dir)
+--           end
+--         end
+--       end
+--     end
+--   end
+--
+--   table.sort(dirs)
+--   return dirs
+-- end
+--
+-- -- Start tmux server if not running
+-- local function ensure_tmux_server()
+--   exec_cmd("tmux start-server 2>/dev/null")
+--   return true
+-- end
+--
+-- -- Create or switch to tmux session
+-- local function handle_tmux_session(session_path)
+--   if not session_path or session_path == "" then
+--     session_path = vim.fn.expand("~")
+--   end
+--
+--   local session_name = session_path:gsub("[./]", "_")
+--
+--   -- Check if session exists
+--   local has_session = exec_cmd(string.format("tmux has-session -t '%s' 2>/dev/null", session_name))
+--   local session_exists = has_session ~= nil
+--
+--   -- Create session if it doesn't exist
+--   if not session_exists then
+--     local create_cmd = string.format(
+--       "tmux new-session -s '%s' -c '%s' -d 'SESSIONIZER_START=true nvim'",
+--       session_name,
+--       session_path
+--     )
+--     exec_cmd(create_cmd)
+--   end
+--
+--   -- Switch to session
+--   local tmux_env = os.getenv("TMUX")
+--   if not tmux_env then
+--     -- Not in tmux, attach to session
+--     local attach_cmd = string.format("tmux attach-session -t '%s'", session_name)
+--     vim.fn.system(attach_cmd)
+--   else
+--     -- In tmux, switch client
+--     local switch_cmd = string.format("tmux switch-client -t '%s'", session_name)
+--     exec_cmd(switch_cmd)
+--   end
+-- end
+--
+-- -- Telescope picker (if telescope is available)
+-- local function telescope_picker(dirs, callback)
+--   local telescope_ok, telescope = pcall(require, "telescope")
+--   if not telescope_ok then
+--     vim.notify("Telescope not found, falling back to vim.ui.select", vim.log.levels.WARN)
+--     return false
+--   end
+--
+--   local pickers = require("telescope.pickers")
+--   local finders = require("telescope.finders")
+--   local conf = require("telescope.config").values
+--   local actions = require("telescope.actions")
+--   local action_state = require("telescope.actions.state")
+--
+--   pickers.new({}, {
+--     prompt_title = "Select Workspace",
+--     finder = finders.new_table({
+--       results = dirs,
+--       entry_maker = function(entry)
+--         local display = entry
+--         -- Show only the last few path components for better readability
+--         local parts = vim.split(entry, "/")
+--         if #parts > 3 then
+--           display = ".../" .. table.concat(vim.list_slice(parts, #parts - 2), "/")
+--         end
+--
+--         return {
+--           value = entry,
+--           display = display,
+--           ordinal = entry,
+--         }
+--       end,
+--     }),
+--     sorter = conf.generic_sorter({}),
+--     attach_mappings = function(prompt_bufnr, map)
+--       actions.select_default:replace(function()
+--         actions.close(prompt_bufnr)
+--         local selection = action_state.get_selected_entry()
+--         if selection then
+--           callback(selection.value)
+--         end
+--       end)
+--       return true
+--     end,
+--   }):find()
+--
+--   return true
+-- end
+--
+-- -- Main function
+-- function M.find_session()
+--   if not ensure_tmux_server() then
+--     return
+--   end
+--
+--   local dirs = get_directories()
+--   if #dirs == 0 then
+--     vim.notify("No directories found", vim.log.levels.WARN)
+--     return
+--   end
+--
+--   local function on_select(selected)
+--     if selected then
+--       handle_tmux_session(selected)
+--     end
+--   end
+--
+--   -- Try telescope first, fall back to vim.ui.select
+--   if config.use_telescope and not telescope_picker(dirs, on_select) then
+--     vim.ui.select(dirs, {
+--       prompt = "Select workspace: ",
+--       format_item = function(item)
+--         local
+--
+--
+--
+--
+-- local function exec_cmd(cmd)
+--   local handle = io.popen(cmd)
+--
+--   if not handle then
+--     return nil
+--   end
+--
+--   local result = handle:read("*a")
+--
+--   handle:close()
+--
+--   return result and result:gsub("\n$", "") or nil
+-- end
