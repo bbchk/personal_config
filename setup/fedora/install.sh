@@ -202,3 +202,15 @@ if $do_keyd; then
 
   sudo usermod -aG keyd "$USER"
 fi
+
+
+# this is for bash
+# confirm "Do you want to install kubie?" do_kubie
+# if $do_kubie; then
+#
+#   cd "/tmp"
+#   git clone https://github.com/sbstp/kubie.git
+#   cd kubie
+#   sudo cp -f ./completion/kubie.bash /etc/bash_completion.d/kubie
+# fi
+
