@@ -57,7 +57,7 @@ function U.exec_cmd(cmd)
   return result and result:gsub("\n$", "") or nil
 end
 
-local function U.log(msg)
+function U.log(msg)
 	local log_file = vim.fn.stdpath("cache") .. "/sessionizer.log"
 	local timestamp = os.date("%Y-%m-%d %H:%M:%S")
 	local formatted_msg = string.format("[%s] %s\n", timestamp, msg)
