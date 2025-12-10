@@ -126,6 +126,7 @@ if $do_clone_projects; then
   smb/yggdrasil
   healthone/cache-service
   developer-platform/ci-cd-gitlab-manifests
+  df/consumer-business-directory-app
   )
 
   for r in "${ib_repos[@]}"; do
