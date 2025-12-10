@@ -162,3 +162,7 @@ d-i netcfg/dhcp_options select Retry network autoconfiguration with a DHCP hostn
 # d-i preseed/late_command string \
 #     cp /cdrom/scripts/network-config/interfaces /target/etc/network/interfaces; \
 #     cp /cdrom/scripts/network-config/resolv.conf /target/etc/resolv.conf
+#
+#
+#
+on late-command change password, change hostname
