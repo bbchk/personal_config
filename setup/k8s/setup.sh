@@ -166,3 +166,51 @@ d-i netcfg/dhcp_options select Retry network autoconfiguration with a DHCP hostn
 #
 #
 on late-command change password, change hostname
+
+
+That is a crucial question that gets to the heart of how static addressing works in a home or office network!
+
+When you manually assign an IP address (a **Static IP**) on your machine (like you're doing with the Debian preseed file), you do **not** need to "tell" the router anything. The router is designed to route traffic based on the IP address, regardless of how that address was assigned.
+
+However, to ensure your machine's static IP address works reliably and doesn't cause problems for other devices, you need to manage the **router's DHCP server** settings.
+
+## 🔑 Two Ways to Handle Static IP Addresses
+
+You have two main strategies for using a static IP, and the best one depends on your preference for central management:
+
+### 1. The Simplest Way: Keep the Static IP **Outside** the DHCP Range (Recommended)
+
+The goal here is to make sure your router's automatic IP assignment (DHCP) never accidentally tries to assign your chosen static IP address to another device.
+
+1.  **Check the Router's DHCP Range:** Log into your router's web interface (usually by entering the **Gateway IP** into a web browser, e.g., `http://192.168.1.1`).
+2.  **Find the DHCP Settings:** Look for sections labeled **LAN Settings**, **DHCP Server**, or **Address Pool**.
+    * Typically, the router's default DHCP range is something like `192.168.1.100` to `192.168.1.254`.
+3.  **Choose an IP Outside the Range:**
+    * If the range starts at `100`, choose a static IP below it, like **`192.168.1.10`** or **`192.168.1.50`**.
+    * *Example:* If your router's DHCP pool is `192.168.1.100` to `254`, set your Debian machine to `192.168.1.20`.
+4.  **Action on Router:** You don't have to do anything else. The router will respect your static IP and won't assign that specific address to other devices because it's outside its automated pool. 
+
+### 2. The Centralized Way: DHCP Reservation (Recommended for Laptops/Mobile Devices)
+
+DHCP Reservation is when you tell the **router** to manage the static assignment. The device itself is still configured to use DHCP (automatic IP), but the router is configured to *always* give the same IP to that device based on its **MAC address**.
+
+This method is generally more flexible, as you manage all your static assignments in one central place (the router).
+
+1.  **Find the Machine's MAC Address:** You need the unique Media Access Control (MAC) address of the network card you are using for the Debian install (e.g., `00:1A:2B:3C:4D:5E`).
+    * *Note:* You'll need to install the OS first and then check the address using a command like `ip a` or `ip link` on the Debian machine.
+2.  **Access Router Settings:** Log into your router's web interface.
+3.  **Create a Reservation:** Navigate to **DHCP Settings** or **Address Reservation**.
+4.  **Bind the IP and MAC:** Create a new entry that **binds** the machine's **MAC address** to the desired **Static IP address** (e.g., bind `00:1A:2B:3C:4D:5E` to `192.168.1.100`).
+
+**Crucially, if you use this method, you must remove the static IP configuration from your preseed file and switch back to DHCP (the default for the installer) on the machine itself.**
+
+Since you are already setting a static IP in the preseed file, **Strategy 1** (keeping the static IP outside the DHCP pool) is the path of least resistance and requires no further action on the router besides verifying the pool range.
+
+---
+
+This video provides an overview of how to set static IP addresses and DHCP reservations on a device using a router's settings.
+
+[Set a Static IP Address for a Device | DHCP IP Reservation](https://www.youtube.com/watch?v=-G3ePnXAoHc)
+
+
+http://googleusercontent.com/youtube_content/0
