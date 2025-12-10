@@ -75,3 +75,18 @@ if $do_shortcuts; then
   gsettings set org.gnome.settings-daemon.plugins.media-keys.custom-keybinding:$CUSTOM_KEYBINDING_2 binding '<Super>o'
 fi
 
+confirm "Do you create nvim autostart" do_nvim_auto
+if $do_nvim_auto; then
+
+  mkdir -p ~/.config/autostart
+
+  cat > ~/.config/autostart/nvim-sessionizer.desktop << EOF
+[Desktop Entry]
+Type=Application
+Name=Neovim Sessionizer
+Exec=gnome-terminal -- nvim -c "lua require('custom.sessionizer').sessionizer()"
+Icon=utilities-terminal
+Comment=Starts Neovim with the sessionizer plugin
+EOF
+
+fi

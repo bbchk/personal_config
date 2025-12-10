@@ -2,7 +2,7 @@
 
 source "$HOME/pers/setup/utils.sh"
 
-set -euo pipefail
+# set -euo pipefail
 
 # ====================================
 
