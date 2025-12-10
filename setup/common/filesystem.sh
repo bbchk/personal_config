@@ -47,16 +47,6 @@ if $do_clone_projects; then
   healthone/ui/business-portal
   cp/client/call-log
   smb-platform-services/cdn
-  df-smb-devops/helmcharts/cx/cache-service
-  df-smb-devops/helmcharts/cdn
-  df-smb-devops/helmcharts/integration
-  df-smb-devops/helmcharts/provider
-  df-smb-devops/helmcharts/secure-forms
-  df-smb-devops/helmcharts/secure-messaging
-  df-smb-devops/helmcharts/sonarqube10
-  df-smb-devops/helmchart-prod/secure-forms
-  df-smb-devops/helmchart-stg/secure-forms
-  df-smb-devops/helmchart-stg/secure-messaging
   smb-portal/clamav-ds
   healthone/consumerservice/consumer-api-v2
   yggdrasil/consumer-portal
@@ -72,9 +62,6 @@ if $do_clone_projects; then
   smb-portal/standalone/webmd/ga-overview
   developer-platform/vendor-images/gitlab-cli
   cp/devops/gitlab-templates
-  df-smb-devops/helmcharts/elasticsearch-indexer
-  df-smb-devops/helmcharts/form-leads
-  developer-platform/helm-charts/helm-provisioner-shims/hop-provisioner
   smb/ibconnect-client
   df/ib-graph
   df/ib-graph-gateway
@@ -84,7 +71,6 @@ if $do_clone_projects; then
   healthone/sonarqube
   developer-platform/minimal-examples/ike-laravel-examples
   developer-platform/ike-migrator
-  developer-platform/helm-charts/ike-service
   healthone/integration
   smb-platform-services/iss-checker
   developer-platform/jenkins-build-helpers
@@ -114,7 +100,6 @@ if $do_clone_projects; then
   smb-portal/smb-portal
   yggdrasil/smb-sequencer
   smb-platform-services/smb-websockets
-  developer-platform/helm-charts/provisioners/solr-provisioner
   cp/bff/text-to-pay
   healthone/userservice
   developer-platform/vendor-images/dind
@@ -127,10 +112,25 @@ if $do_clone_projects; then
   healthone/cache-service
   developer-platform/ci-cd-gitlab-manifests
   df/consumer-business-directory-app
+  df-smb-devops/helmcharts/cx/cache-service
+  df-smb-devops/helmcharts/cdn
+  df-smb-devops/helmcharts/integration
+  df-smb-devops/helmcharts/provider
+  df-smb-devops/helmcharts/secure-forms
+  df-smb-devops/helmcharts/secure-messaging
+  df-smb-devops/helmcharts/sonarqube10
+  df-smb-devops/helmchart-prod/secure-forms
+  df-smb-devops/helmchart-stg/secure-forms
+  df-smb-devops/helmchart-stg/secure-messaging
+  df-smb-devops/helmcharts/elasticsearch-indexer
+  df-smb-devops/helmcharts/form-leads
+  developer-platform/helm-charts/helm-provisioner-shims/hop-provisioner
+  developer-platform/helm-charts/ike-service
+  developer-platform/helm-charts/provisioners/solr-provisioner
   )
 
   for r in "${ib_repos[@]}"; do
-    git clonew "git@git.internetbrands.com:${r}.git" "$HOME/dev/ib/$(basename "$r")"
+    git clonew "git@git.internetbrands.com:${r}.git" "$HOME/dev/ib/$r"
   done
   echo "Finished cloning projects."
 else
