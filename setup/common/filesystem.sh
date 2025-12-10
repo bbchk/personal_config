@@ -46,7 +46,6 @@ if $do_clone_projects; then
   healthone/BOS
   healthone/ui/business-portal
   cp/client/call-log
-  bbuchok/catalog-test
   smb-platform-services/cdn
   df-smb-devops/helmcharts/cx/cache-service
   df-smb-devops/helmcharts/cdn
@@ -86,7 +85,6 @@ if $do_clone_projects; then
   developer-platform/minimal-examples/ike-laravel-examples
   developer-platform/ike-migrator
   developer-platform/helm-charts/ike-service
-  bbuchok/ike-sonarqube
   healthone/integration
   smb-platform-services/iss-checker
   developer-platform/jenkins-build-helpers
@@ -117,7 +115,6 @@ if $do_clone_projects; then
   yggdrasil/smb-sequencer
   smb-platform-services/smb-websockets
   developer-platform/helm-charts/provisioners/solr-provisioner
-  bbuchok/sonarqube-shared-component
   cp/bff/text-to-pay
   healthone/userservice
   developer-platform/vendor-images/dind
