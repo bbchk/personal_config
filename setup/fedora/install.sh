@@ -203,6 +203,10 @@ if $do_keyd; then
   sudo usermod -aG keyd "$USER"
 fi
 
+confirm "Do you want to install tailscale?" do_tailscale
+if "$do_tailscale";then
+  curl -fsSL https://tailscale.com/install.sh | sh
+fi
 
 # this is for bash
 # confirm "Do you want to install kubie?" do_kubie
@@ -213,4 +217,3 @@ fi
 #   cd kubie
 #   sudo cp -f ./completion/kubie.bash /etc/bash_completion.d/kubie
 # fi
-
