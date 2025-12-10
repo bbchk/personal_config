@@ -43,5 +43,31 @@ function U.fs.open_new_tab_at_same_path()
     end
 end
 
+function U.exec_cmd(cmd)
+  local handle = io.popen(cmd)
+
+  if not handle then
+    return nil
+  end
+
+  local result = handle:read("*a")
+
+  handle:close()
+
+  return result and result:gsub("\n$", "") or nil
+end
+
+local function U.log(msg)
+	local log_file = vim.fn.stdpath("cache") .. "/sessionizer.log"
+	local timestamp = os.date("%Y-%m-%d %H:%M:%S")
+	local formatted_msg = string.format("[%s] %s\n", timestamp, msg)
+
+	local file = io.open(log_file, "a")
+	if file then
+		file:write(formatted_msg)
+		file:close()
+	end
+end
+
 return U
 

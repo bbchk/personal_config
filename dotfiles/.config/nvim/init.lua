@@ -18,7 +18,6 @@ require("core.filetypes")
 require("core.terminal")
 require("core.tabs")
 
-require("utils.sessionizer")
 require("custom.sessionizer")
 
 require("options")

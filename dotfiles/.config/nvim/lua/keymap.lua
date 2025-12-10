@@ -20,10 +20,6 @@ u.keyset("n", "<leader>q", "<CMD>q!<CR>")
 u.keyset("n", "<leader>ww", "<CMD>write<CR>")
 u.keyset("n", "<leader>w", "<CMD>noautocmd write<CR>")
 
--- u.keyset("n", "<C-f>", ":silent !tmux neww tmux-sessionizer<CR>")
-
-u.keyset("n", "<C-f>", "<cmd>Sessionizer<CR>", { desc = "Open [S]essionizer" })
--- GIT
 -----------------------------------
 
 -- TODO: fugitive

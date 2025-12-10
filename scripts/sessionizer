@@ -1,88 +1,20 @@
 #!/usr/bin/env bash
-# shellcheck disable=SC2155
-
-NVIM_SERVER=$1
-
-get_bare_repo_session_name() {
-  local dir="$1"
-  local bare_repo_is_valid=0
-
-  if git -C "$dir" rev-parse --git-dir >/dev/null 2>&1 &&
-    [[ "$(git -C "$dir" rev-parse --is-bare-repository 2>/dev/null)" == "true" ]]; then
-    bare_repo_is_valid=1
-  fi
-
-  if [ "$bare_repo_is_valid" -eq 1 ]; then
-    local worktree_list=$(git -C "$dir" worktree list --porcelain 2>/dev/null)
-
-    local worktree_paths=$(
-      echo "$worktree_list" |
-        awk '/^worktree / {print $2}'
-    )
-
-    local found_worktrees=0
-
-    while IFS= read -r worktree_path; do
-      if [ -n "$worktree_path" ] && [[ ! "$worktree_path" =~ \.bare$ ]]; then
-        echo "${worktree_path}" | tr '.' '_'
-        found_worktrees=1
-      fi
-    done <<<"$worktree_paths"
-
-    if [ "$found_worktrees" -eq 1 ]; then
-      return 0
-    fi
-  fi
-  return 1
-}
 
 main() {
   if ! tmux ls &>/dev/null; then
     tmux start-server
   fi
 
-  dirs_to_rec_search=(~ ~/dev/my ~/dev/ib)
-  dirs_to_open_paths=$(find "${dirs_to_rec_search[@]}" -mindepth 1 -maxdepth 1 -type d ! -name '.*')
-
-  local processed_dirs=""
-  for dir in $dirs_to_open_paths; do
-    local bare_names
-    bare_names=$(get_bare_repo_session_name "$dir")
-
-    if [ -n "$bare_names" ]; then
-      processed_dirs+="$bare_names"$'\n'
-    else
-      processed_dirs+="$dir"$'\n'
-    fi
-  done
-
-  local fzf_input=$(echo "$processed_dirs" | sort)
-
-  session=$(echo "$fzf_input" |
-    fzf --height=80% --margin=25% --border=rounded \
-      --prompt="Workdir?: " --delimiter='/' --with-nth='4..')
-
-  if [ -z "$NVIM_SERVER" ] && [ -z "$session" ]; then
-    session="${HOME}"
-  fi
-
-  local tmux_session_name="$session"
-  local session_dir=""
-
+  session="${HOME}"
   tmux_session_name=$(echo "$session" | tr './' '_')
-  session_dir="$session"
 
   if ! tmux has-session -t "$tmux_session_name" 2>/dev/null; then
-    tmux new-session -s "$tmux_session_name" -c "$session_dir" -d "SESSIONIZER_START=true nvim"
+    tmux new-session -s "$tmux_session_name" -c "$session" -d "SESSIONIZER_START=true nvim"
   fi
 
   if [ -z "$TMUX" ]; then
     tmux attach-session -t "$tmux_session_name"
   else
-    current_session_name=$(tmux display-message -p '#S')
-    if [ -n "$NVIM_SERVER" ] && [ "$current_session_name" != "$tmux_session_name" ]; then
-      nvim --server "$NVIM_SERVER" --remote-send '<Esc>:q<CR>'
-    fi
     tmux switch-client -t "$tmux_session_name"
   fi
 }
