@@ -36,6 +36,10 @@ P0
 - make alt+1 work for tabs
 use normal lsp and formatter for html
 
+<!-- set upstreadm automatically -->
+ ╰$ git branch --set-upstream-to=origin/master master
+branch 'master' set up to track 'origin/master'.
+
 P1
 - I would like to have java neovim setup
 - I would like to have containarized neovim setup
