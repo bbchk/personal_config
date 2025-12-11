@@ -350,3 +350,14 @@ M.setup({
 })
 
 return M
+
+-- please add ~/dev/ib
+-- corp  cp  developer-platform  df  df-smb-devops  healthone  ike-migrations  patient-portal  smb  smb-platform-services  smb-portal  yggdrasil
+--
+--  
+-- dev/ib/df-smb-devops/helmchart-prod
+-- dev/ib/df-smb-devops/helmchart
+-- dev/ib/df-smb-devops/helmchart-stg
+--
+--  ╰$ ls dev/ib/developer-platform             
+-- ci-cd-gitlab-manifests  docker-base  helm-charts  ike  ike-migrator  jenkins-build-helpers  k8s-deploy  minimal-examples  scripts  shared-manifests  ship_it  vendor-images

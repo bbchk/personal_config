@@ -2,7 +2,7 @@
 
 source "$HOME/pers/setup/utils.sh"
 
-# set -euo pipefail
+cd "$HOME"
 
 # ====================================
 
@@ -32,11 +32,11 @@ if $do_clone_projects; then
   echo "Cloning frequently used projects..."
   # Clone frequently worked on projects
 
-  mkdir -p "$HOME/dev/my"
-  my_repos=(jv-fr avkfe scrape lvfe live lvbe lvops train slugtrans)
-  for r in "${my_repos[@]}"; do
-    git clonew "git@github.com:bbchk/${r}.git" "$HOME/dev/my/$r"
-  done
+  # mkdir -p "$HOME/dev/my"
+  # my_repos=(jv-fr avkfe scrape lvfe live lvbe lvops train slugtrans)
+  # for r in "${my_repos[@]}"; do
+  #   git clonew "git@github.com:bbchk/${r}.git" "$HOME/dev/my/$r"
+  # done
 
   mkdir -p "$HOME/dev/ib"
   ib_repos=(
@@ -130,7 +130,9 @@ if $do_clone_projects; then
   )
 
   for r in "${ib_repos[@]}"; do
-    git clonew "git@git.internetbrands.com:${r}.git" "$HOME/dev/ib/$r"
+    dest_name="${r//\//_}"
+
+    git clonew "git@git.internetbrands.com:${r}.git" "$HOME/dev/ib/$dest_name"
   done
   echo "Finished cloning projects."
 else
