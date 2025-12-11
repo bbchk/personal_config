@@ -207,11 +207,7 @@ This method is generally more flexible, as you manage all your static assignment
 
 Since you are already setting a static IP in the preseed file, **Strategy 1** (keeping the static IP outside the DHCP pool) is the path of least resistance and requires no further action on the router besides verifying the pool range.
 
----
 
-This video provides an overview of how to set static IP addresses and DHCP reservations on a device using a router's settings.
-
-[Set a Static IP Address for a Device | DHCP IP Reservation](https://www.youtube.com/watch?v=-G3ePnXAoHc)
-
-
-http://googleusercontent.com/youtube_content/0
+# let's figure out our dhcp range and set ip outside of it
+# archer dhcp ip pool
+# 192.168.0.101 - 192.168.0.250
