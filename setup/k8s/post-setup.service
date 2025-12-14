@@ -1,0 +1,13 @@
+[Unit]
+Description=One-time Setup Service for First Boot
+After=network-online.target
+
+[Service]
+Type=oneshot
+ExecStart=/usr/local/bin/post-setup.sh
+ExecStartPost=/usr/bin/systemctl disable firstrun.service
+RemainAfterExit=no
+
+[Install]
+# This unit should be started after the basic system setup is complete
+WantedBy=multi-user.target

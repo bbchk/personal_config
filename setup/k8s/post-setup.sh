@@ -1,4 +1,9 @@
-#!/usr/bin/env bash
+#!/bin/bash
+
+# /usr/bin/apt-get update
+# /usr/bin/apt-get install -y my-custom-package
+
+# exit 0
 
 su
 
@@ -33,3 +38,19 @@ systemctl restart systemd-logind
 
 TODO change password,
 TODO change hostname
+
+we need tailscale
+
+/etc/systemd/system/firstrun.service
+
+
+### Preseeding other packages
+d-i preseed/late_command string \
+    in-target apt-get update; \
+    in-target apt-get install -y sudo; \
+    in-target usermod -aG sudo bchk; \
+    in-target sed -i 's/#PermitRootLogin prohibit-password/PermitRootLogin no/' /etc/ssh/sshd_config
+/cdrom/setup
+
+    in-target /cdrom/setup.sh
+
