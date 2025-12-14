@@ -1,56 +1,84 @@
 #!/bin/bash
+# Script: firstrun-script.sh
+# Description: Executes one-time setup tasks after OS installation.
 
-# /usr/bin/apt-get update
-# /usr/bin/apt-get install -y my-custom-package
+LOG_FILE="/var/log/post-setup.log"
+NEW_HOSTNAME="debian-server"
+EXIT_STATUS=0
+# --- END VARIABLES ---
 
-# exit 0
+# Start the log file, overwriting any previous content (though it shouldn't exist)
+echo "Starting one-time server setup script..." > "$LOG_FILE"
+date >> "$LOG_FILE"
+echo "-------------------------------------" >> "$LOG_FILE"
 
-su
+/usr/bin/apt-get update >> "$LOG_FILE" 2>&1
+/usr/bin/apt-get install -y sudo vim net-tools openssh-server ifupdown >> "$LOG_FILE" 2>&1 || EXIT_STATUS=$?
 
-apt update
-apt install sudo vim
+update-alternatives --set editor /usr/bin/vim.basic >> "$LOG_FILE" 2>&1 || EXIT_STATUS=$?
 
-update-alternatives --config editor
+# ---------
 
-systemctl mask  "dev-*.swap"
+SSH_CONFIG="/etc/ssh/sshd_config"
 
-# TODO: make laptops do not turn off when lid's closed or is idle, act as server
-# HandlePowerKey=poweroff        # Can be poweroff, reboot, halt, ignore
-# HandleLidSwitch=suspend        # Can be suspend, ignore, lock, etc.
-# HandleLidSwitchDocked=ignore   # Controls lid action when docked
-# IdleAction=ignore              # Can be suspend, poweroff, etc.
-# IdleActionSec=30min            # Time before IdleAction triggers
+sed -i 's/GSSAPIAuthentication yes/GSSAPIAuthentication no/' "$SSH_CONFIG" || EXIT_STATUS=$?
+sed -i 's/KerberosAuthentication yes/KerberosAuthentication no/' "$SSH_CONFIG" || EXIT_STATUS=$?
+systemctl restart sshd >> "$LOG_FILE" 2>&1 || EXIT_STATUS=$?
 
-systemctl restart systemd-logind
+# ---------
 
-# /etc/network/interfaces
-# auto enp3s0
-# iface enp3s0 inet static
-#     address 192.168.1.10
-#     netmask 255.255.255.0
-#     gateway 192.168.1.1
-#     metric 100
+LOGIND_CONF="/etc/systemd/logind.conf"
+
+sed -i 's/#HandlePowerKey=poweroff/HandlePowerKey=ignore/' "$LOGIND_CONF" || EXIT_STATUS=$?
+sed -i 's/#HandleLidSwitch=suspend/HandleLidSwitch=ignore/' "$LOGIND_CONF" || EXIT_STATUS=$?
+sed -i 's/#HandleLidSwitchDocked=ignore/HandleLidSwitchDocked=ignore/' "$LOGIND_CONF" || EXIT_STATUS=$?
+sed -i 's/#IdleAction=suspend/IdleAction=ignore/' "$LOGIND_CONF" || EXIT_STATUS=$?
+
+systemctl restart systemd-logind >> "$LOG_FILE" 2>&1 || EXIT_STATUS=$?
+
+#############################################
+### 4. Configure Static Network Interface
+#############################################
+
+# echo "Configuring static Ethernet IP address on $INTERFACE_NAME..." >> "$LOG_FILE"
 #
+# # Create or modify /etc/network/interfaces for static IP
+# INTERFACES_CONF="/etc/network/interfaces"
+#
+# cat << EOF > "$INTERFACES_CONF"
+# # This file describes the network interfaces available on your system
+# # and how to activate them. For more information, see interfaces(5).
+#
+# source /etc/network/interfaces.d/*
+#
+# # The loopback network interface
+# auto lo
+# iface lo inet loopback
+#
+# # Primary Ethernet interface with static configuration
+# auto $INTERFACE_NAME
+# iface $INTERFACE_NAME inet static
+#       address 192.168.1.10
+#       netmask 255.255.255.0
+#       gateway 192.168.1.1
+#       metric 100
+#       dns-nameservers 192.168.1.1 8.8.8.8
+# EOF
+#
+# # Apply network changes (Restarting networking service)
+# ifdown "$INTERFACE_NAME" 2>/dev/null
+# ifup "$INTERFACE_NAME" >> "$LOG_FILE" 2>&1 || EXIT_STATUS=$?
 
-# d-i preseed/late_command string \
-#     cp /cdrom/scripts/network-config/interfaces /target/etc/network/interfaces; \
-#     cp /cdrom/scripts/network-config/resolv.conf /target/etc/resolv.conf
+#############################################
+### Final Cleanup and Exit
+#############################################
 
-TODO change password,
-TODO change hostname
+# Log the completion status
+echo "-------------------------------------" >> "$LOG_FILE"
+echo "Script finished with exit status: $EXIT_STATUS" >> "$LOG_FILE"
 
-we need tailscale
+# Clear the screen after systemd is disabled (Optional: helps cleanup console history)
+/usr/bin/clear
 
-/etc/systemd/system/firstrun.service
-
-
-### Preseeding other packages
-d-i preseed/late_command string \
-    in-target apt-get update; \
-    in-target apt-get install -y sudo; \
-    in-target usermod -aG sudo bchk; \
-    in-target sed -i 's/#PermitRootLogin prohibit-password/PermitRootLogin no/' /etc/ssh/sshd_config
-/cdrom/setup
-
-    in-target /cdrom/setup.sh
-
+# The final exit status determines if ExecStartPost runs. Use the collected status.
+exit $EXIT_STATUS
