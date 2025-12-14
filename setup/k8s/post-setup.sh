@@ -36,43 +36,6 @@ sed -i 's/#IdleAction=suspend/IdleAction=ignore/' "$LOGIND_CONF" || EXIT_STATUS=
 
 systemctl restart systemd-logind >> "$LOG_FILE" 2>&1 || EXIT_STATUS=$?
 
-#############################################
-### 4. Configure Static Network Interface
-#############################################
-
-# echo "Configuring static Ethernet IP address on $INTERFACE_NAME..." >> "$LOG_FILE"
-#
-# # Create or modify /etc/network/interfaces for static IP
-# INTERFACES_CONF="/etc/network/interfaces"
-#
-# cat << EOF > "$INTERFACES_CONF"
-# # This file describes the network interfaces available on your system
-# # and how to activate them. For more information, see interfaces(5).
-#
-# source /etc/network/interfaces.d/*
-#
-# # The loopback network interface
-# auto lo
-# iface lo inet loopback
-#
-# # Primary Ethernet interface with static configuration
-# auto $INTERFACE_NAME
-# iface $INTERFACE_NAME inet static
-#       address 192.168.1.10
-#       netmask 255.255.255.0
-#       gateway 192.168.1.1
-#       metric 100
-#       dns-nameservers 192.168.1.1 8.8.8.8
-# EOF
-#
-# # Apply network changes (Restarting networking service)
-# ifdown "$INTERFACE_NAME" 2>/dev/null
-# ifup "$INTERFACE_NAME" >> "$LOG_FILE" 2>&1 || EXIT_STATUS=$?
-
-#############################################
-### Final Cleanup and Exit
-#############################################
-
 # Log the completion status
 echo "-------------------------------------" >> "$LOG_FILE"
 echo "Script finished with exit status: $EXIT_STATUS" >> "$LOG_FILE"
