@@ -1,14 +1,11 @@
--- local sessionizer = require("your.path.to.sessionizer") -- Adjust path
--- local worktree = require("utils.worktree")            -- Adjust path
--- vim.keymap.set("n", "<leader>fw", function()
---   worktree.add_worktree(sessionizer.refresh_cache)
--- end, { desc = "Create Git Worktree" })
+local sessionizer = require("custom.sessionizer") -- Adjust path
 
 local M = {}
 
----
--- Adds a git worktree based on user input.
--- @param on_success_callback function | nil: An optional function to call upon successful worktree creation.
+vim.keymap.set("n", "<leader>fw", function()
+    M.add_worktree(sessionizer.refresh_cache)
+end, { desc = "Create Git Worktree" })
+
 function M.add_worktree(on_success_callback)
   -- 1. Get the root of the repository
   local repo_root_list = vim.fn.systemlist("git rev-parse --show-toplevel")
@@ -67,3 +64,4 @@ function M.add_worktree(on_success_callback)
 end
 
 return M
+

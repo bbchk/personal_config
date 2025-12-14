@@ -19,6 +19,7 @@ require("core.terminal")
 require("core.tabs")
 
 require("custom.sessionizer")
+require("custom.worktree")
 
 require("options")
 require("plugin_manager")
