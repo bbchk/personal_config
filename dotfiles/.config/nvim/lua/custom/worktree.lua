@@ -5,21 +5,21 @@ local M = {}
 vim.keymap.set("n", "<leader>fw", function()
     M.add_worktree(sessionizer.refresh_cache)
 end, { desc = "Create Git Worktree" })
+--
 
----
 -- Adds a git worktree based on user input.
 -- @param on_success_callback function | nil: An optional function to call upon successful worktree creation.
 function M.add_worktree(on_success_callback)
     -- 1. Get the root of the repository (the directory containing the .git file/pointer)
-    local repo_root_list = vim.fn.systemlist("git rev-parse --show-toplevel")
+    local cmd = 'dirname "$(git rev-parse --git-common-dir)"'
+    local repo_root_list = vim.fn.systemlist(cmd)
     if vim.v.shell_error ~= 0 or not repo_root_list[1] then
         vim.notify("Not a git repository.", vim.log.levels.ERROR)
         return
     end
-    -- This is the top-level directory, e.g., /home/user/dev/my/avkfe
+
     local repo_root = repo_root_list[1]
 
-    -- 2. Verify this is a bare repository managed with worktrees
     if vim.fn.isdirectory(repo_root .. "/.git") == 1 then
         vim.notify("This command is only for bare repositories with worktrees.", vim.log.levels.WARN)
         return
@@ -33,7 +33,6 @@ function M.add_worktree(on_success_callback)
         end
 
         local dir_name = branch_name:gsub("/", "_")
-        -- 💡 MODIFICATION: Use the absolute path for the new worktree directory
         local absolute_worktree_path = repo_root .. "/" .. dir_name
         
         -- Check if a directory with that name already exists
