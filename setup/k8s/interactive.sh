@@ -15,3 +15,5 @@ sed -i "s/127.0.1.1.*/127.0.1.1\t$NEW_HOSTNAME/" /etc/hosts
 read -p "Enter Tailscale auth key: " TS_AUTH_KEY
 curl -fsSL https://tailscale.com/install.sh | sh
 tailscale up --authkey="$TS_AUTH_KEY" --accept-routes
+
+sudo systemctl restart networking
