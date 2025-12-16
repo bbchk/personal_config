@@ -1,19 +1,25 @@
 #!/bin/bash
 
-# --- Change Password ---
+set -e
+
 read -p "Enter username: " USERNAME
-read -p "Enter new password for $USERNAME: " NEW_PASSWORD
+echo -n "Enter new password for $USERNAME: "
+
+stty -echo
+read NEW_PASSWORD
+stty echo
+
 echo
-sudo echo "$USERNAME:$NEW_PASSWORD" | /usr/sbin/chpasswd
+
+echo "$USERNAME:$NEW_PASSWORD" | sudo /usr/sbin/chpasswd
 
 # --- Change Hostname ---
 read -p "Enter new hostname: " NEW_HOSTNAME
 sudo hostnamectl set-hostname "$NEW_HOSTNAME"
-sed -i "s/127.0.1.1.*/127.0.1.1\t$NEW_HOSTNAME/" /etc/hosts
+sudo sed -i "s/127.0.1.1.*/127.0.1.1\t$NEW_HOSTNAME/" /etc/hosts
+sudo systemctl restart networking || sudo systemctl restart NetworkManager
 
-# --- Set up Tailscale ---
+# --- Tailscale ---
 read -p "Enter Tailscale auth key: " TS_AUTH_KEY
-curl -fsSL https://tailscale.com/install.sh | sh
-tailscale up --authkey="$TS_AUTH_KEY" --accept-routes
-
-sudo systemctl restart networking
+curl -fsSL https://tailscale.com/install.sh | sudo sh
+sudo tailscale up --authkey="$TS_AUTH_KEY" --accept-routes
