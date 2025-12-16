@@ -4,11 +4,11 @@
 read -p "Enter username: " USERNAME
 read -p "Enter new password for $USERNAME: " NEW_PASSWORD
 echo
-echo "$USERNAME:$NEW_PASSWORD" | /usr/sbin/chpasswd
+sudo echo "$USERNAME:$NEW_PASSWORD" | /usr/sbin/chpasswd
 
 # --- Change Hostname ---
 read -p "Enter new hostname: " NEW_HOSTNAME
-hostnamectl set-hostname "$NEW_HOSTNAME"
+sudo hostnamectl set-hostname "$NEW_HOSTNAME"
 sed -i "s/127.0.1.1.*/127.0.1.1\t$NEW_HOSTNAME/" /etc/hosts
 
 # --- Set up Tailscale ---
