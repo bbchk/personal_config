@@ -50,3 +50,17 @@ P1
 - learn glab and don't interact with gitlab if not needed. Can i use glab to navigate directly to pipelines from cli?
 
 - limit your search to the certain site, e.g. adding site:stackoverflow.com to your search phrase will limit the search to this site, or site:reddit.com inurl:/r/php to even a single subreddit!
+
+
+## k8s
+we need to create root users on debian installation and then change root user passwd in interactive.sh
+
+we need to throw this config to each node (plane/worker)
+
+192.168.0.107 plane-1
+192.168.0.111 node-1
+192.168.0.113 node-2
+
+ ╰$ scp hosts plane-1:~/                    
+bchk@plane-1:~$ cat hosts >> /etc/hosts
+
