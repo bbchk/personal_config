@@ -25,4 +25,7 @@ sed -i 's/#IdleAction=suspend/IdleAction=ignore/' "$logind_conf"
 
 systemctl restart systemd-logind
 
+# --- Disable Swap Memory ---
+swapoff -a
+
 /usr/bin/clear

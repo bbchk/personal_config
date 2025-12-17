@@ -64,3 +64,10 @@ we need to throw this config to each node (plane/worker)
  ╰$ scp hosts plane-1:~/                    
 bchk@plane-1:~$ cat hosts >> /etc/hosts
 
+for easier to set up it should be node-0, node-1, server
+
+Disable Swap
+Kubernetes has limited support for the use of swap memory, as it is difficult to provide guarantees and account for pod memory utilization when swap is involved.
+root@node-1:~# swapoff -a
+
+should be run as **root**
