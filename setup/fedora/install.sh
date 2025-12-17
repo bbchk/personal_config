@@ -27,6 +27,8 @@ PKGS=(
   glab
   rustfmt
   isort
+  re2-devel
+  mysql-devel
 
   # Development Libraries
   openssl-devel
