@@ -40,6 +40,8 @@ use normal lsp and formatter for html
  ╰$ git branch --set-upstream-to=origin/master master
 branch 'master' set up to track 'origin/master'.
 
+I need to make git clonew refresh nvim cache
+
 P1
 - I would like to have java neovim setup
 - I would like to have containarized neovim setup
@@ -71,3 +73,4 @@ Kubernetes has limited support for the use of swap memory, as it is difficult to
 root@node-1:~# swapoff -a
 
 should be run as **root**
+

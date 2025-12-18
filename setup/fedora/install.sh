@@ -29,6 +29,7 @@ PKGS=(
   isort
   re2-devel
   mysql-devel
+  pipx
 
   # Development Libraries
   openssl-devel
