@@ -74,3 +74,17 @@ root@node-1:~# swapoff -a
 
 should be run as **root**
 
+
+
+WHYYYYY CARL!
+ ╰$ git pull  
+There is no tracking information for the current branch.
+Please specify which branch you want to rebase against.
+See git-pull(1) for details.
+
+    git pull <remote> <branch>
+
+If you wish to set tracking information for this branch you can do so with:
+
+    git branch --set-upstream-to=origin/<branch> master
+
