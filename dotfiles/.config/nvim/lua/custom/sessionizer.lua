@@ -313,7 +313,10 @@ function M.add_worktree()
 		-- 6. Execute the final command and give feedback
 		local output = vim.fn.system(worktree_cmd)
 		if vim.v.shell_error == 0 then
-			vim.notify(string.format("Successfully created worktree '%s' for branch '%s'.", dir_name, branch_name), vim.log.levels.INFO)
+			vim.notify(
+				string.format("Successfully created worktree '%s' for branch '%s'.", dir_name, branch_name),
+				vim.log.levels.INFO
+			)
 			-- As a bonus, clear the cache so the new directory appears next time
 			M.refresh_cache()
 		else
@@ -336,14 +339,23 @@ function M.setup(opts)
 	end
 
 	if opts and opts.worktree_keybind then
-		vim.keymap.set("n", opts.worktree_keybind.key, M.add_worktree, { desc = opts.worktree_keybind.desc or "Add Git Worktree" })
+		vim.keymap.set(
+			"n",
+			opts.worktree_keybind.key,
+			M.add_worktree,
+			{ desc = opts.worktree_keybind.desc or "Add Git Worktree" }
+		)
 	end
 
-	vim.api.nvim_create_user_command("SessionizerRefreshCache", M.refresh_cache, { desc = "Clears the sessionizer directory cache" })
+	vim.api.nvim_create_user_command(
+		"SessionizerRefreshCache",
+		M.refresh_cache,
+		{ desc = "Clears the sessionizer directory cache" }
+	)
 end
 
 M.setup({
-	search_dirs = { vim.fn.expand("~"), vim.fn.expand("~/dev/my"), vim.fn.expand("~/dev/ib") },
+	search_dirs = { vim.fn.expand("~"), vim.fn.expand("~/dev/my"), vim.fn.expand("~/dev/ib"), vim.fn.expand("~/dev") },
 	use_telescope = true,
 	keybind = "<C-f>",
 	desc = "Open Sessionizer",
