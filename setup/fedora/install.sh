@@ -211,6 +211,25 @@ if "$do_tailscale";then
   curl -fsSL https://tailscale.com/install.sh | sh
 fi
 
+
+confirm "Do you want to install gcloud?" do_gcloud
+if [ "$do_gcloud" = true ]; then
+    # Create the repository file for Google Cloud CLI
+    sudo tee -a /etc/yum.repos.d/google-cloud-sdk.repo << EOM
+[google-cloud-cli]
+name=Google Cloud CLI
+baseurl=https://packages.cloud.google.com/yum/repos/cloud-sdk-el9-x86_64
+enabled=1
+gpgcheck=1
+repo_gpgcheck=0
+gpgkey=https://packages.cloud.google.com/yum/doc/rpm-package-key.gpg
+EOM
+
+    # Install dependencies and the CLI
+    sudo dnf install -y libxcrypt-compat.x86_64
+    sudo dnf install -y google-cloud-cli
+fi
+
 # this is for bash
 # confirm "Do you want to install kubie?" do_kubie
 # if $do_kubie; then
