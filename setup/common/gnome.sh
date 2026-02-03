@@ -24,7 +24,6 @@ if $apply_gnome_settings; then
     gsettings set org.gnome.desktop.wm.keybindings "switch-to-workspace-$i" "['<Super>$i']"
     gsettings set org.gnome.desktop.wm.keybindings "move-to-workspace-$i" "['<Shift><Super>$i']"
   done
-
   gsettings set org.gnome.desktop.wm.keybindings "switch-to-workspace-10" "['<Super>0']"
   gsettings set org.gnome.desktop.wm.keybindings "move-to-workspace-10" "['<Shift><Super>0']"
 
@@ -99,6 +98,9 @@ else
   echo "Skipping GNOME extensions installation."
 fi
 
+
+
+# TODO:
 # gsettings set org.gnome.shell.extensions.pop-shell activate-launcher "[]"
 # gsettings set org.gnome.shell.extensions.pop-shell focus-down "[]"
 # gsettings set org.gnome.shell.extensions.pop-shell focus-left "[]"

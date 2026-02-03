@@ -1,5 +1,6 @@
 .gsd-keyboard.settings-ported
 PostmanAgent
+tailscale/ssh_known_hosts
 Asterix
 glab-cli
 org.gnome.Ptyxis/
