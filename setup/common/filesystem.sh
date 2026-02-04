@@ -30,11 +30,11 @@ if $do_clone_projects; then
   echo "Cloning frequently used projects..."
   # Clone frequently worked on projects
 
-  # mkdir -p "$HOME/dev/my"
-  # my_repos=(jv-fr avkfe scrape lvfe live lvbe lvops train slugtrans)
-  # for r in "${my_repos[@]}"; do
-  #   git clonew "git@github.com:bbchk/${r}.git" "$HOME/dev/my/$r"
-  # done
+  mkdir -p "$HOME/dev/my"
+  my_repos=(jv-fr avkfe scrape lvfe live lvbe lvops train slugtrans)
+  for r in "${my_repos[@]}"; do
+    git clone "git@github.com:bbchk/${r}.git" "$HOME/dev/my/$r"
+  done
 
   mkdir -p "$HOME/dev/ib"
   ib_repos=(
