@@ -9,7 +9,6 @@ show_menu() {
   echo "Please choose a setup. Enter a number:"
   echo "1. Debian"
   echo "2. Fedora"
-  echo "3. Kubernetes"
 }
 
 validate_choice() {
@@ -58,10 +57,6 @@ main() {
     echo "You selected Fedora."
     "$HOME/pers/setup/fedora/main.sh" && "$HOME/pers/setup/common/gnome.sh" && "$HOME/pers/setup/common/filesystem.sh"
     ;;
-  3)
-    echo "You selected Kubernetes."
-    "$HOME/pers/setup/k8s/main.sh"
-    ;;
   *)
     echo "Wrong input, please try again."
     ;;
@@ -71,4 +66,4 @@ main() {
 main
 "$HOME/pers/setup/common/gnome.sh"
 "$HOME/pers/setup/common/filesystem.sh"
-"$HOME/pers/setup/teardown.sh"
+"$HOME/pers/setup/common/teardown.sh"

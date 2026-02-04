@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-source "$HOME/pers/setup/utils.sh"
+source "$HOME/pers/setup/common/utils.sh"
 
 # ====================================
 echo -e "\n\n ======= main.sh is starting ======= \n\n"

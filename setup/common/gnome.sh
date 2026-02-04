@@ -117,3 +117,22 @@ fi
 # gsettings set org.gnome.shell.extensions.pop-shell toggle-floating "[]"
 # gsettings set org.gnome.shell.extensions.pop-shell toggle-stacking-global "[]"
 # gsettings set org.gnome.shell.extensions.pop-shell toggle-tiling "[]"
+#
+#
+#
+# org.gnome.shell.extensions.pop-shell activate-launcher ['<Super>slash']
+# org.gnome.shell.extensions.pop-shell focus-down ['<Super>Down', '<Super>KP_Down', '<Super>j']
+# org.gnome.shell.extensions.pop-shell focus-left ['<Super>Left', '<Super>KP_Left', '<Super>h']
+# org.gnome.shell.extensions.pop-shell focus-right ['<Super>Right', '<Super>KP_Right', '<Super>l']
+# org.gnome.shell.extensions.pop-shell focus-up ['<Super>Up', '<Super>KP_Up', '<Super>k']
+# org.gnome.shell.extensions.pop-shell pop-monitor-down ['<Super><Shift><Primary>Down', '<Super><Shift><Primary>KP_Down', '<Super><Shift><Primary>j']
+# org.gnome.shell.extensions.pop-shell pop-monitor-left ['<Super><Shift>Left', '<Super><Shift>KP_Left', '<Super><Shift>h']
+# org.gnome.shell.extensions.pop-shell pop-monitor-right ['<Super><Shift>Right', '<Super><Shift>KP_Right', '<Super><Shift>l']
+# org.gnome.shell.extensions.pop-shell pop-monitor-up ['<Super><Shift><Primary>Up', '<Super><Shift><Primary>KP_Up', '<Super><Shift><Primary>k']
+# org.gnome.shell.extensions.pop-shell pop-workspace-down ['<Super><Shift>Down', '<Super><Shift>KP_Down', '<Super><Shift>j']
+# org.gnome.shell.extensions.pop-shell pop-workspace-up ['<Super><Shift>Up', '<Super><Shift>KP_Up', '<Super><Shift>k']
+# org.gnome.shell.extensions.pop-shell tile-enter ['<Super>Return', '<Super>KP_Enter']
+# org.gnome.shell.extensions.pop-shell tile-orientation ['<Super>o']
+# org.gnome.shell.extensions.pop-shell toggle-floating ['<Super>g']
+# org.gnome.shell.extensions.pop-shell toggle-stacking-global ['<Super>s']
+# org.gnome.shell.extensions.pop-shell toggle-tiling ['<Super>y']

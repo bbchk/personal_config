@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-source "$HOME/pers/setup/utils.sh"
+source "$HOME/pers/setup/common/utils.sh"
 
 git submodule update --init --recursive
 
