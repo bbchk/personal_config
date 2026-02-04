@@ -130,7 +130,7 @@ if $do_clone_projects; then
   for r in "${ib_repos[@]}"; do
     dest_name="${r//\//_}"
 
-    git clonew "git@git.internetbrands.com:${r}.git" "$HOME/dev/ib/$dest_name"
+    git clone "git@git.internetbrands.com:${r}.git" "$HOME/dev/ib/$dest_name"
   done
   echo "Finished cloning projects."
 else
