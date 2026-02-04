@@ -11,6 +11,14 @@ echo "%sudo ALL=(ALL:ALL) ALL" | sudo tee /etc/sudoers.d/nopasswd_sudo
 
 gpasswd -a bchk sudo
 
+mkdir -p ~/.kube
+sudo cp /etc/rancher/k3s/k3s.yaml ~/.kube/config
+sudo chown $USER:$USER ~/.kube/config
+chmod 600 ~/.kube/config
+export KUBECONFIG=$HOME/.kube/config
+kubectl get nodes
+
+
 # ---------
 
 SSH_CONFIG="/etc/ssh/sshd_config"
