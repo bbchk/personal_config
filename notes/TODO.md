@@ -12,6 +12,10 @@
 
 ## WIP
 
+I want to come back to branches instead of worktrees, at least for now.
+I also want to have super o
+I also want to move downloads to xdg, we need to gitignore it
+
 
 ## WIP
 
