@@ -4,6 +4,7 @@
 /usr/bin/apt-get install -y sudo vim net-tools openssh-server ifupdown curl wget
 
 update-alternatives --set editor /usr/bin/vim.basic
+systemctl disable firewalld --now
 
 # The industry standard is to avoid editing the main /etc/sudoers file directly. Instead, you should drop a configuration file into the /etc/sudoers.d/ directory. It’s cleaner, modular, and much harder to break.
 echo "%sudo ALL=(ALL:ALL) ALL" | sudo tee /etc/sudoers.d/nopasswd_sudo
