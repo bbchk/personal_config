@@ -4,13 +4,9 @@
 
 <h1 align="center">
   <div>
-    <span>Dotfiles, scripts, secrets, configs for my working station</span>
+    <span>Dotfiles, scripts and secrets for my machine</span>
   </div>
   <br>
 </h1>
-
----
-
-## 📋 Overview
 
 This repository contains a complete personal configuration setup for Linux development environments, including automated system setup, dotfiles management, custom scripts, and security configurations. It supports multiple Linux distributions (Debian, Fedora) and includes specialized Kubernetes cluster setup tools.
