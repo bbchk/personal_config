@@ -4,7 +4,12 @@
 
 autoload -Uz vcs_info compinit
 
-compinit
+# Use cache for compinit (check only once per day)
+if [[ -n ${ZDOTDIR}/.zcompdump(#qNmh+24) ]]; then
+  compinit
+else
+  compinit -C
+fi
 
 precmd() {
     vcs_info

@@ -10,8 +10,6 @@ ZSH_THEME="strug"
 # Remind about update when it is time
 zstyle ':omz:update' mode reminder
 
-plugins=(git docker zsh-syntax-highlighting zsh-autosuggestions kube-ps1)
-
-PROMPT='$(kube_ps1)'$PROMPT
+plugins=(git docker zsh-syntax-highlighting zsh-autosuggestions)
 
 source $ZSH/oh-my-zsh.sh
