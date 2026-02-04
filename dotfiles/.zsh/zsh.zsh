@@ -44,7 +44,3 @@ export EDITOR='nvim'
 export MANPAGER="nvim +Man!!"
 
 export PATH="$HOME/pers/scripts:$PATH"
-
-for config_file in ~/.zsh/tools/*.zsh; do
-  source "$config_file"
-done

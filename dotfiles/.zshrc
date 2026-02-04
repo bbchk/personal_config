@@ -3,10 +3,6 @@ for config_file in ~/.zsh/*.zsh ~/.zsh/tools/*.zsh; do
   if [[ ! -f "${config_file}.zwc" ]] || [[ "$config_file" -nt "${config_file}.zwc" ]]; then
     zcompile "$config_file"
   fi
-done
-
-# Source config files
-for config_file in ~/.zsh/*.zsh; do
   source "$config_file"
 done
 
