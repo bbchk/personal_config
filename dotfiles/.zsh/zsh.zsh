@@ -1,5 +1,5 @@
 # ------------------------------
-# zsh config 
+# zsh config
 # ------------------------------
 
 autoload -Uz vcs_info compinit
@@ -17,7 +17,7 @@ precmd() {
 
 zstyle ':vcs_info:git:*' formats '[%b]'
 setopt prompt_subst
-setopt histignorespace 
+setopt histignorespace
 
 PROMPT='%F{155} ╭─%f%B%F{227}%~%f %F{214}${vcs_info_msg_0_}%f%b
 %F{155} ╰$ %f'
@@ -25,7 +25,7 @@ RPROMPT='%B%F{155}%f%b'
 export FZF_DEFAULT_OPTS="--color=fg:white,bg:black,hl:155,fg+:white,bg+:black,hl+:214,prompt:white,pointer:214"
 
 export PATH="/usr/bin:$PATH"
-export LD_LIBRARY_PATH="/usr/lib:$LD_LIBRARY_PATH"
+# export LD_LIBRARY_PATH="/usr/lib:$LD_LIBRARY_PATH"
 
 # Terminal history
 HISTFILE="${HOME}/pers/secrets/.zsh_history"
