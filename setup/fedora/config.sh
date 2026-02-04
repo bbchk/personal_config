@@ -61,8 +61,9 @@ confirm "Do you create custom shorcuts" do_shortcuts
 if $do_shortcuts; then
   CUSTOM_KEYBINDING_1="/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/sessionizer/"
   CUSTOM_KEYBINDING_2="/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/screenshots_swappy/"
+  CUSTOM_KEYBINDING_3="/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/screenshots_flameshot/"
   gsettings set org.gnome.settings-daemon.plugins.media-keys custom-keybindings \
-    "['$CUSTOM_KEYBINDING_1', '$CUSTOM_KEYBINDING_2']"
+    "['$CUSTOM_KEYBINDING_1', '$CUSTOM_KEYBINDING_2', '$CUSTOM_KEYBINDING_3']"
 
   APP_CMD_1="kitty -e $HOME/pers/scripts/sessionizer"
   gsettings set org.gnome.settings-daemon.plugins.media-keys.custom-keybinding:$CUSTOM_KEYBINDING_1 name 'Sessionizer'
@@ -73,6 +74,11 @@ if $do_shortcuts; then
   gsettings set org.gnome.settings-daemon.plugins.media-keys.custom-keybinding:$CUSTOM_KEYBINDING_2 name 'Swappy'
   gsettings set org.gnome.settings-daemon.plugins.media-keys.custom-keybinding:$CUSTOM_KEYBINDING_2 command "$APP_CMD_2"
   gsettings set org.gnome.settings-daemon.plugins.media-keys.custom-keybinding:$CUSTOM_KEYBINDING_2 binding '<Super>o'
+
+  APP_CMD_3='sh -c "flameshot.sh --raw | wl-copy"'
+  gsettings set org.gnome.settings-daemon.plugins.media-keys.custom-keybinding:$CUSTOM_KEYBINDING_3 name 'Flameshot'
+  gsettings set org.gnome.settings-daemon.plugins.media-keys.custom-keybinding:$CUSTOM_KEYBINDING_3 command "$APP_CMD_3"
+  gsettings set org.gnome.settings-daemon.plugins.media-keys.custom-keybinding:$CUSTOM_KEYBINDING_3 binding '<Super><Shift>o'
 fi
 
 confirm "Do you create nvim autostart" do_nvim_auto
