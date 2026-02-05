@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 # It's recommended to source utils.sh to make the confirm function available
-source "$HOME/pers/setup/utils.sh"
+source "$HOME/pers/setup/common/utils.sh"
 
 set -euo pipefail
 
