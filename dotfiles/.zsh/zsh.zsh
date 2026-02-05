@@ -19,15 +19,8 @@ zstyle ':vcs_info:git:*' formats '[%b]'
 setopt prompt_subst
 setopt histignorespace
 
-if [ ! -z ${KUBIE_ACTIVE+x} ]
-then
-    PROMPT='%F{155} ╭─%f%B%F{227}%~%f %F{214}${vcs_info_msg_0_}%f%b
+PROMPT='%F{155} ╭─%f%B%F{227}%~%f %F{214}${vcs_info_msg_0_}%f%b
 %F{155} ╰$ %f'
-else
-    PROMPT='%F{155} ╭─%f%B%F{227}%~%f %F{214}${vcs_info_msg_0_}%f%b
-%F{155} ╰$ %f'
-fi
-
 RPROMPT='%B%F{155}%f%b'
 export FZF_DEFAULT_OPTS="--color=fg:white,bg:black,hl:155,fg+:white,bg+:black,hl+:214,prompt:white,pointer:214"
 
