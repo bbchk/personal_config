@@ -15,6 +15,7 @@ if $apply_gnome_settings; then
   gsettings set org.gnome.mutter dynamic-workspaces false
   gsettings set org.gnome.desktop.wm.preferences num-workspaces "10"
   gsettings set org.gnome.desktop.wm.preferences workspace-names "['1', '2', '3', '4', '5', '6', '7', '8', '9', '10']"
+  gsettings set org.gnome.desktop.interface color-scheme 'prefer-dark'
 
   for i in {1..9}; do
     gsettings set org.gnome.shell.keybindings "switch-to-application-$i" "[]"
