@@ -46,7 +46,7 @@ if $do_networking; then
   fi
   sudo hostnamectl set-hostname --pretty "$pretty_hostname"
   sudo hostnamectl set-hostname --static "$static_hostname"
-  sudo ln -sf "$HOME/pers/config/hosts" /etc/hosts
+  sudo ln -sf "$HOME/pers/secrets/hosts" /etc/hosts
 fi
 
 # ---- personalization ---------------------------
@@ -59,26 +59,25 @@ fi
 
 confirm "Do you create custom shorcuts" do_shortcuts
 if $do_shortcuts; then
-  CUSTOM_KEYBINDING_1="/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/sessionizer/"
-  CUSTOM_KEYBINDING_2="/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/screenshots_swappy/"
-  CUSTOM_KEYBINDING_3="/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/screenshots_flameshot/"
-  gsettings set org.gnome.settings-daemon.plugins.media-keys custom-keybindings \
-    "['$CUSTOM_KEYBINDING_1', '$CUSTOM_KEYBINDING_2', '$CUSTOM_KEYBINDING_3']"
+  # Define the paths
+  K1="/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0/"
+  K2="/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom1/"
+  K3="/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom2/"
 
-  APP_CMD_1="kitty -e $HOME/pers/scripts/sessionizer"
-  gsettings set org.gnome.settings-daemon.plugins.media-keys.custom-keybinding:$CUSTOM_KEYBINDING_1 name 'Sessionizer'
-  gsettings set org.gnome.settings-daemon.plugins.media-keys.custom-keybinding:$CUSTOM_KEYBINDING_1 command "$APP_CMD_1"
-  gsettings set org.gnome.settings-daemon.plugins.media-keys.custom-keybinding:$CUSTOM_KEYBINDING_1 binding '<Super>f'
+  # Apply the list all at once - Notice the nested quoting
+  gsettings set org.gnome.settings-daemon.plugins.media-keys custom-keybindings "['$K1', '$K2', '$K3']"
 
-  APP_CMD_2='bash -c "gnome-screenshot -f /tmp/screenshot.png && swappy -f /tmp/screenshot.png"'
-  gsettings set org.gnome.settings-daemon.plugins.media-keys.custom-keybinding:$CUSTOM_KEYBINDING_2 name 'Swappy'
-  gsettings set org.gnome.settings-daemon.plugins.media-keys.custom-keybinding:$CUSTOM_KEYBINDING_2 command "$APP_CMD_2"
-  gsettings set org.gnome.settings-daemon.plugins.media-keys.custom-keybinding:$CUSTOM_KEYBINDING_2 binding '<Super>o'
+  gsettings set org.gnome.settings-daemon.plugins.media-keys.custom-keybinding:$K1 name 'Sessionizer'
+  gsettings set org.gnome.settings-daemon.plugins.media-keys.custom-keybinding:$K1 command "kitty -e $HOME/pers/scripts/sessionizer"
+  gsettings set org.gnome.settings-daemon.plugins.media-keys.custom-keybinding:$K1 binding '<Super>f'
 
-  APP_CMD_3='sh -c "flameshot.sh --raw | wl-copy"'
-  gsettings set org.gnome.settings-daemon.plugins.media-keys.custom-keybinding:$CUSTOM_KEYBINDING_3 name 'Flameshot'
-  gsettings set org.gnome.settings-daemon.plugins.media-keys.custom-keybinding:$CUSTOM_KEYBINDING_3 command "$APP_CMD_3"
-  gsettings set org.gnome.settings-daemon.plugins.media-keys.custom-keybinding:$CUSTOM_KEYBINDING_3 binding '<Super><Shift>o'
+  gsettings set org.gnome.settings-daemon.plugins.media-keys.custom-keybinding:$K2 name 'Swappy'
+  gsettings set org.gnome.settings-daemon.plugins.media-keys.custom-keybinding:$K2 command "bash -c 'gnome-screenshot -f /tmp/screenshot.png && swappy -f /tmp/screenshot.png'"
+  gsettings set org.gnome.settings-daemon.plugins.media-keys.custom-keybinding:$K2 binding '<Super>o'
+
+  gsettings set org.gnome.settings-daemon.plugins.media-keys.custom-keybinding:$K3 name 'Flameshot'
+  gsettings set org.gnome.settings-daemon.plugins.media-keys.custom-keybinding:$K3 command "$HOME/pers/scripts/flameshot.sh --raw | wl-copy"
+  gsettings set org.gnome.settings-daemon.plugins.media-keys.custom-keybinding:$K3 binding '<Super>['
 fi
 
 confirm "Do you create nvim autostart" do_nvim_auto

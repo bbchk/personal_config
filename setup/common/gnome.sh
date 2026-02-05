@@ -17,6 +17,9 @@ if $apply_gnome_settings; then
   gsettings set org.gnome.desktop.wm.preferences workspace-names "['1', '2', '3', '4', '5', '6', '7', '8', '9', '10']"
   gsettings set org.gnome.desktop.interface color-scheme 'prefer-dark'
 
+ # ╰$ gsettings set org.gnome.settings-daemon.plugins.media-keys rotate-video-lock-static "['XF86RotationLockToggle']"
+ #gsettings set org.gnome.desktop.wm.keybindings move-to-side-w "[]"
+
   for i in {1..9}; do
     gsettings set org.gnome.shell.keybindings "switch-to-application-$i" "[]"
   done
@@ -43,7 +46,7 @@ if $apply_gnome_settings; then
 
   # ---- Utlis below -------------------------------
   gsettings set org.gnome.desktop.input-sources sources "[('xkb', 'us'), ('xkb', 'ua')]"
-  gsettings set org.gnome.shell.keybindings show-screenshot-ui "['<Super>p']"
+  # gsettings set org.gnome.shell.keybindings show-screenshot-ui "['<Super>p']"
   gsettings set org.gnome.settings-daemon.plugins.media-keys screensaver "[]"
   gsettings set org.gnome.desktop.default-applications.terminal exec /usr/bin/kitty
 
