@@ -62,6 +62,7 @@ PKGS=(
   ShellCheck
   keepassxc
   bsdtar
+  k9s
 
   # Text Editors & Development Environment
   neovim
