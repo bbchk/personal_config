@@ -1,5 +1,5 @@
 <div align="center" style="display: flex; flex-direction: column;">
-<img src="xdg/Pictures/default/main_gif.gif" width="200">
+<img src="xdg/pictures/default/main_gif.gif" width="200">
 </div>
 
 <h1 align="center">
