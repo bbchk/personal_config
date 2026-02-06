@@ -20,6 +20,13 @@ u.keyset("n", "<leader>q", "<CMD>q!<CR>")
 u.keyset("n", "<leader>ww", "<CMD>write<CR>")
 u.keyset("n", "<leader>w", "<CMD>noautocmd write<CR>")
 
+u.keyset(
+	"n",
+	"<leader>h",
+	"<Cmd>lua require('custom.sessionizer').refresh_cache()<CR>",
+	{ silent = true, desc = "Sessionizer: Refresh cache" }
+)
+
 -----------------------------------
 
 -- TODO: fugitive
