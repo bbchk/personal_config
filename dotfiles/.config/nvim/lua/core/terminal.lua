@@ -29,3 +29,5 @@ vim.keymap.set("n", "<leader>k", function()
 	vim.wo.winfixheight = true
 	vim.cmd.term()
 end)
+
+vim.env.PATH = vim.env.PATH .. ":/usr/local/go/bin:" .. vim.fn.expand("$HOME") .. "/go/bin"
