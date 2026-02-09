@@ -30,6 +30,7 @@ PKGS=(
   re2-devel
   mysql-devel
   pipx
+  libXScrnSaver
 
   # Development Libraries
   openssl-devel
