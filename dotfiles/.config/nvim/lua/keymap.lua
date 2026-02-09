@@ -22,7 +22,7 @@ u.keyset("n", "<leader>w", "<CMD>noautocmd write<CR>")
 
 u.keyset(
 	"n",
-	"<leader>h",
+	"<leader>r",
 	"<Cmd>lua require('custom.sessionizer').refresh_cache()<CR>",
 	{ silent = true, desc = "Sessionizer: Refresh cache" }
 )
