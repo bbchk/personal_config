@@ -2,255 +2,87 @@
 
 source "$HOME/pers/setup/common/utils.sh"
 
-# ====================================
-echo -e "\n\n ======= install.sh is starting ======= \n\n"
+log "Starting install.sh execution..."
 
-# Enable RPM Fusion repositories for additional packages
+# ====================================
+log "Setting up RPM Fusion repositories (Free & Non-Free)..."
 sudo dnf install -y \
   https://download1.rpmfusion.org/free/fedora/rpmfusion-free-release-$(rpm -E %fedora).noarch.rpm \
   https://download1.rpmfusion.org/nonfree/fedora/rpmfusion-nonfree-release-$(rpm -E %fedora).noarch.rpm
 
+# ====================================
 PKGS=(
-  # Development Tools & Build Dependencies
-  gcc
-  gcc-c++
-  make
-  cmake
-  pkgconf-pkg-config
-  git
-  git-delta
-  maven
-  golang
-  julia
-  php-xdebug
-  xclip
-  glab
-  rustfmt
-  isort
-  re2-devel
-  mysql-devel
-  pipx
-  libXScrnSaver
-
-
-  # Development Libraries
-  openssl-devel
-  openssl
-  readline-devel
-  zlib-devel
-  libyaml-devel
-  libffi-devel
-  gdbm-devel
-  ncurses-devel
-  libuuid-devel
-  libssh2-devel
-  libgit2-devel
-  ruby-devel
-  @virtualization
-  virt-manager
-  virt-viewer
-
-  # Programming Languages & Runtimes
-  python3-venv
-  java-17-openjdk
-  lua
-  luarocks
-  rbenv
-
-  # System Administration & DevOps
-  ansible
-  docker
-  docker-compose
-  ShellCheck
-  keepassxc
-  bsdtar
-  k9s
-
-  # Text Editors & Development Environment
-  neovim
-  fzf
-  gh
-  tree
-  kitty
-  tmux
-
-  # Shell & Terminal
-  zsh
-  man-pages
-
-  # Network Tools
-  traceroute
-  nmap-ncat
-  bind-utils
-  openfortivpn
-  net-tools
-  curl
-  nmap
-
-  # File Management & Search
-  fd-find
-  ripgrep
-  zip
-  unzip
-  lsof
-  stow
-
-  # Desktop Environment & GUI Applications
-  qbittorrent
-  swappy
-
-  # System Control & Hardware
-  ppp
-
-  # Mobile Development
-  android-tools
-  scrcpy
-
-  # Fonts
-  fira-code-fonts
-  fontawesome-fonts
+  # Development Tools
+  gcc gcc-c++ make cmake pkgconf-pkg-config git git-delta maven golang julia php-xdebug xclip glab rustfmt isort re2-devel mysql-devel pipx libXScrnSaver
+  # Libraries
+  openssl-devel openssl激 readline-devel zlib-devel libyaml-devel libffi-devel gdbm-devel ncurses-devel libuuid-devel libssh2-devel libgit2-devel ruby-devel @virtualization virt-manager virt-viewer
+  # Runtimes
+  python3-venv java-17-openjdk lua luarocks rbenv
+  # DevOps
+  ansible docker docker-compose ShellCheck keepassxc bsdtar k9s
+  # Editors/Shell
+  neovim fzf gh tree kitty tmux zsh man-pages
+  # Network
+  traceroute nmap-ncat bind-utils openfortivpn net-tools curl nmap
+  # Files/System
+  fd-find ripgrep zip unzip lsof stow qbittorrent swappy ppp android-tools scrcpy fira-code-fonts fontawesome-fonts
 )
 
-echo "Installing packages..."
+log "Preparing to install ${#PKGS[@]} system packages via DNF..."
 sudo dnf install -y "${PKGS[@]}" --skip-unavailable
 
-# NPM packages below
-
-sudo npm install -g pnpm@latest-10
-
-# Docker below
-
+# ====================================
+log "Configuring Docker daemon and user groups..."
 sudo systemctl enable docker
 sudo systemctl start docker
 sudo usermod -aG docker "$USER"
-
 sudo mkdir -p /etc/docker
 sudo ln -sf "$HOME/pers/config/deamon.json" /etc/docker/deamon.json
 
-# K8s below
+# ====================================
+log "Enabling Google Chrome repositories and installing stable branch..."
+sudo dnf -y install fedora-workstation-repositories
+sudo dnf -y config-manager setopt google-chrome.enabled=1
+sudo dnf -y install google-chrome-stable
 
-confirm "Do you want to install kubectl?" do_kubectl
-if $do_kubectl; then
-  echo "Installing kubectl..."
+# ====================================
+log "Installing Sioyek PDF viewer via Flatpak..."
+flatpak install flathub com.github.ahrm.sioyek -y
 
-  # Download kubectl and its sha256 checksum
-  curl -LO "https://dl.k8s.io/release/$(curl -L -s https://dl.k8s.io/release/stable.txt)/bin/linux/amd64/kubectl"
-  curl -LO "https://dl.k8s.io/release/$(curl -L -s https://dl.k8s.io/release/stable.txt)/bin/linux/amd64/kubectl.sha256"
-
-  # Verify the downloaded file's checksum
-  echo "$(cat kubectl.sha256)  kubectl" | sha256sum --check
-
-  # Install kubectl to /usr/local/bin
-  sudo install -o root -g root -m 0755 kubectl /usr/local/bin/kubectl
-
-  # Verify kubectl installation
-  kubectl version --client
-
-  echo "kubectl has been installed successfully."
-
-else
-  echo "Skipping kubectl installation."
-fi
-
-confirm "Do you want to install GitHub CLI?" do_github_cli
-if $do_github_cli; then
-  sudo dnf install dnf5-plugins
-  sudo dnf config-manager addrepo --from-repofile=https://cli.github.com/packages/rpm/gh-cli.repo
-  sudo dnf install gh --repo gh-cli
-fi
-
-# TODO: implement
-# confirm "Do you want to install git-who?" do_git_who
-# if $do_git_who; then
-#
-#   cd "/tmp"
-#   git clone git@github.com:sinclairtarget/git-who.git
-#   cd git-who
-#   rake
-#
-#   sudo cp git-who /usr/local/bin/
-#
-#   cd -
-#   git-who --version
-# fi
-
-confirm "Do you want to install google-chrome?" do_google_chrome
-if $do_google_chrome; then
-  sudo dnf -y install fedora-workstation-repositories
-  sudo dnf -y config-manager setopt google-chrome.enabled=1
-  sudo dnf -y install google-chrome-stable
-fi
-
-confirm "Do you want to install sioyek?" do_sioyek
-if $do_sioyek; then
-  flatpak install flathub com.github.ahrm.sioyek
-  flatpak run com.github.ahrm.sioyek
-fi
-
-confirm "Do you want to install julia?" do_julia
-if $do_julia; then
-  curl -fsSL https://install.julialang.org | sh
-fi
-
-confirm "Do you want to install keyd?" do_keyd
-if $do_keyd; then
-
-  cd "/tmp"
+# ====================================
+if ! command_exists keyd; then
+  log "Keyd not detected. Commencing source build from GitHub..."
+  cd "/tmp" || exit
   git clone https://github.com/rvaiya/keyd
-  cd keyd
-
+  cd keyd || exit
+  log "Compiling and installing Keyd..."
   make && sudo make install
-
-  cd -
+  cd - || exit
+  log "Configuring Keyd service and loading default.conf..."
   sudo systemctl enable keyd --now
   sudo cp "$HOME/pers/config/keyd.conf" /etc/keyd/default.conf
   sudo keyd reload
-
   sudo usermod -aG keyd "$USER"
 fi
 
-confirm "Do you want to install tailscale?" do_tailscale
-if "$do_tailscale";then
+# ====================================
+if ! command_exists tailscale; then
+  log "Tailscale not found. Fetching and running official install script..."
   curl -fsSL https://tailscale.com/install.sh | sh
 fi
 
-# confirm "Do you want to install gcloud?" do_gcloud
-# if [ "$do_gcloud" = true ]; then
-#     # Create the repository file for Google Cloud CLI
-#     sudo tee -a /etc/yum.repos.d/google-cloud-sdk.repo << EOM
-# [google-cloud-cli]
-# name=Google Cloud CLI
-# baseurl=https://packages.cloud.google.com/yum/repos/cloud-sdk-el9-x86_64
-# enabled=1
-# gpgcheck=1
-# repo_gpgcheck=0
-# gpgkey=https://packages.cloud.google.com/yum/doc/rpm-package-key.gpg
-# EOM
-#
-#     # Install dependencies and the CLI
-#     sudo dnf install -y libxcrypt-compat.x86_64
-#     sudo dnf install -y google-cloud-cli
-# fi
+# ====================================
+log "Enabling COPR for 'showmethekey' and installing..."
+sudo dnf copr enable pesader/showmethekey -y
+sudo dnf install showmethekey -y
 
-confirm "Do you want to install showmethekey?" do_showmethekey
-if [ "$do_showmethekey" = true ]; then
-# https://github.com/AlynxZhou/showmethekey
-  sudo dnf copr enable pesader/showmethekey
-  sudo dnf install showmethekey
-fi
-
-confirm "Do you want to install mise?" do_mise
-if [ "$do_mise" = true ]; then
+# ====================================
+if ! command_exists mise; then
+  log "Mise runtime manager not found. Installing via mise.run..."
   curl https://mise.run | sh
 fi
 
+log "Using Mise to provision latest runtimes: Node, PNPM, and GLab..."
+mise use node@latest pnpm@latest glab@latest
 
-# this is for bash
-# confirm "Do you want to install kubie?" do_kubie
-# if $do_kubie; then
-#
-#   cd "/tmp"
-#   git clone https://github.com/sbstp/kubie.git
-#   cd kubie
-#   sudo cp -f ./completion/kubie.bash /etc/bash_completion.d/kubie
-# fi
+log "======= install.sh execution finished successfully ======="
