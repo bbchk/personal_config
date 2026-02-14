@@ -12,6 +12,7 @@
 
 ## WIP
  we need to do some kind of system taht would do setup "migrations" to detect what's been run already and what not
+I would rather have idempotent script that's run on every startup of any machine of mine
 
 I want to come back to branches instead of worktrees, at least for now.
 I also want to have super o
@@ -63,7 +64,7 @@ P1
 ## k8s
 we need to create root users on debian installation and then change root user passwd in interactive.sh
 
-we need to throw this config to each node (plane/worker)
+we need to throw this config to each node ()
 
 192.168.0.107 plane-1
 192.168.0.111 node-1
