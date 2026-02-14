@@ -1,8 +1,8 @@
 #!/usr/bin/env bash
 
-source "$HOME/pers/setup/common/utils.sh"
-
 log "Starting install.sh execution..."
+
+source "$HOME/pers/setup/common/utils.sh"
 
 # ====================================
 log "Setting up RPM Fusion repositories (Free & Non-Free)..."
@@ -81,8 +81,8 @@ if ! command_exists mise; then
   log "Mise runtime manager not found. Installing via mise.run..."
   curl https://mise.run | sh
 fi
-
-log "Using Mise to provision latest runtimes: Node, PNPM, and GLab..."
-mise use node@latest pnpm@latest glab@latest
-
+log "Using Mise to provision latest runtimes"
+mise use --global node@latest pnpm@latest glab@latest
+# ====================================
+#
 log "======= install.sh execution finished successfully ======="
