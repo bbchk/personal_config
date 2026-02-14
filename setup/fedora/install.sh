@@ -241,9 +241,7 @@ fi
 
 confirm "Do you want to install mise?" do_mise
 if [ "$do_mise" = true ]; then
-# https://github.com/AlynxZhou/showmethekey
-  sudo dnf copr enable jdxcode/mise
-  sudo dnf install mise
+  curl https://mise.run | sh
 fi
 
 

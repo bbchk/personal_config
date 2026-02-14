@@ -11,6 +11,7 @@
 </h1>
 
 ## WIP
+ we need to do some kind of system taht would do setup "migrations" to detect what's been run already and what not
 
 I want to come back to branches instead of worktrees, at least for now.
 I also want to have super o
