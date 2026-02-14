@@ -1,91 +1,67 @@
 #!/usr/bin/env bash
 
+log "Starting config.sh execution..."
+
 source "$HOME/pers/setup/common/utils.sh"
 
+
+# ---- submodules ---------------------------
+log "Initializing and updating git submodules..."
 git submodule update --init --recursive
 
-# ====================================
-#
-echo -e "\n\n ======= config.sh is starting ======= \n\n"
-
 # ---- dotfiles ---------------------------
-confirm "Do you want to link dotfiles?" do_dotfiles
-if $do_dotfiles; then
-  dotfiles_to_symlink=($(find "$HOME/pers/dotfiles" -maxdepth 1 -mindepth 1))
-  for i in "${dotfiles_to_symlink[@]}"; do
-    base_item_name=$(basename "$i")
-    echo "Linking $i to $HOME/$base_item_name"
-    rm -rf "$HOME/$base_item_name"
-    ln -sf "$i" "$HOME/$base_item_name"
-  done
-fi
+log "Scanning $HOME/pers/dotfiles for items to symlink..."
+
+dotfiles_to_symlink=($(find "$HOME/pers/dotfiles" -maxdepth 1 -mindepth 1))
+for i in "${dotfiles_to_symlink[@]}"; do
+  base_item_name=$(basename "$i")
+  log "Linking $i -> $HOME/$base_item_name"
+  mv "$HOME/$base_item_name" "$HOME/${base_item_name}.backup" 2>/dev/null
+  ln -sf "$i" "$HOME/$base_item_name"
+done
 
 # ---- secrets ---------------------------
-confirm "Do you want to link secrets?" do_secrets
-if $do_secrets; then
-  find "$HOME/pers/secrets" -type f -exec ansible-vault decrypt --vault-password-file "$HOME/pers/password" -- {} \;
-  mv "$HOME/.ssh" "$HOME/.ssh.backup" 2>/dev/null || true
-  ln -sf "$HOME/pers/secrets/ssh" "$HOME/.ssh"
-fi
+log "Decrypting secret files using ansible-vault..."
+find "$HOME/pers/secrets" -type f -exec ansible-vault decrypt --vault-password-file "$HOME/pers/password" -- {} \;
 
-confirm "Do you set link keepassxc.ini?" do_keepass
-if $do_keepass; then
-  mkdir -p "$HOME/pers/dotfiles/.config/keepassxc"
-  ln -sf "$HOME/pers/secrets/passwords/keepassxc.ini" "$HOME/pers/dotfiles/.config/keepassxc/keepassxc.ini"
-fi
+mv "$HOME/.ssh" "$HOME/.ssh.backup" 2>/dev/null
+ln -sf "$HOME/pers/secrets/ssh" "$HOME/.ssh"
 
-# ---- networking ---------------------------
-confirm "Do you want to tweak networking settings?" do_networking
-if $do_networking; then
-  if [[ "${AUTO_YES:-false}" == "true" ]]; then
-    pretty_hostname="My Laptop"
-    static_hostname="my-laptop"
-  else
-    read -rp "Enter pretty hostname: " pretty_hostname
-    read -rp "Enter static hostname: " static_hostname
-  fi
-  sudo hostnamectl set-hostname --pretty "$pretty_hostname"
-  sudo hostnamectl set-hostname --static "$static_hostname"
-  sudo ln -sf "$HOME/pers/secrets/hosts" /etc/hosts
-fi
+mkdir -p "$HOME/pers/dotfiles/.config/keepassxc"
+ln -sf "$HOME/pers/secrets/passwords/keepassxc.ini" "$HOME/pers/dotfiles/.config/keepassxc/keepassxc.ini"
 
-# ---- personalization ---------------------------
-confirm "Do you set default user image?" do_user_image
-if $do_user_image; then
-  default_user_image_path="$HOME/pers/xdg/Pictures/default/sun-with-face.png"
-  magick "$default_user_image_path" -resize 512x512 -gravity center -extent 512x512 "$default_user_image_path"
-  sudo busctl call org.freedesktop.Accounts /org/freedesktop/Accounts/User$(id -u) org.freedesktop.Accounts.User SetIconFile s "$default_user_image_path"
-fi
+log "Symlinking custom /etc/hosts file..."
+mv /etc/hosts /etc/hosts.backup
+sudo ln -sf "$HOME/pers/secrets/hosts" /etc/hosts
 
-confirm "Do you create custom shorcuts" do_shortcuts
-if $do_shortcuts; then
-  # Define the paths
-  K1="/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0/"
-  K2="/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom1/"
-  K3="/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom2/"
+# ---- shortcuts ---------------------------
+log "Configuring GNOME custom keybindings (Sessionizer, Swappy, Flameshot)..."
+K1="/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0/"
+K2="/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom1/"
+K3="/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom2/"
 
-  # Apply the list all at once - Notice the nested quoting
-  gsettings set org.gnome.settings-daemon.plugins.media-keys custom-keybindings "['$K1', '$K2', '$K3']"
+log "Registering keybinding paths in gsettings..."
+gsettings set org.gnome.settings-daemon.plugins.media-keys custom-keybindings "['$K1', '$K2', '$K3']"
 
-  gsettings set org.gnome.settings-daemon.plugins.media-keys.custom-keybinding:$K1 name 'Sessionizer'
-  gsettings set org.gnome.settings-daemon.plugins.media-keys.custom-keybinding:$K1 command "kitty -e $HOME/pers/scripts/sessionizer"
-  gsettings set org.gnome.settings-daemon.plugins.media-keys.custom-keybinding:$K1 binding '<Super>f'
+log "Setting binding: <Super>f -> Sessionizer"
+gsettings set org.gnome.settings-daemon.plugins.media-keys.custom-keybinding:$K1 name 'Sessionizer'
+gsettings set org.gnome.settings-daemon.plugins.media-keys.custom-keybinding:$K1 command "kitty -e $HOME/pers/scripts/sessionizer"
+gsettings set org.gnome.settings-daemon.plugins.media-keys.custom-keybinding:$K1 binding '<Super>f'
 
-  gsettings set org.gnome.settings-daemon.plugins.media-keys.custom-keybinding:$K2 name 'Swappy'
-  gsettings set org.gnome.settings-daemon.plugins.media-keys.custom-keybinding:$K2 command "bash -c 'gnome-screenshot -f /tmp/screenshot.png && swappy -f /tmp/screenshot.png'"
-  gsettings set org.gnome.settings-daemon.plugins.media-keys.custom-keybinding:$K2 binding '<Super>o'
+log "Setting binding: <Super>o -> Swappy"
+gsettings set org.gnome.settings-daemon.plugins.media-keys.custom-keybinding:$K2 name 'Swappy'
+gsettings set org.gnome.settings-daemon.plugins.media-keys.custom-keybinding:$K2 command "bash -c 'gnome-screenshot -f /tmp/screenshot.png && swappy -f /tmp/screenshot.png'"
+gsettings set org.gnome.settings-daemon.plugins.media-keys.custom-keybinding:$K2 binding '<Super>o'
 
-  gsettings set org.gnome.settings-daemon.plugins.media-keys.custom-keybinding:$K3 name 'Flameshot'
-  gsettings set org.gnome.settings-daemon.plugins.media-keys.custom-keybinding:$K3 command "$HOME/pers/scripts/flameshot.sh --raw | wl-copy"
-  gsettings set org.gnome.settings-daemon.plugins.media-keys.custom-keybinding:$K3 binding '<Super>['
-fi
+log "Setting binding: <Super>[ -> Flameshot"
+gsettings set org.gnome.settings-daemon.plugins.media-keys.custom-keybinding:$K3 name 'Flameshot'
+gsettings set org.gnome.settings-daemon.plugins.media-keys.custom-keybinding:$K3 command "$HOME/pers/scripts/flameshot.sh --raw | wl-copy"
+gsettings set org.gnome.settings-daemon.plugins.media-keys.custom-keybinding:$K3 binding '<Super>['
 
-confirm "Do you create nvim autostart" do_nvim_auto
-if $do_nvim_auto; then
-
-  mkdir -p ~/.config/autostart
-
-  cat > ~/.config/autostart/nvim-sessionizer.desktop << EOF
+# ---- autostart ---------------------------
+log "Creating GNOME autostart directory at ~/.config/autostart..."
+mkdir -p ~/.config/autostart
+cat > ~/.config/autostart/nvim-sessionizer.desktop << EOF
 [Desktop Entry]
 Type=Application
 Name=Neovim Sessionizer
@@ -94,4 +70,4 @@ Icon=utilities-terminal
 Comment=Starts Neovim with the sessionizer plugin
 EOF
 
-fi
+log "======= config.sh execution finished successfully ======="
