@@ -32,6 +32,7 @@ PKGS=(
   pipx
   libXScrnSaver
 
+
   # Development Libraries
   openssl-devel
   openssl
@@ -237,6 +238,14 @@ if [ "$do_showmethekey" = true ]; then
   sudo dnf copr enable pesader/showmethekey
   sudo dnf install showmethekey
 fi
+
+confirm "Do you want to install mise?" do_mise
+if [ "$do_mise" = true ]; then
+# https://github.com/AlynxZhou/showmethekey
+  sudo dnf copr enable jdxcode/mise
+  sudo dnf install mise
+fi
+
 
 # this is for bash
 # confirm "Do you want to install kubie?" do_kubie
