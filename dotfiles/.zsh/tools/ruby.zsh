@@ -2,18 +2,19 @@
 # Ruby config 
 # ------------------------------
 
-export PATH="$HOME/.rbenv/bin:$PATH"
+# export PATH="$HOME/.rbenv/bin:$PATH"
+#
+# if (( $+commands[rbenv] )); then
+#   _rbenv_lazy_load() {
+#     eval "$(rbenv init - zsh)"
+#     unfunction _rbenv_lazy_load
+#   }
+#   rbenv() {
+#     _rbenv_lazy_load
+#     rbenv "$@"
+#   }
+# fi
 
-if (( $+commands[rbenv] )); then
-  _rbenv_lazy_load() {
-    eval "$(rbenv init - zsh)"
-    unfunction _rbenv_lazy_load
-  }
-  rbenv() {
-    _rbenv_lazy_load
-    rbenv "$@"
-  }
-fi
 # gem install ruby-lsp
 
 #https://stackoverflow.com/questions/64860931/why-cant-rbenv-install-the-latest-ruby-version-on-ubuntu
