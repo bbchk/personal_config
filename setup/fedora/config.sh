@@ -4,7 +4,6 @@ log "Starting config.sh execution..."
 
 source "$HOME/pers/setup/common/utils.sh"
 
-
 # ---- submodules ---------------------------
 log "Initializing and updating git submodules..."
 git submodule update --init --recursive
