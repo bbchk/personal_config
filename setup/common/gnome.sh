@@ -3,8 +3,6 @@
 # It's recommended to source utils.sh to make the confirm function available
 source "$HOME/pers/setup/common/utils.sh"
 
-set -euo pipefail
-
 # ====================================
 
 confirm "Do you want to apply all custom GNOME settings (workspaces, keybindings, etc.)?" apply_gnome_settings

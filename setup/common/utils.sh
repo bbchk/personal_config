@@ -3,7 +3,7 @@
 # ===========================
 log () {
     if [[ -n "${DEBUG:-}" ]]; then
-        echo "[DEBUG] $*"
+        echo -e "[DEBUG] $*"
     fi
 }
 
