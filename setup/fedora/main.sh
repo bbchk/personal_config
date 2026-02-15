@@ -13,7 +13,7 @@ fi
 
 # ====================================
 
-nvim --headless "+Lazy! sync" +qa
+nvim --headless "+Lazy! sync" +q
 
 sudo dnf update -y --skip-unavailable --exclude=openh264
 
