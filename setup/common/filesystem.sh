@@ -23,12 +23,12 @@ for r in "${gh_repos[@]}"; do
   git clone "git@github.com:bbchk/${r}.git" "$HOME/dev/my/$r"
 done
 
-gl_repos=(odoo docker ci_cd)
+gl_repos=(odoo docker ci_cd cert_manager)
 for r in "${gl_repos[@]}"; do
   git clone "git@gitlab.com:liveworld/${r}.git" "$HOME/dev/my/liveworld_$r"
 done
 
-log "Provisioning corporate repositories: flattening directory structures for 'Internet Brands' projects."
+log "Provisioning IB repositories projects."
 mkdir -p "$HOME/dev/ib"
 ib_repos=(
     patient-portal/appointments
