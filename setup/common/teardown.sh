@@ -4,18 +4,9 @@ source "$HOME/pers/setup/common/utils.sh"
 
 # ====================================
 
+log "Configuring repository remotes and initializing local Git hooks."
 git remote add origin-ssh git@github.com:bbchk/personal_config.git
 git config core.hooksPath .githooks
 
-xdg-user-dirs-update
-
-confirm "Do you want to change the default shell to Zsh?" do_chsh
-if $do_chsh; then
-  chsh -s "$(which zsh)"
-  echo "Shell changed to Zsh. Please log out and back in for the change to take effect."
-fi
-
-confirm "Do you want to log out now to apply changes?" do_logout
-if $do_logout; then
-  gnome-session-quit --logout
-fi
+log "Updating the system shell to ZSH and initiating a session logout to apply changes."
+chsh -s "$(which zsh)"

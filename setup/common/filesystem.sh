@@ -13,6 +13,7 @@ mv "$HOME/Public" "$HOME/pers/xdg/public"
 mv "$HOME/Templates" "$HOME/pers/xdg/templates"
 mv "$HOME/Videos" "$HOME/pers/xdg/videos"
 mv "$HOME/Downloads" "$HOME/pers/xdg/downloads"
+xdg-user-dirs-update
 
 log "Cloning personal projects and Liveworld repositories from GitHub and GitLab."
 mkdir -p "$HOME/dev/my"
