@@ -1,0 +1,4 @@
+[tools]
+glab = "latest"
+node = "latest"
+pnpm = "latest"
