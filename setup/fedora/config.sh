@@ -1,8 +1,8 @@
 #!/usr/bin/env bash
 
-log "Starting config.sh execution..."
-
 source "$HOME/pers/setup/common/utils.sh"
+
+log "Starting config.sh execution..."
 
 # ---- submodules ---------------------------
 log "Initializing and updating git submodules..."
@@ -29,7 +29,7 @@ mkdir -p "$HOME/pers/dotfiles/.config/keepassxc"
 ln -sf "$HOME/pers/secrets/passwords/keepassxc.ini" "$HOME/pers/dotfiles/.config/keepassxc/keepassxc.ini"
 
 log "Symlinking custom /etc/hosts file..."
-mv /etc/hosts /etc/hosts.backup
+sudo mv /etc/hosts /etc/hosts.backup
 sudo ln -sf "$HOME/pers/secrets/hosts" /etc/hosts
 
 log "======= config.sh execution finished successfully ======="

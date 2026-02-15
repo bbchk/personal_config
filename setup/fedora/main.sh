@@ -9,6 +9,7 @@ log "\n\n ======= main.sh is starting ======= \n\n"
 if [ ! -f "$HOME/pers/password" ]; then
   echo "ERROR: $HOME/pers/password missing."
   touch password
+  exit 1
 fi
 
 # ====================================

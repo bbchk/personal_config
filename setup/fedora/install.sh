@@ -1,8 +1,8 @@
 #!/usr/bin/env bash
 
-log "Starting install.sh execution..."
-
 source "$HOME/pers/setup/common/utils.sh"
+
+log "Starting install.sh execution..."
 
 # ====================================
 log "Setting up RPM Fusion repositories (Free & Non-Free)..."
