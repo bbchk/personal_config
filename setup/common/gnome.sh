@@ -5,102 +5,127 @@ source "$HOME/pers/setup/common/utils.sh"
 
 # ====================================
 
-confirm "Do you want to apply all custom GNOME settings (workspaces, keybindings, etc.)?" apply_gnome_settings
-if $apply_gnome_settings; then
-  echo "Applying GNOME settings..."
+# ---- Workspaces below -------------------------------
+gsettings set org.gnome.mutter dynamic-workspaces false
+gsettings set org.gnome.desktop.wm.preferences num-workspaces "10"
+gsettings set org.gnome.desktop.wm.preferences workspace-names "['1', '2', '3', '4', '5', '6', '7', '8', '9', '10']"
+gsettings set org.gnome.desktop.interface color-scheme 'prefer-dark'
 
-  # ---- Workspaces below -------------------------------
-  gsettings set org.gnome.mutter dynamic-workspaces false
-  gsettings set org.gnome.desktop.wm.preferences num-workspaces "10"
-  gsettings set org.gnome.desktop.wm.preferences workspace-names "['1', '2', '3', '4', '5', '6', '7', '8', '9', '10']"
-  gsettings set org.gnome.desktop.interface color-scheme 'prefer-dark'
 
- # ╰$ gsettings set org.gnome.settings-daemon.plugins.media-keys rotate-video-lock-static "['XF86RotationLockToggle']"
- #gsettings set org.gnome.desktop.wm.keybindings move-to-side-w "[]"
+for i in {1..9}; do
+  gsettings set org.gnome.shell.keybindings "switch-to-application-$i" "[]"
+done
 
-  for i in {1..9}; do
-    gsettings set org.gnome.shell.keybindings "switch-to-application-$i" "[]"
-  done
+for i in {1..9}; do
+  gsettings set org.gnome.desktop.wm.keybindings "switch-to-workspace-$i" "['<Super>$i']"
+  gsettings set org.gnome.desktop.wm.keybindings "move-to-workspace-$i" "['<Shift><Super>$i']"
+done
+gsettings set org.gnome.desktop.wm.keybindings "switch-to-workspace-10" "['<Super>0']"
+gsettings set org.gnome.desktop.wm.keybindings "move-to-workspace-10" "['<Shift><Super>0']"
 
-  for i in {1..9}; do
-    gsettings set org.gnome.desktop.wm.keybindings "switch-to-workspace-$i" "['<Super>$i']"
-    gsettings set org.gnome.desktop.wm.keybindings "move-to-workspace-$i" "['<Shift><Super>$i']"
-  done
-  gsettings set org.gnome.desktop.wm.keybindings "switch-to-workspace-10" "['<Super>0']"
-  gsettings set org.gnome.desktop.wm.keybindings "move-to-workspace-10" "['<Shift><Super>0']"
+gsettings set org.gnome.desktop.wm.keybindings switch-to-workspace-left "['<Super><Shift>h']"
+gsettings set org.gnome.desktop.wm.keybindings switch-to-workspace-right "['<Super><Shift>l']"
 
-  gsettings set org.gnome.desktop.wm.keybindings switch-to-workspace-left "['<Super><Shift>h']"
-  gsettings set org.gnome.desktop.wm.keybindings switch-to-workspace-right "['<Super><Shift>l']"
+gsettings set org.gnome.desktop.wm.keybindings minimize "[]"
+# we need to unset super l first
+gsettings set org.gnome.desktop.wm.keybindings cycle-windows "['<Super>l']"
+gsettings set org.gnome.desktop.wm.keybindings cycle-windows-backward "['<Super>h']"
 
-  gsettings set org.gnome.desktop.wm.keybindings minimize "[]"
-  # we need to unset super l first
-  gsettings set org.gnome.desktop.wm.keybindings cycle-windows "['<Super>l']"
-  gsettings set org.gnome.desktop.wm.keybindings cycle-windows-backward "['<Super>h']"
+# ---- Windows below -------------------------------
+gsettings set org.gnome.shell.keybindings toggle-message-tray "[]"
+gsettings set org.gnome.desktop.wm.keybindings toggle-maximized "['<Super>m']"
+gsettings set org.gnome.desktop.wm.keybindings close "['<Super>q']"
 
-  # ---- Windows below -------------------------------
-  gsettings set org.gnome.shell.keybindings toggle-message-tray "[]"
-  gsettings set org.gnome.desktop.wm.keybindings toggle-maximized "['<Super>m']"
-  gsettings set org.gnome.desktop.wm.keybindings close "['<Super>q']"
+# ---- Utlis below -------------------------------
+gsettings set org.gnome.desktop.input-sources sources "[('xkb', 'us'), ('xkb', 'ua')]"
+gsettings set org.gnome.shell.keybindings show-screenshot-ui "['<Super>p']"
+gsettings set org.gnome.settings-daemon.plugins.media-keys screensaver "[]"
+gsettings set org.gnome.desktop.default-applications.terminal exec /usr/bin/kitty
 
-  # ---- Utlis below -------------------------------
-  gsettings set org.gnome.desktop.input-sources sources "[('xkb', 'us'), ('xkb', 'ua')]"
-  # gsettings set org.gnome.shell.keybindings show-screenshot-ui "['<Super>p']"
-  gsettings set org.gnome.settings-daemon.plugins.media-keys screensaver "[]"
-  gsettings set org.gnome.desktop.default-applications.terminal exec /usr/bin/kitty
+# ---- Wellbeing below -------------------------------
+gsettings set org.gnome.desktop.screen-time-limits daily-limit-enabled "true"
+gsettings set org.gnome.desktop.screen-time-limits daily-limit-seconds "uint32 28800"
+gsettings set org.gnome.desktop.screen-time-limits grayscale "false"
+gsettings set org.gnome.desktop.screen-time-limits history-enabled "true"
 
-  # ---- Wellbeing below -------------------------------
-  gsettings set org.gnome.desktop.screen-time-limits daily-limit-enabled "true"
-  gsettings set org.gnome.desktop.screen-time-limits daily-limit-seconds "uint32 28800"
-  gsettings set org.gnome.desktop.screen-time-limits grayscale "false"
-  gsettings set org.gnome.desktop.screen-time-limits history-enabled "true"
-
-  gsettings set org.gnome.desktop.break-reminders selected-breaks "['eyesight']"
-  gsettings set org.gnome.desktop.break-reminders.eyesight countdown "false"
-  gsettings set org.gnome.desktop.break-reminders.eyesight delay-seconds "uint32 180"
-  gsettings set org.gnome.desktop.break-reminders.eyesight duration-seconds "uint32 20"
-  gsettings set org.gnome.desktop.break-reminders.eyesight fade-screen "true"
-  gsettings set org.gnome.desktop.break-reminders.eyesight interval-seconds "uint32 1200"
-  gsettings set org.gnome.desktop.break-reminders.eyesight lock-screen "false"
-  gsettings set org.gnome.desktop.break-reminders.eyesight notify "true"
-  gsettings set org.gnome.desktop.break-reminders.eyesight notify-overdue "true"
-  gsettings set org.gnome.desktop.break-reminders.eyesight notify-upcoming "false"
-  gsettings set org.gnome.desktop.break-reminders.eyesight play-sound "false"
-  echo "GNOME settings applied."
-else
-  echo "Skipping GNOME settings configuration."
-fi
+gsettings set org.gnome.desktop.break-reminders selected-breaks "['eyesight']"
+gsettings set org.gnome.desktop.break-reminders.eyesight countdown "false"
+gsettings set org.gnome.desktop.break-reminders.eyesight delay-seconds "uint32 180"
+gsettings set org.gnome.desktop.break-reminders.eyesight duration-seconds "uint32 20"
+gsettings set org.gnome.desktop.break-reminders.eyesight fade-screen "true"
+gsettings set org.gnome.desktop.break-reminders.eyesight interval-seconds "uint32 1200"
+gsettings set org.gnome.desktop.break-reminders.eyesight lock-screen "false"
+gsettings set org.gnome.desktop.break-reminders.eyesight notify "true"
+gsettings set org.gnome.desktop.break-reminders.eyesight notify-overdue "true"
+gsettings set org.gnome.desktop.break-reminders.eyesight notify-upcoming "false"
+gsettings set org.gnome.desktop.break-reminders.eyesight play-sound "false"
 
 
 # ---- Extensions below -------------------------------
 
-confirm "Do you want to install GNOME extensions?" do_install_extensions
-if $do_install_extensions; then
-  echo "Installing GNOME extensions..."
-  flatpak install flathub org.gnome.Extensions
+echo "Installing GNOME extensions..."
 
-  gnome-extensions enable launch-new-instance@gnome-shell-extensions.gcampax.github.com
+flatpak install flathub org.gnome.Extensions
 
-  extensions=(
-    "https://extensions.gnome.org/extension-data/just-perfection-desktopjust-perfection.v35.shell-extension.zip"
-    "https://extensions.gnome.org/extension-data/instantworkspaceswitcheramalantony.net.v10.shell-extension.zip"
-    "https://extensions.gnome.org/extension-data/VitalsCoreCoding.com.v73.shell-extension.zip"
-    "https://extensions.gnome.org/extension-data/bluetooth-quick-connectbjarosze.gmail.com.v53.shell-extension.zip"
-  )
+gnome-extensions enable launch-new-instance@gnome-shell-extensions.gcampax.github.com
 
-  # Loop through each URL
-  for url in "${extensions[@]}"; do
-    filename=$(basename "$url")
-    echo "Installing $filename..."
-    wget -P /tmp "$url"
-    gnome-extensions install --force "/tmp/$filename"
-    rm "/tmp/$filename"
-  done
-  echo "GNOME extensions installed."
-else
-  echo "Skipping GNOME extensions installation."
-fi
+extensions=(
+  "https://extensions.gnome.org/extension-data/just-perfection-desktopjust-perfection.v35.shell-extension.zip"
+  "https://extensions.gnome.org/extension-data/instantworkspaceswitcheramalantony.net.v10.shell-extension.zip"
+  "https://extensions.gnome.org/extension-data/VitalsCoreCoding.com.v73.shell-extension.zip"
+  "https://extensions.gnome.org/extension-data/bluetooth-quick-connectbjarosze.gmail.com.v53.shell-extension.zip"
+)
+
+# Loop through each URL
+for url in "${extensions[@]}"; do
+  filename=$(basename "$url")
+  echo "Installing $filename..."
+  wget -P /tmp "$url"
+  gnome-extensions install --force "/tmp/$filename"
+  rm "/tmp/$filename"
+done
+
+# ---- shortcuts ---------------------------
+log "Configuring GNOME custom keybindings (Sessionizer, Swappy, Flameshot)..."
+K1="/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0/"
+K2="/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom1/"
+K3="/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom2/"
+
+log "Registering keybinding paths in gsettings..."
+gsettings set org.gnome.settings-daemon.plugins.media-keys custom-keybindings "['$K1', '$K2', '$K3']"
+
+log "Setting binding: <Super>f -> Sessionizer"
+gsettings set org.gnome.settings-daemon.plugins.media-keys.custom-keybinding:$K1 name 'Sessionizer'
+gsettings set org.gnome.settings-daemon.plugins.media-keys.custom-keybinding:$K1 command "kitty -e $HOME/pers/scripts/sessionizer"
+gsettings set org.gnome.settings-daemon.plugins.media-keys.custom-keybinding:$K1 binding '<Super>f'
+
+# log "Setting binding: <Super>o -> Swappy"
+# gsettings set org.gnome.settings-daemon.plugins.media-keys.custom-keybinding:$K2 name 'Swappy'
+# gsettings set org.gnome.settings-daemon.plugins.media-keys.custom-keybinding:$K2 command "bash -c 'gnome-screenshot -f /tmp/screenshot.png && swappy -f /tmp/screenshot.png'"
+# gsettings set org.gnome.settings-daemon.plugins.media-keys.custom-keybinding:$K2 binding '<Super>o'
+
+log "Setting binding: <Super>o -> Flameshot"
+gsettings set org.gnome.settings-daemon.plugins.media-keys.custom-keybinding:$K3 name 'Flameshot'
+gsettings set org.gnome.settings-daemon.plugins.media-keys.custom-keybinding:$K3 command "$HOME/pers/scripts/flameshot.sh --raw | wl-copy"
+gsettings set org.gnome.settings-daemon.plugins.media-keys.custom-keybinding:$K3 binding '<Super>o'
+
+# ---- autostart ---------------------------
+log "Creating GNOME autostart directory at ~/.config/autostart..."
+mkdir -p ~/.config/autostart
+cat > ~/.config/autostart/nvim-sessionizer.desktop << EOF
+[Desktop Entry]
+Type=Application
+Name=Neovim Sessionizer
+Exec=gnome-terminal -- nvim -c "lua require('custom.sessionizer').sessionizer()"
+Icon=utilities-terminal
+Comment=Starts Neovim with the sessionizer plugin
+EOF
 
 
+# TODO below
+
+#╰$ gsettings set org.gnome.settings-daemon.plugins.media-keys rotate-video-lock-static "['XF86RotationLockToggle']"
+#gsettings set org.gnome.desktop.wm.keybindings move-to-side-w "[]"
 
 # TODO:
 # gsettings set org.gnome.shell.extensions.pop-shell activate-launcher "[]"
