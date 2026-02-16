@@ -19,7 +19,7 @@ PKGS=(
   # Runtimes
   python3-venv java-17-openjdk lua luarocks rbenv
   # DevOps
-  ansible docker docker-compose ShellCheck keepassxc bsdtar k9s
+  ansible docker docker-compose ShellCheck keepassxc bsdtar k9s oathtool
   # Editors/Shell
   neovim fzf gh tree kitty tmux zsh man-pages
   # Network

@@ -2,20 +2,19 @@
 
 sudo -v || exit 1
 
-regions=("east1" "east2" "west1" "west2" "global")
-region=$(printf "%s\n" "${regions[@]}" | fzf --height=10 --border --prompt="Region?: ")
+region=${1:-"west1"}
 
-  # | fzf --height=25 --border --delimiter='/' --with-nth='4..' --prompt="Workdir?: ")
+sudo pkill -9 openfortivpn 2>/dev/null
+sleep 1
 
-if [ -z "$region" ]; then
-  echo "No region selected. Exiting."
-  exit 1
-fi
-
-read -rp "OTP?: " one_time_password
+SECRET_FILE="$HOME/pers/secrets/vpn/totp_secret_key"
+TIME_STEP=60
+DIGITS=6
+SECRET=$(tr -d '[:space:]' < "$SECRET_FILE")
+TOTP=$(oathtool --totp -b --time-step-size=${TIME_STEP}s --digits=${DIGITS} "$SECRET")
 
 config_file="$HOME/pers/secrets/vpn/credentials.cfg"
-sudo openfortivpn "vpn-${region}.internetbrands.com:443" \
-  -c "${config_file}" \
-  -o "${one_time_password}" &
+host="vpn-${region}.internetbrands.com:443"
+
+sudo openfortivpn "$host" -c "${config_file}" -o "${TOTP}" &
 disown

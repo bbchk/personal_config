@@ -1,0 +1,12 @@
+#!/bin/bash
+
+SECRET_FILE="$HOME/pers/secrets/vpn/totp_secret_key"
+
+TIME_STEP=60
+DIGITS=6
+
+SECRET=$(cat "$SECRET_FILE" | tr -d '[:space:]')
+
+TOTP=$(oathtool --totp -b --time-step-size=${TIME_STEP}s --digits=${DIGITS} "$SECRET")
+
+echo "$TOTP"

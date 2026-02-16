@@ -31,6 +31,9 @@ done
 log "Provisioning IB repositories projects."
 mkdir -p "$HOME/dev/ib"
 ib_repos=(
+    cp/online-booking/booking-app
+    cp/online-booking/booking-setting-app
+    smb-portal/online-booking
     patient-portal/appointments
     healthone/appointmentservice
     smb-portal/billing-invoicing
