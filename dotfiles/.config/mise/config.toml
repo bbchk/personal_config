@@ -1,4 +1,4 @@
 [tools]
 glab = "latest"
-node = "latest"
+node = ["latest", "10"]
 pnpm = "latest"

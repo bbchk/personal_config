@@ -10,3 +10,12 @@ repositories:
   password: ""
   url: https://cowboysysop.github.io/charts/
   username: ""
+- caFile: ""
+  certFile: ""
+  insecure_skip_tls_verify: false
+  keyFile: ""
+  name: jetstack
+  pass_credentials_all: false
+  password: ""
+  url: https://charts.jetstack.io
+  username: ""

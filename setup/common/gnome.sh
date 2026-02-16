@@ -83,18 +83,17 @@ done
 log "Registering custom global shortcuts for Sessionizer and Flameshot."
 K1="/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0/"
 K2="/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom1/"
-K3="/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom2/"
 
-gsettings set org.gnome.settings-daemon.plugins.media-keys custom-keybindings "['$K1', '$K2', '$K3']"
+gsettings set org.gnome.settings-daemon.plugins.media-keys custom-keybindings "['$K1', '$K2']"
 
 log "Binding Super+F to Sessionizer and Super+O to Flameshot."
 gsettings set org.gnome.settings-daemon.plugins.media-keys.custom-keybinding:$K1 name 'Sessionizer'
 gsettings set org.gnome.settings-daemon.plugins.media-keys.custom-keybinding:$K1 command "kitty -e $HOME/pers/scripts/sessionizer"
 gsettings set org.gnome.settings-daemon.plugins.media-keys.custom-keybinding:$K1 binding '<Super>f'
 
-gsettings set org.gnome.settings-daemon.plugins.media-keys.custom-keybinding:$K3 name 'Flameshot'
-gsettings set org.gnome.settings-daemon.plugins.media-keys.custom-keybinding:$K3 command "$HOME/pers/scripts/flameshot.sh --raw | wl-copy"
-gsettings set org.gnome.settings-daemon.plugins.media-keys.custom-keybinding:$K3 binding '<Super>o'
+gsettings set org.gnome.settings-daemon.plugins.media-keys.custom-keybinding:$K2 name 'Flameshot'
+gsettings set org.gnome.settings-daemon.plugins.media-keys.custom-keybinding:$K2 command "$HOME/pers/scripts/flameshot.sh --raw | wl-copy"
+gsettings set org.gnome.settings-daemon.plugins.media-keys.custom-keybinding:$K2 binding '<Super>o'
 
 log "Creating desktop entry to autostart Neovim Sessionizer on login."
 mkdir -p ~/.config/autostart
