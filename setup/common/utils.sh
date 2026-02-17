@@ -7,30 +7,10 @@ log () {
     fi
 }
 
-confirm() {
-  local prompt="$1"
-  local __resultvar=$2
-  local reply
-
-  if [[ "${AUTO_YES:-false}" == "true" ]]; then
-    reply="y"
-    echo "$prompt (auto-yes)"
-  else
-    read -rp "$prompt (y/n): " reply
-  fi
-
-  if [[ "$reply" =~ ^[Yy]$ ]]; then
-    eval "$__resultvar=true"
-  else
-    eval "$__resultvar=false"
-  fi
-}
-
 command_exists() {
     command -v "$1" >/dev/null 2>&1
 }
 
-# Helper to check if a DNF package is installed
 is_installed() {
     rpm -q "$1" >/dev/null 2>&1
 }

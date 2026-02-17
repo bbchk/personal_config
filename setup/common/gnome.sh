@@ -1,6 +1,5 @@
 #!/usr/bin/env bash
 
-# It's recommended to source utils.sh to make the confirm function available
 source "$HOME/pers/setup/common/utils.sh"
 
 # ====================================
@@ -18,8 +17,6 @@ SCHEMAS=(
 for SCHEMA in "${SCHEMAS[@]}"; do
     KEYS=$(gsettings list-keys "$SCHEMA" 2>/dev/null)
     for KEY in $KEYS; do
-        # Most GNOME keys are arrays ['<Key>']
-        # We try to set them to an empty array
         gsettings set "$SCHEMA" "$KEY" "['']" 2>/dev/null
     done
 done
