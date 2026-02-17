@@ -5,6 +5,33 @@ source "$HOME/pers/setup/common/utils.sh"
 
 # ====================================
 
+SCHEMAS=(
+    "org.gnome.desktop.wm.keybindings"
+    "org.gnome.settings-daemon.plugins.media-keys"
+    "org.gnome.shell.keybindings"
+    "org.gnome.mutter.keybindings"
+    "org.gnome.mutter.wayland.keybindings"
+    "org.freedesktop.ibus.general"
+    "org.freedesktop.ibus.panel.emoji"
+)
+
+for SCHEMA in "${SCHEMAS[@]}"; do
+    KEYS=$(gsettings list-keys "$SCHEMA" 2>/dev/null)
+    for KEY in $KEYS; do
+        # Most GNOME keys are arrays ['<Key>']
+        # We try to set them to an empty array
+        gsettings set "$SCHEMA" "$KEY" "['']" 2>/dev/null
+    done
+done
+
+gsettings set org.gnome.mutter overlay-key 'Super_L'
+
+gsettings set org.gnome.settings-daemon.plugins.media-keys volume-down "['XF86AudioLowerVolume']"
+gsettings set org.gnome.settings-daemon.plugins.media-keys volume-up "['XF86AudioRaiseVolume']"
+gsettings set org.gnome.settings-daemon.plugins.media-keys volume-mute "['XF86AudioMute']"
+gsettings set org.gnome.settings-daemon.plugins.media-keys screen-brightness-down "['XF86MonBrightnessDown']"
+gsettings set org.gnome.settings-daemon.plugins.media-keys screen-brightness-up "['XF86MonBrightnessUp']"
+
 log "Configuring workspace behavior: setting 10 static workspaces and dark mode preference."
 gsettings set org.gnome.mutter dynamic-workspaces false
 gsettings set org.gnome.desktop.wm.preferences num-workspaces "10"
