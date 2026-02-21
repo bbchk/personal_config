@@ -28,6 +28,7 @@ gsettings set org.gnome.settings-daemon.plugins.media-keys volume-up "['XF86Audi
 gsettings set org.gnome.settings-daemon.plugins.media-keys volume-mute "['XF86AudioMute']"
 gsettings set org.gnome.settings-daemon.plugins.media-keys screen-brightness-down "['XF86MonBrightnessDown']"
 gsettings set org.gnome.settings-daemon.plugins.media-keys screen-brightness-up "['XF86MonBrightnessUp']"
+gsettings set org.gnome.desktop.wm.keybindings switch-input-source "['<Super>space']"
 
 log "Configuring workspace behavior: setting 10 static workspaces and dark mode preference."
 gsettings set org.gnome.mutter dynamic-workspaces false
