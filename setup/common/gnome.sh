@@ -74,7 +74,7 @@ gsettings set org.gnome.desktop.screen-time-limits daily-limit-seconds "uint32 2
 gsettings set org.gnome.desktop.screen-time-limits grayscale "false"
 gsettings set org.gnome.desktop.screen-time-limits history-enabled "true"
 
-gsettings set org.gnome.desktop.break-reminders selected-breaks "['eyesight']"
+gsettings set org.gnome.desktop.break-reminders selected-breaks ""
 gsettings set org.gnome.desktop.break-reminders.eyesight countdown "false"
 gsettings set org.gnome.desktop.break-reminders.eyesight delay-seconds "uint32 180"
 gsettings set org.gnome.desktop.break-reminders.eyesight duration-seconds "uint32 20"
