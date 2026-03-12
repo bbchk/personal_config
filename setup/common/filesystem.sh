@@ -123,8 +123,16 @@ ib_repos=(
     developer-platform/helm-charts/provisioners/solr-provisioner
 )
 
-# for r in "${ib_repos[@]}"; do
-#   dest_name="${r//\//_}"
-#   log "Cloning $r as $dest_name"
-#   git clone "git@git.internetbrands.com:${r}.git" "$HOME/dev/ib/$dest_name"
-# done
+for r in "${ib_repos[@]}"; do
+  IFS='/' read -ra parts <<< "$r"
+  len=${#parts[@]}
+  
+  if [ $len -ge 2 ]; then
+    dest_name="${parts[$len-2]}_${parts[$len-1]}"
+  else
+    dest_name="${parts[0]}"
+  fi
+  
+  log "Cloning $r as $dest_name"
+  git clone "git@git.internetbrands.com:${r}.git" "$HOME/dev/ib/$dest_name"
+done
