@@ -120,16 +120,3 @@ gsettings set org.gnome.settings-daemon.plugins.media-keys.custom-keybinding:$K1
 gsettings set org.gnome.settings-daemon.plugins.media-keys.custom-keybinding:$K2 name 'Flameshot'
 gsettings set org.gnome.settings-daemon.plugins.media-keys.custom-keybinding:$K2 command "$HOME/pers/scripts/flameshot.sh --raw | wl-copy"
 gsettings set org.gnome.settings-daemon.plugins.media-keys.custom-keybinding:$K2 binding '<Super>o'
-
-log "Creating desktop entry to autostart Neovim Sessionizer on login."
-mkdir -p ~/.config/autostart
-cat > ~/.config/autostart/nvim-sessionizer.desktop << EOF
-[Desktop Entry]
-Type=Application
-Name=Neovim Sessionizer
-Exec=gnome-terminal -- nvim -c "lua require('custom.sessionizer').sessionizer()"
-Icon=utilities-terminal
-Comment=Starts Neovim with the sessionizer plugin
-EOF
-
-# gsettings set org.gnome.shell.extensions.auto-move-windows window-list "['keepassxc.desktop:2', 'org.gnome.Terminal.desktop:1']"
