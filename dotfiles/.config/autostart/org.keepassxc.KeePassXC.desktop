@@ -1,0 +1,9 @@
+[Desktop Entry]
+Type=Application
+Name=KeePassXC CLI Session
+Exec=/home/bchk/pers/scripts/keepassxc.sh
+Hidden=false
+NoDisplay=false
+Terminal=false
+X-GNOME-Autostart-enabled=true
+Categories=Utility;Security;

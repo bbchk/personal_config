@@ -1,0 +1,6 @@
+[Desktop Entry]
+Type=Application
+Name=Neovim Sessionizer
+Exec=gnome-terminal -- nvim -c "lua require('custom.sessionizer').sessionizer('/home/bchk/pers')"
+Icon=utilities-terminal
+Comment=Starts Neovim with the sessionizer plugin

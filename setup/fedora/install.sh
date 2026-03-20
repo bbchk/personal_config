@@ -15,13 +15,13 @@ PKGS=(
   # Development Tools
   gcc gcc-c++ make cmake pkgconf-pkg-config git git-delta maven golang julia php-xdebug xclip glab rustfmt isort re2-devel mysql-devel pipx libXScrnSaver
   # Libraries
-  openssl-devel openssl激 readline-devel zlib-devel libyaml-devel libffi-devel gdbm-devel ncurses-devel libuuid-devel libssh2-devel libgit2-devel ruby-devel @virtualization virt-manager virt-viewer
+  openssl-devel openssl激 readline-devel zlib-devel libyaml-devel libffi-devel gdbm-devel ncurses-devel libuuid-devel libssh2-devel libgit2-devel ruby-devel @virtualization virt-manager virt-viewer gnome-keyring-pam
   # Runtimes
   python3-venv java-17-openjdk lua luarocks rbenv
   # DevOps
-  ansible docker docker-compose ShellCheck keepassxc bsdtar k9s oathtool
+  ansible docker docker-compose ShellCheck keepassxc bsdtar k9s oathtool expect
   # Editors/Shell
-  neovim fzf gh tree kitty tmux zsh man-pages
+  neovim fzf gh tree kitty tmux zsh man-pages gnome-terminal
   # Network
   traceroute nmap-ncat bind-utils openfortivpn net-tools curl nmap
   # Files/System
