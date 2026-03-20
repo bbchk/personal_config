@@ -1,48 +1,28 @@
 #!/usr/bin/env bash
 
-# set -euo pipefail
+echo "======= post-commit started ======="
 
-# ====================================
-
-main() {
-  echo "======= post-commit started ======="
-
- local FILES_TO_DECRYPT=()
-
-  if [[ "${1:-}" == "--all" ]]; then
-    FILES_TO_DECRYPT=($(find secrets/ -type f))
-  else
-    FILES_TO_DECRYPT=($(git show --name-only --format= --diff-filter=d HEAD -- secrets/))
+# Verify all secrets in HEAD are encrypted (GPG binary starts with 0x84 or 0x85)
+failed=()
+for file in $(git ls-tree -r --name-only HEAD -- secrets/ 2>/dev/null); do
+  [[ -z "$file" ]] && continue
+  # Get first two bytes as hex
+  header=$(git cat-file blob HEAD:"$file" 2>/dev/null | od -A n -t x1 -N 1 | tr -d ' ')
+  if [[ "$header" != "84" && "$header" != "85" ]]; then
+    failed+=("$file")
   fi
+done
 
-  if [ "${#FILES_TO_DECRYPT[@]}" -eq 0 ]; then
+if [[ ${#failed[@]} -gt 0 ]]; then
+  echo "ERROR: The following secrets are NOT encrypted in this commit:"
+  for f in "${failed[@]}"; do
+    echo "  - $f"
+  done
+  echo ""
+  echo "This should not happen if GPG filters are configured correctly."
+  echo "Run: ./scripts/setup-git-filters && git add secrets/ && git commit --amend"
+  exit 1
+fi
 
-    echo "No secrets added to commit."
-    echo "Skipping post-commit hook decryption"
-
-  else
-
-    PASSWORD_FILE="$HOME/pers/password"
-    if [ ! -s "${PASSWORD_FILE}" ]; then
-      echo "${PASSWORD_FILE} missing. Created now."
-      echo "Enter correct password in the file and try again"
-      touch "${PASSWORD_FILE}" && chmod 600 "${PASSWORD_FILE}"
-      exit 1
-    fi
-
-    echo "Files to be decrypted:"
-    for file in "${FILES_TO_DECRYPT[@]}"; do
-        echo "  - $file"
-    done
-
-    echo "Decryption..."
-    ansible-vault decrypt --vault-password-file "${PASSWORD_FILE}" -- "${FILES_TO_DECRYPT[@]}"
-
-    trap 'shred -u -n 5 "${PASSWORD_FILE}"' EXIT SIGINT SIGTERM
-
-  fi
-
-  echo -e "======= post-commit finished =======\n"
-}
-
-main "$@"
+echo "All secrets verified encrypted."
+echo -e "======= post-commit finished =======\n"

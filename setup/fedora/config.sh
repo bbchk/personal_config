@@ -22,8 +22,13 @@ done
 # ---- secrets ---------------------------
 [[ -z $(secret-tool lookup application keepassxc) ]] && secret-tool store --label='KeePassXC Password' application keepassxc
 
-log "Decrypting secret files using ansible-vault..."
-find "$HOME/pers/secrets" -type f -exec ansible-vault decrypt --vault-password-file "$HOME/pers/password" -- {} \;
+log "Setting up GPG filters and decrypting secrets..."
+git config core.hooksPath .githooks
+git config --local filter.gpg.clean "/home/bch/pers/scripts/gpg-clean"
+git config --local filter.gpg.smudge "/home/bchk/pers/scripts/gpg-smudge"
+git config --local filter.gpg.required true
+git config --local diff.gpg.textconv "/home/bchk/pers/scripts/gpg-diff"
+git -C "$HOME/pers" checkout -- secrets/
 
 mv "$HOME/.ssh/config" "$HOME/.ssh/config.backup" 2>/dev/null
 ln -sfnT "$HOME/pers/secrets/ssh_config" "$HOME/.ssh/config"
