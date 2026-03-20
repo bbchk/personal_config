@@ -15,10 +15,6 @@
 gpg --import secrets/gpg/pers-secrets.key
 gpg --import secrets/gpg/pers-secrets.pub
 
-%wheel	ALL=(ALL)	ALL
-
-bchk ALL=(ALL) NOPASSWD: /usr/bin/openfortivpn
-bchk ALL=(ALL) NOPASSWD: /usr/bin/pkill -9 openfortivpn
 
 <!-- bchk ALL=(ALL) NOPASSWD: /usr/bin/openfortivpn -->
 <!-- bchk ALL=(ALL) NOPASSWD: /usr/bin/pkill -9 openfortivpn -->
