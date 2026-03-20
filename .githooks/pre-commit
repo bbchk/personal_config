@@ -12,3 +12,5 @@ fi
 
 echo "GPG filters active. Secrets will be encrypted automatically."
 echo -e "======= pre-commit finished =======\n"
+
+echo -e "======= committing =======\n"
