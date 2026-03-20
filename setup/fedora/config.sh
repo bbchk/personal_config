@@ -21,8 +21,8 @@ done
 
 # ====================================
 
-sudo usermod -aG input $USER
-systemctl --user enable --now ydotool.service
+# for ksnip
+sudo dnf distro-sync
 
 # ====================================
 
