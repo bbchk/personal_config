@@ -1,2 +1,0 @@
-# Encrypt all repository secrets with git-crypt
-secrets/** filter=git-crypt diff=git-crypt
