@@ -6,23 +6,23 @@ echo "======= post-commit started ======="
 failed=()
 for file in $(git ls-tree -r --name-only HEAD -- secrets/ 2>/dev/null); do
   [[ -z "$file" ]] && continue
-  # Get first two bytes as hex
+  # Get first byte as hex
   header=$(git cat-file blob HEAD:"$file" 2>/dev/null | od -A n -t x1 -N 1 | tr -d ' ')
-  if [[ "$header" != "84" && "$header" != "85" ]]; then
+  if [[ "$header" == "84" || "$header" == "85" ]]; then
+    echo "  ✓ encrypted: $file"
+  else
+    echo "  ✗ PLAINTEXT: $file"
     failed+=("$file")
   fi
 done
 
 if [[ ${#failed[@]} -gt 0 ]]; then
-  echo "ERROR: The following secrets are NOT encrypted in this commit:"
-  for f in "${failed[@]}"; do
-    echo "  - $f"
-  done
   echo ""
-  echo "This should not happen if GPG filters are configured correctly."
+  echo "ERROR: ${#failed[@]} secret(s) are NOT encrypted in this commit!"
   echo "Run: ./scripts/setup-git-filters && git add secrets/ && git commit --amend"
   exit 1
 fi
 
+echo ""
 echo "All secrets verified encrypted."
 echo -e "======= post-commit finished =======\n"

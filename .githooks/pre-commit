@@ -6,7 +6,7 @@ echo "======= pre-commit started ======="
 
 # Verify GPG filters are configured
 if ! git config --get filter.gpg.clean >/dev/null 2>&1; then
-  echo "ERROR: GPG filters not configured. Run: ./scripts/setup-git-filters"
+  echo "ERROR: GPG filters not configured"
   exit 1
 fi
 
