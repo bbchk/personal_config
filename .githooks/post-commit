@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-set -euo pipefail
+# set -euo pipefail
 
 # ====================================
 
@@ -12,7 +12,7 @@ main() {
   if [[ "${1:-}" == "--all" ]]; then
     FILES_TO_DECRYPT=($(find secrets/ -type f))
   else
-    FILES_TO_DECRYPT=($(git show --name-only --oneline HEAD -- secrets/ | sed '1d'))
+    FILES_TO_DECRYPT=($(git show --name-only --format= --diff-filter=d HEAD -- secrets/))
   fi
 
   if [ "${#FILES_TO_DECRYPT[@]}" -eq 0 ]; then

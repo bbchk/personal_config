@@ -10,7 +10,7 @@ set -euo pipefail
 main() {
   echo "======= pre-commit started ======="
 
-  FILES_TO_ENCRYPT=($(git diff --name-only --cached -- secrets/))
+  FILES_TO_ENCRYPT=($(git diff --name-only --cached --diff-filter=d -- secrets/))
 
   if [ "${#FILES_TO_ENCRYPT[@]}" -eq 0 ]; then
     echo "No secrets added to commit."

@@ -1,10 +1,8 @@
 #!/usr/bin/env bash
 
-sudo -v || exit 1
-
 region=${1:-"west1"}
 
-sudo pkill -9 openfortivpn 2>/dev/null
+pkill -9 openfortivpn 2>/dev/null
 sleep 1
 
 SECRET_FILE="$HOME/pers/secrets/vpn/totp_secret_key"

@@ -20,7 +20,7 @@ alias gs="git status"
 # ------------------------------
 
 bindkey -s '^n' '^unvim .\n'
-bindkey -s '^p' '^uconnect_vpn\n'
+bindkey -s '^p' '^uconnect_vpn.sh\n'
 
 # bindkey -s '^h' '^u. hop_to_worktree\n'
 # bindkey -s '^k' '^u. create_worktree\n'
@@ -30,3 +30,4 @@ bindkey -s '^p' '^uconnect_vpn\n'
 
 # bindkey -s '^a' '^ugit add .\n'
 # bindkey -s '^s' '^ugit status\n'
+#

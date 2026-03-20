@@ -11,7 +11,20 @@
 </h1>
 
 ## WIP
- we need to do some kind of system taht would do setup "migrations" to detect what's been run already and what not
+
+%wheel	ALL=(ALL)	ALL
+
+bchk ALL=(ALL) NOPASSWD: /usr/bin/openfortivpn
+bchk ALL=(ALL) NOPASSWD: /usr/bin/pkill -9 openfortivpn
+
+<!-- bchk ALL=(ALL) NOPASSWD: /usr/bin/openfortivpn -->
+<!-- bchk ALL=(ALL) NOPASSWD: /usr/bin/pkill -9 openfortivpn -->
+
+store sensitive stuff in keepassxc and get it from there on demand? that way we could reduce number of secret files and actually secure sensitive data better
+
+Consider using git-crypt or SOPS to encrypt these files specifically while keeping them in the repo.
+
+We need to do some kind of system taht would do setup "migrations" to detect what's been run already and what not
 I would rather have idempotent script that's run on every startup of any machine of mine, complet refactoring common and make it rune very script
 
 
@@ -37,7 +50,6 @@ I also want to move downloads to xdg, we need to gitignore it
 ### TODO: nvim :
 
 P0
-- make sessionizer appear in floating window at center of screen
 - Learn how to use nvim harpoon
 - Learn how to use nvim fugitive
 - syntax highlighting for helm go templates

@@ -32,7 +32,9 @@ mkdir -p "$HOME/pers/dotfiles/.config/keepassxc"
 ln -sfnT "$HOME/pers/secrets/passwords/keepassxc.ini" "$HOME/pers/dotfiles/.config/keepassxc/keepassxc.ini"
 
 log "Symlinking custom /etc/hosts file..."
-sudo mv /etc/hosts /etc/hosts.backup
-sudo ln -sfnT "$HOME/pers/secrets/hosts" /etc/hosts
+sudo cp "$HOME/pers/secrets/sys/hosts" /etc/hosts
+
+# log "Symlinking pers/secrets/sudoers file for /etc/sudoers.d/sudoers ..."
+# sudo ln -sfnT "$HOME/pers/secrets/sys/sudoers" /etc/sudoers.d/sudoers
 
 log "======= config.sh execution finished successfully ======="
