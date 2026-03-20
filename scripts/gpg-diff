@@ -1,0 +1,7 @@
+#!/usr/bin/env bash
+# Git diff textconv filter: decrypt file for readable diffs
+# Usage: called automatically by git diff for files matching .gitattributes
+
+set -euo pipefail
+
+gpg --batch --yes --quiet -d "$1" 2>/dev/null || cat "$1"

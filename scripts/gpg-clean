@@ -1,0 +1,9 @@
+#!/usr/bin/env bash
+# Git clean filter: encrypt stdin for storage in git
+# Usage: called automatically by git when staging files matching .gitattributes
+
+set -euo pipefail
+
+GPG_KEY_ID="E78A0D774F0BDAC50F897DC5FF99608021A353C0"
+
+gpg --batch --yes --quiet -e -r "$GPG_KEY_ID"

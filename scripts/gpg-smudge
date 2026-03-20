@@ -1,0 +1,8 @@
+#!/usr/bin/env bash
+# Git smudge filter: decrypt stdin for working tree
+# Usage: called automatically by git when checking out files matching .gitattributes
+
+set -euo pipefail
+
+gpg --batch --yes --quiet -d 2>/dev/null || cat
+# Fallback to cat if decryption fails (file might be plaintext during transition)
