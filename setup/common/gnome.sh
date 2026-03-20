@@ -95,6 +95,7 @@ extensions=(
   "https://extensions.gnome.org/extension-data/instantworkspaceswitcheramalantony.net.v10.shell-extension.zip"
   "https://extensions.gnome.org/extension-data/VitalsCoreCoding.com.v73.shell-extension.zip"
   "https://extensions.gnome.org/extension-data/bluetooth-quick-connectbjarosze.gmail.com.v53.shell-extension.zip"
+  "https://extensions.gnome.org/extension-data/auto-move-windowsgnome-shell-extensions.gcampax.github.com.v71.shell-extension.zip"
 )
 
 for url in "${extensions[@]}"; do
@@ -130,3 +131,5 @@ Exec=gnome-terminal -- nvim -c "lua require('custom.sessionizer').sessionizer()"
 Icon=utilities-terminal
 Comment=Starts Neovim with the sessionizer plugin
 EOF
+
+# gsettings set org.gnome.shell.extensions.auto-move-windows window-list "['keepassxc.desktop:2', 'org.gnome.Terminal.desktop:1']"
