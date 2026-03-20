@@ -12,8 +12,6 @@
 
 ## WIP
 
-store sensitive stuff in keepassxc and get it from there on demand? that way we could reduce number of secret files and actually secure sensitive data better
-
 We need to do some kind of system taht would do setup "migrations" to detect what's been run already and what not
 I would rather have idempotent script that's run on every startup of any machine of mine, complet refactoring common and make it rune very script
 
