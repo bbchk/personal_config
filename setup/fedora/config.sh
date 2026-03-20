@@ -25,11 +25,11 @@ done
 log "Decrypting secret files using ansible-vault..."
 find "$HOME/pers/secrets" -type f -exec ansible-vault decrypt --vault-password-file "$HOME/pers/password" -- {} \;
 
-mv "$HOME/.ssh" "$HOME/.ssh.backup" 2>/dev/null
-ln -sfnT "$HOME/pers/secrets/ssh" "$HOME/.ssh"
+mv "$HOME/.ssh/config" "$HOME/.ssh/config.backup" 2>/dev/null
+ln -sfnT "$HOME/pers/secrets/ssh_config" "$HOME/.ssh/config"
 
 mkdir -p "$HOME/pers/dotfiles/.config/keepassxc"
-ln -sfnT "$HOME/pers/secrets/passwords/keepassxc.ini" "$HOME/pers/dotfiles/.config/keepassxc/keepassxc.ini"
+ln -sfnT "$HOME/pers/secrets/my/keepassxc.ini" "$HOME/pers/dotfiles/.config/keepassxc/keepassxc.ini"
 
 log "Symlinking custom /etc/hosts file..."
 sudo cp "$HOME/pers/secrets/sys/hosts" /etc/hosts

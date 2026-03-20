@@ -28,7 +28,7 @@ export PATH="/usr/bin:$PATH"
 # export LD_LIBRARY_PATH="/usr/lib:$LD_LIBRARY_PATH"
 
 # Terminal history
-HISTFILE="${HOME}/pers/secrets/.zsh_history"
+HISTFILE="${HOME}/pers/secrets/my/.zsh_history"
 HISTSIZE=100000
 SAVEHIST=100000
 setopt SHARE_HISTORY
