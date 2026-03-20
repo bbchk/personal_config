@@ -19,6 +19,13 @@ for i in "${dotfiles_to_symlink[@]}"; do
 
 done
 
+# ====================================
+
+sudo usermod -aG input $USER
+systemctl --user enable --now ydotool.service
+
+# ====================================
+
 # ---- secrets ---------------------------
 [[ -z $(secret-tool lookup application keepassxc) ]] && secret-tool store --label='KeePassXC Password' application keepassxc
 

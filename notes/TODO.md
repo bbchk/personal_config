@@ -11,11 +11,8 @@
 </h1>
 
 ## WIP
+j
 
-We need to do some kind of system taht would do setup "migrations" to detect what's been run already and what not
-I would rather have idempotent script that's run on every startup of any machine of mine, complet refactoring common and make it rune very script
-
-I want to come back to branches instead of worktrees, at least for now.
 I also want to have super o
 
 ## WIP
