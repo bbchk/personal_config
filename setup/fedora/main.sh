@@ -23,7 +23,3 @@ sudo dnf update -y --skip-unavailable --exclude=openh264
 "$HOME/pers/setup/common/gnome.sh"
 "$HOME/pers/setup/common/filesystem.sh"
 "$HOME/pers/setup/common/teardown.sh"
-
-
-# secret-tool store --label='KeePassXC Password' application keepassxc
-

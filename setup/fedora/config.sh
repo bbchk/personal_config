@@ -20,6 +20,8 @@ for i in "${dotfiles_to_symlink[@]}"; do
 done
 
 # ---- secrets ---------------------------
+[[ -z $(secret-tool lookup application keepassxc) ]] && secret-tool store --label='KeePassXC Password' application keepassxc
+
 log "Decrypting secret files using ansible-vault..."
 find "$HOME/pers/secrets" -type f -exec ansible-vault decrypt --vault-password-file "$HOME/pers/password" -- {} \;
 
