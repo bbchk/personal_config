@@ -118,5 +118,5 @@ gsettings set org.gnome.settings-daemon.plugins.media-keys.custom-keybinding:$K1
 gsettings set org.gnome.settings-daemon.plugins.media-keys.custom-keybinding:$K1 binding '<Super>f'
 
 gsettings set org.gnome.settings-daemon.plugins.media-keys.custom-keybinding:$K2 name 'Flameshot'
-gsettings set org.gnome.settings-daemon.plugins.media-keys.custom-keybinding:$K2 command "$HOME/pers/scripts/flameshot.sh --raw | wl-copy"
+gsettings set org.gnome.settings-daemon.plugins.media-keys.custom-keybinding:$K2 command "$HOME/pers/scripts/flameshot.sh"
 gsettings set org.gnome.settings-daemon.plugins.media-keys.custom-keybinding:$K2 binding '<Super>o'

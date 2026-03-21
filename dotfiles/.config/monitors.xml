@@ -1,0 +1,32 @@
+<monitors version="2">
+  <configuration>
+    <layoutmode>logical</layoutmode>
+    <logicalmonitor>
+      <x>0</x>
+      <y>0</y>
+      <scale>1.5</scale>
+      <primary>yes</primary>
+      <monitor>
+        <monitorspec>
+          <connector>DP-1</connector>
+          <vendor>DEL</vendor>
+          <product>DELL S2722QC</product>
+          <serial>3V34J24</serial>
+        </monitorspec>
+        <mode>
+          <width>3840</width>
+          <height>2160</height>
+          <rate>59.997</rate>
+        </mode>
+      </monitor>
+    </logicalmonitor>
+    <disabled>
+      <monitorspec>
+        <connector>eDP-1</connector>
+        <vendor>SDC</vendor>
+        <product>0x416d</product>
+        <serial>0x00000000</serial>
+      </monitorspec>
+    </disabled>
+  </configuration>
+</monitors>
