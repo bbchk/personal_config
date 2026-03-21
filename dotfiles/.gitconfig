@@ -3,7 +3,6 @@
 	name = Bohdan Buchok
 [core]
 	editor = nvim
-	sshCommand = ssh -i ~/.ssh/github-2
   fsmonitor = true
   ; commentChar = ''
 [alias]
