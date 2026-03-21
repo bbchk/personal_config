@@ -39,15 +39,13 @@ export GPG_TTY=$(tty)
 export MANPATH="/usr/local/man:$MANPATH"
 export LANG=en_US.UTF-8
 export LESS='-R'
-
-export VISUAL="nvr --servername $NVIM --remote-tab"
 export EDITOR="nvr --servername $NVIM --remote-tab"
-export SUDO_EDITOR="nvr --servername $NVIM --remote-wait-silent +'set bufhidden=wipe'"
-
+export VISUAL="$EDITOR"
 export MANPAGER="nvim +Man!!"
 
 export PATH="$HOME/pers/scripts:$PATH"
 
+# TODO: refacor later
 it() {
     if [[ $1 == "clone" ]] || [[ $1 == "clonew" ]]; then
         command git "$@"
