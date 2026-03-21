@@ -10,15 +10,10 @@
   <br>
 </h1>
 
-## WIP
-### TODO: nvim :
-
 P0
-- Learn how to use nvim fugitive
+- I would like to type on laptop and also use its touchpad, but actually pass all these signals to my primary dekstop pc with no input lag, is it possible?
 
 P1
-- Learn how to use nvim harpoon
 - I would like to have java neovim setup
 - I would like to have containarized neovim setup
-
 - make git commit and sudoedit work in nvim terminal / impossilbe for now, while --remote-wait is not fully implemented in neovim

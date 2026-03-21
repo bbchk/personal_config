@@ -33,8 +33,8 @@ function _G.Tabline()
       s = s .. "%#TabLine#"
     end
 
-    -- Clickable tab
-    s = s .. "%" .. i .. "T " .. name .. " "
+    -- Clickable tab (number prefix + name)
+    s = s .. "%" .. i .. "T " .. i .. ":" .. name .. " "
   end
 
   s = s .. "%#TabLineFill#"

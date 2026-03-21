@@ -76,6 +76,9 @@ u.keyset(
 -- ultimately, so my utilization of tabs should be minimal in the future
 -- map("n", "<leader>TODO", ":tabonly<CR>", { desc = "Tab only" })
 -- Map <M-1..9> to switch to tabs 1..9
+for i = 1, 9 do
+	u.keyset("n", "<M-" .. i .. ">", i .. "gt", { desc = "Go to tab " .. i })
+end
 
 for i = 1, 9 do
 	u.keyset("n", "<C-" .. i .. ">", i .. "gt", { desc = "Go to tab " .. i })
