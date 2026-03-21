@@ -2,8 +2,8 @@
 <img src="xdg/pictures/default/main_gif.gif" width="200">
 </div>
 
-<h4 align="center">
+<h5 align="center">
   <div>
     <span>Dotfiles, scripts and secrets for my machine</span>
   </div>
-</h4>
+</h5>
