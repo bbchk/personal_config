@@ -40,9 +40,39 @@ export GPG_TTY=$(tty)
 export MANPATH="/usr/local/man:$MANPATH"
 export LANG=en_US.UTF-8
 export LESS='-R'
-export EDITOR='nvim'
-export VISUAL='nvim'
-export SUDO_EDITOR='nvim'
+export EDITOR="nvim --server $NVIM --remote-tab"
+export VISUAL="nvim --server $NVIM --remote-tab"
+export SUDO_EDITOR="nvim --server $NVIM --remote-tab"
 export MANPAGER="nvim +Man!!"
 
 export PATH="$HOME/pers/scripts:$PATH"
+
+git() {
+    if [[ $1 == "clone" ]] || [[ $1 == "clonew" ]]; then
+        command git "$@"
+        local exit_code=$?
+
+        if [ $exit_code -eq 0 ]; then
+            # Find Neovim sockets in common locations
+            local nvim_sockets=$(
+                find /tmp "${XDG_RUNTIME_DIR:-/run/user/$UID}" -name 'nvim.*.0' 2>/dev/null | sort -u
+            )
+
+            if [ -n "$nvim_sockets" ]; then
+                echo "🔄 Refreshing Neovim sessionizer cache..."
+                (
+                    echo "$nvim_sockets" | while read -r socket; do
+                        nvim --server "$socket" \
+                            --remote-send "<Cmd>lua require('custom.sessionizer').refresh_cache()<CR>" \
+                            2>/dev/null &
+                    done
+                    wait
+                ) &>/dev/null
+            fi
+        fi
+
+        return $exit_code
+    else
+        command git "$@"
+    fi
+}
