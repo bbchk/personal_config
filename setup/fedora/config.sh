@@ -19,7 +19,8 @@ for i in "${dotfiles_to_symlink[@]}"; do
 done
 
 # ---- secrets ---------------------------
-[[ -z $(secret-tool lookup application keepassxc) ]] && secret-tool store --label='KeePassXC Password' application keepassxc
+[[ -z $(secret-tool lookup application keepassxc) ]] \
+  && secret-tool store --label='KeePassXC Password' application keepassxc
 
 log "Setting up GPG filters and decrypting secrets..."
 git config core.hooksPath .githooks
