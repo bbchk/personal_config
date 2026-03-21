@@ -31,3 +31,4 @@ bindkey -s '^p' '^uconnect_vpn.sh\n'
 # bindkey -s '^a' '^ugit add .\n'
 # bindkey -s '^s' '^ugit status\n'
 #
+alias nvim="nvim --server $NVIM --remote-tab"

@@ -12,15 +12,15 @@
 
 ## WIP
 
-## WIP
+make git commit work in nvim terminal
 
 <!-- Cool ideas, but no use yet or no much benefit yet -->
 <!-- * create collection of git hooks for quality of life that will be copied in every repo cloned -->
-<!-- * browser specific shortcuts that will set shift+X to ctlr tab, etc. also S->> and S-<< -->
+
 <!-- - add fzf plugin to command history in nvim | Telescope has this functionality? -->
 <!-- Make single leader key in all programs and nvim  -->
-<!-- - make it so sessionizer would take git ssh https or just plain text to create a folder -->
-<!-- - remove default gnome keybind to lock the screen  -->
+
+<!-- make it so sessionizer would take git ssh https or just plain text to create a folder and update cache globally -->
 
 <!-- for pok openining in new tabs from terminal -->
 <!-- https://github.com/mhinz/neovim-remote -->
