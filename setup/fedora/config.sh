@@ -20,8 +20,9 @@ done
 
 # ====================================
 
-# for ksnip
-sudo dnf distro-sync
+sudo cp /home/bchk/pers/scripts/sudoedit-nvr /usr/local/bin/sudoedit-nvr
+sudo chown root:root /usr/local/bin/sudoedit-nvr
+sudo chmod 755 /usr/local/bin/sudoedit-nvr
 
 # ====================================
 

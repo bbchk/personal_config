@@ -32,3 +32,16 @@ bindkey -s '^p' '^uconnect_vpn.sh\n'
 # bindkey -s '^s' '^ugit status\n'
 #
 alias nvim="nvim --server $NVIM --remote-tab"
+
+# # sudoedit with nvr when inside Neovim, plain nvim otherwise
+# se() {
+#   local socket="${NVIM:-}"
+#   if [[ -z "$socket" ]]; then
+#     socket=$(nvr --serverlist 2>/dev/null | head -n1)
+#   fi
+#   if [[ -n "$socket" ]]; then
+#     SUDO_EDITOR="nvr --servername $socket --remote-wait-silent +'set bufhidden=wipe'" sudoedit "$@"
+#   else
+#     SUDO_EDITOR=nvim sudoedit "$@"
+#   fi
+# }

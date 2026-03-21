@@ -1,6 +1,5 @@
 # ------------------------------
-# zsh config
-# ------------------------------
+# zsh config ------------------------------
 
 autoload -Uz vcs_info compinit
 
@@ -40,14 +39,16 @@ export GPG_TTY=$(tty)
 export MANPATH="/usr/local/man:$MANPATH"
 export LANG=en_US.UTF-8
 export LESS='-R'
-export EDITOR="nvim --server $NVIM --remote-tab"
-export VISUAL="nvim --server $NVIM --remote-tab"
-export SUDO_EDITOR="nvim --server $NVIM --remote-tab"
+
+export VISUAL="nvr --servername $NVIM --remote-tab"
+export EDITOR="nvr --servername $NVIM --remote-tab"
+export SUDO_EDITOR="nvr --servername $NVIM --remote-wait-silent +'set bufhidden=wipe'"
+
 export MANPAGER="nvim +Man!!"
 
 export PATH="$HOME/pers/scripts:$PATH"
 
-git() {
+it() {
     if [[ $1 == "clone" ]] || [[ $1 == "clonew" ]]; then
         command git "$@"
         local exit_code=$?

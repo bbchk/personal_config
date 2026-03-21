@@ -2,7 +2,7 @@
 	email = bohdan.buchok@internetbrands.com
 	name = Bohdan Buchok
 [core]
-	editor = nvr --remote-wait-silent +'set bufhidden=wipe'
+	editor = nvr --remote-tab-wait +'set bufhidden=wipe'
   fsmonitor = true
   ; commentChar = ''
 [alias]

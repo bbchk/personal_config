@@ -1,0 +1,2 @@
+#!/bin/bash
+nvr --servername "$NVIM" --remote-tab-wait +'set bufhidden=wipe' "$@"
