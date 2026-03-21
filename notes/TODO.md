@@ -14,11 +14,9 @@
 
 preserve my browsing history in secrets
 
-close keepassxc app on logout
-` /root/.config/nvim`
-
-when I open with sudoedit in nvim, it does not chagne actual file
 when I ctrl+v with graves into vs code, it fucks it up
+
+H
 
 make git commit work in nvim terminal
 
