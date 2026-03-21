@@ -34,6 +34,9 @@ sudo dnf install -y "${PKGS[@]}" --skip-unavailable
 # ====================================
 
 pip3 install neovim-remote
+sudo cp /home/bchk/pers/scripts/sudoedit-nvr /usr/local/bin/sudoedit-nvr
+sudo chown root:root /usr/local/bin/sudoedit-nvr
+sudo chmod 755 /usr/local/bin/sudoedit-nvr
 
 # ====================================
 log "Configuring Docker daemon and user groups..."

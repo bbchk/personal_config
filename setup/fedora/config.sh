@@ -18,14 +18,6 @@ for i in "${dotfiles_to_symlink[@]}"; do
   ln -sfnT "$i" "$HOME/$base_item_name"
 done
 
-# ====================================
-
-sudo cp /home/bchk/pers/scripts/sudoedit-nvr /usr/local/bin/sudoedit-nvr
-sudo chown root:root /usr/local/bin/sudoedit-nvr
-sudo chmod 755 /usr/local/bin/sudoedit-nvr
-
-# ====================================
-
 # ---- secrets ---------------------------
 [[ -z $(secret-tool lookup application keepassxc) ]] && secret-tool store --label='KeePassXC Password' application keepassxc
 
