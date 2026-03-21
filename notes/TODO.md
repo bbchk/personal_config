@@ -12,8 +12,6 @@
 
 ## WIP
 
-preserve my browsing history in secrets
-
 when I ctrl+v with graves into vs code, it fucks it up
 
 H
