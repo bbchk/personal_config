@@ -63,7 +63,7 @@ git() {
                 (
                     echo "$nvim_sockets" | while read -r socket; do
                         nvim --server "$socket" \
-                            --remote-send "<Cmd>lua require('custom.sessionizer').refresh_cache()<CR>" \
+                            --remote-send "<Cmd>lua local s=require('custom.sessionizer'); s.refresh_cache(); s.populate_cache({ quiet = true })<CR>" \
                             2>/dev/null &
                     done
                     wait

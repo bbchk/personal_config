@@ -46,6 +46,42 @@ local config = {
 	use_telescope = true,
 }
 
+local function load_cache_from_file()
+	local file = io.open(cache_file, "r")
+	if not file then
+		return nil
+	end
+
+	local content = file:read("*a")
+	file:close()
+
+	local ok, decoded = pcall(vim.fn.json_decode, content)
+	if ok and type(decoded) == "table" then
+		u.log("Successfully loaded " .. #decoded .. " dirs from file cache.")
+		return decoded
+	end
+
+	u.log("Cache file is invalid.")
+	return nil
+end
+
+local function save_cache_to_file(dirs)
+	local ok, encoded = pcall(vim.fn.json_encode, dirs)
+	if not ok then
+		return false
+	end
+
+	local file = io.open(cache_file, "w")
+	if not file then
+		return false
+	end
+
+	file:write(encoded)
+	file:close()
+	u.log("Saved new cache to file.")
+	return true
+end
+
 local function get_bare_repo_session_name(dir)
 	local is_git_repo = u.exec_cmd(string.format("git -C '%s' rev-parse --git-dir 2>/dev/null", dir))
 	local is_bare_repo = u.exec_cmd(string.format("git -C '%s' rev-parse --is-bare-repository 2>/dev/null", dir))
@@ -218,37 +254,7 @@ end
 function M.sessionizer()
 	u.log("--- Sessionizer Run Started ---")
 	ensure_tmux_server()
-
-	if not cached_dirs then
-		u.log("In-memory cache is empty. Checking file cache.")
-		local file = io.open(cache_file, "r")
-		if file then
-			local content = file:read("*a")
-			file:close()
-			local ok, decoded = pcall(vim.fn.json_decode, content)
-			if ok and type(decoded) == "table" then
-				u.log("Successfully loaded " .. #decoded .. " dirs from file cache.")
-				cached_dirs = decoded
-			else
-				u.log("Cache file is invalid.")
-			end
-		end
-	else
-		u.log("Using in-memory cache.")
-	end
-
-	if not cached_dirs then
-		cached_dirs = get_directories() -- Run the slow function
-		local ok, encoded = pcall(vim.fn.json_encode, cached_dirs)
-		if ok then
-			local file = io.open(cache_file, "w")
-			if file then
-				file:write(encoded)
-				file:close()
-				u.log("Saved new cache to file.")
-			end
-		end
-	end
+	cached_dirs = M.populate_cache({ quiet = true })
 
 	if #cached_dirs == 0 then
 		vim.notify("No directories found. Run :SessionizerRefreshCache", vim.log.levels.WARN)
@@ -266,6 +272,36 @@ function M.sessionizer()
 	else
 		select_picker(cached_dirs, callback)
 	end
+end
+
+function M.populate_cache(opts)
+	opts = opts or {}
+	local force = opts.force == true
+	local quiet = opts.quiet == true
+
+	if force then
+		cached_dirs = nil
+		pcall(vim.fn.delete, cache_file)
+		u.log("Forced cache rebuild requested.")
+	end
+
+	if not cached_dirs then
+		u.log("In-memory cache is empty. Checking file cache.")
+		cached_dirs = load_cache_from_file()
+	else
+		u.log("Using in-memory cache.")
+	end
+
+	if not cached_dirs then
+		cached_dirs = get_directories()
+		save_cache_to_file(cached_dirs)
+	end
+
+	if not quiet then
+		vim.notify("Sessionizer cache populated: " .. #cached_dirs .. " directories.", vim.log.levels.INFO)
+	end
+
+	return cached_dirs
 end
 
 function M.add_worktree()
@@ -352,6 +388,13 @@ function M.setup(opts)
 		M.refresh_cache,
 		{ desc = "Clears the sessionizer directory cache" }
 	)
+
+	vim.api.nvim_create_user_command("SessionizerPopulateCache", function(cmd_opts)
+		M.populate_cache({ force = cmd_opts.bang })
+	end, {
+		desc = "Populates the sessionizer cache without opening Telescope",
+		bang = true,
+	})
 end
 
 M.setup({
