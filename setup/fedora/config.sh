@@ -16,7 +16,6 @@ for i in "${dotfiles_to_symlink[@]}"; do
   log "Linking $i -> $HOME/$base_item_name"
   mv "$HOME/$base_item_name" "$HOME/${base_item_name}.backup" 2>/dev/null
   ln -sfnT "$i" "$HOME/$base_item_name"
-
 done
 
 # ====================================
@@ -37,13 +36,10 @@ git config --local filter.gpg.required true
 git config --local diff.gpg.textconv "/home/bchk/pers/scripts/gpg-diff"
 git -C "$HOME/pers" checkout -- secrets/
 
-mv "$HOME/.ssh/config" "$HOME/.ssh/config.backup" 2>/dev/null
-ln -sfnT "$HOME/pers/secrets/ssh_config" "$HOME/.ssh/config"
+ln -sfb "$HOME/pers/secrets/ssh_config" "$HOME/.ssh/config"
 
 mkdir -p "$HOME/pers/dotfiles/.config/keepassxc"
-ln -sfnT "$HOME/pers/secrets/my/keepassxc.ini" "$HOME/pers/dotfiles/.config/keepassxc/keepassxc.ini"
-# ln -sfnTb -S .old "$HOME/pers/secrets/my/keepassxc.ini" \
-#                   "$HOME/pers/dotfiles/.config/keepassxc/keepassxc.ini"
+ln -sfb "$HOME/pers/secrets/my/keepassxc.ini" "$HOME/pers/dotfiles/.config/keepassxc/keepassxc.ini"
 
 log "Symlinking custom /etc/hosts file..."
 sudo cp "$HOME/pers/secrets/sys/hosts" /etc/hosts
@@ -54,10 +50,6 @@ sudo cp "$HOME/pers/secrets/my/sudoers" /etc/sudoers.d/sudoers
 log "Symlinking browser history files"
 CHROME_DEFAULT_DIR="$HOME/pers/dotfiles/.config/google-chrome/Default"
 SECRETS_BROWSER_DIR="$HOME/pers/secrets/my/browser"
-
-# mv "$CHROME_DEFAULT_DIR/History" "$CHROME_DEFAULT_DIR/History.backup" 2>/dev/null
-# mv "$CHROME_DEFAULT_DIR/History-journal" "$CHROME_DEFAULT_DIR/History-journal.backup" 2>/dev/null
-
 ln -sfb "$SECRETS_BROWSER_DIR/History" "$CHROME_DEFAULT_DIR/History"
 ln -sfb "$SECRETS_BROWSER_DIR/History-journal" "$CHROME_DEFAULT_DIR/History-journal"
 log "======= config.sh execution finished successfully ======="
