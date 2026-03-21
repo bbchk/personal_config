@@ -8,5 +8,3 @@
   </div>
   <br>
 </h1>
-
-This repository contains a complete personal configuration setup for Linux development environments, including automated system setup, dotfiles management, custom scripts, and security configurations. It supports multiple Linux distributions (Debian, Fedora) and includes specialized Kubernetes cluster setup tools.
