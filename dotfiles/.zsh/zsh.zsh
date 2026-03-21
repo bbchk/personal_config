@@ -41,6 +41,8 @@ export MANPATH="/usr/local/man:$MANPATH"
 export LANG=en_US.UTF-8
 export LESS='-R'
 export EDITOR='nvim'
+export VISUAL='nvim'
+export SUDO_EDITOR='nvim'
 export MANPAGER="nvim +Man!!"
 
 export PATH="$HOME/pers/scripts:$PATH"
