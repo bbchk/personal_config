@@ -46,7 +46,7 @@ export MANPAGER="nvim +Man!!"
 export PATH="$HOME/pers/scripts:$PATH"
 
 # TODO: refacor later
-it() {
+git() {
     if [[ $1 == "clone" ]] || [[ $1 == "clonew" ]]; then
         command git "$@"
         local exit_code=$?
