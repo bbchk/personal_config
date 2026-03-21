@@ -42,6 +42,8 @@ ln -sfnT "$HOME/pers/secrets/ssh_config" "$HOME/.ssh/config"
 
 mkdir -p "$HOME/pers/dotfiles/.config/keepassxc"
 ln -sfnT "$HOME/pers/secrets/my/keepassxc.ini" "$HOME/pers/dotfiles/.config/keepassxc/keepassxc.ini"
+# ln -sfnTb -S .old "$HOME/pers/secrets/my/keepassxc.ini" \
+#                   "$HOME/pers/dotfiles/.config/keepassxc/keepassxc.ini"
 
 log "Symlinking custom /etc/hosts file..."
 sudo cp "$HOME/pers/secrets/sys/hosts" /etc/hosts
@@ -49,4 +51,13 @@ sudo cp "$HOME/pers/secrets/sys/hosts" /etc/hosts
 log "Symlinking pers/secrets/sudoers file for /etc/sudoers.d/sudoers ..."
 sudo cp "$HOME/pers/secrets/my/sudoers" /etc/sudoers.d/sudoers
 
+log "Symlinking browser history files"
+CHROME_DEFAULT_DIR="$HOME/pers/dotfiles/.config/google-chrome/Default"
+SECRETS_BROWSER_DIR="$HOME/pers/secrets/my/browser"
+
+# mv "$CHROME_DEFAULT_DIR/History" "$CHROME_DEFAULT_DIR/History.backup" 2>/dev/null
+# mv "$CHROME_DEFAULT_DIR/History-journal" "$CHROME_DEFAULT_DIR/History-journal.backup" 2>/dev/null
+
+ln -sfb "$SECRETS_BROWSER_DIR/History" "$CHROME_DEFAULT_DIR/History"
+ln -sfb "$SECRETS_BROWSER_DIR/History-journal" "$CHROME_DEFAULT_DIR/History-journal"
 log "======= config.sh execution finished successfully ======="
