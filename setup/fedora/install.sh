@@ -32,6 +32,10 @@ log "Preparing to install ${#PKGS[@]} system packages via DNF..."
 sudo dnf install -y "${PKGS[@]}" --skip-unavailable
 
 # ====================================
+
+pip3 install neovim-remote
+
+# ====================================
 log "Configuring Docker daemon and user groups..."
 sudo systemctl enable docker
 sudo systemctl start docker
