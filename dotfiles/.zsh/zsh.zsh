@@ -26,7 +26,7 @@ export FZF_DEFAULT_OPTS="--color=fg:white,bg:black,hl:155,fg+:white,bg+:black,hl
 export PATH="/usr/bin:$PATH"
 # export LD_LIBRARY_PATH="/usr/lib:$LD_LIBRARY_PATH"
 
-HISTFILE="${HOME}/pers/secrets/my/.zsh_history"
+HISTFILE="${HOME}/pers/secrets/my/sys/.zsh_history"
 HISTSIZE=100000
 SAVEHIST=100000
 setopt SHARE_HISTORY

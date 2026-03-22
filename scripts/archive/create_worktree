@@ -73,7 +73,6 @@ main() {
     ;;
   "remote")
     log "Creating remote"
-    # TODO: implement remote handling if needed
     ;;
   "tag")
     log "Creating tag"

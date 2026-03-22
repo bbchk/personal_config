@@ -28,11 +28,6 @@ u.keyset(
 )
 
 -----------------------------------
-
--- TODO: fugitive
--- map("n", "", ":Gitsigns blame")
-
------------------------------------
 -- Window Management
 -----------------------------------
 
@@ -52,7 +47,6 @@ u.keyset("n", "<C-Down>", "<C-w>-")
 u.keyset("n", "<leader>c", "<C-w>c", { desc = "Close window" })
 u.keyset("n", "<leader>=", "<C-w>=", { desc = "Equalize windows" })
 
--- TODO: Buffer Management?
 -- vim.keymap.set("n", "<leader>bn", ":bnext<CR>", { desc = "Next buffer" })
 -- vim.keymap.set("n", "<leader>bp", ":bprevious<CR>", { desc = "Previous buffer" })
 -- vim.keymap.set("n", "<leader>bd", ":bd<CR>", { desc = "Delete buffer" })
@@ -72,10 +66,6 @@ u.keyset(
 	{ remap = false, desc = "Open new tab with at current path" }
 )
 
--- TODO: I don't think that I need this because I want to use harpoon
--- ultimately, so my utilization of tabs should be minimal in the future
--- map("n", "<leader>TODO", ":tabonly<CR>", { desc = "Tab only" })
--- Map <M-1..9> to switch to tabs 1..9
 for i = 1, 9 do
 	u.keyset("n", "<M-" .. i .. ">", i .. "gt", { desc = "Go to tab " .. i })
 end
@@ -84,21 +74,10 @@ for i = 1, 9 do
 	u.keyset("n", "<C-" .. i .. ">", i .. "gt", { desc = "Go to tab " .. i })
 end
 
--- u.keyset("n", "^[h", "1gt", { desc = "Go to tab " .. 1 })
--- u.keyset("n", "\x1bh", "1gt", { desc = "Go to tab 1" })
-
--- nnoremap <silent> ^[h :TmuxNavigateLeft<cr>
--- nnoremap <silent> ^[j :TmuxNavigateDown<cr>
--- nnoremap <silent> ^[k :TmuxNavigateUp<cr>
--- nnoremap <silent> ^[l :TmuxNavigateRight<cr>
--- nnoremap <silent> ^[\ :TmuxNavigatePrevious<cr>
-
 -----------------------------------
 -- Ukrainian Keyboard Layout Mappings
 -----------------------------------
 
--- Mappings for normal mode, based on the Ukrainian keyboard layout
--- Note: These keymaps might conflict with other plugins.
 u.keyset("i", "ол", "jk")
 u.keyset("n", "ф", "ggVG") -- Select all
 u.keyset("n", "в", "d") -- Delete
@@ -124,8 +103,7 @@ u.keyset("n", "<C-u>", "<C-u>zz")
 u.keyset("n", "n", "nzzzv")
 u.keyset("n", "N", "Nzzzv")
 
--- Yank and paste without overwriting the register
-u.keyset("x", "p", '"_dP')
+u.keyset("x", "p", '"_dP') -- Yank and paste without overwriting the register
 
--- TODO: command for copying path to current buffer from root
+-- command for copying path to current buffer from root
 -- keymap('n', '<leader>cp', ':let @+ = expand("%:p")<CR>', { noremap = true, silent = true })
