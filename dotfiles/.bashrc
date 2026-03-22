@@ -5,7 +5,7 @@ if [ -f /etc/bashrc ]; then
     . /etc/bashrc
 fi
 
-HISTFILE="${HOME}/pers/secrets/my/.zsh_history"
+HISTFILE="${HOME}/pers/secrets/my/sys/.zsh_history"
 HISTSIZE=100000
 SAVEHIST=100000
 
