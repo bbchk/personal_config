@@ -24,7 +24,7 @@ done
 
 log "Setting up GPG filters and decrypting secrets..."
 git config core.hooksPath .githooks
-git config --local filter.gpg.clean "/home/bch/pers/scripts/gpg-clean"
+git config --local filter.gpg.clean "/home/bchk/pers/scripts/gpg-clean"
 git config --local filter.gpg.smudge "/home/bchk/pers/scripts/gpg-smudge"
 git config --local filter.gpg.required true
 git config --local diff.gpg.textconv "/home/bchk/pers/scripts/gpg-diff"
