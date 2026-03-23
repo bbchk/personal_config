@@ -44,9 +44,7 @@ export MANPAGER="nvim +Man!!"
 
 export PATH="$HOME/pers/scripts:$PATH"
 
-
-
-
+[[ "$TERM_PROGRAM" == "vscode" ]] && . "$(code --locate-shell-integration-path zsh)"
 
 # TODO: refacor later
 git() {
