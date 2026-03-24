@@ -1,0 +1,1 @@
+/home/bchk/pers/secrets/ib/ibc.zsh
