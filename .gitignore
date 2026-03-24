@@ -4,3 +4,6 @@ bchk-baked-debian-13.2.0-amd64-netinst.iso
 isohdpfx.bin
 xdg/documents/ViberDownloads
 xdg/downloads
+
+secrets/my/browser/History-journal
+secrets/my/sys/.zsh_history
