@@ -42,8 +42,5 @@ log "Symlinking pers/secrets/sudoers file for /etc/sudoers.d/sudoers ..."
 sudo cp "$HOME/pers/secrets/my/sys/sudoers" /etc/sudoers.d/sudoers
 
 log "Symlinking browser history files"
-CHROME_DEFAULT_DIR="$HOME/pers/dotfiles/.config/google-chrome/Default"
-SECRETS_BROWSER_DIR="$HOME/pers/secrets/my/browser"
-ln -sfb "$SECRETS_BROWSER_DIR/History" "$CHROME_DEFAULT_DIR/History"
-ln -sfb "$SECRETS_BROWSER_DIR/History-journal" "$CHROME_DEFAULT_DIR/History-journal"
+ln -sfb "$HOME/pers/secrets/my/browser/History" "$HOME/pers/dotfiles/.config/google-chrome/Default/History"
 log "======= config.sh execution finished successfully ======="
