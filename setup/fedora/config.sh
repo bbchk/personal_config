@@ -40,7 +40,3 @@ sudo cp "$HOME/pers/secrets/my/sys/hosts" /etc/hosts
 
 log "Symlinking pers/secrets/sudoers file for /etc/sudoers.d/sudoers ..."
 sudo cp "$HOME/pers/secrets/my/sys/sudoers" /etc/sudoers.d/sudoers
-
-log "Symlinking browser history files"
-ln -sfb "$HOME/pers/secrets/my/browser/History" "$HOME/pers/dotfiles/.config/google-chrome/Default/History"
-log "======= config.sh execution finished successfully ======="
