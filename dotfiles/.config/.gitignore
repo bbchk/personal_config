@@ -1,4 +1,5 @@
 .gsd-keyboard.settings-ported
+monitors.xml*
 helm
 libreoffice
 gcloud
