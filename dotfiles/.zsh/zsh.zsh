@@ -40,7 +40,7 @@ export LANG=en_US.UTF-8
 export LESS='-R'
 export EDITOR="nvr --servername $NVIM --remote-tab"
 export VISUAL="$EDITOR"
-export MANPAGER="nvim +Man!!"
+export MANPAGER="nvr --servername $NVIM --remote-tab +'Man!' -"
 
 export PATH="$HOME/pers/scripts:$PATH"
 
