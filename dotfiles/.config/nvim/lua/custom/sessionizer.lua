@@ -398,7 +398,14 @@ function M.setup(opts)
 end
 
 M.setup({
-	search_dirs = { vim.fn.expand("~"), vim.fn.expand("~/dev/my"), vim.fn.expand("~/dev/ib"), vim.fn.expand("~/dev"), vim.fn.expand("~/pers/xdg") },
+	search_dirs = {
+		vim.fn.expand("~"),
+		vim.fn.expand("~/dev/my"),
+		vim.fn.expand("~/dev/ib"),
+		vim.fn.expand("~/dev/lw"),
+		vim.fn.expand("~/dev"),
+		vim.fn.expand("~/pers/xdg"),
+	},
 	use_telescope = true,
 	keybind = "<C-f>",
 	desc = "Open Sessionizer",
