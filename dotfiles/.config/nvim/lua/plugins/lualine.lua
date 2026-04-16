@@ -23,13 +23,9 @@ return {
 				},
 				lualine_b = {
 					{
-						-- A more efficient and robust function to get the Git repository's root directory name.
 						function()
-							-- Helper function to run a shell command and return its output,
-							-- trimmed of any leading/trailing whitespace.
-							-- Returns nil if the command fails or produces no output.
 							local function run_cmd(cmd)
-								local handle = io.popen(cmd .. " 2>/dev/null") -- Redirect stderr to null
+								local handle = io.popen(cmd .. " 2>/dev/null")
 								if not handle then
 									return nil
 								end
@@ -37,45 +33,44 @@ return {
 								handle:close()
 
 								if output and output ~= "" then
-									-- Trim whitespace (including the trailing newline)
 									return output:match("^%s*(.-)%s*$")
 								end
 								return nil
 							end
 
-							-- Helper function to extract the last component of a path (basename).
-							local function basename(path)
+							-- Extracts the last two path segments (e.g. "/home/user/projects/myrepo" → "projects/myrepo")
+							local function last_two(path)
 								if not path then
 									return nil
 								end
 
-                for part in path:gmatch("[^/]+") do
-                  if part:match("%.git$") then
-                    return part:sub(1, -5)  -- Strip the last 4 characters (".git")
-                  end
-                end
+								local parts = {}
+								for part in path:gmatch("[^/]+") do
+									table.insert(parts, part)
+								end
 
-                return path:match("([^/]+)$")
-              end
+								if #parts >= 2 then
+									return parts[#parts - 1] .. "/" .. parts[#parts]
+								elseif #parts == 1 then
+									return parts[1]
+								end
+
+								return nil
+							end
 
 							local git_root = run_cmd("git rev-parse --show-toplevel")
 
 							if not git_root then
-								return "" -- Not in a git repo or git command failed, show nothing.
+								return ""
 							end
 
-							local repo_name = basename(git_root)
-							if repo_name then
-								-- Note: Ensure you have a Nerd Font installed for the '' icon to display correctly.
-								return "⌂ " .. repo_name
+							local repo_path = last_two(git_root)
+							if repo_path then
+								return "⌂ " .. repo_path
 							end
 
-							return "" -- Fallback in case basename fails.
+							return ""
 						end,
-						color = { fg = "#A6E22E", bg = "transparent" },
-					},
-					{
-						"branch",
 						color = { fg = "#A6E22E", bg = "transparent" },
 					},
 				},
