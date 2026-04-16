@@ -45,15 +45,14 @@ export MANPAGER="nvr --servername $NVIM --remote-tab +'Man!' -"
 export PATH="$HOME/pers/scripts:$PATH"
 
 [[ "$TERM_PROGRAM" == "vscode" ]] && . "$(code --locate-shell-integration-path zsh)"
-
-# TODO: refacor later
+#
+# TODO: refactor later
 git() {
-    if [[ $1 == "clone" ]] || [[ $1 == "clonew" ]]; then
+    if [[ $1 == "clone" ]] || [[ $1 == "clonew" ]] || [[ $1 == "submodule" && $2 == "add" ]]; then
         command git "$@"
         local exit_code=$?
 
         if [ $exit_code -eq 0 ]; then
-            # Find Neovim sockets in common locations
             local nvim_sockets=$(
                 find /tmp "${XDG_RUNTIME_DIR:-/run/user/$UID}" -name 'nvim.*.0' 2>/dev/null | sort -u
             )
@@ -76,3 +75,4 @@ git() {
         command git "$@"
     fi
 }
+
