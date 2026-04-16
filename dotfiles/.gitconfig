@@ -27,6 +27,7 @@
   renames = true
   mnemonicprefix = true
   compactionHeuristic = true
+  submodule = log
 [status]
   branch = true
 	hints = false
