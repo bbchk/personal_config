@@ -4,6 +4,7 @@
 [core]
 	editor = nvr --remote-tab-wait +'set bufhidden=wipe'
   fsmonitor = true
+  hooksPath = ~/pers/.githooks
   ; commentChar = ''
 [alias]
 	clonew = "!sh git_clone_for_worktrees"
@@ -72,3 +73,7 @@
     changed = 124
     untracked = 124
     branch = white
+[filter "gpg"]
+       clean = /home/bchk/pers/scripts/gpg-clean
+       smudge = /home/bchk/pers/scripts/gpg-smudge
+       required = true

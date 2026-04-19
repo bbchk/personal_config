@@ -2,15 +2,14 @@
 
 set -euo pipefail
 
-echo "======= pre-commit started ======="
+# Skip in repos without GPG filter configured
+git config --get filter.gpg.clean >/dev/null 2>&1 || exit 0
 
-# Verify GPG filters are configured
-if ! git config --get filter.gpg.clean >/dev/null 2>&1; then
-  echo "ERROR: GPG filters not configured"
-  exit 1
-fi
+# Skip if no .gitattributes with filter=gpg
+repo_root=$(git rev-parse --show-toplevel)
+grep -q 'filter=gpg' "$repo_root/.gitattributes" 2>/dev/null || exit 0
 
-echo "GPG filters active. Secrets will be encrypted automatically."
-echo -e "======= pre-commit finished =======\n"
-
-echo -e "======= committing =======\n"
+echo ""
+echo -e "  \033[1;33m⚙  pre-commit\033[0m"
+echo -e "  \033[0;32m🔐 GPG filters active — secrets will be encrypted automatically.\033[0m"
+echo ""
