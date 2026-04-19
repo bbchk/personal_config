@@ -198,5 +198,8 @@ return {
 
 		vim.keymap.set("n", "-", "<CMD>Oil<CR>", { desc = "Open parent directory" })
 		vim.keymap.set("n", "<leader>-", oil.toggle_float, { desc = "Open parent directory" })
+
+		-- Highlight files with git attributes (e.g. filter=gpg)
+		require("custom.oil-gitattr").setup()
 	end,
 }
