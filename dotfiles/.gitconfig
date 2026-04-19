@@ -1,5 +1,5 @@
 [user]
-	email = bohdan.buchok@internetbrands.com
+	email = bohdanbuchok@gmail.com
 	name = Bohdan Buchok
 [core]
 	editor = nvr --remote-tab-wait +'set bufhidden=wipe'

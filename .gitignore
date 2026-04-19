@@ -1,5 +1,8 @@
 password
+dotfiles/.config/freerdp/server/e2e_newdf.carsdirect.win_3389.pem
+dotfiles/.config/remmina
 dotfiles/.config/JetBrains
+dotfiles/.config/autostart/remmina-applet.desktop
 bchk-baked-debian-13.2.0-amd64-netinst.iso
 isohdpfx.bin
 xdg/documents/ViberDownloads
