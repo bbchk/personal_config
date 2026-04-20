@@ -37,3 +37,5 @@ collect all the projects I have atm in dev/my and dev/ib and write to pers/setup
 run my local model that will check pre-commit if there are any sensitive files planned to commited that has any sensitive info (secrets)
 
 git push --force-with-lease vs --force
+
+implement quick shorcut for sessionizer to go to previous project
