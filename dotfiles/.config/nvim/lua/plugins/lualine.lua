@@ -74,14 +74,25 @@ return {
 						color = { fg = "#A6E22E", bg = "transparent" },
 					},
 				},
-				lualine_c = {
-					{
-						"location",
-						color = { fg = "#A6E22E", bg = "#2E3440" },
-					},
+			lualine_c = {
+				{
+					"location",
+					color = { fg = "#A6E22E", bg = "#2E3440" },
 				},
-
-				lualine_x = {
+				{
+					function()
+						local file = vim.fn.expand("%:p")
+						if file == "" then return "" end
+						local root = vim.fn.system("git rev-parse --show-toplevel 2>/dev/null"):gsub("\n", "")
+						if vim.v.shell_error ~= 0 or root == "" then return "" end
+						local rel = file:gsub("^" .. vim.pesc(root) .. "/", "")
+						local out = vim.fn.system("git check-attr filter -- " .. vim.fn.shellescape(rel) .. " 2>/dev/null")
+						if out:match("filter: gpg") then return "🔒" end
+						return ""
+					end,
+					color = { fg = "#e5c07b", bg = "#2E3440" },
+				},
+			},				lualine_x = {
 					{
 						function()
 							local handle = io.popen('ip a | grep -q ppp0 && echo "vpn" || echo "home"')
