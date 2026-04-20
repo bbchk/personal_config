@@ -30,8 +30,9 @@ done
 failed=()
 for file in $(git ls-tree -r --name-only HEAD -- "${ls_tree_paths[@]}" 2>/dev/null); do
   [[ -z "$file" ]] && continue
-  header=$(git cat-file blob HEAD:"$file" 2>/dev/null | od -A n -t x1 -N 1 | tr -d ' ')
-  if [[ "$header" == "84" || "$header" == "85" ]]; then
+  header=$(git cat-file blob HEAD:"$file" 2>/dev/null | head -c 30)
+  header_hex=$(printf '%s' "$header" | od -A n -t x1 -N 1 | tr -d ' ')
+  if [[ "$header_hex" == "84" || "$header_hex" == "85" || "$header" == *"BEGIN PGP MESSAGE"* ]]; then
     echo -e "     \033[0;32m✓\033[0m $file"
   else
     echo -e "     \033[0;31m✗ PLAINTEXT\033[0m $file"

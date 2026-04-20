@@ -5,4 +5,4 @@
 set -euo pipefail
 
 GPG_KEY_ID="E78A0D774F0BDAC50F897DC5FF99608021A353C0"
-gpg --batch --yes --quiet -e -r "$GPG_KEY_ID"
+gpg --batch --yes --quiet -e --armor --no-emit-version -r "$GPG_KEY_ID"
