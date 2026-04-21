@@ -31,7 +31,7 @@ for url in $(find '../lws' -mindepth 1 -maxdepth 1 -type d -exec git -C {} remot
 done
 ```
 
-convert dev/my and dev/ib to repositories with submodules
+convert dev/my and dev/ib to repositories with submodules and include .gitconfig-ib that would set my username and email
 collect all the projects I have atm in dev/my and dev/ib and write to pers/setup/common/filesystem.sh
 
 run my local model that will check pre-commit if there are any sensitive files planned to commited that has any sensitive info (secrets)
