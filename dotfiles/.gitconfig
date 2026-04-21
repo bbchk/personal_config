@@ -79,3 +79,6 @@
    required = true
 [diff "gpg"]
 	textconv = /home/bchk/pers/scripts/gpg-diff
+
+[includeIf "gitdir:~/dev/ib/"]
+path = ~/.gitconfig-ib
