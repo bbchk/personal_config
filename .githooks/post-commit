@@ -3,32 +3,12 @@
 # Skip in repos without GPG filter configured
 git config --get filter.gpg.clean >/dev/null 2>&1 || exit 0
 
-repo_root=$(git rev-parse --show-toplevel)
-
-# Extract path patterns with filter=gpg from .gitattributes
-gpg_patterns=()
-while IFS= read -r line; do
-  pattern=$(echo "$line" | awk '{print $1}')
-  [[ -n "$pattern" ]] && gpg_patterns+=("$pattern")
-done < <(grep 'filter=gpg' "$repo_root/.gitattributes" 2>/dev/null)
-
-# Skip if no GPG-filtered paths
-[[ ${#gpg_patterns[@]} -eq 0 ]] && exit 0
-
 echo ""
 echo -e "  \033[1;33m⚙  post-commit\033[0m  verifying encryption..."
 
-# Convert glob patterns to directory prefixes for git ls-tree
-ls_tree_paths=()
-for p in "${gpg_patterns[@]}"; do
-  dir=${p%%\*\**}
-  [[ -z "$dir" ]] && dir="."
-  ls_tree_paths+=("$dir")
-done
-
-# Verify all matched files in HEAD are encrypted (GPG binary starts with 0x84 or 0x85)
+# Check only files that have filter=gpg attribute
 failed=()
-for file in $(git ls-tree -r --name-only HEAD -- "${ls_tree_paths[@]}" 2>/dev/null); do
+while IFS= read -r file; do
   [[ -z "$file" ]] && continue
   header=$(git cat-file blob HEAD:"$file" 2>/dev/null | head -c 30)
   header_hex=$(printf '%s' "$header" | od -A n -t x1 -N 1 | tr -d ' ')
@@ -38,7 +18,10 @@ for file in $(git ls-tree -r --name-only HEAD -- "${ls_tree_paths[@]}" 2>/dev/nu
     echo -e "     \033[0;31m✗ PLAINTEXT\033[0m $file"
     failed+=("$file")
   fi
-done
+done < <(git ls-tree -r --name-only HEAD | while read -r f; do
+  attr=$(git check-attr filter -- "$f" 2>/dev/null)
+  [[ "$attr" == *"filter: gpg"* ]] && echo "$f"
+done)
 
 if [[ ${#failed[@]} -gt 0 ]]; then
   echo ""

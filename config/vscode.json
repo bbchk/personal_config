@@ -1,0 +1,20 @@
+{
+    "github.copilot.nextEditSuggestions.enabled": true,
+    "github.copilot.chat.terminalChatAutoExecute": "always",
+    "chat.tools.autoApprove": true,
+    "chat.agent.maxRequests": 300,
+    "chat.tools.terminal.enableAutoApprove": true,
+    "chat.tools.terminal.autoApprove": {
+        "rm": false,
+        "rmdir": false,
+        "del": false,
+        "kill": false,
+        "curl": false,
+        "wget": false,
+        "eval": false,
+        "git push": false,
+        "/.*/": true,
+    },
+    "workbench.preferredHighContrastColorTheme": "Monokai Pro (Filter Machine)",
+    "makefile.configureOnOpen": true,
+}
