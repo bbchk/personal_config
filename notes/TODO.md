@@ -68,3 +68,10 @@ post-hoook apparntely checks only full paths, and errros out on globs and regexe
      ✓ server/etc/profile.d/first-boot.sh
      ✓ worker/etc/profile.d/first-boot.sh
   ✓ all secrets encrypted
+
+Thought for a few seconds
+Smart idea. The concept: hash the plaintext input, compare to a cached hash, and if unchanged, output the previous ciphertext instead of re-encrypting. This would:
+
+Solve the dirty working tree problem — same plaintext → same ciphertext output → git sees no change
+Save bandwidth — no pointless re-encryption diffs pushed to remote
+Here's how it would work:
