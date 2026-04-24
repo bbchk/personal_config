@@ -43,3 +43,28 @@ implement quick shorcut for sessionizer to go to previous project
 create shortcuts fro vs code!
 
 in filters, would it help if we hash content? (limit size )
+
+
+
+# .gitattributes
+server/etc/profile.d/first-boot.sh filter=gpg
+worker/etc/profile.d/first-boot.sh filter=gpg
+ca.conf filter=gpg
+*.key filter=gpg
+*.crt filter=gpg
+*kubeconfig filter=gpg
+server/root/encryption-config.yaml filter=gpg
+TODO.md filter=gpg
+
+post-hoook apparntely checks only full paths, and errros out on globs and regexes
+ ╰$ g ci -m 'feat'
+
+  ⚙  pre-commit
+  🔐 GPG filters active — secrets will be encrypted automatically.
+
+
+  ⚙  post-commit  verifying encryption...
+     ✓ TODO.md
+     ✓ server/etc/profile.d/first-boot.sh
+     ✓ worker/etc/profile.d/first-boot.sh
+  ✓ all secrets encrypted
