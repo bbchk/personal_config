@@ -75,3 +75,30 @@ Smart idea. The concept: hash the plaintext input, compare to a cached hash, and
 Solve the dirty working tree problem — same plaintext → same ciphertext output → git sees no change
 Save bandwidth — no pointless re-encryption diffs pushed to remote
 Here's how it would work:
+
+pg-clean (stdin) →
+  1. Read stdin into temp buffer
+  2. Hash the plaintext (sha256)
+  3. Check cache: ~/.cache/gpg-clean/<hash-of-filepath>
+     - If cached hash matches → output cached ciphertext
+     - If different → encrypt, store new hash + ciphertext in cache
+
+use git hash-object to check if the blob already exists:
+
+HASH=$(sha256sum | cut -d' ' -f1)
+CACHE_FILE="$CACHE_DIR/$HASH"
+if [ -f "$CACHE_FILE" ]; then
+    cat "$CACHE_FILE"
+else
+    tee "$CACHE_FILE" | gpg --batch --yes --quiet -e --armor -r "$GPG_KEY_ID"
+    # wait, this won't work — need to encrypt the original, not the tee
+fi
+
+Practical implementation
+Want me to build it? The cleanest version would be:
+
+gpg-clean reads stdin, hashes it
+Checks ~/.cache/gpg-clean-cache/ for a file named by that hash
+Cache hit → output the cached ciphertext verbatim
+Cache miss → encrypt, tee the ciphertext to cache, output it
+This fully solves the dirty tree problem and saves bandwidth. The only tradeoff is cached ciphertext on disk. Want me to implement it?
