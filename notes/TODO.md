@@ -41,3 +41,5 @@ git push --force-with-lease vs --force
 implement quick shorcut for sessionizer to go to previous project
 
 create shortcuts fro vs code!
+
+in filters, would it help if we hash content? (limit size )
