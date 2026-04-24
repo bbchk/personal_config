@@ -39,3 +39,5 @@ run my local model that will check pre-commit if there are any sensitive files p
 git push --force-with-lease vs --force
 
 implement quick shorcut for sessionizer to go to previous project
+
+create shortcuts fro vs code!
