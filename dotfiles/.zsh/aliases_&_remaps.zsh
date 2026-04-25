@@ -7,6 +7,7 @@ alias irb='irb --simple-prompt'
 
 # K8s
 alias k='kubectl'
+alias kb='kubie'
 
 # IDEs
 alias code="code --profile main"
