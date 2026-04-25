@@ -1,3 +1,3 @@
 # .gitattributes
 # Encrypt all files under secrets/ using GPG clean/smudge filters
-secrets/** filter=gpg
+secrets/** filter=gpg diff=gpg
