@@ -1,3 +1,4 @@
+we need to get rid of ssh keys problem also problem of reencrypting with di
 
 git remote get-url origin
 
