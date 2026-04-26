@@ -1,4 +1,5 @@
 we need to get rid of ssh keys problem also problem of reencrypting with di
+- I would like to have better markdown coloring in neovim
 
 git remote get-url origin
 
