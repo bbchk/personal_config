@@ -10,3 +10,4 @@ export PATH="$PATH:/home/bchk/.local/bin"
 
 # Benchmark your shell startup time
 # time zsh -i -c exit
+
