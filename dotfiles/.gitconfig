@@ -47,6 +47,7 @@
 [credential]
 	helper = store
 [merge]
+  renormalize = true
   ; conflictstyle = diff3
 [rerere]
   enabled = true
@@ -79,6 +80,7 @@
    required = true
 [diff "gpg"]
 	textconv = /home/bchk/pers/scripts/gpg-diff
+  cachedtextconv = true
 
 [includeIf "gitdir:~/dev/ib/"]
 path = ~/.gitconfig-ib

@@ -71,6 +71,16 @@ git() {
         fi
 
         return $exit_code
+    # elif [[ $1 == "checkout" ]]; then
+    #     command git "$@"
+    #     local exit_code=$?
+    #     # Re-add GPG-filtered files to sync index (avoids dirty worktree from non-deterministic encryption)
+    #     local repo_root=$(command git rev-parse --show-toplevel 2>/dev/null)
+    #     if [[ $exit_code -eq 0 && -f "$repo_root/.gitattributes" ]] && grep -q 'filter=gpg' "$repo_root/.gitattributes" 2>/dev/null; then
+    #         command git ls-files -- $(grep 'filter=gpg' "$repo_root/.gitattributes" | awk '{print $1}') 2>/dev/null | xargs -r touch 2>/dev/null
+    #         command git add $(grep 'filter=gpg' "$repo_root/.gitattributes" | awk '{print $1}') 2>/dev/null
+    #     fi
+    #     return $exit_code
     else
         command git "$@"
     fi
