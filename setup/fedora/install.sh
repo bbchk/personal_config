@@ -21,7 +21,7 @@ PKGS=(
   # DevOps
   ansible docker docker-compose ShellCheck keepassxc bsdtar k9s oathtool expect xorriso
   # Editors/Shell
-  neovim fzf gh tree kitty tmux zsh man-pages gnome-terminal gnome-tweaks drawing
+  neovim fzf gh tree kitty tmux zsh man-pages gnome-terminal gnome-tweaks drawing calibre
   # Network
   traceroute nmap-ncat bind-utils openfortivpn net-tools curl nmap
   # Files/System
