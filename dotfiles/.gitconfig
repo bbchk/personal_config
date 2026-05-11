@@ -47,7 +47,6 @@
 [credential]
 	helper = store
 [merge]
-  renormalize = true
   ; conflictstyle = diff3
 [rerere]
   enabled = true
