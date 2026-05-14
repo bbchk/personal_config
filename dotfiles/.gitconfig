@@ -73,6 +73,7 @@
     changed = 124
     untracked = 124
     branch = white
+
 [filter "gpg"]
    clean = /home/bchk/pers/scripts/gpg-clean %f
    smudge = /home/bchk/pers/scripts/gpg-smudge

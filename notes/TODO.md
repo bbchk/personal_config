@@ -3,6 +3,9 @@ we need to get rid of ssh keys problem also problem of reencrypting with di
 
 - create a hook that will automatically append PORT-<number>, PLTF-<number>, DF-<number>, HOP-<number> to each commit msg, if branch has that in name 
 
+FIX THIS on desk!:
+/bin/sh: error while loading shared libraries: /lib64/libc.so.6: cannot apply additional memory protection after relocation: Permission denied
+
 git remote get-url origin
 
 ```bash
