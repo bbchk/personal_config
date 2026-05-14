@@ -1,8 +1,33 @@
 #!/usr/bin/env bash
 # Git clean filter: encrypt stdin for storage in git
-# Usage: called automatically by git when staging files matching .gitattributes
+# Reuses existing ciphertext when plaintext is unchanged (avoids dirty worktree from GPG non-determinism)
+# Usage: called automatically by git via: clean = gpg-clean %f
 
 set -euo pipefail
 
 GPG_KEY_ID="E78A0D774F0BDAC50F897DC5FF99608021A353C0"
-gpg --batch --yes --quiet -e --armor --no-emit-version -r "$GPG_KEY_ID"
+
+tmpdir=$(mktemp -d)
+trap 'rm -rf "$tmpdir"' EXIT
+
+# Save stdin (plaintext) to a temp file to handle binary content with null bytes
+cat > "$tmpdir/plaintext"
+plaintext_hash=$(sha256sum < "$tmpdir/plaintext" | cut -d' ' -f1)
+
+# Try to get the existing blob from the index and decrypt it for comparison
+if [[ -n "${1:-}" ]]; then
+    if git show ":$1" > "$tmpdir/existing_ciphertext" 2>/dev/null; then
+        if gpg --batch --yes --quiet -d < "$tmpdir/existing_ciphertext" > "$tmpdir/existing_plaintext" 2>/dev/null; then
+            existing_hash=$(sha256sum < "$tmpdir/existing_plaintext" | cut -d' ' -f1)
+
+            if [[ "$plaintext_hash" == "$existing_hash" ]]; then
+                # Plaintext unchanged — reuse existing ciphertext
+                cat "$tmpdir/existing_ciphertext"
+                exit 0
+            fi
+        fi
+    fi
+fi
+
+# Plaintext changed (or no index entry) — encrypt
+gpg --batch --yes --quiet -e --armor --no-emit-version -r "$GPG_KEY_ID" < "$tmpdir/plaintext"

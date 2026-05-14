@@ -1,6 +1,8 @@
 we need to get rid of ssh keys problem also problem of reencrypting with di
 - I would like to have better markdown coloring in neovim
 
+- create a hook that will automatically append PORT-<number>, PLTF-<number>, DF-<number>, HOP-<number> to each commit msg, if branch has that in name 
+
 git remote get-url origin
 
 ```bash
