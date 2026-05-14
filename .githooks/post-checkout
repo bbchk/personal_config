@@ -1,6 +1,0 @@
-#!/usr/bin/env bash
-
-# Fix SSH key permissions after checkout (smudge filter resets to 0644)
-repo_root=$(git rev-parse --show-toplevel)
-grep -q 'filter=gpg' "$repo_root/.gitattributes" 2>/dev/null || exit 0
-find "$repo_root" -path '*/ssh/*' -type f ! -name '*.pub' -exec chmod 600 {} + 2>/dev/null
