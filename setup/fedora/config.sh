@@ -22,12 +22,7 @@ done
 [[ -z $(secret-tool lookup application keepassxc) ]] \
   && secret-tool store --label='KeePassXC Password' application keepassxc
 
-log "Setting up GPG filters and decrypting secrets..."
-git config core.hooksPath .githooks
-git config --local filter.gpg.clean "/home/bchk/pers/scripts/gpg-clean"
-git config --local filter.gpg.smudge "/home/bchk/pers/scripts/gpg-smudge"
-git config --local filter.gpg.required true
-git config --local diff.gpg.textconv "/home/bchk/pers/scripts/gpg-diff"
+log "Decrypting secrets..."
 git -C "$HOME/pers" checkout -- secrets/
 
 ln -sfb "$HOME/pers/secrets/ssh_config" "$HOME/.ssh/config"
