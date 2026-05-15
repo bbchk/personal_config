@@ -26,6 +26,8 @@ PKGS=(
   traceroute nmap-ncat bind-utils openfortivpn net-tools curl nmap
   # Files/System
   fd-find ripgrep zip unzip lsof stow qbittorrent swappy ppp android-tools scrcpy fira-code-fonts fontawesome-fonts
+  # Misc
+  steam
 )
 
 log "Preparing to install ${#PKGS[@]} system packages via DNF..."
