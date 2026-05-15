@@ -3,40 +3,19 @@
 COMMIT_MSG_FILE="$1"
 COMMIT_SOURCE="$2"
 
-# Only auto-append for regular commits (not amend, merge, squash, etc.)
-[[ "$COMMIT_SOURCE" == "merge" || "$COMMIT_SOURCE" == "squash" ]] && exit 0
+# Only execute for interactive editor mode (empty source) or template-based commits
+[[ -n "$COMMIT_SOURCE" && "$COMMIT_SOURCE" != "template" ]] && exit 0
 
 branch=$(git symbolic-ref --short HEAD 2>/dev/null) || exit 0
 
-# Extract all ticket references from branch name
-tickets=()
-for pattern in 'PORT-[0-9]+' 'PLTF-[0-9]+' 'DF-[0-9]+' 'HOP-[0-9]+'; do
-    match=$(grep -oE "$pattern" <<< "$branch" | head -1)
-    [[ -n "$match" ]] && tickets+=("$match")
-done
+# Extract only the first matching ticket reference from the branch name
+ticket=$(grep -oE 'PORT-[0-9]+|PLTF-[0-9]+|DF-[0-9]+|HOP-[0-9]+' <<<"$branch" | head -n 1)
 
-[[ ${#tickets[@]} -eq 0 ]] && exit 0
+[[ -z "$ticket" ]] && exit 0
 
-ticket_str="${tickets[*]}"  # space-separated if multiple
-
-# Skip if ticket already present in non-comment lines (e.g. amend)
-current_msg=$(grep -v '^#' "$COMMIT_MSG_FILE")
-for ticket in "${tickets[@]}"; do
-    grep -qF "$ticket" <<< "$current_msg" && exit 0
-done
-
-if [[ "$COMMIT_SOURCE" == "message" ]]; then
-    # -m mode: prepend ticket to the provided message
-    first_line=$(head -1 "$COMMIT_MSG_FILE")
-    rest=$(tail -n +2 "$COMMIT_MSG_FILE")
-    {
-        echo "$ticket_str: $first_line"
-        echo "$rest"
-    } > "$COMMIT_MSG_FILE"
-else
-    # Editor mode: insert ticket as first line for user to complete
-    {
-        echo "$ticket_str: "
-        cat "$COMMIT_MSG_FILE"
-    } > "$COMMIT_MSG_FILE.tmp" && mv "$COMMIT_MSG_FILE.tmp" "$COMMIT_MSG_FILE"
-fi
+# Editor mode: insert the single ticket on the first line without a trailing newline
+{
+  echo -n "$ticket: "
+  # Use sed to strip any initial empty lines from the original git template
+  sed '/./,$!d' "$COMMIT_MSG_FILE"
+} >"$COMMIT_MSG_FILE.tmp" && mv "$COMMIT_MSG_FILE.tmp" "$COMMIT_MSG_FILE"
