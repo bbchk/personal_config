@@ -5,7 +5,6 @@
 	editor = nvr --remote-tab-wait +'set bufhidden=wipe'
   fsmonitor = true
   hooksPath = ~/pers/.githooks
-  ; commentChar = ''
 [alias]
 	clonew = "!sh git_clone_for_worktrees"
 	shl = log --pretty=oneline --abbrev-commit
