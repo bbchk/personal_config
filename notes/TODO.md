@@ -1,6 +1,8 @@
 we need to get rid of ssh keys problem also problem of reencrypting with di
 - I would like to have better markdown coloring in neovim
 
+<!-- we can import dconf.dump instead of having those imperative commands -->
+<!-- dconf load / < dconf.dump -->
 
 <!--   125  git clone https://github.com/jeffshee/gnome-ext-hanabi.git -->
 <!--   126  gnome-shell --version -->
