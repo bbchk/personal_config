@@ -44,7 +44,7 @@ return {
         "black",
         "isort",
         "rubocop",
-        "markdownlint"
+        "markdownlint",
         "php-debug-adapter",
         "js-debug-adapter",
 			},
