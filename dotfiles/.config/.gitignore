@@ -1,4 +1,5 @@
 .gsd-keyboard.settings-ported
+intelephense/*
 monitors.xml*
 helm
 libreoffice
