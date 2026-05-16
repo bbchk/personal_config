@@ -20,8 +20,3 @@ fi
 "$HOME/pers/setup/gnome.sh"
 "$HOME/pers/setup/filesystem.sh"
 "$HOME/pers/setup/teardown.sh"
-
-# ====================================
-
-sudo mkdir -p /etc/profile.d
-ln -sfb "$HOME/pers/setup/index.sh" /etc/profile.d/setup.sh
