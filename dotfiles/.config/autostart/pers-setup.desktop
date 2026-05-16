@@ -4,3 +4,5 @@ Name=Pers Setup
 Exec=kitty -e /home/bchk/pers/setup/index.sh
 Terminal=false
 X-GNOME-Autostart-enabled=true
+Hidden=false
+NoDisplay=false
