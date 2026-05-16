@@ -18,6 +18,8 @@ for i in "${dotfiles_to_symlink[@]}"; do
   ln -sfnT "$i" "$HOME/$base_item_name"
 done
 
+nvim --headless "+Lazy! sync" +q
+
 # ---- secrets ---------------------------
 [[ -z $(secret-tool lookup application keepassxc) ]] \
   && secret-tool store --label='KeePassXC Password' application keepassxc

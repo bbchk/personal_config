@@ -15,10 +15,6 @@ fi
 
 # ====================================
 
-nvim --headless "+Lazy! sync" +q
-
-sudo dnf update -y --skip-unavailable --exclude=openh264
-
 "$HOME/pers/setup/fedora/install.sh"
 "$HOME/pers/setup/fedora/config.sh"
 "$HOME/pers/setup/common/gnome.sh"
