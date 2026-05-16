@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-source "$HOME/pers/setup/common/utils.sh"
+source "$HOME/pers/setup/utils.sh"
 
 # ====================================
 
@@ -21,5 +21,5 @@ gh_repos=(jv-fr avkfe scrape lvfe live lvbe lvops train slugtrans)
 for r in "${gh_repos[@]}"; do
   git clone "git@github.com:bbchk/${r}.git" "$HOME/dev/my/$r"
 done
-j
+
 git clone git@gitlab.com:liveworld/parent.git "$HOME/dev/lw"

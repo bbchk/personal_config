@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-source "$HOME/pers/setup/common/utils.sh"
+source "$HOME/pers/setup/utils.sh"
 
 log "Starting config.sh execution..."
 

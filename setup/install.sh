@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-source "$HOME/pers/setup/common/utils.sh"
+source "$HOME/pers/setup/utils.sh"
 
 log "Starting install.sh execution..."
 
@@ -17,7 +17,7 @@ PKGS=(
   # Development Tools
   gcc gcc-c++ make cmake pkgconf-pkg-config git git-delta maven golang julia php-xdebug xclip glab rustfmt isort re2-devel mysql-devel pipx libXScrnSaver meson python3-pip
   # Libraries
-  openssl-devel openssl激 readline-devel zlib-devel libyaml-devel libffi-devel gdbm-devel ncurses-devel libuuid-devel libssh2-devel libgit2-devel ruby-devel @virtualization virt-manager virt-viewer gnome-keyring-pam xdg-desktop-portal xdg-desktop-portal-gnome
+  openssl-devel readline-devel zlib-devel libyaml-devel libffi-devel gdbm-devel ncurses-devel libuuid-devel libssh2-devel libgit2-devel ruby-devel @virtualization virt-manager virt-viewer gnome-keyring-pam xdg-desktop-portal xdg-desktop-portal-gnome
   # Runtimes
   python3-venv java-17-openjdk lua luarocks rbenv
   # DevOps
