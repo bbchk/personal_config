@@ -1,8 +1,0 @@
-[Desktop Entry]
-Type=Application
-Name=InternetBrands VPN connector
-Exec=/home/bchk/pers/scripts/connect_vpn.sh
-Hidden=false
-NoDisplay=false
-Terminal=false
-X-GNOME-Autostart-enabled=true
