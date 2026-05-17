@@ -84,18 +84,13 @@ if ! command_exists tailscale; then
   curl -fsSL https://tailscale.com/install.sh | sh
 fi
 
-# # ====================================
-# log "Enabling COPR for 'showmethekey' and installing..."
-# sudo dnf copr enable pesader/showmethekey -y
-# sudo dnf install showmethekey -y
-
 # ====================================
 if ! command_exists mise; then
   log "Mise runtime manager not found. Installing via mise.run..."
   curl https://mise.run | sh
 fi
-log "Using Mise to provision latest runtimes"
-mise use --global node@latest pnpm@latest glab@latest
+log "Using Mise to all runtimes from config"
+mise install
 # ====================================
-#
+
 log "======= install.sh execution finished successfully ======="
