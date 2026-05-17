@@ -21,7 +21,7 @@ git remote set-url --push origin git@github.com:bbchk/personal_config.git
 # ====================================
 
 log "Updating the system shell to zsh."
-chsh -s "$(which zsh)"
+[[ "$SHELL" == */zsh ]] || chsh -s "$(which zsh)"
 
 # ====================================
 
@@ -31,3 +31,5 @@ chsh -s "$(which zsh)"
 "$HOME/pers/setup/filesystem.sh"
 
 "$HOME/pers/scripts/connect_vpn.sh"
+
+read -rp "Setup complete. Press Enter to close..."
