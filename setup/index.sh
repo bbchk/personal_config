@@ -16,7 +16,7 @@ fi
 # ====================================
 
 log "Configuring repository remote for push"
-git remote set-url --push origin git@github.com:bbchk/personal_config.git
+git -C "$HOME/pers" remote set-url --push origin git@github.com:bbchk/personal_config.git
 
 # ====================================
 
