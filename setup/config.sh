@@ -9,10 +9,13 @@ log "Initializing and updating git submodules..."
 git submodule update --init --recursive
 
 # ---- dotfiles ---------------------------
+
 log "Scanning $HOME/pers/dotfiles for items to symlink..."
+
 dotfiles_to_symlink=($(find "$HOME/pers/dotfiles" -maxdepth 1 -mindepth 1))
 for i in "${dotfiles_to_symlink[@]}"; do
   base_item_name=$(basename "$i")
+
   log "Linking $i -> $HOME/$base_item_name"
   mv "$HOME/$base_item_name" "$HOME/${base_item_name}.backup" 2>/dev/null
   ln -sfnT "$i" "$HOME/$base_item_name"

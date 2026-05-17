@@ -15,6 +15,16 @@ fi
 
 # ====================================
 
+log "Configuring repository remote for push"
+git remote set-url --push origin git@github.com:bbchk/personal_config.git
+
+# ====================================
+
+log "Updating the system shell to zsh."
+chsh -s "$(which zsh)"
+
+# ====================================
+
 "$HOME/pers/setup/install.sh"
 "$HOME/pers/setup/config.sh"
 "$HOME/pers/setup/gnome.sh"

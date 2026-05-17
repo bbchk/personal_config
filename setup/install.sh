@@ -66,9 +66,11 @@ if ! command_exists keyd; then
   cd "/tmp" || exit
   git clone https://github.com/rvaiya/keyd
   cd keyd || exit
+
   log "Compiling and installing Keyd..."
   make && sudo make install
   cd - || exit
+
   log "Configuring Keyd service and loading default.conf..."
   sudo systemctl enable keyd --now
   sudo cp "$HOME/pers/config/keyd.conf" /etc/keyd/default.conf
@@ -82,10 +84,10 @@ if ! command_exists tailscale; then
   curl -fsSL https://tailscale.com/install.sh | sh
 fi
 
-# ====================================
-log "Enabling COPR for 'showmethekey' and installing..."
-sudo dnf copr enable pesader/showmethekey -y
-sudo dnf install showmethekey -y
+# # ====================================
+# log "Enabling COPR for 'showmethekey' and installing..."
+# sudo dnf copr enable pesader/showmethekey -y
+# sudo dnf install showmethekey -y
 
 # ====================================
 if ! command_exists mise; then
