@@ -1,6 +1,6 @@
 #!/bin/bash
 
-source "$HOME/pers/scripts/utils"
+source "$HOME/pers/scripts/utils.sh"
 
 log "Retrieving KeePassXC password from keyring..."
 PASSWORD=$(secret-tool lookup application keepassxc)

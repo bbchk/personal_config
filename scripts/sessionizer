@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-source "$HOME/pers/scripts/utils"
+source "$HOME/pers/scripts/utils.sh"
 
 main() {
   if ! tmux ls &>/dev/null; then
