@@ -10,6 +10,9 @@ sudo dnf install -y \
   https://download1.rpmfusion.org/free/fedora/rpmfusion-free-release-$(rpm -E %fedora).noarch.rpm \
   https://download1.rpmfusion.org/nonfree/fedora/rpmfusion-nonfree-release-$(rpm -E %fedora).noarch.rpm
 
+# ====================================
+log "Updating DNF"
+
 sudo dnf update -y --skip-unavailable --exclude=openh264
 
 # ====================================
@@ -32,10 +35,12 @@ PKGS=(
   steam cups cups-filters system-config-printer sane-backends sane-frontends simple-scan lynx
 )
 
-log "Preparing to install ${#PKGS[@]} system packages via DNF..."
+log "Preparing to install ${#PKGS[@]} packages via DNF..."
 sudo dnf install -y "${PKGS[@]}" --skip-unavailable
 
 # ====================================
+
+log "Installing neovim-remote"
 
 pip3 install neovim-remote
 sudo cp /home/bchk/pers/scripts/sudoedit-nvr /usr/local/bin/sudoedit-nvr
@@ -89,7 +94,7 @@ if ! command_exists mise; then
   log "Mise runtime manager not found. Installing via mise.run..."
   curl https://mise.run | sh
 fi
-log "Using Mise to all runtimes from config"
+log "Using Mise to install all runtimes from config"
 mise install
 # ====================================
 
