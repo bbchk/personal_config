@@ -92,7 +92,7 @@ gsettings set org.gnome.desktop.break-reminders.eyesight notify-upcoming "false"
 gsettings set org.gnome.desktop.break-reminders.eyesight play-sound "false"
 
 log "Installing and enabling GNOME Shell extensions for workflow enhancement."
-flatpak install flathub org.gnome.Extensions
+flatpak install --user -y flathub org.gnome.Extensions
 gnome-extensions enable launch-new-instance@gnome-shell-extensions.gcampax.github.com
 
 extensions=(

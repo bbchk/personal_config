@@ -11,6 +11,12 @@ sudo dnf install -y \
   https://download1.rpmfusion.org/nonfree/fedora/rpmfusion-nonfree-release-$(rpm -E %fedora).noarch.rpm
 
 # ====================================
+log "Configuring flathub origin for flatpak and updating afterwards..."
+
+flatpak remote-add --if-not-exists --user flathub https://flathub.org/repo/flathub.flatpakrepo
+flatpak update
+
+# ====================================
 log "Updating DNF"
 
 sudo dnf update -y --skip-unavailable --exclude=openh264
@@ -63,7 +69,7 @@ sudo dnf -y install google-chrome-stable
 
 # ====================================
 log "Installing Sioyek PDF viewer via Flatpak..."
-flatpak install flathub com.github.ahrm.sioyek -y
+flatpak install --user -y flathub com.github.ahrm.sioyek
 
 # ====================================
 if ! command_exists keyd; then
