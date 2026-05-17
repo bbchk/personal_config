@@ -29,6 +29,5 @@ chsh -s "$(which zsh)"
 "$HOME/pers/setup/config.sh"
 "$HOME/pers/setup/gnome.sh"
 "$HOME/pers/setup/filesystem.sh"
-"$HOME/pers/setup/teardown.sh"
 
 "$HOME/pers/scripts/connect_vpn.sh"
