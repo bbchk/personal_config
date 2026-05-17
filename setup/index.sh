@@ -15,6 +15,11 @@ fi
 
 # ====================================
 
+log "Pulling latest changes from personal_config..."
+git -C "$HOME/pers" pull
+
+# ====================================
+
 log "Configuring repository remote for push"
 git -C "$HOME/pers" remote set-url --push origin git@github.com:bbchk/personal_config.git
 
