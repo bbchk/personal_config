@@ -5,13 +5,13 @@ source "$HOME/pers/scripts/utils.sh"
 region=${1:-"west1"}
 
 log "Killing existing openfortivpn processes..."
-pkill -9 openfortivpn 2>/dev/null
+sudo pkill -9 openfortivpn 2>/dev/null
 sleep 1
 
 SECRET_FILE="$HOME/pers/secrets/ib/carsdirect_totp_secret_key"
 TIME_STEP=60
 DIGITS=6
-SECRET=$(tr -d '[:space:]' < "$SECRET_FILE")
+SECRET=$(tr -d '[:space:]' <"$SECRET_FILE")
 TOTP=$(oathtool --totp -b --time-step-size=${TIME_STEP}s --digits=${DIGITS} "$SECRET")
 log "Generated TOTP for VPN authentication"
 
