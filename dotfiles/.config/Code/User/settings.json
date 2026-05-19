@@ -1,0 +1,37 @@
+{
+    "chat.viewSessions.orientation": "stacked",
+    "github.copilot.chat.terminalChatAutoExecute": "always",
+    "chat.tools.autoApprove": true,
+    "chat.agent.maxRequests": 300,
+    "chat.tools.terminal.enableAutoApprove": true,
+    "chat.tools.terminal.autoApprove": {
+        "rm": false,
+        "rmdir": false,
+        "del": false,
+        "kill": false,
+        "curl": false,
+        "wget": false,
+        "eval": false,
+        "git push": false,
+        "/.*/": true
+    },
+    "workbench.preferredHighContrastColorTheme": "Monokai Pro (Filter Machine)",
+    "makefile.configureOnOpen": true,
+    "github.copilot.nextEditSuggestions.enabled": true,
+    "[markdown]": {
+        "editor.autoClosingBrackets": "never",
+        "editor.autoClosingQuotes": "never",
+        "editor.quickSuggestions": {
+            "other": "off",
+            "comments": "off",
+            "strings": "off"
+        }
+    },
+    "github.copilot.editor.enableAutoCompletions": false,
+    "servers": {
+        "ike": {
+            "type": "http",
+            "url": "https://ike.internetbrands.com/mcp"
+        }
+    }
+}

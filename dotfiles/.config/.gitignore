@@ -14,7 +14,10 @@ tailscale/ssh_known_hosts
 Asterix
 glab-cli
 org.gnome.Ptyxis/
-Code
+Code/**
+!Code/User/
+!Code/User/settings.json
+
 enchant
 MongoDB Compass
 QtProject.conf
