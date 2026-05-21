@@ -2,11 +2,11 @@
 	path = dotfiles/.oh-my-zsh
 	url = https://github.com/ohmyzsh/ohmyzsh.git
 	ignore = dirty
-[submodule "config/omz/plugins/zsh-syntax-highlighting"]
-	path = config/omz/plugins/zsh-syntax-highlighting
-	url = https://github.com/zsh-users/zsh-syntax-highlighting.git
-	ignore = dirty
-[submodule "config/omz/plugins/zsh-autosuggestions"]
-	path = config/omz/plugins/zsh-autosuggestions
+[submodule "dotfiles/.custom/omz/plugins/zsh-autosuggestions"]
+	path = dotfiles/.custom/omz/plugins/zsh-autosuggestions
 	url = https://github.com/zsh-users/zsh-autosuggestions.git
+	ignore = dirty
+[submodule "dotfiles/.custom/omz/plugins/zsh-syntax-highlighting"]
+	path = dotfiles/.custom/omz/plugins/zsh-syntax-highlighting
+	url = https://github.com/zsh-users/zsh-syntax-highlighting.git
 	ignore = dirty

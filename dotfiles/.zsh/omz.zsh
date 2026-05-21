@@ -3,7 +3,7 @@
 # ------------------------------
 
 export ZSH="$HOME/pers/dotfiles/.oh-my-zsh"
-export ZSH_CUSTOM="$HOME/pers/config/omz"
+export ZSH_CUSTOM="$HOME/pers/dotfiles/.custom/omz"
 
 ZSH_THEME="strug"
 

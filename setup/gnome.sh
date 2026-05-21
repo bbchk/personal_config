@@ -4,9 +4,9 @@ source "$HOME/pers/setup/utils.sh"
 
 # ====================================
 
-gsettings set org.gnome.desktop.background picture-uri "file:///home/bchk/pers/config/personalization/mariupol.jpg"
-gsettings set org.gnome.desktop.background picture-uri-dark "file:///home/bchk/pers/config/personalization/mariupol.jpg"
-gsettings set org.gnome.desktop.screensaver picture-uri "file:///home/bchk/pers/config/personalization/mariupol.jpg"
+gsettings set org.gnome.desktop.background picture-uri "file:///home/bchk/pers/xdg/pictures/mariupol.jpg"
+gsettings set org.gnome.desktop.background picture-uri-dark "file:///home/bchk/pers/xdg/pictures/mariupol.jpg"
+gsettings set org.gnome.desktop.screensaver picture-uri "file:///home/bchk/pers/xdg/pictures/mariupol.jpg"
 gsettings set org.gnome.desktop.background picture-options "zoom"
 
 SCHEMAS=(
