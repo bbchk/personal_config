@@ -46,6 +46,8 @@ while true; do
   ((PAGE++))
 done
 
+log "Pulling latest changes from all git repositories"
+
 repos=($(find "$HOME/dev/my" "$HOME/dev/lw" "$HOME/dev/ib" -maxdepth 1 -mindepth 1 -type d))
 for repo in "${repos[@]}"; do
   git -C "$repo" pull &
