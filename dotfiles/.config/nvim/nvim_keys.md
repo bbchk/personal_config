@@ -1,6 +1,5 @@
 Here's a comprehensive list of standard Neovim keybindings organized by category. These are the default mappings you should avoid overwriting unless you intentionally want to replace their functionality:
 
-
 how to w or ww only the selected area?
 
 ## Movement
