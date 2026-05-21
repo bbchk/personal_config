@@ -6,14 +6,14 @@ source "$HOME/pers/setup/utils.sh"
 
 log "Relocating standard XDG user directories to a centralized persistent storage path."
 
-mv "$HOME/Desktop" "$HOME/pers/xdg/desktop"
-mv "$HOME/Documents" "$HOME/pers/xdg/documents"
-mv "$HOME/Music" "$HOME/pers/xdg/music"
-mv "$HOME/Pictures" "$HOME/pers/xdg/pictures"
-mv "$HOME/Public" "$HOME/pers/xdg/public"
-mv "$HOME/Templates" "$HOME/pers/xdg/templates"
-mv "$HOME/Videos" "$HOME/pers/xdg/videos"
-mv "$HOME/Downloads" "$HOME/pers/xdg/downloads"
+mv "$HOME/Desktop" "$HOME/pers/xdg/Desktop"
+mv "$HOME/Documents" "$HOME/pers/xdg/Documents"
+mv "$HOME/Music" "$HOME/pers/xdg/Music"
+mv "$HOME/Pictures" "$HOME/pers/xdg/Pictures"
+mv "$HOME/Public" "$HOME/pers/xdg/Public"
+mv "$HOME/Templates" "$HOME/pers/xdg/Templates"
+mv "$HOME/Videos" "$HOME/pers/xdg/Videos"
+mv "$HOME/Downloads" "$HOME/pers/xdg/Downloads"
 xdg-user-dirs-update
 
 # ====================================
