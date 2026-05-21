@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-source "$HOME/pers/setup/utils.sh"
+source "$HOME/pers/scripts/setup/utils.sh"
 
 log "\n\n ======= index.sh is starting ======= \n\n"
 
@@ -30,10 +30,10 @@ log "Updating the system shell to zsh."
 
 # ====================================
 
-"$HOME/pers/setup/install.sh"
-"$HOME/pers/setup/config.sh"
-"$HOME/pers/setup/gnome.sh"
-"$HOME/pers/setup/filesystem.sh"
+"$HOME/pers/scripts/setup/install.sh"
+"$HOME/pers/scripts/setup/config.sh"
+"$HOME/pers/scripts/setup/gnome.sh"
+"$HOME/pers/scripts/setup/filesystem.sh"
 
 "$HOME/pers/scripts/connect_vpn.sh"
 
