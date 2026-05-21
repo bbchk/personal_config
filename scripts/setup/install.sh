@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-source "$HOME/pers/scripts/setup/utils.sh"
+source "$HOME/pers/scripts/utils.sh"
 
 log "Starting install.sh execution..."
 
