@@ -27,7 +27,10 @@ go/
 pulse/
 evolution/
 gnome-initial-setup-done
-gtk-3.0/
+
+gtk-3.0/*
+!gtk-3.0/bookmarks
+
 ibus/
 
 google-chrome
