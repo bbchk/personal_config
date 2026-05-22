@@ -48,6 +48,7 @@ return {
 				"markdownlint",
 				"php-debug-adapter",
 				"js-debug-adapter",
+        "clang-format"
 			},
 		})
 	end,
