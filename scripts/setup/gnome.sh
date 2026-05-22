@@ -22,7 +22,10 @@ SCHEMAS=(
 for SCHEMA in "${SCHEMAS[@]}"; do
     KEYS=$(gsettings list-keys "$SCHEMA" 2>/dev/null)
     for KEY in $KEYS; do
-        gsettings set "$SCHEMA" "$KEY" "['']" 2>/dev/null
+    if [[ "$SCHEMA" == "org.gnome.settings-daemon.plugins.media-keys" && "$KEY" == "custom-keybindings" ]]; then
+      continue
+    fi
+    gsettings set "$SCHEMA" "$KEY" "[]" 2>/dev/null
     done
 done
 
@@ -112,16 +115,19 @@ for url in "${extensions[@]}"; do
 done
 
 log "Registering custom global shortcuts for Sessionizer and Flameshot."
-K1="/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0/"
-K2="/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom1/"
+K1="/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/pers-sessionizer/"
+K2="/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/pers-flameshot/"
 
-gsettings set org.gnome.settings-daemon.plugins.media-keys custom-keybindings "['$K1', '$K2']"
+CURRENT=$(gsettings get org.gnome.settings-daemon.plugins.media-keys custom-keybindings)
 
-log "Binding Super+F to Sessionizer and Super+O to Flameshot."
-gsettings set org.gnome.settings-daemon.plugins.media-keys.custom-keybinding:$K1 name 'Sessionizer'
-gsettings set org.gnome.settings-daemon.plugins.media-keys.custom-keybinding:$K1 command "kitty -e $HOME/pers/scripts/sessionizer"
-gsettings set org.gnome.settings-daemon.plugins.media-keys.custom-keybinding:$K1 binding '<Super>f'
+if [[ "$CURRENT" == "[]" || "$CURRENT" == "@as []" ]]; then
+  gsettings set org.gnome.settings-daemon.plugins.media-keys custom-keybindings "['$K1', '$K2']"
+  gsettings set org.gnome.settings-daemon.plugins.media-keys.custom-keybinding:$K1 name 'Sessionizer'
+  gsettings set org.gnome.settings-daemon.plugins.media-keys.custom-keybinding:$K1 command "kitty -e $HOME/pers/scripts/sessionizer"
+  gsettings set org.gnome.settings-daemon.plugins.media-keys.custom-keybinding:$K1 binding '<Super>f'
 
-gsettings set org.gnome.settings-daemon.plugins.media-keys.custom-keybinding:$K2 name 'Flameshot'
-gsettings set org.gnome.settings-daemon.plugins.media-keys.custom-keybinding:$K2 command "$HOME/pers/scripts/flameshot.sh"
-gsettings set org.gnome.settings-daemon.plugins.media-keys.custom-keybinding:$K2 binding '<Super>o'
+  gsettings set org.gnome.settings-daemon.plugins.media-keys.custom-keybinding:$K2 name 'Flameshot'
+  gsettings set org.gnome.settings-daemon.plugins.media-keys.custom-keybinding:$K2 command "$HOME/pers/scripts/flameshot.sh"
+  gsettings set org.gnome.settings-daemon.plugins.media-keys.custom-keybinding:$K2 binding '<Super>o'
+fi
+
