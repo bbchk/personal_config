@@ -2,6 +2,7 @@
 pop-shell
 dleyna-server-service.conf
 
+.config/exercism/user.json
 .config/freerdp/server/e2e_newdf.carsdirect.win_3389.pem
 .config/remmina
 .config/JetBrains

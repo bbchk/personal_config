@@ -405,6 +405,7 @@ M.setup({
 		vim.fn.expand("~/dev/lw"),
 		vim.fn.expand("~/dev"),
 		vim.fn.expand("~/pers/xdg"),
+		vim.fn.expand("~/exercism"),
 	},
 	use_telescope = true,
 	keybind = "<C-f>",
