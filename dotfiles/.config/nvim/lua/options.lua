@@ -22,6 +22,7 @@ o.clipboard = "unnamedplus" -- uses the clipboard register for all operations ex
 o.syntax = "on" -- When this option is set, the syntax with this name is loaded.
 o.autoindent = true -- Copy indent from current line when starting a new line.
 o.cursorline = true -- Highlight the screen line of the cursor with CursorLine.
+o.signcolumn = "no"
 o.expandtab = true -- In Insert mode: Use the appropriate number of spaces to insert a <Tab>.
 o.shiftwidth = 2 -- Number of spaces to use for each step of (auto)indent.
 o.tabstop = 2 -- Number of spaces that a <Tab> in the file counts for.

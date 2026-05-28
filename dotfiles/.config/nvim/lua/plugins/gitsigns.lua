@@ -133,3 +133,4 @@ return {
 --
 --     map('n', '<leader>hQ', function() gitsigns.setqflist('all') end)
 --     map('n', '<leader>hq', gitsigns.setqflist)
+
