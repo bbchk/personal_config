@@ -1,0 +1,36 @@
+[bluetooth]
+adapter = "hci0"
+auto_connect = true
+preferred_codec = "msbc"   # "msbc" (wideband) or "cvsd"
+
+[audio]
+sco_routing = "pipewire"   # "pipewire" or "alsa_direct"
+mic_gain = 10              # 0-15
+speaker_gain = 10          # 0-15
+# pactl short node name for the headset to use during calls.
+# Leave empty to use the system default.
+call_output_device = ""    # sink  — what you hear during a call
+call_input_device  = ""    # source — your microphone during a call
+call_volume = 80           # 0-100 %
+ring_volume = 80           # 0-100 %
+mic_sensitivity = 80       # 0-100 % (150 = +50 % boost)
+
+[pbap]
+sync_on_connect = true
+sync_interval_hours = 24
+
+[voip]
+enabled = true
+poll_interval_seconds = 2
+process_names = ["zoom", "teams", "webex", "slack", "discord", "skype"]
+
+[dial]
+# Your country code WITHOUT leading +  (e.g. "359" for Bulgaria, "44" for UK, "1" for US)
+# Leave empty to dial numbers exactly as typed.
+country_code = "359"
+# If true, a leading 0 is stripped before adding country code (0899… → +359899…)
+strip_leading_zero = true
+
+[ui]
+show_main_window_on_start = false
+call_popup_timeout_seconds = 30
