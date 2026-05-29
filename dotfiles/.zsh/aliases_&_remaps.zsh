@@ -2,7 +2,7 @@
 # Aliases
 # ------------------------------
 
-alias g++='g++ -std=c++20 -pedantic-errors -Wall -Weffc++ -Wextra -Wconversion -Wsign-conversion -Werror'
+alias g++='g++ -std=c++23 -Wpedantic -Wall -Weffc++ -Wextra -Wconversion -Wsign-conversion -Werror'
 
 # Ruby
 alias irb='irb --simple-prompt'
