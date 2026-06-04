@@ -47,6 +47,7 @@ research
 p3
  ╰$ ls -la ~/.gnupg/public-keys.d/                                           
 
+<<<<<<< HEAD
 
 what could we write in C++ for avakgroup.online?
 a program that would control how batteries perfom in utk!
@@ -232,3 +233,6 @@ Step 7 → Ping clone                 (raw sockets, your first "wow" moment)
 | Ping clone | `<netinet/ip_icmp.h>` |
 
 Start with **Step 1** — you can finish it in an afternoon and it will give you enough confidence and muscle memory (compilation, headers, Makefiles) to tackle everything else.
+=======
+adb shell pm uninstall --user 0 com.google.android.youtube
+>>>>>>> 4d4e6db (feat(todo): add one)
