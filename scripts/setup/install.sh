@@ -59,7 +59,8 @@ sudo systemctl enable docker
 sudo systemctl start docker
 sudo usermod -aG docker "$USER"
 sudo mkdir -p /etc/docker
-sudo ln -sf "$HOME/pers/dotfiles/.custom/deamon.json" /etc/docker/deamon.json
+sudo mv /etc/docker/daemon.json /etc/docker/daemon.json.old
+sudo cp "$HOME/pers/dotfiles/.custom/deamon.json" /etc/docker/daemon.json
 
 # ====================================
 log "Enabling Google Chrome repositories and installing stable branch..."
