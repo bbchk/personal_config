@@ -1,4 +1,10 @@
 
+ ╰$ efibootmgr -v
+
+ ╰$ sudo efibootmgr --create --disk /dev/sda --part 1 --label "Ubuntu USB" --loader '\EFI\boot\bootx64.efi'
+sudo efibootmgr --delete-bootnum --bootnum XXXX   # replace XXXX with the new entry number
+sudo efibootmgr --timeout 10
+
 sudo dd if=/home/bchk/pers/xdg/Downloads/ubuntu-26.04-desktop-amd64.iso of=/dev/sdX bs=4M status=progress
 
  ╰$ ls -la ~/.gnupg/public-keys.d/
