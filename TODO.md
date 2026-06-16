@@ -1,3 +1,6 @@
+
+sudo dd if=/home/bchk/pers/xdg/Downloads/ubuntu-26.04-desktop-amd64.iso of=/dev/sdX bs=4M status=progress
+
  ╰$ ls -la ~/.gnupg/public-keys.d/
 
 P1
