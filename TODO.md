@@ -1,5 +1,17 @@
+ ╰$ sudoedit /etc/default/grub
+ ╭─~ 
+ ╰$ sudo grub2-mkconfig -o /boot/efi/EFI/fedora/grub.cfg
+Running `grub2-mkconfig -o /boot/efi/EFI/fedora/grub.cfg' will overwrite the GRUB wrapper.
+Please run `grub2-mkconfig -o /boot/grub2/grub.cfg' instead to update grub.cfg.
+GRUB configuration file was not updated.
+ ╭─~ 
+ ╰$ sudo grub2-mkconfig -o /boot/grub2/grub.cfg                                               
+Generating grub configuration file ...
 
- ╰$ efibootmgr -v
+sudo blkid /dev/sda2
+sudo mount /dev/sda2 /mnt && ls /mnt/EFI/boot/
+sudo efibootmgr --create --disk /dev/sda --part 2 --label "Ubuntu USB" --loader '\EFI\boot\bootx64.efi'
+efibootmgr -v
 
  ╰$ sudo efibootmgr --create --disk /dev/sda --part 1 --label "Ubuntu USB" --loader '\EFI\boot\bootx64.efi'
 sudo efibootmgr --delete-bootnum --bootnum XXXX   # replace XXXX with the new entry number
