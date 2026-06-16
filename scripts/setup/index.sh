@@ -30,11 +30,11 @@ log "Updating the system shell to zsh."
 
 # ====================================
 
-"$HOME/pers/scripts/setup/install.sh"
+DISTRO="$1"
+"$HOME/pers/scripts/setup/distros/$DISTRO.sh"
+
 "$HOME/pers/scripts/setup/config.sh"
 "$HOME/pers/scripts/setup/gnome.sh"
 "$HOME/pers/scripts/setup/filesystem.sh"
-
-"$HOME/pers/scripts/connect_vpn.sh"
 
 read -rp "Setup complete. Press Enter to close..."

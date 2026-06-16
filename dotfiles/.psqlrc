@@ -1,7 +1,7 @@
 \set VERBOSE on
 \x on
 
-\pset pager always
+\pset pager off
 \timing
 
 \pset null '∎'

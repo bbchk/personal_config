@@ -94,13 +94,4 @@ if ! command_exists tailscale; then
   curl -fsSL https://tailscale.com/install.sh | sh
 fi
 
-# ====================================
-if ! command_exists mise; then
-  log "Mise runtime manager not found. Installing via mise.run..."
-  curl https://mise.run | sh
-fi
-log "Using Mise to install all runtimes from config"
-mise install
-# ====================================
-
 log "======= install.sh execution finished successfully ======="
