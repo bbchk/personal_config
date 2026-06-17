@@ -4,14 +4,6 @@ source "$HOME/pers/scripts/utils.sh"
 
 log "Starting Ubuntu install.sh execution..."
 
-
-log "Adding required PPAs and external repositories..."
-sudo add-apt-repository -y ppa:neovim-ppa/unstable
-
-# Docker (official repo)
-curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo gpg --dearmor -o /etc/apt/keyrings/docker.gpg
-echo "deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/docker.gpg] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable" | sudo tee /etc/apt/sources.list.d/docker.list >/dev/null
-
 log "Updating & upgrading local apt registry"
 sudo apt update && sudo apt upgrade -y
 
@@ -36,7 +28,7 @@ PKGS=(
   keepassxc libarchive-tools oathtool
 
   # Editors/Shell
-  neovim fzf gh tree kitty tmux zsh man-db
+  neovim python3-neovim fzf gh tree kitty tmux zsh man-db
   gnome-terminal gnome-tweaks drawing calibre
 
   # Network
@@ -57,16 +49,14 @@ log "Configuring flathub origin and updating afterwards..."
 flatpak remote-add --if-not-exists --user flathub https://flathub.org/repo/flathub.flatpakrepo
 flatpak update -y
 
+log "Installing docker"
+curl -fsSL https://get.docker.com -o get-docker.sh
+sudo sh ./get-docker.sh
+
 log "Installing neovim-remote"
 pip3 install neovim-remote
 sudo install -m 755 -o root -g root \
   "$HOME/pers/scripts/sudoedit-nvr" "/usr/local/bin/sudoedit-nvr"
-
-log "Configuring Docker daemon and user groups..."
-sudo systemctl enable --now docker
-sudo usermod -aG docker "$USER"
-sudo mv /etc/docker/daemon.json /etc/docker/daemon.json.old 2>/dev/null
-sudo cp "$HOME/pers/dotfiles/.custom/deamon.json" /etc/docker/daemon.json
 
 log "Installing Google Chrome..."
 if ! command_exists google-chrome-stable; then

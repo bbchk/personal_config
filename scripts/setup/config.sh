@@ -9,11 +9,18 @@ log "Initializing and updating git submodules..."
 git submodule update --init --recursive
 
 # ---- config ---------------------------
+#
 log "Configuring Keyd service and loading default.conf..."
 sudo systemctl enable keyd --now
 sudo cp "$HOME/pers/dotfiles/.custom/keyd.conf" /etc/keyd/default.conf
 sudo keyd reload
 sudo usermod -aG keyd "$USER"
+
+log "Configuring Docker daemon and user groups..."
+sudo systemctl enable --now docker
+sudo usermod -aG docker "$USER"
+sudo mv /etc/docker/daemon.json{,.old}
+sudo cp "$HOME/pers/dotfiles/.custom/deamon.json" /etc/docker/daemon.json
 
 # ---- dotfiles ---------------------------
 
