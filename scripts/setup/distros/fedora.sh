@@ -12,7 +12,6 @@ sudo dnf install -y \
 
 # ====================================
 log "Configuring flathub origin for flatpak and updating afterwards..."
-
 flatpak remote-add --if-not-exists --user flathub https://flathub.org/repo/flathub.flatpakrepo
 flatpak update
 

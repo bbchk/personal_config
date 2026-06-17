@@ -8,6 +8,13 @@ log "Starting config.sh execution..."
 log "Initializing and updating git submodules..."
 git submodule update --init --recursive
 
+# ---- config ---------------------------
+log "Configuring Keyd service and loading default.conf..."
+sudo systemctl enable keyd --now
+sudo cp "$HOME/pers/dotfiles/.custom/keyd.conf" /etc/keyd/default.conf
+sudo keyd reload
+sudo usermod -aG keyd "$USER"
+
 # ---- dotfiles ---------------------------
 
 log "Scanning $HOME/pers/dotfiles for items to symlink..."
