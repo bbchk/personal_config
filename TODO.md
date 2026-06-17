@@ -235,4 +235,8 @@ Step 7 → Ping clone                 (raw sockets, your first "wow" moment)
 Start with **Step 1** — you can finish it in an afternoon and it will give you enough confidence and muscle memory (compilation, headers, Makefiles) to tackle everything else.
 =======
 adb shell pm uninstall --user 0 com.google.android.youtube
+<<<<<<< HEAD
 >>>>>>> 4d4e6db (feat(todo): add one)
+=======
+adb shell pm uninstall --user 0 com.android.chrome
+>>>>>>> 47bcf4d (feat(todo): add one)
