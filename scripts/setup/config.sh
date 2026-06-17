@@ -38,7 +38,8 @@ for i in "${dotfiles_to_symlink[@]}"; do
   ln -sfnT "$i" "$target"
 done
 
-nvim --headless "+Lazy! sync" +q
+log "Syncing Neovim plugins..."
+nvim --headless -c "Lazy! sync" -c "qa!" 2>/dev/null || true
 
 # ---- secrets ---------------------------
 [[ -z $(secret-tool lookup application keepassxc) ]] \
