@@ -52,8 +52,8 @@ ln -sfb "$HOME/pers/secrets/ssh_config" "$HOME/.ssh/config"
 mkdir -p "$HOME/pers/dotfiles/.config/keepassxc"
 ln -sfb "$HOME/pers/secrets/my/keepassxc/keepassxc.ini" "$HOME/pers/dotfiles/.config/keepassxc/keepassxc.ini"
 
-log "Symlinking custom /etc/hosts file..."
+log "Copying custom /etc/hosts file..."
 sudo cp "$HOME/pers/secrets/my/sys/hosts" /etc/hosts
 
-log "Symlinking pers/secrets/sudoers file for /etc/sudoers.d/sudoers ..."
+log "Copying pers/secrets/sudoers file for /etc/sudoers.d/sudoers ..."
 sudo cp "$HOME/pers/secrets/my/sys/sudoers" /etc/sudoers.d/sudoers
