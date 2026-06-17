@@ -1,3 +1,6 @@
+in neovim, I want to stop running e!, I want oil buffer to update itself every time it's active
+
+
 <!-- sudo dnf install -y \ -->
 <!--   cmake \ -->
 <!--   gcc-c++ \ -->
