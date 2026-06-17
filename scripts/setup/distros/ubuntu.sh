@@ -59,6 +59,8 @@ flatpak remote-add --user -y --if-not-exists flathub https://dl.flathub.org/repo
 flatpak install --user -y flathub org.keepassxc.KeePassXC
 
 log "Installing docker"
+# Remove stale docker/gh repo entries from previous failed installs (broken GPG keys block apt-get update)
+sudo rm -f /etc/apt/sources.list.d/docker.list /etc/apt/sources.list.d/github-cli.list /etc/apt/keyrings/docker.gpg /usr/share/keyrings/githubcli-archive-keyring.gpg
 curl -fsSL https://get.docker.com -o /tmp/get-docker.sh
 sudo sh /tmp/get-docker.sh
 
