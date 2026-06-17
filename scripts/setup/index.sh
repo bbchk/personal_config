@@ -19,7 +19,7 @@ log "Configuring repository remote for push"
 git -C "$HOME/pers" remote set-url --push origin git@github.com:bbchk/personal_config.git
 
 log "Updating the system shell to zsh."
-[[ "$SHELL" == */zsh ]] || chsh -s "$(which zsh)"
+[[ "$SHELL" == */zsh ]] || sudo usermod -s "$(which zsh)" "$USER"
 
 DISTRO="$1"
 "$HOME/pers/scripts/setup/distros/$DISTRO.sh"

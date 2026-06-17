@@ -1,10 +1,8 @@
 #!/usr/bin/env bash
 
 # ===========================
-log () {
-    if [[ -n "${DEBUG:-}" ]]; then
-        echo "[DEBUG] $*"
-    fi
+log() {
+    echo "  → $*" >&2
 }
 
 command_exists() {
@@ -12,5 +10,9 @@ command_exists() {
 }
 
 is_installed() {
-    rpm -q "$1" >/dev/null 2>&1
+    if command_exists dpkg; then
+        dpkg -s "$1" >/dev/null 2>&1
+    elif command_exists rpm; then
+        rpm -q "$1" >/dev/null 2>&1
+    fi
 }

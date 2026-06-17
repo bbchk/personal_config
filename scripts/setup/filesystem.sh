@@ -18,6 +18,8 @@ xdg-user-dirs-update
 
 # ====================================
 
+mkdir -p "$HOME/dev/my" "$HOME/dev/lw" "$HOME/dev/ib"
+
 log "Cloning all the git repositories"
 for repo in $(curl -s "https://api.github.com/users/bbchk/repos?per_page=100&page=1" | jq -r '.[].ssh_url'); do
   git clone "$repo" "$HOME/dev/my/$(basename "${repo%.git}")"
