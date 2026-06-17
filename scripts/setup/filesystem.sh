@@ -19,7 +19,6 @@ xdg-user-dirs-update
 # ====================================
 
 log "Cloning all the git repositories"
-
 for repo in $(curl -s "https://api.github.com/users/bbchk/repos?per_page=100&page=1" | jq -r '.[].ssh_url'); do
   git clone "$repo" "$HOME/dev/my/$(basename "${repo%.git}")"
 done
@@ -32,22 +31,7 @@ for repo in $(curl -s "https://gitlab.com/api/v4/groups/liveworld/projects?per_p
   git clone "$repo" "$HOME/dev/lw/$(basename "${repo%.git}")"
 done
 
-PAGE=1
-TOKEN_FILE="$HOME/pers/secrets/ib/token"
-while true; do
-  BATCH=$(curl -s --header "PRIVATE-TOKEN: $(<"$TOKEN_FILE")" "https://git.internetbrands.com/api/v4/projects?per_page=100&membership=true&page=$PAGE" | jq -r '.[].ssh_url_to_repo')
-  [ -z "$BATCH" ] && break
-  for repo in $BATCH; do
-    path="${repo##*:}"
-    path="${path%.git}"
-    path="${path//\//_}"
-    git clone "$repo" "$HOME/dev/ib/$path"
-  done
-  ((PAGE++))
-done
-
-log "Pulling latest changes from all git repositories"
-
+log "Pulling latest changes from all git repositories in batches"
 repos=($(find "$HOME/dev/my" "$HOME/dev/lw" "$HOME/dev/ib" -maxdepth 1 -mindepth 1 -type d))
 for repo in "${repos[@]}"; do
   git -C "$repo" pull &
