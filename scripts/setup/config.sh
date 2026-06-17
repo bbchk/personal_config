@@ -25,7 +25,6 @@ sudo cp "$HOME/pers/dotfiles/.custom/deamon.json" /etc/docker/daemon.json
 # ---- dotfiles ---------------------------
 
 log "Scanning $HOME/pers/dotfiles for items to symlink..."
-
 dotfiles_to_symlink=($(find "$HOME/pers/dotfiles" -maxdepth 1 -mindepth 1))
 for i in "${dotfiles_to_symlink[@]}"; do
   base_item_name=$(basename "$i")
