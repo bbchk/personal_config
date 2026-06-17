@@ -17,15 +17,14 @@ PKGS=(
   # Libraries
   libssl-dev libreadline-dev zlib1g-dev libyaml-dev libffi-dev libgdbm-dev
   libncurses-dev uuid-dev libssh2-1-dev libgit2-dev ruby-dev
-  qemu-kvm libvirt-daemon-system virt-manager virt-viewer
+  libvirt-daemon-system virt-manager virt-viewer
   libpam-gnome-keyring xdg-desktop-portal xdg-desktop-portal-gnome
 
   # Runtimes
   python3-venv openjdk-17-jdk lua5.4 luarocks rbenv
 
   # DevOps
-  ansible docker-ce docker-ce-cli containerd.io docker-compose-plugin
-  keepassxc libarchive-tools oathtool
+  ansible libarchive-tools oathtool
 
   # Editors/Shell
   neovim python3-neovim fzf gh tree kitty tmux zsh man-db
@@ -48,6 +47,10 @@ sudo apt install -y "${PKGS[@]}" || true
 log "Configuring flathub origin and updating afterwards..."
 flatpak remote-add --if-not-exists --user flathub https://flathub.org/repo/flathub.flatpakrepo
 flatpak update -y
+
+log "Install keepassxc..."
+flatpak remote-add --user --if-not-exists flathub https://dl.flathub.org/repo/flathub.flatpakrepo
+flatpak install --user flathub org.keepassxc.KeePassXC
 
 log "Installing docker"
 curl -fsSL https://get.docker.com -o get-docker.sh
