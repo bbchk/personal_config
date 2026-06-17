@@ -50,6 +50,9 @@ fi
 log "Decrypting secrets..."
 git -C "$HOME/pers" checkout -- secrets/
 
+log "Fixing SSH key permissions (600 for private keys)..."
+find "$HOME/pers/secrets" -path '*/ssh/*' -type f ! -name '*.pub' -exec chmod 600 {} +
+
 ln -sfb "$HOME/pers/secrets/ssh_config" "$HOME/.ssh/config"
 
 mkdir -p "$HOME/pers/dotfiles/.config/keepassxc"
