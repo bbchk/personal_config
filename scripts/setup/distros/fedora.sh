@@ -38,6 +38,9 @@ PKGS=(
 )
 sudo dnf install -y "${PKGS[@]}" --skip-unavailable
 
+# TODO: devcontainers
+curl -fsSL https://raw.githubusercontent.com/devcontainers/cli/main/scripts/install.sh | sh
+
 # TODO: install pkgs for lsp servers
 # npm i -g vscode-langservers-extracted   # cssls + eslint + html + jsonls
 # npm i -g intelephense

@@ -43,6 +43,7 @@ export EDITOR="nvr --servername $NVIM --remote-tab"
 export VISUAL="$EDITOR"
 export MANPAGER="nvr --servername $NVIM --remote-tab +'Man!' -"
 
+export PATH="$HOME/.devcontainers/bin:$PATH"
 export PATH="$HOME/pers/scripts:$PATH"
 
 [[ "$TERM_PROGRAM" == "vscode" ]] && . "$(code --locate-shell-integration-path zsh)"
