@@ -1,0 +1,39 @@
+#!/usr/bin/env bash
+
+# Transparent wrapper — routes all `colcon` calls into a persistent Docker
+# container. Reuses the same container as the ros2 wrapper if already running.
+
+set -euo pipefail
+
+CONTAINER="${ROS2_CONTAINER:-ros2_neovim}"
+DISTRO="${ROS_DISTRO:-lyrical}"
+IMAGE="${ROS_IMAGE:-osrf/ros:${DISTRO}-desktop}"
+
+_start_container() {
+  echo "[colcon-docker] Starting container '${CONTAINER}' (${IMAGE})…" >&2
+
+  docker rm -f "${CONTAINER}" 2>/dev/null || true
+  docker run -d \
+    --name    "${CONTAINER}" \
+    --network host \
+    --user    "$(id -u):$(id -g)" \
+    -v        "${HOME}:${HOME}:z" \
+    -e        "HOME=${HOME}" \
+    -w        "${HOME}" \
+    "${IMAGE}" \
+    sleep infinity > /dev/null
+  sleep 0.3
+}
+
+if ! docker ps --format '{{.Names}}' | grep -qx "${CONTAINER}"; then
+  _start_container
+fi
+
+exec docker exec \
+  --interactive \
+  --user    "$(id -u):$(id -g)" \
+  --workdir "$(pwd)" \
+  "${CONTAINER}" \
+  bash -c 'source /opt/ros/$ROS_DISTRO/setup.sh 2>/dev/null; exec colcon "$@"' \
+  -- "$@"
+
