@@ -20,7 +20,7 @@ sudo dnf update -y --skip-unavailable --exclude=openh264
 log "Preparing to install packages via DNF..."
 PKGS=(
   # Development Tools
-  gcc gcc-c++ make cmake pkgconf-pkg-config git git-delta maven golang julia php-xdebug xclip glab rustfmt isort re2-devel mysql-devel pipx libXScrnSaver meson python3-pip jq
+  gcc gcc-c++ make cmake pkgconf-pkg-config git git-delta maven golang golang-x-tools-gopls julia php-xdebug xclip glab rustfmt isort re2-devel mysql-devel pipx libXScrnSaver meson python3-pip jq clang-tools-extra
   # Libraries
   openssl-devel readline-devel zlib-devel libyaml-devel libffi-devel gdbm-devel ncurses-devel libuuid-devel libssh2-devel libgit2-devel ruby-devel @virtualization virt-manager virt-viewer gnome-keyring-pam xdg-desktop-portal xdg-desktop-portal-gnome langpacks-en glibc-langpack-en
   # Runtimes
@@ -37,6 +37,15 @@ PKGS=(
   steam cups cups-filters system-config-printer sane-backends sane-frontends simple-scan lynx poedit gnome-shell-extension-gsconnect nautilus-python
 )
 sudo dnf install -y "${PKGS[@]}" --skip-unavailable
+
+# TODO: install pkgs for lsp servers
+# npm i -g vscode-langservers-extracted   # cssls + eslint + html + jsonls
+# npm i -g intelephense
+# npm i -g pyright
+# npm i -g sql-language-server
+# npm i -g @tailwindcss/language-server
+# npm i -g typescript typescript-language-server
+# npm i -g stylelint
 
 log "Installing docker"
 curl -fsSL https://get.docker.com -o get-docker.sh

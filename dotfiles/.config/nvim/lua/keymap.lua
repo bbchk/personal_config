@@ -7,6 +7,9 @@ local u = require("utils.index")
 vim.g.mapleader = " "
 vim.g.maplocalleader = " "
 
+-- TODO:
+-- nnoremap <silent><esc><esc> :nohlsearch<CR>
+
 -----------------------------------
 -- Quality of Life Keymaps
 -----------------------------------
