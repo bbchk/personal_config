@@ -23,5 +23,9 @@ so we could use sessionizer that would spin up devcontainer in neovim in a chose
 
 <!--         "ghcr.io/s1n7ax/devcontainer-features/astronvim:0": {} --> I need to figure out what is and how build my ones
 
+we need somehow to have defualt devcontainer container definition, so if I don't choose 
+
+also I would like to have fzf for devcontainers on which I want to open a particular project? or is it easier to just have a devcontaainers.json file on each pj I work on? copying them will be boresome
+
 practice debugger in nvim 
 practice copilot.nvim
