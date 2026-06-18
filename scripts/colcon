@@ -5,7 +5,7 @@
 
 set -euo pipefail
 
-CONTAINER="${ROS2_CONTAINER:-ros2_neovim}"
+CONTAINER="${ROS2_CONTAINER:-ros2_containerized}"
 DISTRO="${ROS_DISTRO:-lyrical}"
 IMAGE="${ROS_IMAGE:-osrf/ros:${DISTRO}-desktop}"
 

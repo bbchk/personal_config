@@ -7,6 +7,8 @@ figure out how we can use copilot.nvim
 figure out how we should use debugger in nvim 
 
 
+create dev container setups for each development purpose (java, ros, c++, js, web, etc.)
+Or better, use a Dev Container setup (VS Code or Neovim) where:
 
 
 

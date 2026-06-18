@@ -1,5 +1,3 @@
--- ~/nvim/lua/slydragonn/plugins/colorizer.lua
-
 return {
     "norcalli/nvim-colorizer.lua",
     config = function()

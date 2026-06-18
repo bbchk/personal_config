@@ -94,30 +94,6 @@ function M.setup()
       end
     end,
   })
-
-  -- Debug command: run :OilGitAttrDebug in an Oil buffer to see what's happening
-  vim.api.nvim_create_user_command("OilGitAttrDebug", function()
-    local bufnr = vim.api.nvim_get_current_buf()
-    local ft = vim.bo[bufnr].filetype
-    print("filetype: " .. ft)
-
-    local ok, oil = pcall(require, "oil")
-    if not ok then print("oil not loaded"); return end
-
-    local dir = oil.get_current_dir(bufnr)
-    print("oil dir: " .. tostring(dir))
-    if not dir then return end
-
-    local gpg_names = get_gpg_entries(dir)
-    print("gpg entries: " .. vim.inspect(gpg_names))
-
-    local lines = vim.api.nvim_buf_get_lines(bufnr, 0, -1, false)
-    for i, line in ipairs(lines) do
-      local cleaned = line:gsub("[^%g%s]", ""):gsub("^/%d+%s+", ""):gsub("^%s+", ""):gsub("/$", "")
-      local match = gpg_names[cleaned] and "✓" or "✗"
-      print(string.format("  line %d: cleaned=|%s| %s", i, cleaned, match))
-    end
-  end, {})
 end
 
 return M

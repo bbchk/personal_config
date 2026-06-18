@@ -46,6 +46,7 @@ return {
 			"markdown",
 		}
 
+    -- TODO: move
 		-- Keymaps for manual whitespace management
 		-- vim.keymap.set('n', '<leader>ws', ':StripWhitespace<CR>',
 		--   { desc = 'Strip trailing whitespace', silent = true })

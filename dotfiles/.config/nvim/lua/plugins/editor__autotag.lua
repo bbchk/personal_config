@@ -1,5 +1,3 @@
--- ~/.config/nvim/lua/plugins/autotag.lua
-
 return {
 	"windwp/nvim-ts-autotag",
 	config = function()

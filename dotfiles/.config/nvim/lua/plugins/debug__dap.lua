@@ -96,6 +96,7 @@ return {
 	},
 }
 
+-- TODO: move
 -- vim-dap uses five signs:
 --
 -- - `DapBreakpoint` for breakpoints (default: `B`)
