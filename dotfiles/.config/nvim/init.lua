@@ -22,4 +22,4 @@ require("custom.sessionizer")
 require("custom.worktree")
 
 require("options")
-require("plugin_manager")
+require("_lazy")

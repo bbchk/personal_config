@@ -1,4 +1,4 @@
-local u = require("utils.index")
+local u = require("utils")
 
 local M = {}
 
