@@ -1,6 +1,8 @@
 local global = vim.g
 local o = vim.opt
 
+vim.env.PATH = vim.env.HOME .. "/pers/scripts:" .. vim.env.PATH
+
 vim.o.cmdheight = 1
 -- vim.o.splitbelow = true
 -- vim.o.splitright = true
