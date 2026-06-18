@@ -7,16 +7,13 @@ local u = require("utils")
 vim.g.mapleader = " "
 vim.g.maplocalleader = " "
 
--- TODO:
--- nnoremap <silent><esc><esc> :nohlsearch<CR>
-
 -----------------------------------
 -- Quality of Life Keymaps
 -----------------------------------
 
 u.keyset("i", "jk", "<ESC>")
 
-u.keyset("n", "<leader>h", "<CMD>nohlsearch<CR>")
+u.keyset("n", "<esc><esc>", "<CMD>nohlsearch<CR>", { silent = true })
 
 u.keyset("n", "<leader>q", "<CMD>q!<CR>")
 
@@ -106,7 +103,8 @@ u.keyset("n", "<C-u>", "<C-u>zz")
 u.keyset("n", "n", "nzzzv")
 u.keyset("n", "N", "Nzzzv")
 
-u.keyset("x", "p", '"_dP') -- Yank and paste without overwriting the register
+ -- Yank and paste without overwriting the register
+u.keyset("x", "p", '"_dP')
 
 -- command for copying path to current buffer from root
 -- keymap('n', '<leader>cp', ':let @+ = expand("%:p")<CR>', { noremap = true, silent = true })
