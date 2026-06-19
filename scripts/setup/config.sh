@@ -47,19 +47,14 @@ if [[ -z $(secret-tool lookup application keepassxc 2>/dev/null) ]]; then
   secret-tool store --label='KeePassXC Password' application keepassxc
 fi
 
-log "Decrypting secrets..."
-git -C "$HOME/pers" checkout -- secrets/
+log "Decrypting all secrets..."
+git -C "$HOME/pers" checkout -- .
 
 log "Fixing SSH key permissions (600 for private keys)..."
-find "$HOME/pers/secrets" -path '*/ssh/*' -type f ! -name '*.pub' -exec chmod 600 {} +
-
-ln -sfb "$HOME/pers/secrets/ssh_config" "$HOME/.ssh/config"
-
-mkdir -p "$HOME/pers/dotfiles/.config/keepassxc"
-ln -sfb "$HOME/pers/secrets/my/keepassxc/keepassxc.ini" "$HOME/pers/dotfiles/.config/keepassxc/keepassxc.ini"
+find "$HOME/pers/" -path '*/.ssh/*' -type f ! -name '*.pub' -exec chmod 600 {} +
 
 log "Copying custom /etc/hosts file..."
-sudo cp "$HOME/pers/secrets/my/sys/hosts" /etc/hosts
+sudo cp "$HOME/pers/dotfiles/.custom/sys/hosts" /etc/hosts
 
 log "Copying pers/secrets/sudoers file for /etc/sudoers.d/sudoers ..."
-sudo cp "$HOME/pers/secrets/my/sys/sudoers" /etc/sudoers.d/sudoers
+sudo cp "$HOME/pers/dotfiles/.custom/sys/sudoers" /etc/sudoers.d/sudoers

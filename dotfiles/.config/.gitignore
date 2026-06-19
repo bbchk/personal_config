@@ -21,7 +21,10 @@ Code/**
 enchant
 MongoDB Compass
 QtProject.conf
-keepassxc
+keepassxc/**
+!keepassxc/kbdx_key
+!keepassxc/kbdx_passwords.kdbx
+!keepassxc/keepassxc.ini
 yelp/
 go/
 pulse/

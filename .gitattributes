@@ -1,1 +1,18 @@
 secrets/** filter=gpg diff=gpg
+
+**/.ssh/** filter=gpg diff=gpg
+
+dotfiles/.config/keepassxc/** filter=gpg diff=gpg
+
+dotfiles/.kube/*.yml filter=gpg diff=gpg
+dotfiles/.kube/*.yaml filter=gpg diff=gpg
+
+dotfiles/.zsh/*ib* filter=gpg diff=gpg
+
+dotfiles/.custom/ib/** filter=gpg diff=gpg
+dotfiles/.custom/sys/** filter=gpg diff=gpg
+dotfiles/.custom/tailscale/** filter=gpg diff=gpg
+
+scripts/ib_connect_vpn.sh filter=gpg diff=gpg
+
+xdg/Documents/notes/** filter=gpg diff=gpg

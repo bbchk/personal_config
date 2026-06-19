@@ -2,7 +2,6 @@
 
 P1
 
-
 move .ssh secrets to dotfiles 
 
 create dev container setups for each development purpose (java, ros, c++, js, web, etc.)

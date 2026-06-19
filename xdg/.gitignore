@@ -3,6 +3,7 @@ Desktop/*
 
 Documents/*
 !Documents/.gitkeep
+!Documents/notes
 
 Downloads/*
 !Downloads/.gitkeep
