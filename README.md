@@ -22,5 +22,4 @@ To put it very simple, this single repo manages workstation state in the followi
 - **`dotfiles/.custom/`** — specific configs that cannot by symlinked.
 - **`scripts/`** — daily-use utilities (VPN connect, tmux sessionizer, flameshot).
 - **`scripts/setup/`** — workstation bootstrap scripts. Install packages → symlink dotfiles & decrypt secrets → configure GNOME → relocate XDG dirs. 
-- **`secrets/`** — encrypted secrets at rest via GPG clean/smudge git filters. `git checkout` decrypts, `git add` encrypts. 
 - **`xdg/`** — XDG user directories (Desktop, Downloads, etc.) live here instead of `$HOME`.
