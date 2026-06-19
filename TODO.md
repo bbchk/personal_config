@@ -35,6 +35,24 @@ is it worth to install many versions of languages inside a container (let's say 
 
 <!--     "image": "ubuntu:latest", -->it's better not use latest, it's better to pin up to patch version ubuntu:24.0.4, so it's 99.9% reproducible
 
+
+
+Option 3: Multi-Folder Workspace Devcontainer
+If all your projects live under one parent folder, you can open that parent folder in VS Code and define a single .devcontainer at the top level. All projects share one container.
+
+```
+workspace/
+├── .devcontainer/
+│   └── devcontainer.json
+├── project-a/
+├── project-b/
+└── project-c/
+```
+
+<!-- !"dotfiles.repository": "https://github.com/your-username/dotfiles" -->
+
+we should design our devcontainer wihtout neovim as a must, but as an additional packages (what do u think?)
+
 ----
 
 practice debugger in nvim 
