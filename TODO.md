@@ -1,6 +1,10 @@
 ## Tasks 
 
 P1
+
+
+move .ssh secrets to dotfiles 
+
 create dev container setups for each development purpose (java, ros, c++, js, web, etc.)
 Or better, use a Dev Container setup (VS Code or Neovim) where:
 
@@ -26,6 +30,13 @@ so we could use sessionizer that would spin up devcontainer in neovim in a chose
 we need somehow to have defualt devcontainer container definition, so if I don't choose 
 
 also I would like to have fzf for devcontainers on which I want to open a particular project? or is it easier to just have a devcontaainers.json file on each pj I work on? copying them will be boresome
+
+
+is it worth to install many versions of languages inside a container (let's say java dev container and we install 20, 21, 25, etc.), so we don't need to switch beetween them. What is downside of such approach? -> weight of container, but I don't see an issue with this.
+
+<!--     "image": "ubuntu:latest", -->it's better not use latest, it's better to pin up to patch version ubuntu:24.0.4, so it's 99.9% reproducible
+
+----
 
 practice debugger in nvim 
 practice copilot.nvim
