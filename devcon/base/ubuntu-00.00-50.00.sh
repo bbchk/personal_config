@@ -30,7 +30,7 @@ PKGS=(
   ansible libarchive-tools oathtool
 
   # Editors/Shell
-  python3-neovim fzf gh tree kitty tmux zsh man-db
+  fzf gh tree kitty tmux zsh man-db
   gnome-terminal gnome-tweaks drawing calibre
 
   # Network

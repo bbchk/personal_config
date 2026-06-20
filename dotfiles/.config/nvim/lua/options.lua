@@ -3,7 +3,7 @@ local o = vim.opt
 
 vim.env.PATH = vim.env.HOME .. "/pers/scripts:" .. vim.env.PATH
 
-vim.o.cmdheight = 1
+o.cmdheight = 1
 -- vim.o.splitbelow = true
 -- vim.o.splitright = true
 -- Editor options
@@ -61,6 +61,19 @@ global.netrw_banner = 0
 
 -- Set Netrw to use a tree-style listing
 global.netrw_liststyle = 3
+
+-- Use OSC52 as the clipboard provider
+global.clipboard = {
+  name = "OSC 52",
+  copy = {
+    ["+"] = require("vim.ui.clipboard.osc52").copy("+"),
+    ["*"] = require("vim.ui.clipboard.osc52").copy("*"),
+  },
+  paste = {
+    ["+"] = require("vim.ui.clipboard.osc52").paste("+"),
+    ["*"] = require("vim.ui.clipboard.osc52").paste("*"),
+  },
+}
 
 -- Default values
 vim.o.timeout = true
