@@ -30,7 +30,7 @@ PKGS=(
   ansible libarchive-tools oathtool
 
   # Editors/Shell
-  neovim python3-neovim fzf gh tree kitty tmux zsh man-db
+  python3-neovim fzf gh tree kitty tmux zsh man-db
   gnome-terminal gnome-tweaks drawing calibre
 
   # Network
@@ -59,11 +59,5 @@ log "Installing docker"
 sudo rm -f /etc/apt/sources.list.d/docker.list /etc/apt/sources.list.d/github-cli.list /etc/apt/keyrings/docker.gpg /usr/share/keyrings/githubcli-archive-keyring.gpg
 curl -fsSL https://get.docker.com -o /tmp/get-docker.sh
 sudo sh /tmp/get-docker.sh
-
-# TODO: move to some post-install
-# log "Installing neovim-remote"
-# pipx install neovim-remote
-# sudo install -m 755 -o root -g root \
-#   "$HOME/pers/scripts/sudoedit-nvr" "/usr/local/bin/sudoedit-nvr"
 
 log "======= Ubuntu install.sh execution finished successfully ======="
