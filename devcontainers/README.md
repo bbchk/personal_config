@@ -1,3 +1,3 @@
 devcontainer features publish
 
- ╰$ devcontainer features publish ./devcontainers/helper -n bbchk/pers --help -r ghcr.io
+ ╰$ devcontainer features publish ./devcontainers/helper -n bbchk/pers -r ghcr.io
