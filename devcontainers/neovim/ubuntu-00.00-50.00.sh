@@ -11,7 +11,8 @@ apt install -y \
   python-is-python3 \
   ripgrep \
   unzip \
-  fzf
+  fzf \
+  zsh
 
 ARCHIVE="nvim-linux-x86_64.tar.gz"
 TEMP_DIR=$(mktemp -d)
