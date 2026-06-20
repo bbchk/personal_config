@@ -27,5 +27,3 @@ DISTRO="$1"
 "$HOME/pers/scripts/setup/config.sh"
 "$HOME/pers/scripts/setup/gnome.sh"
 "$HOME/pers/scripts/setup/filesystem.sh"
-
-read -rp "Setup complete. Press Enter to close..."
