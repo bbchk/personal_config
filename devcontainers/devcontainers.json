@@ -1,0 +1,6 @@
+{
+    "name": "nvim Container",
+    "image": "ubuntu:26.04",
+    "features": {
+    }
+}
