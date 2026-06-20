@@ -12,7 +12,8 @@ apt install -y \
   ripgrep \
   unzip \
   fzf \
-  zsh
+  zsh \
+  upower
 
 ARCHIVE="nvim-linux-x86_64.tar.gz"
 TEMP_DIR=$(mktemp -d)

@@ -25,4 +25,6 @@ git -C "$HOME/pers" remote set-url --push origin git@github.com:bbchk/personal_c
 log "Updating the system shell to zsh."
 [[ "$SHELL" == */zsh ]] || sudo usermod -s "$(which zsh)" "$USER"
 
+# nvim --headless "+Lazy! sync" +qa
+
 "$HOME/pers/scripts/setup/config.sh"
