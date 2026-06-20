@@ -1,5 +1,13 @@
 #!/usr/bin/env bash
 
+log() {
+    echo "  → $*" >&2
+}
+
+command_exists() {
+    command -v "$1" >/dev/null 2>&1
+}
+
 get_os_info() {
 	if [ -f /etc/os-release ]; then
 		. /etc/os-release

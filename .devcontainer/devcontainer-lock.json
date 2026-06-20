@@ -1,5 +1,13 @@
 {
   "features": {
+    "ghcr.io/bbchk/pers/base:1.0.7": {
+      "version": "1.0.7",
+      "resolved": "ghcr.io/bbchk/pers/base@sha256:96ae9348d145b29b090f06fedbae125b1c3b4ab742b8d7b1496d50a834d9c90d",
+      "integrity": "sha256:96ae9348d145b29b090f06fedbae125b1c3b4ab742b8d7b1496d50a834d9c90d",
+      "dependsOn": [
+        "ghcr.io/bbchk/pers/helper:latest"
+      ]
+    },
     "ghcr.io/bbchk/pers/helper:latest": {
       "version": "1.0.0",
       "resolved": "ghcr.io/bbchk/pers/helper@sha256:6fa88fe0dcff8875122078eac3932ecceac7fd19caa7083e7e789b50757dd4f9",
