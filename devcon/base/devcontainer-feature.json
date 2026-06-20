@@ -1,7 +1,7 @@
 {
   "name": "Base",
   "id": "base",
-  "version": "1.0.7",
+  "version": "1.0.8",
   "description": "Provide base packages and environment for development",
   "dependsOn": {
     "ghcr.io/bbchk/pers/helper:latest": {}
