@@ -42,10 +42,10 @@ log "Syncing Neovim plugins..."
 nvim --headless -c "Lazy! sync" -c "qa!" 2>/dev/null || true
 
 # ---- secrets ---------------------------
-if [[ -z $(secret-tool lookup application keepassxc 2>/dev/null) ]]; then
-  log "Storing KeePassXC database password in GNOME Keyring."
-  secret-tool store --label='KeePassXC Password' application keepassxc
-fi
+# if [[ -z $(secret-tool lookup application keepassxc 2>/dev/null) ]]; then
+#   log "Storing KeePassXC database password in GNOME Keyring."
+#   secret-tool store --label='KeePassXC Password' application keepassxc
+# fi
 
 log "Decrypting all secrets..."
 git -C "$HOME/pers" checkout -- .
