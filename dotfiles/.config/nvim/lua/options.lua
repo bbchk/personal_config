@@ -3,6 +3,7 @@ local o = vim.opt
 
 vim.env.PATH = vim.env.HOME .. "/pers/scripts:" .. vim.env.PATH
 
+o.shell = "/usr/bin/zsh"
 o.cmdheight = 1
 -- vim.o.splitbelow = true
 -- vim.o.splitright = true
