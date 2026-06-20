@@ -5,10 +5,10 @@ source /usr/local/share/devcontainer-helpers/utils.sh
 log "Starting Ubuntu install.sh execution..."
 
 log "Updating & upgrading local apt registry"
-sudo apt update && sudo apt upgrade -y
+apt update && apt upgrade -y
 
 log "Installing critical base packages first..."
-sudo apt install -y curl git make gcc g++ jq gnupg python3-pip python3-venv pipx
+apt install -y sudo curl git make gcc g++ jq gnupg python3-pip python3-venv pipx
 
 log "Preparing to install packages via APT..."
 PKGS=(
@@ -55,7 +55,7 @@ flatpak remote-add --if-not-exists --user flathub https://flathub.org/repo/flath
 flatpak update -y
 
 log "Install keepassxc..."
-flatpak remote-add --user -y --if-not-exists flathub https://dl.flathub.org/repo/flathub.flatpakrepo
+flatpak remote-add --user --if-not-exists flathub https://dl.flathub.org/repo/flathub.flatpakrepo
 flatpak install --user -y flathub org.keepassxc.KeePassXC
 
 log "Installing docker"

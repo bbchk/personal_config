@@ -55,7 +55,7 @@ flatpak remote-add --if-not-exists --user flathub https://flathub.org/repo/flath
 flatpak update -y
 
 log "Install keepassxc..."
-flatpak remote-add --user -y --if-not-exists flathub https://dl.flathub.org/repo/flathub.flatpakrepo
+flatpak remote-add --user --if-not-exists flathub https://dl.flathub.org/repo/flathub.flatpakrepo
 flatpak install --user -y flathub org.keepassxc.KeePassXC
 
 log "Installing docker"
