@@ -3,6 +3,10 @@
 source "$HOME/pers/scripts/utils.sh"
 
 log "\n\n ======= index_devcon.sh is starting ======= \n\n"
+# gpg --export --armor E78A0D774F0BDAC50F897DC5FF99608021A353C0 > ~/.gnupg/devcon-public.asc
+
+chmod 700 /root/.gnupg
+gpg --import /root/.gnupg/devcon-public.asc
 
 GPG_KEY_ID="E78A0D774F0BDAC50F897DC5FF99608021A353C0"
 if ! gpg --list-secret-keys "$GPG_KEY_ID" >/dev/null 2>&1; then
@@ -20,7 +24,5 @@ git -C "$HOME/pers" remote set-url --push origin git@github.com:bbchk/personal_c
 
 log "Updating the system shell to zsh."
 [[ "$SHELL" == */zsh ]] || sudo usermod -s "$(which zsh)" "$USER"
-
-DISTRO="$1"
 
 "$HOME/pers/scripts/setup/config.sh"
