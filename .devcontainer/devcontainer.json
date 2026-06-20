@@ -6,8 +6,5 @@
     "ghcr.io/bbchk/pers/neovim:1.0.5": {
       "version": "v0.11.5"
     }
-  },
-  "dotfilesRepository": "https://github.com/bbchk/personal_config.git",
-  "dotfilesTargetPath": "~/pers",
-  "dotfilesInstallCommand": "bash scripts/setup/index.sh ubuntu"
+  }
 }
