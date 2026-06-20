@@ -3,8 +3,8 @@
   "image": "ubuntu:26.04",
   "features": {
     "ghcr.io/bbchk/pers/helper:latest": {},
-    "ghcr.io/bbchk/pers/neovim:1.0.5": {
-      "version": "v0.11.6"
+    "ghcr.io/bbchk/pers/neovim:1.0.7": {
+      "version": "v0.11.5"
     }
   }
 }

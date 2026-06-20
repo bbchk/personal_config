@@ -102,18 +102,18 @@ return {
 					},
 				},
 				lualine_y = {
-					{
-						function()
-							local handle = io.popen(
-								"upower -i $(upower -e | grep BAT) | grep percentage | awk '{print $2}' | sed 's/%//'"
-							)
-							local result = handle:read("*a")
-							handle:close()
-
-							return "🗲" .. tostring(tonumber(result))
-						end,
-						color = { fg = "#A6E22E", bg = "transparent" },
-					},
+					-- {
+					-- 	function()
+					-- 		local handle = io.popen(
+					-- 			"upower -i $(upower -e | grep BAT) | grep percentage | awk '{print $2}' | sed 's/%//'"
+					-- 		)
+					-- 		local result = handle:read("*a")
+					-- 		handle:close()
+					--
+					-- 		return "🗲" .. tostring(tonumber(result))
+					-- 	end,
+					-- 	color = { fg = "#A6E22E", bg = "transparent" },
+					-- },
 				},
 				lualine_z = {
 					{

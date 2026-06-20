@@ -13,7 +13,8 @@ apt install -y \
   unzip \
   fzf \
   zsh \
-  upower
+  upower \
+  iproute2
 
 ARCHIVE="nvim-linux-x86_64.tar.gz"
 TEMP_DIR=$(mktemp -d)
