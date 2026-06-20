@@ -54,19 +54,16 @@ log "Configuring flathub origin and updating afterwards..."
 flatpak remote-add --if-not-exists --user flathub https://flathub.org/repo/flathub.flatpakrepo
 flatpak update -y
 
-log "Install keepassxc..."
-flatpak remote-add --user --if-not-exists flathub https://dl.flathub.org/repo/flathub.flatpakrepo
-flatpak install --user -y flathub org.keepassxc.KeePassXC
-
 log "Installing docker"
 # Remove stale docker/gh repo entries from previous failed installs (broken GPG keys block apt-get update)
 sudo rm -f /etc/apt/sources.list.d/docker.list /etc/apt/sources.list.d/github-cli.list /etc/apt/keyrings/docker.gpg /usr/share/keyrings/githubcli-archive-keyring.gpg
 curl -fsSL https://get.docker.com -o /tmp/get-docker.sh
 sudo sh /tmp/get-docker.sh
 
-log "Installing neovim-remote"
-pipx install neovim-remote
-sudo install -m 755 -o root -g root \
-  "$HOME/pers/scripts/sudoedit-nvr" "/usr/local/bin/sudoedit-nvr"
+# TODO: move to some post-install
+# log "Installing neovim-remote"
+# pipx install neovim-remote
+# sudo install -m 755 -o root -g root \
+#   "$HOME/pers/scripts/sudoedit-nvr" "/usr/local/bin/sudoedit-nvr"
 
 log "======= Ubuntu install.sh execution finished successfully ======="
