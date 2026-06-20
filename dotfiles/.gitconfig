@@ -74,11 +74,11 @@
     branch = white
 
 [filter "gpg"]
-   clean = /home/bchk/pers/scripts/gpg-clean %f
-   smudge = /home/bchk/pers/scripts/gpg-smudge
+   clean = ~/pers/scripts/gpg-clean %f
+   smudge = ~/pers/scripts/gpg-smudge
    required = true
 [diff "gpg"]
-	textconv = /home/bchk/pers/scripts/gpg-diff
+	textconv = ~/pers/scripts/gpg-diff
   cachedtextconv = true
 
 [includeIf "gitdir:~/dev/ib/"]
