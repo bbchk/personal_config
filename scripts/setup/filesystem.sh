@@ -33,11 +33,11 @@ for repo in $(curl -s "https://gitlab.com/api/v4/groups/liveworld/projects?per_p
   git clone "$repo" "$HOME/dev/lw/$(basename "${repo%.git}")"
 done
 
-log "Pulling latest changes from all git repositories in batches"
-repos=($(find "$HOME/dev/my" "$HOME/dev/lw" "$HOME/dev/ib" -maxdepth 1 -mindepth 1 -type d))
-for repo in "${repos[@]}"; do
-  git -C "$repo" pull &
-  # allow only 8 jobs at a time
-  while (( $(jobs -r | wc -l) >= 10 )); do sleep 0.5; done
-done
-wait
+# log "Pulling latest changes from all git repositories in batches"
+# repos=($(find "$HOME/dev/my" "$HOME/dev/lw" "$HOME/dev/ib" -maxdepth 1 -mindepth 1 -type d))
+# for repo in "${repos[@]}"; do
+#   git -C "$repo" pull &
+#   # allow only 8 jobs at a time
+#   while (( $(jobs -r | wc -l) >= 10 )); do sleep 0.5; done
+# done
+# wait

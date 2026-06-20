@@ -5,10 +5,10 @@
       "resolved": "ghcr.io/bbchk/pers/helper@sha256:6fa88fe0dcff8875122078eac3932ecceac7fd19caa7083e7e789b50757dd4f9",
       "integrity": "sha256:6fa88fe0dcff8875122078eac3932ecceac7fd19caa7083e7e789b50757dd4f9"
     },
-    "ghcr.io/bbchk/pers/neovim:1.0.5": {
-      "version": "1.0.5",
-      "resolved": "ghcr.io/bbchk/pers/neovim@sha256:8b27d202b2ace742bb14c02e8eb5bef4b76ef9e3705d1b52b38f59b9ee515da9",
-      "integrity": "sha256:8b27d202b2ace742bb14c02e8eb5bef4b76ef9e3705d1b52b38f59b9ee515da9",
+    "ghcr.io/bbchk/pers/neovim:1.0.7": {
+      "version": "1.0.7",
+      "resolved": "ghcr.io/bbchk/pers/neovim@sha256:97d92cd83fc4c3d5b691195a11ac31070c4cb4672ba7eeca63422eceb1a27505",
+      "integrity": "sha256:97d92cd83fc4c3d5b691195a11ac31070c4cb4672ba7eeca63422eceb1a27505",
       "dependsOn": [
         "ghcr.io/bbchk/pers/helper:latest"
       ]

@@ -1,5 +1,7 @@
 #!/usr/bin/env bash
 
+. /usr/local/share/devcontainer-helpers/utils.sh
+
 apt update
 apt install -y \
   git \
