@@ -1,59 +1,33 @@
-## Tasks 
+-----BEGIN PGP MESSAGE-----
 
-P1
-
-move .ssh secrets to dotfiles 
-
-create dev container setups for each development purpose (java, ros, c++, js, web, etc.)
-Or better, use a Dev Container setup (VS Code or Neovim) where:
-
-<!-- https://github.com/s1n7ax/nvim-search-and-replace -->
-
-so we could use sessionizer that would spin up devcontainer in neovim in a chosen folder, instead of plain nvim
-
-<!-- { -->
-<!--     "name": "Java Container", -->
-<!--     "image": "ubuntu:latest", -->
-<!--     "features": { -->
-<!--         "ghcr.io/s1n7ax/devcontainer-features/jdk19:0": {}, -->
-<!--         "ghcr.io/s1n7ax/devcontainer-features/gradle:0": {}, -->
-<!--         "ghcr.io/s1n7ax/devcontainer-features/maven:0": {}, -->
-<!--         "ghcr.io/s1n7ax/devcontainer-features/neovim-essentials:0": {}, -->
-<!--         "ghcr.io/s1n7ax/devcontainer-features/neovim:0": {}, -->
-<!--         "ghcr.io/s1n7ax/devcontainer-features/astronvim:0": {} -->
-<!--     } -->
-<!-- } -->
-
-<!--         "ghcr.io/s1n7ax/devcontainer-features/astronvim:0": {} --> I need to figure out what is and how build my ones
-
-we need somehow to have defualt devcontainer container definition, so if I don't choose 
-
-also I would like to have fzf for devcontainers on which I want to open a particular project? or is it easier to just have a devcontaainers.json file on each pj I work on? copying them will be boresome
-
-
-is it worth to install many versions of languages inside a container (let's say java dev container and we install 20, 21, 25, etc.), so we don't need to switch beetween them. What is downside of such approach? -> weight of container, but I don't see an issue with this.
-
-<!--     "image": "ubuntu:latest", -->it's better not use latest, it's better to pin up to patch version ubuntu:24.0.4, so it's 99.9% reproducible
-
-
-
-Option 3: Multi-Folder Workspace Devcontainer
-If all your projects live under one parent folder, you can open that parent folder in VS Code and define a single .devcontainer at the top level. All projects share one container.
-
-```
-workspace/
-├── .devcontainer/
-│   └── devcontainer.json
-├── project-a/
-├── project-b/
-└── project-c/
-```
-
-<!-- !"dotfiles.repository": "https://github.com/your-username/dotfiles" -->
-
-we should design our devcontainer wihtout neovim as a must, but as an additional packages (what do u think?)
-
-----
-
-practice debugger in nvim 
-practice copilot.nvim
+hF4D7/9t5OpFi7oSAQdAFPMgPFSGa3xgnSFzLpA/lmoVelT612NypunJ/GiRX2Iw
+cCshiR1hVNB7dY6FR0dwEfLv6UX4/4t06a4Pll+7p9uAFNc85oEBkzR3bTUfezpV
+0uoBbQpKGqzvpYZxIpTJyXpqkTIsKu+8tZ2WWHW7JHE5q8QMB5veR75vTXMe9Qv8
+aSPNgpVyfPqCzzdo8GWc3MWnXFntZ4ALGwLB6TVcHAjltfCf6TmP0sSQ8p0kQfux
+47mdFacXxoli08+3VCH1MPwlQwSBih133P9WItm8nmeQSWCNkyToU9JwjgBvT9E6
+vxXxQbynnBIdmWDTJeFkmnaanaad6eW6ppf2sxLNckN0ms1Nu+j1q/B7K1V586QC
+NlP3Os4kIQagyAxhalE/kPEMdPHJLUwWoFZvTdY26Xc86St3WmVK4RQcJ+Aos5jo
++sLqchveF1wValQokOj+IHFGU+KC5I+DVkodfEEcYWRe3wE40L4eECYXp/rJ8Wwy
+Ed6gbOwEHNkJgDpsZ/AXHIczBPy7B1HoIByTLoTKBCabKFh0PL+MjraKZhiub8dU
+CNszfKz4DYos+truYYxEoirVZLxNXtWluIbFRnxLOp/BOG1pAbWVZO5fQ/j79vn6
+t4x3E3S0JtOPS5BuzwnPiLkut+0z/YoPeqmbybxigR2k/vJf20Kvx7jEj28CEPPM
+KPPd9rB6aVt/I8xYI7ty+ZZK6GRZ26JIfMNO9Xw39p3A0Luu36toz0OFdo3po/Cq
+25cSBMvxGRFA0BCwbCF/VW+C31NJ1nhvlxggguf5E3dPkZ43tGGbzMUfATuvjr9g
+iWbwJDXFLXKavbBvI2YtWCdNkoI0NRNibQzJi/fl+pgsWxSpTV2NX6ig5y6pEEhH
+3cwVhivcDn94ERlKXDG4FfjVQhAx9anhjjaMYns/ZxMgJx9OT2wOSwvqIPC1F5BQ
+IuOyUue+aWJAUAn2MlCoWHsv9MjOPf1MRJFys49z+fVNrfLH3JbaBhDaO6wm/q4D
+C6B6mW6DaeXLQMplcrrVqL/mydpugSsbny1oEcJzrjJrEcKC3SUL7xq3u5d0f92X
+Ip2j2zMNn5senoH97eeoEuGHIW9oC8oC4/LmSc7WLlU18GAbZU1vu5n61c4DmPg2
+xNrYl0zL2FyqgdiEebTiU2Gczlk6Vke37QRWen0iLSi9e1rrW5+svlswlTQ9jAup
+44qOeB2HDJrXbP0KkO24q36d9tzd4SiO2+MPLQ3DYo4QJz+iUOew1rs23wTvu1Oo
+gOsUlf0SBTFsl2Cp49l8wWdkxbiQJr9FQPWZA0mDtTt5QxyUj8IYvI1E7he+YOKA
+o1F5coWm5gO8HtowsLbmAemgzvy4suWuEhdEVRdVtuKwy+igykbDNsquxncSEuoi
+EX8LW8jkUC1cnELPFDi22/SYcyT8sl+cysp5eEb7enwg4AXIugUIVnSY9EI8BsK1
+zzt3NmOb3KVdevPP+aZlO9iTwDbkqu+FfRpfdqB2P61DevNh2eu3QbCP6Hbqg5uS
+TuGfgcQd2jJWdBRttYv38Db/9cEKptvK1kgOl1w/IOJ0E3Sh5RcswtvDDUmhMfao
+f43HqX4OAiQ8gmjEBC1b3qIuSc/eb72TK/JABrrc8/Wq/evVRpDvxylPj/yumSC7
+5y5nqv8wfDVP+pVhPgdzBTEK9iysDfNzeWG4/qcuDwRwpBVTR+1kCPWd5cmEEf55
+eOoLeE47EjARffsQQdQZG3mUKcXl8FdHUdURWIEEK/CTPKYMdgcK+i0mrHFzRawv
+aps6H9cVITJqGpEndmirr3OrlFxOeooOBps=
+=jWuT
+-----END PGP MESSAGE-----
