@@ -18,6 +18,8 @@ alias code="code --profile main"
 alias open="xdg-open"
 alias gs="git status"
 
+alias devcon="devcontainer"
+
 # ------------------------------
 # Remaps
 # ------------------------------
