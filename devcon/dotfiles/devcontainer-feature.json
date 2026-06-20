@@ -1,0 +1,28 @@
+{
+  "name": "Personal Config & Dotfiles",
+  "id": "dotfiles",
+  "version": "1.0.0",
+  "description": "Clones personal config repo, sets up dotfiles symlinks, configures shell and syncs Neovim plugins at build time.",
+  "options": {
+    "repo": {
+      "type": "string",
+      "default": "",
+      "description": "Git repository URL of your personal config (e.g. https://github.com/bbchk/personal_config.git)"
+    },
+    "branch": {
+      "type": "string",
+      "default": "main",
+      "description": "Branch to clone"
+    },
+    "target_path": {
+      "type": "string",
+      "default": "/root/pers",
+      "description": "Absolute path where the repo will be cloned inside the container"
+    },
+    "dotfiles_dir": {
+      "type": "string",
+      "default": "dotfiles",
+      "description": "Relative path inside the repo where dotfiles to symlink live"
+    }
+  }
+}

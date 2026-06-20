@@ -8,6 +8,7 @@ return {
     require("mason").setup()
 
     require("mason-lspconfig").setup({
+      automatic_installation = false,
       ensure_installed = {
         "bashls",
         "clangd",
@@ -28,6 +29,7 @@ return {
     })
 
     require("mason-tool-installer").setup({
+      automatic_installation = false,
       ensure_installed = {
         "black",
         "clang-format",

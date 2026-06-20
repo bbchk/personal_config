@@ -32,4 +32,3 @@ cp -ru "$SRC/lib/." /usr/local/lib/
 [ -d "$SRC/man" ] && cp -ru "$SRC/man/." /usr/local/man/
 
 rm -rf "$TEMP_DIR"
-
