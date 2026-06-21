@@ -9,6 +9,15 @@ TARGET_PATH="${TARGET_PATH:-/root/pers}"
 DOTFILES_DIR="${DOTFILES_DIR:-dotfiles}"
 BRANCH="${BRANCH:-main}"
 
+# ---- TODO -------------------------
+
+chmod 700 /root/.gnupg
+gpg --import /root/.gnupg/devcon-public.asc
+
+gpg --list-keys --with-colons \
+    | awk -F: '/^fpr/{print $10":6:"; exit}' \
+    | gpg --import-ownertrust
+
 # ---- Clone repo -------------------------
 
 log "Cloning $REPO (branch: $BRANCH) into $TARGET_PATH..."
@@ -55,9 +64,6 @@ log "Fixing SSH key permissions..."
 find "$TARGET_PATH/" -path '*/.ssh/*' -type f ! -name '*.pub' -exec chmod 600 {} + 2>/dev/null || true
 
 CUSTOM_DIR="$DOTFILES_FULL/.custom/sys"
-log "Copying custom /etc/hosts..."
-cp "$CUSTOM_DIR/hosts" /etc/hosts
-
 log "Copying sudoers to /etc/sudoers.d/sudoers..."
 cp "$CUSTOM_DIR/sudoers" /etc/sudoers.d/sudoers
 chmod 440 /etc/sudoers.d/sudoers

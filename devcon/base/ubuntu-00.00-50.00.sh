@@ -39,7 +39,7 @@ PKGS=(
   fd-find ripgrep zip unzip lsof stow
 
   # Secrets / Keyring
-  libsecret-tools  # situational: needs keyring daemon
+  libsecret-tools gnupg
 
   # Java
   maven

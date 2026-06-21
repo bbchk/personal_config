@@ -1,9 +1,10 @@
 {
   "name": "Base",
   "id": "base",
-  "version": "1.0.20",
+  "version": "1.0.22",
   "description": "Provide base packages and environment for development",
   "dependsOn": {
+    "ghcr.io/devcontainers/features/common-utils:2": {},
     "ghcr.io/bbchk/pers/helper:latest": {}
   }
 }

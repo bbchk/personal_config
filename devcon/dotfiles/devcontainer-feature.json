@@ -1,7 +1,7 @@
 {
   "name": "Personal Config & Dotfiles",
   "id": "dotfiles",
-  "version": "1.0.2",
+  "version": "1.0.6",
   "description": "Clones personal config repo, sets up dotfiles symlinks, configures shell and syncs Neovim plugins at build time.",
   "options": {
     "repo": {
@@ -24,5 +24,8 @@
       "default": "dotfiles",
       "description": "Relative path inside the repo where dotfiles to symlink live"
     }
+  },
+  "dependsOn": {
+    "ghcr.io/bbchk/pers/base:latest": {}
   }
 }
