@@ -4,6 +4,8 @@ source "$HOME/pers/scripts/utils.sh"
 
 log "\n\n ======= devcon.sh is starting ======= \n\n"
 
+# We should use docker deamon from host somehow! How to do that?
+
 log "Configuring Docker daemon and user groups..."
 sudo systemctl enable --now docker
 sudo usermod -aG docker "$USER"

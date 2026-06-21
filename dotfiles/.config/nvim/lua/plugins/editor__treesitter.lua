@@ -6,8 +6,10 @@ return {
 	event = { "BufReadPre", "BufNewFile" },
 	build = ":TSUpdate",
 	config = function()
-    local ok, treesitter = pcall(require, "nvim-treesitter.configs")
-    if not ok then return end
+		local ok, treesitter = pcall(require, "nvim-treesitter.configs")
+		if not ok then
+			return
+		end
 
 		treesitter.setup({
 			highlight = {
@@ -15,7 +17,8 @@ return {
 				additional_vim_regex_highlighting = false,
 			},
 			indent = { enable = true },
-			auto_install = true,
+			auto_install = false,
+			sync_install = false,
 			ensure_installed = {
 				"vimdoc",
 				"query",
@@ -42,8 +45,7 @@ return {
 				"markdown_inline",
 				"yaml",
 				"dockerfile",
-        "sql",
-
+				"sql",
 			},
 			incremental_selection = {
 				enable = true,

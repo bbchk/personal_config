@@ -32,3 +32,11 @@ cp -ru "$SRC/lib/." /usr/local/lib/
 [ -d "$SRC/man" ] && cp -ru "$SRC/man/." /usr/local/man/
 
 rm -rf "$TEMP_DIR"
+
+# Pre-install plugins and treesitter parsers at build time
+nvim --headless "+Lazy! sync" +qa 2>/dev/null || true
+nvim --headless "+TSInstall! all" +qa 2>/dev/null || true
+
+# Clean up any stale tmp dirs left by failed parser compilations
+find "${XDG_DATA_HOME:-$HOME/.local/share}/nvim" \
+  -name "*-tmp" -type d -exec rm -rf {} + 2>/dev/null || true
