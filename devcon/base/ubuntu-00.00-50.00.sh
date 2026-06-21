@@ -5,10 +5,10 @@ source /usr/local/share/devcontainer-helpers/utils.sh
 log "Starting Ubuntu install.sh execution..."
 
 log "Updating & upgrading local apt registry"
-apt update && apt upgrade -y
+apt-get update && apt-get upgrade -y
 
 log "Installing critical base packages first..."
-apt install -y sudo curl git make gcc g++ jq gnupg python3-pip python3-venv pipx
+apt-get install -y sudo curl git make gcc g++ jq gnupg python3-pip python3-venv pipx
 
 log "Preparing to install packages via APT..."
 PKGS=(

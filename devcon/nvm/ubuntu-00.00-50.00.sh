@@ -5,7 +5,7 @@ source /usr/local/share/devcontainer-helpers/utils.sh
 log "Starting Ubuntu install.sh execution..."
 
 log "Installing critical base packages first..."
-apt install -y sudo curl git make
+apt-get install -y sudo curl git make
 
 log "Installing NVM..."
 export NVM_DIR="/usr/local/nvm"
