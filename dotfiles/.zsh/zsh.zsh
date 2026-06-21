@@ -47,7 +47,15 @@ export PATH="$HOME/.devcontainers/bin:$PATH"
 export PATH="$HOME/pers/scripts:$PATH"
 
 [[ "$TERM_PROGRAM" == "vscode" ]] && . "$(code --locate-shell-integration-path zsh)"
-#
+
+docker() {
+  if [[ "$1" == "push" && "$2" == vsc-* ]]; then
+    echo "❌ Blocked: refusing to push dev container image '$2'" >&2
+    return 1
+  fi
+  command docker "$@"
+}
+
 # TODO: refactor later
 git() {
     if [[ $1 == "clone" ]] || [[ $1 == "clonew" ]] || [[ $1 == "submodule" && $2 == "add" ]]; then
