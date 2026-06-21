@@ -6,7 +6,6 @@
 # --log-level trace \
 # --no-lockfile
 
-
 # devcon exec --workspace-folder $PWD nvim
 
 source "$HOME/pers/scripts/utils.sh"
