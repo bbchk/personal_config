@@ -25,6 +25,7 @@ require("keymap")
 require("core.filetypes")
 require("core.terminal")
 require("core.tabs")
+require("core.clipboard")
 
 require("custom.sessionizer")
 
