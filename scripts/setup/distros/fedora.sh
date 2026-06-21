@@ -20,7 +20,7 @@ sudo dnf update -y --skip-unavailable --exclude=openh264
 log "Preparing to install packages via DNF..."
 PKGS=(
   # Development Tools
-  gcc gcc-c++ make cmake pkgconf-pkg-config git git-delta maven golang golang-x-tools-gopls julia php-xdebug xclip glab rustfmt isort re2-devel mysql-devel pipx libXScrnSaver meson python3-pip jq clang-tools-extra
+  gcc gcc-c++ make cmake pkgconf-pkg-config git maven golang golang-x-tools-gopls julia php-xdebug xclip glab rustfmt isort re2-devel mysql-devel pipx libXScrnSaver meson python3-pip jq clang-tools-extra
   # Libraries
   openssl-devel readline-devel zlib-devel libyaml-devel libffi-devel gdbm-devel ncurses-devel libuuid-devel libssh2-devel libgit2-devel ruby-devel @virtualization virt-manager virt-viewer gnome-keyring-pam xdg-desktop-portal xdg-desktop-portal-gnome langpacks-en glibc-langpack-en
   # Runtimes

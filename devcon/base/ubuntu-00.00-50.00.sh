@@ -13,7 +13,7 @@ apt-get install -y sudo curl git make gcc g++ jq gnupg python3-pip python3-venv 
 log "Preparing to install packages via APT..."
 PKGS=(
   # Development Tools
-  cmake pkg-config git-delta golang php-xdebug
+  cmake pkg-config php-xdebug
   rustfmt isort libre2-dev libmysqlclient-dev meson
   shellcheck expect
 
@@ -29,7 +29,7 @@ PKGS=(
   ansible libarchive-tools oathtool
 
   # Editors/Shell
-  fzf gh tree tmux zsh man-db
+  fzf tree tmux zsh man-db
 
   # Network
   traceroute ncat dnsutils net-tools nmap
@@ -39,17 +39,12 @@ PKGS=(
   fd-find ripgrep zip unzip lsof stow
 
   # Secrets / Keyring
-  libsecret-tools gnupg
+  libsecret-tools
 
   # Java
   maven
 )
-sudo apt-get install -y "${PKGS[@]}" || true
-
-log "Installing docker"
-sudo rm -f /etc/apt/sources.list.d/docker.list /etc/apt/sources.list.d/github-cli.list /etc/apt/keyrings/docker.gpg /usr/share/keyrings/githubcli-archive-keyring.gpg
-curl -fsSL https://get.docker.com -o /tmp/get-docker.sh
-sudo sh /tmp/get-docker.sh
+apt-get install -y "${PKGS[@]}" || true
 
 log "======= Ubuntu install.sh execution finished successfully ======="
 

@@ -5,7 +5,9 @@ return {
     "WhoIsSethDaniel/mason-tool-installer.nvim",
   },
   config = function()
-    require("mason").setup()
+    require("mason").setup({
+      log_level = vim.log.levels.WARN,
+    })
 
     require("mason-lspconfig").setup({
       automatic_installation = false,

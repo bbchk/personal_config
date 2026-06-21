@@ -1,7 +1,7 @@
 {
   "name": "Base",
   "id": "base",
-  "version": "1.0.22",
+  "version": "1.0.23",
   "description": "Provide base packages and environment for development",
   "dependsOn": {
     "ghcr.io/devcontainers/features/common-utils:2": {},
