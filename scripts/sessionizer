@@ -1,5 +1,14 @@
 #!/usr/bin/env bash
 
+# devcon up \
+# --workspace-folder $PWD \
+# --remove-existing-container \
+# --log-level trace \
+# --no-lockfile
+
+
+# devcon exec --workspace-folder $PWD nvim
+
 source "$HOME/pers/scripts/utils.sh"
 
 main() {

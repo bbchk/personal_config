@@ -29,6 +29,5 @@
     "ghcr.io/bbchk/pers/neovim:latest": {
       "version": "v0.11.5"
     }
-  },
-  "postCreateCommand": "/root/pers/scripts/setup/devcon.sh"
+  }
 }
