@@ -46,7 +46,7 @@ PKGS=(
   # Development Tools
   cmake pkg-config git-delta maven golang php-xdebug
   xclip rustfmt isort libre2-dev libmysqlclient-dev libxss-dev meson
-  shellcheck expect xorriso wl-copy
+  shellcheck expect xorriso
 
   # Libraries
   libssl-dev libreadline-dev zlib1g-dev libyaml-dev libffi-dev libgdbm-dev
@@ -81,9 +81,9 @@ PKGS=(
 )
 sudo apt-get install -y "${PKGS[@]}" || true
 
-# log "Configuring flathub origin and updating afterwards..."
-# flatpak remote-add --if-not-exists --user flathub https://flathub.org/repo/flathub.flatpakrepo
-# flatpak update -y
+log "Configuring flathub origin and updating afterwards..."
+flatpak remote-add --if-not-exists --user flathub https://flathub.org/repo/flathub.flatpakrepo
+flatpak update -y
 
 log "Installing docker"
 sudo rm -f /etc/apt/sources.list.d/docker.list /etc/apt/sources.list.d/github-cli.list /etc/apt/keyrings/docker.gpg /usr/share/keyrings/githubcli-archive-keyring.gpg
