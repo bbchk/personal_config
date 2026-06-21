@@ -79,11 +79,11 @@ PKGS=(
   cups cups-filters system-config-printer sane-utils simple-scan
   lynx poedit gnome-shell-extension-gsconnect python3-nautilus flatpak gnome-software-plugin-flatpak
 )
-sudo apt install -y "${PKGS[@]}" || true
+sudo apt-get install -y "${PKGS[@]}" || true
 
-log "Configuring flathub origin and updating afterwards..."
-flatpak remote-add --if-not-exists --user flathub https://flathub.org/repo/flathub.flatpakrepo
-flatpak update -y
+# log "Configuring flathub origin and updating afterwards..."
+# flatpak remote-add --if-not-exists --user flathub https://flathub.org/repo/flathub.flatpakrepo
+# flatpak update -y
 
 log "Installing docker"
 sudo rm -f /etc/apt/sources.list.d/docker.list /etc/apt/sources.list.d/github-cli.list /etc/apt/keyrings/docker.gpg /usr/share/keyrings/githubcli-archive-keyring.gpg
