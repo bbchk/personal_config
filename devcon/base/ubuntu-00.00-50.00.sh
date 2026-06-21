@@ -46,7 +46,7 @@ PKGS=(
   # Development Tools
   cmake pkg-config git-delta maven golang php-xdebug
   xclip rustfmt isort libre2-dev libmysqlclient-dev libxss-dev meson
-  shellcheck expect xorriso
+  shellcheck expect xorriso wl-copy
 
   # Libraries
   libssl-dev libreadline-dev zlib1g-dev libyaml-dev libffi-dev libgdbm-dev
