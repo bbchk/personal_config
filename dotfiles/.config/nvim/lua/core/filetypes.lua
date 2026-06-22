@@ -5,6 +5,7 @@ vim.filetype.add({
 		tiltfile = "tiltfile",
 		Tiltfile = "tiltfile",
 		slim = "slim",
+		json = "jsonc",
 	},
 	filename = {
 		[".env"] = "dotenv",
