@@ -2,7 +2,7 @@
 # Oh My Zsh (zsh plugin manager) configuration
 # ------------------------------
 
-ZSH_DISABLE_COMPFIX=true
+export ZSH_DISABLE_COMPFIX="true"
 
 export ZSH="$HOME/pers/dotfiles/.oh-my-zsh"
 export ZSH_CUSTOM="$HOME/pers/dotfiles/.custom/omz"

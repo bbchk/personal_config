@@ -13,39 +13,39 @@
     // "source=${localEnv:HOME}/.gnupg/private-keys-v1.d/FA5DE4470687D6D2ABBB530C4E56172E13A38854.key,target=/root/.gnupg/private-keys-v1.d/FA5DE4470687D6D2ABBB530C4E56172E13A38854.key,type=bind",
   ],
   "features": {
-    // "ghcr.io/devcontainers/features/github-cli:1": {
-    //   "installDirectlyFromGitHubRelease": true
-    // },
-    // "ghcr.io/devcontainers/features/go:1": {
-    //   "version": "latest"
-    // },
-    // "ghcr.io/devcontainers/features/php:1": {
-    //   "version": "latest"
-    // },
-    // "ghcr.io/devcontainers/features/python:1": {},
-    // "ghcr.io/devcontainers/features/node:2": {
-    //   "version": "26.3.1",
-    //   "npmVersion": "11.17.0",
-    //   "pnpmVersion": "11.5.3"
-    // },
-    // "ghcr.io/devcontainers/features/ruby:2": {
-    //   "version": "latest",
-    //   "versionManager": "rbenv"
-    // },
-    // "ghcr.io/devcontainers/features/java:1": {
-    //   "version": "latest",
-    //   "additionalVersions": "",
-    //   "jdkDistro": "ms",
-    //   "installMaven": true,
-    //   "mavenVersion": "latest",
-    //   "installGradle": false,
-    //   "installGroovy": false,
-    //   "groovyVersion": "latest"
-    // },
-    // "ghcr.io/devcontainers/features/docker-outside-of-docker:1": {
-    //   "version": "latest",
-    //   "moby": false
-    // },
+    "ghcr.io/devcontainers/features/github-cli:1": {
+      "installDirectlyFromGitHubRelease": true
+    },
+    "ghcr.io/devcontainers/features/go:1": {
+      "version": "latest"
+    },
+    "ghcr.io/devcontainers/features/php:1": {
+      "version": "latest"
+    },
+    "ghcr.io/devcontainers/features/python:1": {},
+    "ghcr.io/devcontainers/features/node:2": {
+      "version": "26.3.1",
+      "npmVersion": "11.17.0",
+      "pnpmVersion": "11.5.3"
+    },
+    "ghcr.io/devcontainers/features/ruby:2": {
+      "version": "latest",
+      "versionManager": "rbenv"
+    },
+    "ghcr.io/devcontainers/features/java:1": {
+      "version": "latest",
+      "additionalVersions": "",
+      "jdkDistro": "ms",
+      "installMaven": true,
+      "mavenVersion": "latest",
+      "installGradle": false,
+      "installGroovy": false,
+      "groovyVersion": "latest"
+    },
+    "ghcr.io/devcontainers/features/docker-outside-of-docker:1": {
+      "version": "latest",
+      "moby": false
+    },
     "ghcr.io/bbchk/pers/helper:latest": {},
     "ghcr.io/bbchk/pers/base:latest": {},
     "ghcr.io/bbchk/pers/neovim:latest": {
