@@ -10,6 +10,9 @@
     "source=${localEnv:HOME}/pers,target=/root/pers,type=bind",
     "source=${localEnv:HOME}/.gnupg/devcon-public.asc,target=/root/.gnupg/devcon-public.asc,type=bind"
   ],
+  "remoteEnv": {
+    "TMUX": "${localEnv:TMUX}"
+  },
   "features": {
     "ghcr.io/devcontainers/features/github-cli:1": {
       "installDirectlyFromGitHubRelease": true
@@ -52,4 +55,3 @@
   },
   "postCreateCommand": "/root/pers/devcon/postCreate.sh"
 }
-
