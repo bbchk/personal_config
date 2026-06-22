@@ -1,5 +1,12 @@
 local u = require("utils")
 
+-- nvim 0.11 compatibility shim
+-- if not vim.treesitter.ft_to_lang then
+--   vim.treesitter.ft_to_lang = function(ft)
+--     return vim.treesitter.language.get_lang(ft) or ft
+--   end
+-- end
+
 return {
 	"nvim-telescope/telescope.nvim",
 	branch = "master",
@@ -28,6 +35,9 @@ return {
 		t.setup({
 			defaults = {
 				layout_strategy = "horizontal",
+				preview = {
+					treesitter = false,
+				},
 				layout_config = {
 					height = 0.95,
 					width = 0.95,
