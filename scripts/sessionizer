@@ -21,8 +21,7 @@ if ! tmux has-session -t "$session_name" 2>/dev/null; then
   fi
 
   tmux new-session -s "$session_name" -c "$session" -d
-  tmux send-keys -t "$session_name" "BUILDKIT_PROGRESS=plain devcon up --workspace-folder . $CONFIG_FLAG --remove-existing-container --no-lockfile --log-level trace" C-m
-  tmux send-keys -t "$session_name" "devcon exec --workspace-folder . $CONFIG_FLAG 'nvim' '--cmd' 'lua vim.g.sessionizer_devcon = true'" C-m
+  tmux send-keys -t "$session_name" "BUILDKIT_PROGRESS=plain devcon up --workspace-folder . $CONFIG_FLAG --remove-existing-container --no-lockfile --log-level trace && devcon exec --workspace-folder . $CONFIG_FLAG 'nvim' '--cmd' 'lua vim.g.sessionizer_devcon = true'" C-m
 fi
 
 if [ -z "$TMUX" ]; then
@@ -30,3 +29,4 @@ if [ -z "$TMUX" ]; then
 else
   tmux switch-client -t "$session_name"
 fi
+
