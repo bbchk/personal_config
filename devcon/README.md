@@ -10,6 +10,8 @@ Copy code
 echo "test" | gpg --batch -e -r E78A0D774F0BDAC50F897DC5FF99608021A353C0 | gpg --batch -d >/dev/null
 ```
 
+git config --global --add safe.directory /workspaces/<dir>
+
 > NB!: If all your projects live under one parent folder, you can open that parent folder in VS Code and define a single .devcontainer at the top level. All projects share one container.
 ```
 workspace/
