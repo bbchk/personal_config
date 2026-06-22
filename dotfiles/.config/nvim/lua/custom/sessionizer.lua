@@ -17,6 +17,25 @@ if vim.env.SESSIONIZER_START == "true" then
 	})
 end
 
+if vim.env.SESSIONIZER_DEVCON == "true" then
+	vim.api.nvim_create_autocmd("VimEnter", {
+		pattern = "*",
+		once = true,
+		callback = function()
+			vim.cmd([[
+        terminal
+        tabnew
+      ]])
+			vim.defer_fn(function()
+				vim.cmd([[
+          Oil
+          Telescope find_files
+        ]])
+			end, 50)
+		end,
+	})
+end
+
 if vim.env.SESSIONIZER_SWITCH == "true" then
 	vim.api.nvim_create_autocmd("VimEnter", {
 		pattern = "*",
