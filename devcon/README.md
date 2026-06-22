@@ -1,5 +1,6 @@
 TODO:
 - need our own lua feature or use some
+- make clipboard work in the dev container
 - need C++ feature, see:
 https://github.com/devcontainer-community/devcontainer-features/tree/main/src/collection-c-cpp
 https://github.com/devcontainer-community/devcontainer-features/tree/main/src/collection-c-cpp
