@@ -1,37 +1,37 @@
 #!/usr/bin/env bash
 
-# devcon up \
-# --workspace-folder $PWD \
-# --remove-existing-container \
-# --log-level trace \
-# --no-lockfile
+session=$(find ~ ~/dev ~/dev/ib ~/dev/my ~/dev/lw ~/pers/xdg -mindepth 1 -maxdepth 1 -type d ! -name '.*' | fzf --border --delimiter='/' --with-nth='4..' --prompt="Workdir?: ")
 
-# devcon exec --workspace-folder $PWD nvim
+[ -z "$session" ] && exit 0
 
-source "$HOME/pers/scripts/utils.sh"
+if ! tmux ls &>/dev/null; then
+  tmux start-server
+fi
 
-main() {
-  if ! tmux ls &>/dev/null; then
-    log "No tmux server running, starting one..."
-    tmux start-server
-  fi
+session_name=$(echo "$session" | tr './' '_')
+if ! tmux has-session -t "$session_name" 2>/dev/null; then
 
-  session="${HOME}"
-  tmux_session_name=$(echo "$session" | tr './' '_')
-  log "Target session: $tmux_session_name"
+  LOCAL_DC_DIR="$session/.devcontainer"
+  GLOBAL_DC_CONFIG="$HOME/pers/.devcontainer/devcontainer.json"
 
-  if ! tmux has-session -t "$tmux_session_name" 2>/dev/null; then
-    log "Creating new tmux session: $tmux_session_name"
-    tmux new-session -s "$tmux_session_name" -c "$session" -d "SESSIONIZER_START=true nvim"
-  fi
+  if [ -d "$LOCAL_DC_DIR" ]; then
+    tmux new-session -s "$session_name" -c "$session" -d
+    tmux send-keys -t "$session_name" "devcon up --workspace-folder . --remove-existing-container --build-no-cache" C-m
+    tmux send-keys -t "$session_name" "devcon exec --workspace-folder . 'nvim' '--cmd' 'lua vim.g.sessionizer_devcon = true'" C-m
 
-  if [ -z "$TMUX" ]; then
-    log "Attaching to session"
-    tmux attach-session -t "$tmux_session_name"
+  elif [ -f "$GLOBAL_DC_CONFIG" ]; then
+    tmux new-session -s "$session_name" -c "$session" -d
+    tmux send-keys -t "$session_name" "devcon up --workspace-folder . --config $GLOBAL_DC_CONFIG --remove-existing-container --build-no-cache" C-m
+    tmux send-keys -t "$session_name" "devcon exec --workspace-folder . --config $GLOBAL_DC_CONFIG 'nvim' '--cmd' 'lua vim.g.sessionizer_devcon = true'" C-m
+
   else
-    log "Switching client to session"
-    tmux switch-client -t "$tmux_session_name"
+    tmux new-session -s "$session_name" -c "$session" -d "nvim --cmd lua vim.g.sessionizer_devcon = true"
   fi
-}
+fi
 
-main "$@"
+if [ -z "$TMUX" ]; then
+  exec tmux attach-session -t "$session_name"
+else
+  tmux switch-client -t "$session_name"
+fi
+
