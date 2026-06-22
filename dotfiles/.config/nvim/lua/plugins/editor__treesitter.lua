@@ -41,10 +41,6 @@ return {
 				"ruby",
 				"go",
 				"php",
-				"markdown",
-				"markdown_inline",
-				"yaml",
-				"dockerfile",
 				"sql",
 			},
 			incremental_selection = {
