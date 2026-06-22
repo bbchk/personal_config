@@ -16,12 +16,12 @@ if ! tmux has-session -t "$session_name" 2>/dev/null; then
 
   if [ -d "$LOCAL_DC_DIR" ]; then
     tmux new-session -s "$session_name" -c "$session" -d
-    tmux send-keys -t "$session_name" "devcon up --workspace-folder . --remove-existing-container --build-no-cache" C-m
+    tmux send-keys -t "$session_name" "devcon up --workspace-folder . --remove-existing-container --build-no-cache --log-level trace" C-m
     tmux send-keys -t "$session_name" "devcon exec --workspace-folder . 'nvim' '--cmd' 'lua vim.g.sessionizer_devcon = true'" C-m
 
   elif [ -f "$GLOBAL_DC_CONFIG" ]; then
     tmux new-session -s "$session_name" -c "$session" -d
-    tmux send-keys -t "$session_name" "devcon up --workspace-folder . --config $GLOBAL_DC_CONFIG --remove-existing-container --build-no-cache" C-m
+    tmux send-keys -t "$session_name" "devcon up --workspace-folder . --config $GLOBAL_DC_CONFIG --remove-existing-container --build-no-cache --log-level trace" C-m
     tmux send-keys -t "$session_name" "devcon exec --workspace-folder . --config $GLOBAL_DC_CONFIG 'nvim' '--cmd' 'lua vim.g.sessionizer_devcon = true'" C-m
 
   else
