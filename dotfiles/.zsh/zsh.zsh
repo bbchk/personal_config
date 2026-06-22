@@ -6,9 +6,9 @@ autoload -Uz vcs_info compinit
 
 # Use cache for compinit (check only once per day)
 if [[ -n ${ZDOTDIR}/.zcompdump(#qNmh+24) ]]; then
-  compinit
+  compinit -u
 else
-  compinit -C
+  compinit -Cu
 fi
 
 precmd() {
