@@ -1,7 +1,7 @@
 [Desktop Entry]
 Type=Application
 Name=Pers Setup
-Exec=env DEBUG=true kitty -e bash -c '/home/bchk/pers/scripts/setup/index.sh'
+Exec=kitty -e bash -c '/home/bchk/pers/scripts/login.sh'
 Terminal=false
 X-GNOME-Autostart-enabled=true
 Hidden=false
