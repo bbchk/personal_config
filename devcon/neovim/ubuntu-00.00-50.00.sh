@@ -15,7 +15,6 @@ apt-get install -y \
   unzip \
   fzf \
   zsh \
-  upower \
   iproute2
 
 ARCHIVE="nvim-linux-x86_64.tar.gz"

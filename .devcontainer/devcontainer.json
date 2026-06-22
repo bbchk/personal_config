@@ -50,5 +50,5 @@
       "version": "v0.11.5"
     }
   },
-  "postCreateCommand": "/root/pers/scripts/devcon.sh"
+  "postCreateCommand": "/root/pers/devcon/postCreate.sh"
 }
