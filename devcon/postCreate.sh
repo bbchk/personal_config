@@ -7,8 +7,8 @@ source /usr/local/share/devcontainer-helpers/utils.sh
 log "Setting default shell to zsh..."
 [[ "$SHELL" == */zsh ]] || usermod -s "$(which zsh)" root
 
-log "Scanning $TARGET_PATH/$DOTFILES_DIR for items to symlink into $HOME..."
-DOTFILES_FULL="$TARGET_PATH/$DOTFILES_DIR"
+log "Scanning /root/pers/dotfiles for items to symlink into $HOME..."
+DOTFILES_FULL="/root/pers/dotfiles"
 while IFS= read -r -d '' item; do
   base_item_name=$(basename "$item")
   target="$HOME/$base_item_name"
@@ -26,7 +26,7 @@ done < <(find "$DOTFILES_FULL" -maxdepth 1 -mindepth 1 -print0)
 
 log "Installing neovim-remote"
 pipx install neovim-remote
-NVR_SCRIPT="$TARGET_PATH/scripts/sudoedit-nvr"
+NVR_SCRIPT="/root/pers/scripts/sudoedit-nvr"
 install -m 755 -o root -g root "$NVR_SCRIPT" "/usr/local/bin/sudoedit-nvr"
 
 log "personal-config feature install complete!"

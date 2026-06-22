@@ -7,10 +7,10 @@
   "mounts": [
     "source=/var/run/docker.sock,target=/var/run/docker.sock,type=bind",
     "source=${localEnv:XDG_RUNTIME_DIR}/gnupg/S.gpg-agent.extra,target=/root/.gnupg/S.gpg-agent,type=bind",
-    "source=${localEnv:HOME}/pers,target=/root/pers,type=bind"
+    "source=${localEnv:HOME}/pers,target=/root/pers,type=bind",
+    "source=${localEnv:HOME}/.gnupg/devcon-public.asc,target=/root/.gnupg/devcon-public.asc,type=bind"
     // "source=${localEnv:HOME}/.gnupg/private-keys-v1.d/3F8B20FBE0ED2DC0ECD533D56661CE64D7E8A8F2.key,target=/root/.gnupg/private-keys-v1.d/3F8B20FBE0ED2DC0ECD533D56661CE64D7E8A8F2.key,type=bind",
     // "source=${localEnv:HOME}/.gnupg/private-keys-v1.d/FA5DE4470687D6D2ABBB530C4E56172E13A38854.key,target=/root/.gnupg/private-keys-v1.d/FA5DE4470687D6D2ABBB530C4E56172E13A38854.key,type=bind",
-    // "source=${localEnv:HOME}/.gnupg/devcon-public.asc,target=/root/.gnupg/devcon-public.asc,type=bind"
   ],
   "features": {
     // "ghcr.io/devcontainers/features/github-cli:1": {
