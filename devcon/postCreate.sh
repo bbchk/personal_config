@@ -36,14 +36,15 @@ chmod 700 /root/.gnupg
 
 # Prevent GPG from trying to start its own agent.
 # The host agent is forwarded via the mounted socket.
-echo "no-autostart" >> /root/.gnupg/gpg.conf
+echo "no-autostart" >>/root/.gnupg/gpg.conf
 
 gpg --import /root/.gnupg/devcon-public.asc
-gpg --list-keys --with-colons \
-    | awk -F: '/^fpr/{print $10":6:"; exit}' \
-    | gpg --import-ownertrust
+gpg --list-keys --with-colons |
+  awk -F: '/^fpr/{print $10":6:"; exit}' |
+  gpg --import-ownertrust
 
 log "Decrypting secrets..."
+git -C "$HOME/pers" config --global --add safe.directory /root/pers
 git -C "$HOME/pers" checkout -- .
 
 log "Fixing SSH key permissions..."
