@@ -1,7 +1,7 @@
 {
   "name": "Personal Config & Dotfiles",
   "id": "dotfiles",
-  "version": "1.0.8",
+  "version": "1.0.9",
   "description": "Clones personal config repo, sets up dotfiles symlinks, configures shell and syncs Neovim plugins at build time.",
   "options": {
     "repo": {
