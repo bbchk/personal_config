@@ -15,18 +15,17 @@ if ! tmux has-session -t "$session_name" 2>/dev/null; then
   GLOBAL_DC_CONFIG="$HOME/pers/.devcontainer/devcontainer.json"
 
   if [ -d "$LOCAL_DC_DIR" ]; then
-    tmux new-session -s "$session_name" -c "$session" -d
-    tmux send-keys -t "$session_name" "BUILDKIT_PROGRESS=plain devcon up --workspace-folder . --remove-existing-container --no-lockfile --build-no-cache --log-level trace" C-m
-    tmux send-keys -t "$session_name" "devcon exec --workspace-folder . 'nvim' '--cmd' 'lua vim.g.sessionizer_devcon = true'" C-m
-
+    CONFIG_FLAG=""
   elif [ -f "$GLOBAL_DC_CONFIG" ]; then
-    tmux new-session -s "$session_name" -c "$session" -d
-    tmux send-keys -t "$session_name" "BUILDKIT_PROGRESS=plain devcon up --workspace-folder . --config $GLOBAL_DC_CONFIG --remove-existing-container --no-lockfile --build-no-cache --log-level trace" C-m
-    tmux send-keys -t "$session_name" "devcon exec --workspace-folder . --config $GLOBAL_DC_CONFIG 'nvim' '--cmd' 'lua vim.g.sessionizer_devcon = true'" C-m
-
-  else
-    tmux new-session -s "$session_name" -c "$session" -d "nvim --cmd lua vim.g.sessionizer_devcon = true"
+    CONFIG_FLAG="--config $GLOBAL_DC_CONFIG"
   fi
+
+  tmux new-session -s "$session_name" -c "$session" -d
+  tmux send-keys -t "$session_name" "BUILDKIT_PROGRESS=plain devcon up --workspace-folder . $CONFIG_FLAG --remove-existing-container --no-lockfile --build-no-cache --log-level trace \
+      --mount \"type=bind,source=${HOME}/.gnupg/private-keys-v1.d/3F8B20FBE0ED2DC0ECD533D56661CE64D7E8A8F2.key,target=/root/.gnupg/private-keys-v1.d/3F8B20FBE0ED2DC0ECD533D56661CE64D7E8A8F2.key\" \
+      --mount \"type=bind,source=${HOME}/.gnupg/private-keys-v1.d/FA5DE4470687D6D2ABBB530C4E56172E13A38854.key,target=/root/.gnupg/private-keys-v1.d/FA5DE4470687D6D2ABBB530C4E56172E13A38854.key\" \
+      --mount \"type=bind,source=${HOME}/.gnupg/devcon-public.asc,target=/root/.gnupg/devcon-public.asc\"" C-m
+  tmux send-keys -t "$session_name" "devcon exec --workspace-folder . $CONFIG_FLAG 'nvim' '--cmd' 'lua vim.g.sessionizer_devcon = true'" C-m
 fi
 
 if [ -z "$TMUX" ]; then

@@ -4,18 +4,6 @@ set -euo pipefail
 
 source /usr/local/share/devcontainer-helpers/utils.sh
 
-REPO="${REPO:-https://github.com/bbchk/personal_config.git}"
-TARGET_PATH="${TARGET_PATH:-/root/pers}"
-DOTFILES_DIR="${DOTFILES_DIR:-dotfiles}"
-BRANCH="${BRANCH:-main}"
-
-log "Importing gpg keys"
-chmod 700 /root/.gnupg
-gpg --import /root/.gnupg/devcon-public.asc
-gpg --list-keys --with-colons \
-    | awk -F: '/^fpr/{print $10":6:"; exit}' \
-    | gpg --import-ownertrust
-
 log "Cloning $REPO (branch: $BRANCH) into $TARGET_PATH..."
 git clone --depth=1 --branch "$BRANCH" "$REPO" "$TARGET_PATH"
 
