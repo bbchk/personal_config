@@ -136,3 +136,5 @@ if [[ "$CURRENT" == "[]" || "$CURRENT" == "@as []" ]]; then
   gsettings set org.gnome.settings-daemon.plugins.media-keys.custom-keybinding:$K2 binding '<Super>o'
 fi
 
+# disable flash sound for flameshot.sh
+sudo mv /usr/share/sounds/freedesktop/stereo/camera-shutter.oga /usr/share/sounds/freedesktop/stereo/camera-shutter-disabled.oga
