@@ -4,6 +4,13 @@ set -euo pipefail
 
 source /usr/local/share/devcontainer-helpers/utils.sh
 
+# log "Importing gpg keys"
+# chmod 700 /root/.gnupg
+# gpg --import /root/.gnupg/devcon-public.asc
+# gpg --list-keys --with-colons \
+#     | awk -F: '/^fpr/{print $10":6:"; exit}' \
+#     | gpg --import-ownertrust
+
 log "Decrypting secrets..."
 git -C "$HOME/pers" checkout -- .
 
