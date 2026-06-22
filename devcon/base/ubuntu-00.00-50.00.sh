@@ -22,11 +22,10 @@ PKGS=(
   libncurses-dev uuid-dev libssh2-1-dev libgit2-dev ruby-dev
 
   # Runtimes
-  openjdk-17-jdk lua5.4 luarocks
-  rbenv
+  lua5.4 luarocks
 
   # DevOps
-  ansible libarchive-tools oathtool
+  libarchive-tools oathtool
 
   # Editors/Shell
   fzf tree tmux zsh man-db
@@ -36,13 +35,7 @@ PKGS=(
   openfortivpn
 
   # Files/System
-  fd-find ripgrep zip unzip lsof stow
-
-  # Secrets / Keyring
-  libsecret-tools
-
-  # Java
-  maven
+  fd-find ripgrep zip unzip lsof
 )
 apt-get install -y "${PKGS[@]}" || true
 

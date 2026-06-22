@@ -1,9 +1,0 @@
-{
-  "name": "Nmv",
-  "id": "nvm",
-  "version": "1.0.0",
-  "description": "Provides nvm",
-  "dependsOn": {
-    "ghcr.io/bbchk/pers/helper:latest": {}
-  }
-}

@@ -1,4 +1,5 @@
 -- We don't want any directory scanning anymore?
+
 -- just open devcon inside a project that we open on host with sessionizer (we can revive old sessionizer implementation then, for every new devcon, we open sessinoizer that calls bash version of sessinizer.sh scritp)? 
 
 local M = {}
