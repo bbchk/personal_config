@@ -15,7 +15,7 @@ PKGS=(
   # Development Tools
   cmake pkg-config php-xdebug
   rustfmt isort libre2-dev libmysqlclient-dev meson
-  shellcheck expect
+  shellcheck expect xclip
 
   # Libraries
   libssl-dev libreadline-dev zlib1g-dev libyaml-dev libffi-dev libgdbm-dev
