@@ -47,15 +47,4 @@ pipx install neovim-remote
 NVR_SCRIPT="$TARGET_PATH/scripts/sudoedit-nvr"
 install -m 755 -o root -g root "$NVR_SCRIPT" "/usr/local/bin/sudoedit-nvr"
 
-log "Decrypting secrets..."
-git -C "$HOME/pers" checkout -- .
-
-log "Fixing SSH key permissions..."
-find "$TARGET_PATH/" -path '*/.ssh/*' -type f ! -name '*.pub' -exec chmod 600 {} + 2>/dev/null || true
-
-log "Copying sudoers to /etc/sudoers.d/sudoers..."
-CUSTOM_DIR="$DOTFILES_FULL/.custom/sys"
-cp "$CUSTOM_DIR/sudoers" /etc/sudoers.d/sudoers
-chmod 440 /etc/sudoers.d/sudoers
-
 log "personal-config feature install complete!"
