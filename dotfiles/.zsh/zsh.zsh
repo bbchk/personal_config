@@ -1,8 +1,4 @@
-# ------------------------------
-# zsh config ------------------------------
-
 autoload -Uz vcs_info compinit
-
 
 # Use cache for compinit (check only once per day)
 if [[ -n ${ZDOTDIR}/.zcompdump(#qNmh+24) ]]; then
@@ -25,11 +21,11 @@ RPROMPT='%B%F{155}%f%b'
 export FZF_DEFAULT_OPTS="--color=fg:white,bg:black,hl:155,fg+:white,bg+:black,hl+:214,prompt:white,pointer:214"
 
 export PATH="/usr/bin:$PATH"
-# export LD_LIBRARY_PATH="/usr/lib:$LD_LIBRARY_PATH"
 
 HISTFILE="${HOME}/.zsh_history"
 HISTSIZE=100000
 SAVEHIST=100000
+
 setopt SHARE_HISTORY
 setopt INC_APPEND_HISTORY
 setopt HIST_IGNORE_DUPS
@@ -47,41 +43,3 @@ export PATH="$HOME/.devcontainers/bin:$PATH"
 export PATH="$HOME/pers/scripts:$PATH"
 
 [[ "$TERM_PROGRAM" == "vscode" ]] && . "$(code --locate-shell-integration-path zsh)"
-
-docker() {
-  if [[ "$1" == "push" && "$2" == vsc-* ]]; then
-    echo "❌ Blocked: refusing to push dev container image '$2'" >&2
-    return 1
-  fi
-  command docker "$@"
-}
-
-# TODO: refactor later
-git() {
-    if [[ $1 == "clone" ]] || [[ $1 == "clonew" ]] || [[ $1 == "submodule" && $2 == "add" ]]; then
-        command git "$@"
-        local exit_code=$?
-
-        if [ $exit_code -eq 0 ]; then
-            local nvim_sockets=$(
-                find /tmp "${XDG_RUNTIME_DIR:-/run/user/$UID}" -name 'nvim.*.0' 2>/dev/null | sort -u
-            )
-
-            if [ -n "$nvim_sockets" ]; then
-                echo "🔄 Refreshing Neovim sessionizer cache..."
-                (
-                    echo "$nvim_sockets" | while read -r socket; do
-                        nvim --server "$socket" \
-                            --remote-send "<Cmd>lua local s=require('custom.sessionizer'); s.refresh_cache(); s.populate_cache({ quiet = true })<CR>" \
-                            2>/dev/null &
-                    done
-                    wait
-                ) &>/dev/null
-            fi
-        fi
-
-        return $exit_code
-    else
-        command git "$@"
-    fi
-}
