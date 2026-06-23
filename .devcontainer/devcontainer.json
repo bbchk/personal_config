@@ -14,6 +14,11 @@
     "TMUX": "${localEnv:TMUX}"
   },
   "features": {
+    "ghcr.io/rocker-org/devcontainer-features/common-utils:2": {},
+    "ghcr.io/rocker-org/devcontainer-features/apt-packages:1": {
+      "packages": "curl,nano",
+      "upgradePackages": "true"
+    },
     "ghcr.io/devcontainers/features/github-cli:1": {
       "installDirectlyFromGitHubRelease": true
     },
@@ -48,7 +53,6 @@
       "moby": false
     },
     "ghcr.io/bbchk/pers/helper:latest": {},
-    "ghcr.io/bbchk/pers/base:latest": {},
     "ghcr.io/bbchk/pers/neovim:latest": {
       "version": "v0.11.5"
     }
