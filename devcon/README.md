@@ -3,6 +3,8 @@
 - fix clipboard in devcon
   `:lua print(vim.inspect(vim.g.clipboard))`
 
+- fzf for devcontainer.json files, when mounting whole dev/
+
 - need C++ feature, see:
   https://github.com/devcontainer-community/devcontainer-features/tree/main/src/collection-c-cpp
   https://github.com/jakoch/cpp-devbox/tree/main
