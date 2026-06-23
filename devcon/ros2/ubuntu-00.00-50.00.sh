@@ -1,4 +1,4 @@
-#!/usr/bin/env zsh
+#!/usr/bin/env bash
 # shellcheck source=/dev/null
 
 source /usr/local/share/devcontainer-helpers/utils.sh
@@ -30,4 +30,4 @@ apt-get install -y ros-lyrical-desktop
 apt-get install -y ros-lyrical-ros-base
 
 # shellcheck source=/dev/null
-source /opt/ros/lyrical/setup.zsh
+source /opt/ros/lyrical/setup.bash

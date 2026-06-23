@@ -53,3 +53,6 @@ find "/root/pers/" -path '*/.ssh/*' -type f ! -name '*.pub' -exec chmod 600 {} +
 log "Copying sudoers..."
 cp "/root/pers/dotfiles/.custom/sys/sudoers" /etc/sudoers.d/sudoers
 chmod 440 /etc/sudoers.d/sudoers
+
+# TODO: 
+# source /opt/ros/lyrical/setup.bash
