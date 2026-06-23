@@ -1,4 +1,5 @@
 TODO:
+- kafka tools feature
 - need our own lua feature or use some
 - make clipboard work in the dev container
 - need C++ feature, see:
