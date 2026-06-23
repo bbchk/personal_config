@@ -1,7 +1,7 @@
 {
   "name": "Neovim",
   "id": "neovim",
-  "version": "1.0.10",
+  "version": "1.0.11",
   "description": "Provide neovim features for devcontainers",
   "options": {
     "version": {
@@ -10,9 +10,5 @@
       "default": "stable",
       "description": "Select the neovim version you want to install as present in GitHub Releases"
     }
-  },
-  "dependsOn": {
-    "ghcr.io/bbchk/pers/helper:latest": {},
-    "ghcr.io/bbchk/pers/dotfiles:latest": {}
   }
 }

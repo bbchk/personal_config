@@ -14,14 +14,25 @@
     "TMUX": "${localEnv:TMUX}"
   },
   "features": {
+    "ghcr.io/bbchk/pers/helper:latest": {},
+
+
     "ghcr.io/rocker-org/devcontainer-features/common-utils:2": {},
     "ghcr.io/rocker-org/devcontainer-features/apt-packages:1": {
       "packages": "curl,nano",
       "upgradePackages": "true"
     },
+
+
     "ghcr.io/devcontainers/features/github-cli:1": {
       "installDirectlyFromGitHubRelease": true
     },
+    "ghcr.io/devcontainers/features/docker-outside-of-docker:1": {
+      "version": "latest",
+      "moby": false
+    },
+
+
     "ghcr.io/devcontainers/features/go:1": {
       "version": "latest"
     },
@@ -48,11 +59,8 @@
       "installGroovy": false,
       "groovyVersion": "latest"
     },
-    "ghcr.io/devcontainers/features/docker-outside-of-docker:1": {
-      "version": "latest",
-      "moby": false
-    },
-    "ghcr.io/bbchk/pers/helper:latest": {},
+
+
     "ghcr.io/bbchk/pers/neovim:latest": {
       "version": "v0.11.5"
     }
