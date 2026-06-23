@@ -62,7 +62,9 @@
 
     "ghcr.io/bbchk/pers/neovim:latest": {
       "version": "v0.11.5"
-    }
+    },
+
+    "ghcr.io/bbchk/pers/ros2:latest": {}
   },
   "postCreateCommand": "/root/pers/devcon/postCreate.sh"
 }
