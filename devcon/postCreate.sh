@@ -54,5 +54,8 @@ log "Copying sudoers..."
 cp "/root/pers/dotfiles/.custom/sys/sudoers" /etc/sudoers.d/sudoers
 chmod 440 /etc/sudoers.d/sudoers
 
+log "Syncing Neovim plugins..."
+nvim --headless -c "Lazy! sync" -c "qa!" 2>/dev/null || true
+
 # TODO: 
 # source /opt/ros/lyrical/setup.bash
