@@ -11,7 +11,7 @@
 
 - create dev container setups for each development purpose (java, ros, c++, js, web, etc.)
 - also I would like to have fzf for devcontainers on which I want to open a particular project? or is it easier to just have a devcontaainers.json file on each pj I work on? copying them will be boresome
-- each devcon image takes ~5gb, image is created for each folder, even though it's same
+- each devcon image takes ~5gb, image is created for each folder, even though it's same, we can use ~/ as workspace
 
 - source ros2 in postCreate
 
