@@ -1,0 +1,14 @@
+{
+  "name": "Kafka",
+  "id": "kafka",
+  "version": "0.0.0",
+  "description": "Provide kafka tools for devcontainers",
+  "options": {
+    "version": {
+      "type": "string",
+      "proposals": ["TODO", "TODO"],
+      "default": "stable",
+      "description": "Select the kafka tools version"
+    }
+  }
+}

@@ -1,30 +1,38 @@
 TODO:
-- kafka tools feature
-- need our own lua feature or use some
-- make clipboard work in the dev container
+
+- fix clipboard in devcon
+  `:lua print(vim.inspect(vim.g.clipboard))`
+
 - need C++ feature, see:
-https://github.com/devcontainer-community/devcontainer-features/tree/main/src/collection-c-cpp
-https://github.com/devcontainer-community/devcontainer-features/tree/main/src/collection-c-cpp
-- need ros2 feature
-- implement gpg agent "warmpu" on startup script. 
-```bash
-Copy code
-echo "test" | gpg --batch -e -r E78A0D774F0BDAC50F897DC5FF99608021A353C0 | gpg --batch -d >/dev/null
+  https://github.com/devcontainer-community/devcontainer-features/tree/main/src/collection-c-cpp
+  https://github.com/jakoch/cpp-devbox/tree/main
+  https://github.com/microsoft/vscode-remote-try-cpp
+  https://github.com/vitaliy-ostapchuk93/cpp-dev-sandbox
+
 ```
-
-
-:lua print(vim.inspect(vim.g.clipboard))
-
-git config --global --add safe.directory /workspaces/<dir>
-
-> NB!: If all your projects live under one parent folder, you can open that parent folder in VS Code and define a single .devcontainer at the top level. All projects share one container.
-```
-workspace/
-├── .devcontainer/
-│   └── devcontainer.json
-├── project-a/
-├── project-b/
-└── project-c/
+{
+    "name": "collection-c-cpp",
+    "id": "collection-c-cpp",
+    "version": "1.0.3",
+    "description": "C/C++ dev collection \u2014 cmake, ninja, gdb, valgrind, ccache, cppcheck, clang-format, clang-tidy, distcc, vcpkg, build-essential",
+    "documentationURL": "https://github.com/devcontainer-community/devcontainer-features/tree/main/src/collection-c-cpp",
+    "dependsOn": {
+        "ghcr.io/devcontainer-community/devcontainer-features/cmake.org:latest": {},
+        "ghcr.io/devcontainer-community/devcontainer-features/ninja-build.org:latest": {},
+        "ghcr.io/devcontainer-community/devcontainer-features/sourceware.org-gdb:latest": {},
+        "ghcr.io/devcontainer-community/devcontainer-features/valgrind.org:latest": {},
+        "ghcr.io/devcontainer-community/devcontainer-features/ccache.dev:latest": {},
+        "ghcr.io/devcontainer-community/devcontainer-features/danmar-cppcheck:latest": {},
+        "ghcr.io/devcontainer-community/devcontainer-features/clang-format:latest": {},
+        "ghcr.io/devcontainer-community/devcontainer-features/clang-tidy:latest": {},
+        "ghcr.io/devcontainer-community/devcontainer-features/distcc.org:latest": {},
+        "ghcr.io/devcontainer-community/devcontainer-features/vcpkg.io:latest": {},
+        "ghcr.io/devcontainer-community/devcontainer-features/apt-build-essential:latest": {}
+    },
+    "installsAfter": [
+        "ghcr.io/devcontainer-community/devcontainer-features/ca-certificates:latest"
+    ]
+}
 ```
 
 ### Useful commands
@@ -51,6 +59,6 @@ workspace/
   --no-lockfile
 ```
 
-devcontainer read-configuration --workspace-folder $PWD --include-merged-configuration | jq
+`devcontainer read-configuration --workspace-folder $PWD --include-merged-configuration | jq`
 
-gpg --export --armor E78A0D774F0BDAC50F897DC5FF99608021A353C0 > ~/.gnupg/devcon-public.asc
+`gpg --export --armor E78A0D774F0BDAC50F897DC5FF99608021A353C0 > ~/.gnupg/devcon-public.asc`

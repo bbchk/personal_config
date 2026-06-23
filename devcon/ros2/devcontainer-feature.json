@@ -1,0 +1,14 @@
+{
+  "name": "ROS2",
+  "id": "ros2",
+  "version": "0.0.0",
+  "description": "Provide ros2",
+  "options": {
+    "version": {
+      "type": "string",
+      "proposals": ["TODO", "TODO"],
+      "default": "stable",
+      "description": "Select the ros2 version you want to install"
+    }
+  }
+}

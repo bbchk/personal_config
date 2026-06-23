@@ -1,0 +1,14 @@
+{
+  "name": "Lua",
+  "id": "lua",
+  "version": "0.0.0",
+  "description": "Provide lua features for devcontainers",
+  "options": {
+    "version": {
+      "type": "string",
+      "proposals": ["TODO", "TODO"],
+      "default": "stable",
+      "description": "Select the lua version"
+    }
+  }
+}
