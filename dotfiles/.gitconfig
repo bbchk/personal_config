@@ -85,4 +85,4 @@
 [user]
 	email = bohdan.buchok@internetbrands.com
 [safe]
-	directory = /workspaces/forno
+	directory = *
