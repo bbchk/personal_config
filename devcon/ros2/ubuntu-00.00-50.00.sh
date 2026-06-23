@@ -1,4 +1,4 @@
-#!/usr/bin/env bash
+#!/usr/bin/env zsh
 # shellcheck source=/dev/null
 
 source /usr/local/share/devcontainer-helpers/utils.sh
@@ -16,8 +16,6 @@ export LANG=en_US.UTF-8
 
 apt-get install -y software-properties-common
 add-apt-repository universe -y
-
-apt-get install -y curl
 
 ROS_APT_SOURCE_VERSION=$(curl -s https://api.github.com/repos/ros-infrastructure/ros-apt-source/releases/latest | grep -F "tag_name" | awk -F'"' '{print $4}')
 export ROS_APT_SOURCE_VERSION
