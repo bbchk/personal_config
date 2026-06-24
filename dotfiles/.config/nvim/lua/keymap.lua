@@ -27,6 +27,8 @@ u.keyset(
 	{ silent = true, desc = "Sessionizer: Refresh cache" }
 )
 
+u.keyset("t", "<Esc><Esc>", "<C-\\><C-n>", { desc = "Exit terminal insert mode" })
+
 -----------------------------------
 -- Window Management
 -----------------------------------
@@ -103,7 +105,7 @@ u.keyset("n", "<C-u>", "<C-u>zz")
 u.keyset("n", "n", "nzzzv")
 u.keyset("n", "N", "Nzzzv")
 
- -- Yank and paste without overwriting the register
+-- Yank and paste without overwriting the register
 u.keyset("x", "p", '"_dP')
 
 -- command for copying path to current buffer from root
