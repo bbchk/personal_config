@@ -18,3 +18,4 @@ scripts/ib_connect_vpn.sh filter=gpg diff=gpg
 xdg/Documents/notes/** filter=gpg diff=gpg
 
 TODO.md filter=gpg diff=gpg
+*gitlab* filter=gpg diff=gpg
