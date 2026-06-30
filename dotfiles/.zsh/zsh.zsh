@@ -1,4 +1,4 @@
-autoload -Uz vcs_info compinit
+autoload -Uz vcs_info compinit -u
 
 # Use cache for compinit (check only once per day)
 if [[ -n ${ZDOTDIR}/.zcompdump(#qNmh+24) ]]; then
