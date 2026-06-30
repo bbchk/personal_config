@@ -1,3 +1,36 @@
+### Naming convention for `definitions/*.json`
+
+Each file in `definitions/` is one selectable devcontainer. The filename is what
+shows up in the `sessionizer` fzf picker, so it doubles as documentation:
+
+```
+<codename>___<token>[-<ver>]_<token>[-<ver>]_...json
+```
+
+- `<codename>` — a memorable mascot for fast recognition in fzf (Ukrainian
+  programmer flavour). `___` (triple underscore) separates it from the stack.
+- `<token>` — short canonical id of a main dep/feature, joined by `_`.
+- `-<ver>` — pinned version (dots allowed, leading `v` dropped). Omit the
+  version when the feature tracks `latest`/rolling.
+- Order: editor first (`nvim`) → language runtimes → infra/tooling
+  (`docker`, `ros2`, `kafka`) last.
+
+Token vocabulary: `nvim go py node rb php java rust cpp lua docker ros2 kafka gh`
+
+Current definitions:
+
+| File | Codename means | Stack |
+|------|----------------|-------|
+| `normi___nvim.json` | personal everything-box | nvim + go, php, py, node, ruby, java, c++, ros2 |
+| `hovrakh___nvim-0.11.5_go_docker.json` | ховрах = gopher | nvim 0.11.5, go, docker |
+| `kapitoshka___nvim-0.11.5_node-26.3.1_docker.json` | Капітошка (cartoon) | nvim 0.11.5, node 26.3.1, docker |
+| `zmiy___nvim-0.11.5_py_node-26.3.1.json` | Змій = serpent | nvim 0.11.5, python, node 26.3.1 |
+| `koval___nvim-0.11.5_rust.json` | коваль = blacksmith | nvim 0.11.5, rust |
+| `kotyhoroshko___nvim-0.11.5_cpp.json` | Котигорошко (strongman) | nvim 0.11.5, c/c++ collection |
+
+> Every definition keeps `python3-pip`/`pipx` in its apt base — `postCreate.sh`
+> needs it for `pipx install neovim-remote`.
+
 ### TODO:
 
 - instead of mouning one folder, we should mount ~/dev, when on meta+f we are able to choose from different decontainer.json files stored ~/pers/devcon
