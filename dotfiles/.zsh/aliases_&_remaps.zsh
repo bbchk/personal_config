@@ -20,6 +20,8 @@ alias gs="git status"
 
 alias devcon="devcontainer"
 
+alias se="sudoedit"
+
 # ------------------------------
 # Remaps
 # ------------------------------
