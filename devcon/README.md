@@ -3,6 +3,7 @@
 Each file in `definitions/` is one selectable devcontainer. The filename is what
 shows up in the `sessionizer` fzf picker, so it doubles as documentation:
 
+
 ```
 <codename>___<token>[-<ver>]_<token>[-<ver>]_...json
 ```
@@ -51,6 +52,8 @@ Current definitions:
 - each devcon image takes ~5gb, image is created for each folder, even though it's same, we can use ~/ as workspace
 
 - source ros2 in postCreate
+
+- If we scope devcontainers by langs and features, we need to scope nvim config somehow as well, so we don't get any install errors, etc.
 
 ```
 {

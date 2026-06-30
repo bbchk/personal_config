@@ -1,7 +1,7 @@
 {
   "name": "hovrakh — Go backend (nvim, go, docker)",
   "build": {
-    "dockerfile": "../Dockerfile",
+    "dockerfile": "${localEnv:HOME}/pers/devcon/Dockerfile",
     "context": "${localEnv:HOME}"
   },
   "mounts": [

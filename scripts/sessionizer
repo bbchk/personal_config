@@ -9,8 +9,11 @@ if ! tmux ls &>/dev/null; then
 fi
 
 # $session is the picked definition file; use it as the devcontainer config.
-CONFIG_FLAG="--config $session"
-config_label=$(basename "$session" | sed 's/___.*//')
+tmp_dc_dir=$(mktemp -d)
+cp "$session" "$tmp_dc_dir/devcontainer.json"
+CONFIG_FLAG="--config $tmp_dc_dir/devcontainer.json"
+
+config_label=$(basename "$session" | sed 's/___.*//' | tr -c 'a-zA-Z0-9_-' '_')
 
 rand_num=$((RANDOM % 9000 + 1000))
 session_name="${config_label}_${rand_num}"
