@@ -57,4 +57,4 @@ chmod 440 /etc/sudoers.d/sudoers
 log "Syncing Neovim plugins..."
 nvim --headless -c "Lazy! sync" -c "qa!" 2>/dev/null || true
 
-# su ubuntu
+#TODO?: su ubuntu

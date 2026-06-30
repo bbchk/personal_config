@@ -1,5 +1,9 @@
 ### TODO:
 
+- instead of mouning one folder, we should mount ~/dev, when on meta+f we are able to choose from different decontainer.json files stored ~/pers/devcon
+
+- speed up devcontainer creation
+
 - fix clipboard in devcon
   `:lua print(vim.inspect(vim.g.clipboard))`
 

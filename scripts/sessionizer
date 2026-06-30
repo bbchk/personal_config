@@ -12,7 +12,7 @@ session_name=$(echo "$session" | tr './' '_')
 if ! tmux has-session -t "$session_name" 2>/dev/null; then
 
   LOCAL_DC_DIR="$session/.devcontainer"
-  GLOBAL_DC_CONFIG="$HOME/pers/.devcontainer/devcontainer.json"
+  GLOBAL_DC_CONFIG="$HOME/pers/devcon/definitions/devcontainer.json"
 
   if [ -d "$LOCAL_DC_DIR" ]; then
     CONFIG_FLAG=""

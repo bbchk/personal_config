@@ -1,7 +1,7 @@
 {
   "name": "nvim Container",
   "build": {
-    "dockerfile": "../devcon/Dockerfile",
+    "dockerfile": "../Dockerfile",
     "context": "${localEnv:HOME}"
   },
   "mounts": [
