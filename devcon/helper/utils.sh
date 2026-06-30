@@ -37,6 +37,12 @@ parse_installer_versions() {
 	echo "$bottomv" "$topv"
 }
 
+apt_cleanup() {
+	log "Cleaning apt cache and temp files (same layer)..."
+	apt-get clean
+	rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
+}
+
 source_matching_installer() {
 	read -r curr_os curr_os_version <<< "$(get_os_info)"
 	local matched=0
