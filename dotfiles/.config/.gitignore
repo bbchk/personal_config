@@ -1,4 +1,5 @@
 .gsd-keyboard.settings-ported
+calibre/*
 intelephense/*
 monitors.xml*
 helm
