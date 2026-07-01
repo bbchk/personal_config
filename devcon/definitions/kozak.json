@@ -18,16 +18,15 @@
     "ghcr.io/devcontainers/features/common-utils:2": {
       "username": "bchk",
       "userUid": "1000",
-      "userGid": "1000"
+      "userGid": "1000",
+      "installZsh": "true",
+      "installOhMyZsh": "true",
+      "configureZshAsDefaultShell": true
     },
-
-
     "ghcr.io/rocker-org/devcontainer-features/apt-packages:1": {
       "packages": "sudo,curl,git,make,gcc,g++,jq,gnupg,python3-pip,python3-venv,pipx,cmake,pkg-config,php-xdebug,rustfmt,isort,libre2-dev,libmysqlclient-dev,meson,shellcheck,expect,xclip,libssl-dev,libreadline-dev,zlib1g-dev,libyaml-dev,libffi-dev,libgdbm-dev,libncurses-dev,uuid-dev,libssh2-1-dev,libgit2-dev,ruby-dev,lua5.4,luarocks,libarchive-tools,oathtool,fzf,tree,tmux,zsh,man-db,traceroute,ncat,dnsutils,net-tools,nmap,openfortivpn,fd-find,ripgrep,zip,unzip,lsof,cppcheck",
       "upgradePackages": "true"
     },
-
-
     "ghcr.io/devcontainers/features/github-cli:1": {
       "installDirectlyFromGitHubRelease": true
     },
@@ -35,9 +34,6 @@
       "version": "latest",
       "moby": false
     },
-
-
-
     "ghcr.io/devcontainers/features/go:1": {
       "version": "latest"
     },
@@ -65,9 +61,6 @@
       "groovyVersion": "latest"
     },
     "ghcr.io/devcontainer-community/devcontainer-features/collection-c-cpp:1": {},
-
-
-
     "ghcr.io/bbchk/pers/neovim:latest": {
       "version": "v0.11.5"
     },
