@@ -1,5 +1,9 @@
 #!/usr/bin/env bash
 
+# Any args passed to this script are forwarded to `devcon up`
+# (e.g. --recreate-existing-container, --no-lockfile).
+EXTRA_UP_ARGS="$*"
+
 session=$(find ~/pers/devcon/definitions -mindepth 1 -maxdepth 1 -type f ! -name '.*' | fzf --border --delimiter='/' --with-nth='7..' --prompt="Devcon?: ")
 
 [ -z "$session" ] && exit 0
@@ -20,7 +24,7 @@ session_name="${config_label}_${rand_num}"
 
 if ! tmux has-session -t "$session_name" 2>/dev/null; then
   tmux new-session -s "$session_name" -c "$HOME/dev" -d
-  tmux send-keys -t "$session_name" "BUILDKIT_PROGRESS=plain devcon up --workspace-folder $HOME/dev/ $CONFIG_FLAG --log-level trace && devcon exec --workspace-folder $HOME/dev $CONFIG_FLAG 'nvim' '--cmd' 'lua vim.g.sessionizer_devcon = true'" C-m
+  tmux send-keys -t "$session_name" "BUILDKIT_PROGRESS=plain devcon up --workspace-folder $HOME/dev/ $CONFIG_FLAG $EXTRA_UP_ARGS --log-level trace && devcon exec --workspace-folder $HOME/dev $CONFIG_FLAG 'nvim' '--cmd' 'lua vim.g.sessionizer_devcon = true'" C-m
 fi
 
 if [ -z "$TMUX" ]; then

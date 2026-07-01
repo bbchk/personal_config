@@ -122,11 +122,13 @@ done
 log "Registering custom global shortcuts for Sessionizer and Flameshot."
 K1="/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/pers-sessionizer/"
 K2="/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/pers-flameshot/"
+K3="/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/pers-sessionizer-recreate/"
+K4="/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/pers-sessionizer-nolock/"
 
 CURRENT=$(gsettings get org.gnome.settings-daemon.plugins.media-keys custom-keybindings)
 
 if [[ "$CURRENT" == "[]" || "$CURRENT" == "@as []" ]]; then
-  gsettings set org.gnome.settings-daemon.plugins.media-keys custom-keybindings "['$K1', '$K2']"
+  gsettings set org.gnome.settings-daemon.plugins.media-keys custom-keybindings "['$K1', '$K2', '$K3', '$K4']"
   gsettings set org.gnome.settings-daemon.plugins.media-keys.custom-keybinding:$K1 name 'Sessionizer'
   gsettings set org.gnome.settings-daemon.plugins.media-keys.custom-keybinding:$K1 command "kitty -e $HOME/pers/scripts/sessionizer"
   gsettings set org.gnome.settings-daemon.plugins.media-keys.custom-keybinding:$K1 binding '<Super>f'
@@ -134,6 +136,14 @@ if [[ "$CURRENT" == "[]" || "$CURRENT" == "@as []" ]]; then
   gsettings set org.gnome.settings-daemon.plugins.media-keys.custom-keybinding:$K2 name 'Flameshot'
   gsettings set org.gnome.settings-daemon.plugins.media-keys.custom-keybinding:$K2 command "$HOME/pers/scripts/flameshot.sh"
   gsettings set org.gnome.settings-daemon.plugins.media-keys.custom-keybinding:$K2 binding '<Super>o'
+
+  gsettings set org.gnome.settings-daemon.plugins.media-keys.custom-keybinding:$K3 name 'Sessionizer (recreate container)'
+  gsettings set org.gnome.settings-daemon.plugins.media-keys.custom-keybinding:$K3 command "kitty -e $HOME/pers/scripts/sessionizer --recreate-existing-container"
+  gsettings set org.gnome.settings-daemon.plugins.media-keys.custom-keybinding:$K3 binding '<Shift><Super>f'
+
+  gsettings set org.gnome.settings-daemon.plugins.media-keys.custom-keybinding:$K4 name 'Sessionizer (no lockfile)'
+  gsettings set org.gnome.settings-daemon.plugins.media-keys.custom-keybinding:$K4 command "kitty -e $HOME/pers/scripts/sessionizer --no-lockfile"
+  gsettings set org.gnome.settings-daemon.plugins.media-keys.custom-keybinding:$K4 binding '<Control><Super>f'
 fi
 
 # disable flash sound for flameshot.sh
