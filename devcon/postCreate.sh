@@ -4,12 +4,6 @@ set -euo pipefail
 
 source /usr/local/share/devcontainer-helpers/utils.sh
 
-# This script now runs as the non-root user "bchk" (see remoteUser in the
-# definitions). updateRemoteUserUID syncs bchk's uid/gid to the host user that
-# owns the bind-mounted ~/pers, so completion dirs are no longer flagged by
-# compaudit. Privileged steps below go through passwordless sudo (granted to
-# bchk by the common-utils feature).
-
 log "Setting default shell to zsh..."
 [[ "$SHELL" == */zsh ]] || sudo usermod -s "$(command -v zsh)" "$(id -un)"
 
@@ -19,10 +13,8 @@ while IFS= read -r -d '' item; do
   base_item_name=$(basename "$item")
   target="$HOME/$base_item_name"
 
-  # Skip dot-custom (system-level files handled separately below)
   [[ "$base_item_name" == ".custom" ]] && continue
 
-  # Skip if already correctly linked
   [[ -L "$target" && "$(readlink "$target")" == "$item" ]] && continue
 
   log "Linking $item -> $target"
@@ -36,6 +28,7 @@ NVR_SCRIPT="$HOME/pers/scripts/sudoedit-nvr"
 sudo install -m 755 -o root -g root "$NVR_SCRIPT" "/usr/local/bin/sudoedit-nvr"
 
 log "Importing gpg keys..."
+
 # The .gnupg dir is created by the bind mounts as root; take ownership of the
 # dir itself (not -R, so we don't touch the mounted socket/key files).
 sudo chown "$(id -u):$(id -g)" "$HOME/.gnupg"
