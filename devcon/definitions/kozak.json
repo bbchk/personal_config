@@ -6,16 +6,20 @@
   },
   "mounts": [
     "source=/var/run/docker.sock,target=/var/run/docker.sock,type=bind",
-    "source=${localEnv:XDG_RUNTIME_DIR}/gnupg/S.gpg-agent.extra,target=/root/.gnupg/S.gpg-agent,type=bind",
-    "source=${localEnv:HOME}/pers,target=/root/pers,type=bind",
-    "source=${localEnv:HOME}/.gnupg/devcon-public.asc,target=/root/.gnupg/devcon-public.asc,type=bind"
+    "source=${localEnv:XDG_RUNTIME_DIR}/gnupg/S.gpg-agent.extra,target=/home/bchk/.gnupg/S.gpg-agent,type=bind",
+    "source=${localEnv:HOME}/pers,target=/home/bchk/pers,type=bind",
+    "source=${localEnv:HOME}/.gnupg/devcon-public.asc,target=/home/bchk/.gnupg/devcon-public.asc,type=bind"
   ],
   "remoteEnv": {
     "TMUX": "${localEnv:TMUX}"
   },
   "features": {
     "ghcr.io/bbchk/pers/helper:latest": {},
-    "ghcr.io/devcontainers/features/common-utils:2": {},
+    "ghcr.io/devcontainers/features/common-utils:2": {
+      "username": "bchk",
+      "userUid": "1000",
+      "userGid": "1000"
+    },
 
 
     "ghcr.io/rocker-org/devcontainer-features/apt-packages:1": {
@@ -69,5 +73,7 @@
     },
     "ghcr.io/bbchk/pers/ros2:latest": {}
   },
-  "postCreateCommand": "/root/pers/devcon/postCreate.sh"
+  "remoteUser": "bchk",
+  "updateRemoteUserUID": true,
+  "postCreateCommand": "/home/bchk/pers/devcon/postCreate.sh"
 }

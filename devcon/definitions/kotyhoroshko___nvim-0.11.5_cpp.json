@@ -6,16 +6,20 @@
   },
   "mounts": [
     "source=/var/run/docker.sock,target=/var/run/docker.sock,type=bind",
-    "source=${localEnv:XDG_RUNTIME_DIR}/gnupg/S.gpg-agent.extra,target=/root/.gnupg/S.gpg-agent,type=bind",
-    "source=${localEnv:HOME}/pers,target=/root/pers,type=bind",
-    "source=${localEnv:HOME}/.gnupg/devcon-public.asc,target=/root/.gnupg/devcon-public.asc,type=bind"
+    "source=${localEnv:XDG_RUNTIME_DIR}/gnupg/S.gpg-agent.extra,target=/home/bchk/.gnupg/S.gpg-agent,type=bind",
+    "source=${localEnv:HOME}/pers,target=/home/bchk/pers,type=bind",
+    "source=${localEnv:HOME}/.gnupg/devcon-public.asc,target=/home/bchk/.gnupg/devcon-public.asc,type=bind"
   ],
   "remoteEnv": {
     "TMUX": "${localEnv:TMUX}"
   },
   "features": {
     "ghcr.io/bbchk/pers/helper:latest": {},
-    "ghcr.io/devcontainers/features/common-utils:2": {},
+    "ghcr.io/devcontainers/features/common-utils:2": {
+      "username": "bchk",
+      "userUid": "1000",
+      "userGid": "1000"
+    },
     "ghcr.io/rocker-org/devcontainer-features/apt-packages:1": {
       "packages": "sudo,curl,git,make,gcc,g++,jq,gnupg,python3-pip,python3-venv,pipx,cmake,pkg-config,meson,shellcheck,expect,xclip,libssl-dev,libreadline-dev,zlib1g-dev,libffi-dev,lua5.4,luarocks,libarchive-tools,oathtool,fzf,tree,tmux,zsh,man-db,traceroute,ncat,dnsutils,net-tools,nmap,openfortivpn,fd-find,ripgrep,zip,unzip,lsof,cppcheck",
       "upgradePackages": "true"
@@ -28,5 +32,7 @@
       "version": "v0.11.5"
     }
   },
-  "postCreateCommand": "/root/pers/devcon/postCreate.sh"
+  "remoteUser": "bchk",
+  "updateRemoteUserUID": true,
+  "postCreateCommand": "/home/bchk/pers/devcon/postCreate.sh"
 }
