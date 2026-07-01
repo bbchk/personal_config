@@ -10,5 +10,8 @@
       "default": "stable",
       "description": "Select the neovim version you want to install as present in GitHub Releases"
     }
+  },
+  "dependsOn": {
+    "ghcr.io/bbchk/pers/helper:latest": {}
   }
 }

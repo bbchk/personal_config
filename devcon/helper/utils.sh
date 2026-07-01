@@ -40,7 +40,16 @@ parse_installer_versions() {
 apt_cleanup() {
 	log "Cleaning apt cache and temp files (same layer)..."
 	apt-get clean
-	rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
+	rm -rf /var/lib/apt/lists/* /var/tmp/*
+	# During builds /tmp holds two CLI-managed paths we must not touch:
+	#   build-features-src   - the read-only feature-source bind mount
+	#   dev-container-features - shared across feature RUN layers; deleting it
+	#                            makes the next feature's `cp` rename-collapse
+	#                            and its chmod fail (No such file or directory).
+	# Skip both and ignore failures on anything else that can't be removed.
+	find /tmp -mindepth 1 -maxdepth 1 \
+		! -name 'build-features-src' ! -name 'dev-container-features' \
+		-exec rm -rf {} + 2>/dev/null || true
 }
 
 source_matching_installer() {

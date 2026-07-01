@@ -10,5 +10,8 @@
       "default": "stable",
       "description": "Select the ros2 version you want to install"
     }
+  },
+  "dependsOn": {
+    "ghcr.io/bbchk/pers/helper:latest": {}
   }
 }

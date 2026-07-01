@@ -1,6 +1,6 @@
 {
   "name": "Helper",
   "id": "helper",
-  "version": "1.0.4",
+  "version": "1.0.6",
   "description": "Provide helper features for devcontainers"
 }
