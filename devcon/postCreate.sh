@@ -39,8 +39,11 @@ log "Customizing sudoers..."
 sudo install -m 440 -o root -g root "$HOME/pers/dotfiles/.custom/sys/sudoers" /etc/sudoers.d/sudoers
 
 log "Dancing around Nvim plugins..."
-# Fixing bind root mount
-sudo chown "$(id -u):$(id -g)" "$HOME/.local/share/nvim"
+# The nvim volume mounts at ~/.local/share/nvim; Docker creates the parent
+# chain (~/.local, ~/.local/share) root-owned, which blocks nvim from making
+# siblings like ~/.local/state. Take ownership of the parents (non-recursive,
+# so we don't churn the whole volume) plus the volume root itself.
+sudo chown "$(id -u):$(id -g)" "$HOME/.local" "$HOME/.local/share" "$HOME/.local/share/nvim"
 nvim --headless -c "Lazy! restore" -c "qa!" 2>/dev/null || true
 
 log "postCreate complete"
