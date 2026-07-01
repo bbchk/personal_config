@@ -76,3 +76,37 @@ push-$(call name,$(1)):
 endef
 
 $(foreach d,$(DEFINITIONS),$(eval $(call IMAGE_template,$(d))))
+
+
+
+# ● The Makefile works. Verified via dry-run: it auto-discovers all 6 definitions, derives image names from the persona (part before ___), and emits correct devcontainer build invocations.
+#   
+#   What I built
+#
+#   devcon/Makefile — builds one image per definitions/*.json using the devcontainer CLI.
+#
+#   Targets:
+#   - make build / make push — all images (push = build + --push)
+#   - make build-<name> / make push-<name> — single image (e.g. push-zmiy)
+#   - make list — shows the definition → image-name mapping
+#   - make help — default target, summary + current vars
+#
+#   Image naming: definitions/zmiy___nvim-0.11.5_py_node-26.3.1.json → ghcr.io/bbchk/pers/devcon-zmiy:latest. The ___tags suffix is stripped so the tag string in the filename can change without changing the image name.
+#
+#   Overridable vars (for CI):
+#   - REGISTRY (default ghcr.io/bbchk/pers), IMAGE_PREFIX (devcon-), TAG (latest)
+#   - PLATFORM (linux/amd64 — single-arch, per your README note #6)
+#   - WORKSPACE_FOLDER ($HOME), BUILD_ARGS (forwards --no-cache, --cache-from, etc.)
+#
+#   CI usage:
+#   make -C devcon push TAG=$GIT_SHA
+#   make -C devcon push-zmiy
+#
+#   Two things to flag
+#
+#   1. Checkout location constraint (not introduced by the Makefile). The definitions hardcode dockerfile: ${localEnv:HOME}/pers/devcon/Dockerfile and context: ${localEnv:HOME}. So in CI the repo must sit at $HOME/pers, or you
+#   override HOME for the build step. This is an existing property of your definitions — I documented it in the Makefile header but didn't change the definitions.
+#   2. Features vs. images are separate concerns. This Makefile builds the devcontainer images. Your features (helper, neovim, ros2, lua, kafka) are published separately via devcontainer features publish — and the images depend
+#   on those features being published first (ghcr.io/bbchk/pers/neovim:latest, etc.).
+#
+#   Want me to add a features-publish target too, so CI can do features-then-images in order? And/or scaffold the GitHub Actions workflow (your README TODO #3) that calls these targets?
