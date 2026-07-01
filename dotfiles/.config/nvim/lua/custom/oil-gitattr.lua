@@ -70,7 +70,7 @@ function M.highlight_buffer(bufnr)
     local cleaned = line:gsub("[^%g%s]", ""):gsub("^/%d+%s+", ""):gsub("^%s+", ""):gsub("/$", "")
     if cleaned ~= "" and gpg_names[cleaned] then
         vim.api.nvim_buf_set_extmark(bufnr, ns, i - 1, 0, {
-          virt_text = { { "🔒", "OilGpgFilter" } },
+          virt_text = { { "🗝", "OilGpgFilter" } },
           virt_text_pos = "eol",
           line_hl_group = "OilGpgFilter",
           priority = 100,
