@@ -13,7 +13,7 @@ vim.g.maplocalleader = " "
 
 u.keyset("i", "jk", "<ESC>")
 
-u.keyset("n", "<esc><esc>", "<CMD>nohlsearch<CR>", { silent = true })
+-- u.keyset("n", "<esc><esc>", "<CMD>nohlsearch<CR>", { silent = true })
 
 u.keyset("n", "<leader>q", "<CMD>q!<CR>")
 
@@ -27,7 +27,12 @@ u.keyset(
 	{ silent = true, desc = "Sessionizer: Refresh cache" }
 )
 
-u.keyset("t", "<Esc><Esc>", "<C-\\><C-n>", { desc = "Exit terminal insert mode" })
+
+-- u.keyset("n", "<esc>", "<CMD>nohlsearch<CR>", { silent = true })
+-- u.keyset("t", "<Esc><Esc>", "<C-\\><C-n>", { desc = "Exit terminal insert mode" })
+
+-- u.keyset("t", "<C-space>", "<C-\\><C-n>", { desc = "Exit terminal insert mode" })
+-- u.keyset("t", "<C-[><C-[>", "<C-\\><C-n>", { desc = "Exit terminal insert mode" })
 
 -----------------------------------
 -- Window Management
