@@ -13,9 +13,14 @@ if ! tmux ls &>/dev/null; then
 fi
 
 # $session is the picked definition file; use it as the devcontainer config.
-tmp_dc_dir=$(mktemp -d)
-cp "$session" "$tmp_dc_dir/devcontainer.json"
-CONFIG_FLAG="--config $tmp_dc_dir/devcontainer.json"
+# Stable per-persona dir (not mktemp): keeps the devcontainer.config_file label
+# constant across launches so `devcon up` reuses the existing container instead
+# of creating a new one every time (~0.3s vs ~10-30s). Overwrite so edits to the
+# definition still propagate; pass --remove-existing-container to force a fresh one.
+dc_dir="${XDG_CACHE_HOME:-$HOME/.cache}/devcon/$(basename "$session" .json)"
+mkdir -p "$dc_dir"
+cp "$session" "$dc_dir/devcontainer.json"
+CONFIG_FLAG="--config $dc_dir/devcontainer.json"
 
 config_label=$(basename "$session" | sed 's/___.*//' | tr -c 'a-zA-Z0-9_-' '_')
 
