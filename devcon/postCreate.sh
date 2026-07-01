@@ -29,8 +29,6 @@ pipx install neovim-remote
 NVR_SCRIPT="/root/pers/scripts/sudoedit-nvr"
 install -m 755 -o root -g root "$NVR_SCRIPT" "/usr/local/bin/sudoedit-nvr"
 
-echo 'skip_global_compinit=1' >>/etc/zsh/zshenv
-
 log "Importing gpg keys..."
 chmod 700 /root/.gnupg
 
