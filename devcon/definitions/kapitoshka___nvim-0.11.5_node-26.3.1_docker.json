@@ -8,7 +8,8 @@
     "source=/var/run/docker.sock,target=/var/run/docker.sock,type=bind",
     "source=${localEnv:XDG_RUNTIME_DIR}/gnupg/S.gpg-agent.extra,target=/home/bchk/.gnupg/S.gpg-agent,type=bind",
     "source=${localEnv:HOME}/pers,target=/home/bchk/pers,type=bind",
-    "source=${localEnv:HOME}/.gnupg/devcon-public.asc,target=/home/bchk/.gnupg/devcon-public.asc,type=bind"
+    "source=${localEnv:HOME}/.gnupg/devcon-public.asc,target=/home/bchk/.gnupg/devcon-public.asc,type=bind",
+    "source=devcon-nvim-data,target=/home/bchk/.local/share/nvim,type=volume"
   ],
   "remoteEnv": {
     "TMUX": "${localEnv:TMUX}"
