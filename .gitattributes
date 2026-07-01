@@ -19,3 +19,5 @@ xdg/Documents/notes/** filter=gpg diff=gpg
 
 TODO.md filter=gpg diff=gpg
 *gitlab* filter=gpg diff=gpg
+
+.github/workflows/devcon.yml filter=gpg diff=gpg

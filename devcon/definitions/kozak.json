@@ -40,7 +40,9 @@
     "ghcr.io/devcontainers/features/php:1": {
       "version": "latest"
     },
-    "ghcr.io/devcontainers/features/python:1": {},
+    "ghcr.io/devcontainers/features/python:1": {
+      "toolsToInstall": "neovim-remote"
+    },
     "ghcr.io/devcontainers/features/node:2": {
       "version": "26.3.1",
       "npmVersion": "11.17.0",

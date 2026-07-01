@@ -27,6 +27,11 @@ DEVCONTAINER   ?= devcontainer
 # Extra flags forwarded to `devcontainer build` (e.g. --no-cache, --cache-from).
 BUILD_ARGS     ?=
 
+# Features publish to <FEATURE_REGISTRY>/<FEATURE_NAMESPACE>/<id> — the images
+# above consume ghcr.io/bbchk/pers/<id>, so features must be published first.
+FEATURE_REGISTRY  ?= ghcr.io
+FEATURE_NAMESPACE ?= bbchk/pers
+
 # ---- discovery -------------------------------------------------------------
 DEFINITIONS := $(wildcard definitions/*.json)
 # persona name = filename stem, truncated at the first "___"
@@ -34,25 +39,38 @@ name  = $(firstword $(subst ___, ,$(basename $(notdir $(1)))))
 image = $(REGISTRY)/$(IMAGE_PREFIX)$(call name,$(1)):$(TAG)
 NAMES := $(foreach d,$(DEFINITIONS),$(call name,$(d)))
 
+# feature dirs = any subdir holding a devcontainer-feature.json (helper, neovim, ...)
+FEATURE_NAMES := $(patsubst %/,%,$(dir $(wildcard */devcontainer-feature.json)))
+
 # ---- meta targets ----------------------------------------------------------
 .DEFAULT_GOAL := help
-.PHONY: help list build push $(addprefix build-,$(NAMES)) $(addprefix push-,$(NAMES))
+.PHONY: help list build push features-publish \
+	$(addprefix build-,$(NAMES)) $(addprefix push-,$(NAMES)) \
+	$(addprefix features-publish-,$(FEATURE_NAMES)) \
+	$(addprefix bump-,$(FEATURE_NAMES))
 
 help: ## Show this help
 	@echo "devcontainer image builds — targets:"
-	@echo "  make build           build all images locally"
-	@echo "  make push            build + push all images"
-	@echo "  make build-<name>    build a single image (e.g. build-zmiy)"
-	@echo "  make push-<name>     build + push a single image"
-	@echo "  make list            list discovered definitions -> image names"
+	@echo "  make build                    build all images locally"
+	@echo "  make push                     build + push all images"
+	@echo "  make build-<name>             build a single image (e.g. build-zmiy)"
+	@echo "  make push-<name>              build + push a single image"
+	@echo "  make features-publish         publish all features (do this before push)"
+	@echo "  make features-publish-<name>  publish a single feature (e.g. neovim)"
+	@echo "  make list                     list definitions/features -> targets"
 	@echo ""
-	@echo "vars: REGISTRY=$(REGISTRY) IMAGE_PREFIX=$(IMAGE_PREFIX) TAG=$(TAG) PLATFORM=$(PLATFORM)"
+	@echo "images:   REGISTRY=$(REGISTRY) IMAGE_PREFIX=$(IMAGE_PREFIX) TAG=$(TAG) PLATFORM=$(PLATFORM)"
+	@echo "features: $(FEATURE_REGISTRY)/$(FEATURE_NAMESPACE)/<id>"
 
 list: ## List definitions and the image each maps to
-	@$(foreach d,$(DEFINITIONS),printf '%-55s -> %s\n' '$(d)' '$(call image,$(d))';)
+	@echo "images:"
+	@$(foreach d,$(DEFINITIONS),printf '  %-55s -> %s\n' '$(d)' '$(call image,$(d))';)
+	@echo "features:"
+	@$(foreach f,$(FEATURE_NAMES),printf '  %-55s -> %s\n' '$(f)/' '$(FEATURE_REGISTRY)/$(FEATURE_NAMESPACE)/$(f)';)
 
 build: $(addprefix build-,$(NAMES)) ## Build every image locally
 push:  $(addprefix push-,$(NAMES))  ## Build + push every image
+features-publish: $(addprefix features-publish-,$(FEATURE_NAMES)) ## Publish every feature
 
 # ---- per-definition rules (generated) --------------------------------------
 # $(1) = definition path. Defines build-<name> and push-<name>.
@@ -76,6 +94,32 @@ push-$(call name,$(1)):
 endef
 
 $(foreach d,$(DEFINITIONS),$(eval $(call IMAGE_template,$(d))))
+
+# ---- per-feature rules (generated) -----------------------------------------
+# $(1) = feature dir name. Publishes <FEATURE_REGISTRY>/<FEATURE_NAMESPACE>/<id>.
+# Auto-bumps the patch version in the feature's devcontainer-feature.json first,
+# so every publish lands a fresh, monotonically increasing version. Set
+# BUMP=0 to publish the existing version as-is (e.g. re-runs / dry checks).
+BUMP ?= 1
+define FEATURE_template
+features-publish-$(1): bump-$(1)
+	$$(DEVCONTAINER) features publish \
+		--registry "$$(FEATURE_REGISTRY)" \
+		--namespace "$$(FEATURE_NAMESPACE)" \
+		"$(1)"
+
+bump-$(1):
+	@[ "$$(BUMP)" = "0" ] && exit 0; \
+	f="$(1)/devcontainer-feature.json"; \
+	cur=$$$$(jq -r '.version' "$$$$f"); \
+	new=$$$$(echo "$$$$cur" | awk -F. 'NF==3{printf "%d.%d.%d",$$$$1,$$$$2,$$$$3+1}'); \
+	[ -n "$$$$new" ] || { echo "$$$$f: version '$$$$cur' is not X.Y.Z" >&2; exit 1; }; \
+	tmp=$$$$(mktemp); \
+	jq --arg v "$$$$new" '.version=$$$$v' "$$$$f" > "$$$$tmp" && mv "$$$$tmp" "$$$$f"; \
+	echo "$(1): bumped $$$$cur -> $$$$new"
+endef
+
+$(foreach f,$(FEATURE_NAMES),$(eval $(call FEATURE_template,$(f))))
 
 
 

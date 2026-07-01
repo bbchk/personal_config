@@ -16,4 +16,3 @@ FROM ubuntu:26.04@sha256:53958ec7b67c2c9355df922dd08dbf0360611f8c3cdb656875e8187
 ```
 
 To update the image digest, run `docker buildx imagetools inspect ubuntu:<tag>` to see latest sha on the tag and then update the sha.
-

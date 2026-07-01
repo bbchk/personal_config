@@ -4,9 +4,6 @@ set -euo pipefail
 
 source /usr/local/share/devcontainer-helpers/utils.sh
 
-log "Setting default shell to zsh..."
-[[ "$SHELL" == */zsh ]] || sudo usermod -s "$(command -v zsh)" "$(id -un)"
-
 log "Scanning $HOME/pers/dotfiles for items to symlink into $HOME..."
 DOTFILES_FULL="$HOME/pers/dotfiles"
 while IFS= read -r -d '' item; do
@@ -23,19 +20,13 @@ while IFS= read -r -d '' item; do
 done < <(find "$DOTFILES_FULL" -maxdepth 1 -mindepth 1 -print0)
 
 log "Installing neovim-remote"
-pipx install neovim-remote
-NVR_SCRIPT="$HOME/pers/scripts/sudoedit-nvr"
-sudo install -m 755 -o root -g root "$NVR_SCRIPT" "/usr/local/bin/sudoedit-nvr"
+sudo install -m 755 -o root -g root "$HOME/pers/scripts/sudoedit-nvr" "/usr/local/bin/sudoedit-nvr"
 
 log "Importing gpg keys..."
-
-# The .gnupg dir is created by the bind mounts as root; take ownership of the
-# dir itself (not -R, so we don't touch the mounted socket/key files).
-sudo chown "$(id -u):$(id -g)" "$HOME/.gnupg"
-chmod 700 "$HOME/.gnupg"
-
-# Prevent GPG from trying to start its own agent.
-# The host agent is forwarded via the mounted socket.
+# The .gnupg dir is created by the bind mounts as root
+sudo install -d -o "$(id -u)" -g "$(id -g)" -m 700 "$HOME/.gnupg"
+ 
+# The agent is forwarded from host machine via the mounted socket instead
 echo "no-autostart" >>"$HOME/.gnupg/gpg.conf"
 
 gpg --import "$HOME/.gnupg/devcon-public.asc"
