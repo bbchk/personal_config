@@ -23,5 +23,7 @@ apt-get update
 apt-get install -y ros-lyrical-desktop
 apt-get install -y ros-lyrical-ros-base
 
+apt-get install -y ros-dev-tools
+
 # shellcheck source=/dev/null
 source /opt/ros/lyrical/setup.bash
