@@ -79,7 +79,7 @@ return {
 			if in_container then
 				return "env: 🛳"
 			end
-			return "env: 🖳"
+			return "env: 🏝"
 		end
 
 		-- lualine_x: shows whether connected via VPN (ppp0) or home network
@@ -91,7 +91,7 @@ return {
 			if result == "vpn" then
 				return "net: 🖧"
 			end
-			return "net: 🖳"
+			return "net: 🖥"
 		end
 
 		-- lualine_z: current time
