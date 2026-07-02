@@ -27,7 +27,6 @@ require("core.terminal")
 require("core.tabs")
 require("core.clipboard")
 
-require("custom.sessionizer")
 require("custom.devcontainer")
 
 require("options")
