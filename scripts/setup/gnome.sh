@@ -124,11 +124,12 @@ K1="/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/pers-sessio
 K2="/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/pers-flameshot/"
 K3="/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/pers-sessionizer-recreate/"
 K4="/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/pers-sessionizer-nolock/"
+K5="/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/pers-sessionizer-remove-nolock/"
 
 CURRENT=$(gsettings get org.gnome.settings-daemon.plugins.media-keys custom-keybindings)
 
 if [[ "$CURRENT" == "[]" || "$CURRENT" == "@as []" ]]; then
-  gsettings set org.gnome.settings-daemon.plugins.media-keys custom-keybindings "['$K1', '$K2', '$K3', '$K4']"
+  gsettings set org.gnome.settings-daemon.plugins.media-keys custom-keybindings "['$K1', '$K2', '$K3', '$K4', '$K5']"
   gsettings set org.gnome.settings-daemon.plugins.media-keys.custom-keybinding:$K1 name 'Sessionizer'
   gsettings set org.gnome.settings-daemon.plugins.media-keys.custom-keybinding:$K1 command "kitty -e $HOME/pers/scripts/sessionizer"
   gsettings set org.gnome.settings-daemon.plugins.media-keys.custom-keybinding:$K1 binding '<Super>f'
@@ -144,6 +145,10 @@ if [[ "$CURRENT" == "[]" || "$CURRENT" == "@as []" ]]; then
   gsettings set org.gnome.settings-daemon.plugins.media-keys.custom-keybinding:$K4 name 'Sessionizer (no lockfile)'
   gsettings set org.gnome.settings-daemon.plugins.media-keys.custom-keybinding:$K4 command "kitty -e $HOME/pers/scripts/sessionizer --no-lockfile"
   gsettings set org.gnome.settings-daemon.plugins.media-keys.custom-keybinding:$K4 binding '<Control><Super>f'
+
+  gsettings set org.gnome.settings-daemon.plugins.media-keys.custom-keybinding:$K5 name 'Sessionizer (remove container, no lockfile)'
+  gsettings set org.gnome.settings-daemon.plugins.media-keys.custom-keybinding:$K5 command "kitty -e $HOME/pers/scripts/sessionizer --remove-existing-container --no-lockfile"
+  gsettings set org.gnome.settings-daemon.plugins.media-keys.custom-keybinding:$K5 binding '<Control><Shift><Super>f'
 fi
 
 # disable flash sound for flameshot.sh
