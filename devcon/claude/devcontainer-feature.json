@@ -1,9 +1,0 @@
-{
-  "name": "claude code cli",
-  "id": "claude-cli",
-  "version": "0.0.0",
-  "description": "Provide claude code",
-  "dependsOn": {
-    "ghcr.io/bbchk/pers/helper:latest": {}
-  }
-}
