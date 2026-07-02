@@ -1,0 +1,6 @@
+{
+  "features": {
+    "ghcr.io/devcontainer-community/devcontainer-features/collection-c-cpp:1": {},
+    "ghcr.io/bbchk/pers/ros2:latest": {}
+  }
+}
