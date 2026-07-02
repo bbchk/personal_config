@@ -23,9 +23,13 @@ apt-get update
 
 apt-get install -y ros-lyrical-desktop
 apt-get install -y ros-lyrical-ros-base
-apt-get install -y ros-distro-turtulesim
+apt-get install -y ros-lyrical-turtlesim
 
 apt-get install -y ros-dev-tools
+
+# Qt xcb platform plugin needs libxcb-cursor0 (Qt >= 6.5) to open GUI windows
+# such as turtlesim / rviz / rqt when forwarding X11 from the host.
+apt-get install -y libxcb-cursor0
 
 # shellcheck source=/dev/null
 source /opt/ros/lyrical/setup.bash

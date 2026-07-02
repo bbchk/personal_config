@@ -4,16 +4,18 @@
     "dockerfile": "${localEnv:HOME}/pers/devcon/Dockerfile",
     "context": "${localEnv:HOME}"
   },
-  "initializeCommand": "gpgconf --launch gpg-agent",
+  "initializeCommand": "gpgconf --launch gpg-agent; xhost +SI:localuser:$(id -un) >/dev/null 2>&1 || true",
   "mounts": [
     "source=/var/run/docker.sock,target=/var/run/docker.sock,type=bind",
     "source=${localEnv:XDG_RUNTIME_DIR}/gnupg/S.gpg-agent.extra,target=/home/bchk/.gnupg/S.gpg-agent,type=bind",
     "source=${localEnv:HOME}/pers,target=/home/bchk/pers,type=bind",
     "source=${localEnv:HOME}/.gnupg/devcon-public.asc,target=/home/bchk/.gnupg/devcon-public.asc,type=bind",
-    "source=devcon-nvim-data,target=/home/bchk/.local/share/nvim,type=volume"
+    "source=devcon-nvim-data,target=/home/bchk/.local/share/nvim,type=volume",
+    "source=/tmp/.X11-unix,target=/tmp/.X11-unix,type=bind"
   ],
   "remoteEnv": {
-    "TMUX": "${localEnv:TMUX}"
+    "TMUX": "${localEnv:TMUX}",
+    "DISPLAY": "${localEnv:DISPLAY}"
   },
   "features": {
     "ghcr.io/bbchk/pers/helper:latest": {},
