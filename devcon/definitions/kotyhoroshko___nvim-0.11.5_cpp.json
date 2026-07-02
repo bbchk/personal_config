@@ -12,9 +12,6 @@
     "source=${localEnv:HOME}/.gnupg/devcon-public.asc,target=/home/bchk/.gnupg/devcon-public.asc,type=bind",
     "source=devcon-nvim-data,target=/home/bchk/.local/share/nvim,type=volume"
   ],
-  "remoteEnv": {
-    "TMUX": "${localEnv:TMUX}"
-  },
   "features": {
     "ghcr.io/bbchk/pers/helper:latest": {},
     "ghcr.io/devcontainers/features/common-utils:2": {

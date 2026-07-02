@@ -1,8 +1,13 @@
 #!/usr/bin/env bash
 
-# Any args passed to this script are forwarded to `devcon up`
+# Any args passed to this script are forwarded to `devcontainer up`
 # (e.g. --recreate-existing-container, --no-lockfile).
 EXTRA_UP_ARGS="$*"
+
+# The devcontainer CLI lives here. `devcon` is only a zsh alias, and this script
+# may run outside an interactive shell (GNOME keybinding -> `kitty -e sessionizer`),
+# so put the real binary on PATH and call it directly.
+export PATH="$HOME/.devcontainers/bin:$PATH"
 
 session=$(find ~/pers/devcon/definitions -mindepth 1 -maxdepth 1 -type f ! -name '.*' | fzf --border --delimiter='/' --with-nth='7..' --prompt="Devcon?: ")
 
@@ -18,32 +23,30 @@ folder=$(find ~/dev -mindepth 1 -maxdepth 2 -type d ! -path '*/.*' | fzf --borde
 
 container_folder="${folder/#$HOME\/dev//workspaces/dev}"
 
-if ! tmux ls &>/dev/null; then
-  tmux start-server
-fi
-
 # $session is the picked definition file; use it as the devcontainer config.
 # Stable per-persona dir (not mktemp): keeps the devcontainer.config_file label
-# constant across launches so `devcon up` reuses the existing container instead
-# of creating a new one every time (~0.3s vs ~10-30s). Overwrite so edits to the
+# constant across launches so `up` reuses the existing container instead of
+# creating a new one every time (~0.3s vs ~10-30s). Overwrite so edits to the
 # definition still propagate; pass --remove-existing-container to force a fresh one.
 dc_dir="${XDG_CACHE_HOME:-$HOME/.cache}/devcon/$(basename "$session" .json)"
 mkdir -p "$dc_dir"
 cp "$session" "$dc_dir/devcontainer.json"
 CONFIG_FLAG="--config $dc_dir/devcontainer.json"
 
-config_label=$(basename "$session" | sed 's/___.*//' | tr -c 'a-zA-Z0-9_-' '_')
-
-rand_num=$((RANDOM % 9000 + 1000))
-session_name="${config_label}_${rand_num}"
-
-if ! tmux has-session -t "$session_name" 2>/dev/null; then
-  tmux new-session -s "$session_name" -c "$HOME/dev" -d
-  tmux send-keys -t "$session_name" "BUILDKIT_PROGRESS=plain devcon up --workspace-folder $HOME/dev/ $CONFIG_FLAG $EXTRA_UP_ARGS --log-level trace && devcon exec --workspace-folder $HOME/dev $CONFIG_FLAG 'nvim' '--cmd' 'lua vim.g.sessionizer_devcon = true; vim.g.sessionizer_folder = \"$container_folder\"'" C-m
+# Bring the container up (reused if already running), then hand this kitty window
+# straight to nvim inside it -- no tmux. If `up` fails, pause so the error stays
+# readable before kitty closes the window.
+if ! BUILDKIT_PROGRESS=plain devcontainer up --workspace-folder "$HOME/dev/" $CONFIG_FLAG $EXTRA_UP_ARGS --log-level trace; then
+  echo
+  echo "devcontainer up failed. Press Enter to close."
+  read -r _
+  exit 1
 fi
 
-if [ -z "$TMUX" ]; then
-  exec tmux attach-session -t "$session_name"
-else
-  tmux switch-client -t "$session_name"
-fi
+# Force a TERM whose terminfo is guaranteed to exist in the container. `exec`
+# forwards this shell's TERM, and kitty's own xterm-kitty has no terminfo inside
+# the image -- which breaks split/redraw (mirroring) and Ctrl-hjkl decoding.
+# xterm-256color is shipped by ncurses-base; nvim still probes kitty's keyboard
+# protocol at runtime, so nothing is lost.
+exec env TERM=xterm-256color devcontainer exec --workspace-folder "$HOME/dev" $CONFIG_FLAG \
+  nvim --cmd "lua vim.g.sessionizer_devcon = true; vim.g.sessionizer_folder = \"$container_folder\""
