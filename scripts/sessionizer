@@ -9,7 +9,7 @@ EXTRA_UP_ARGS="$*"
 # so put the real binary on PATH and call it directly.
 export PATH="$HOME/.devcontainers/bin:$PATH"
 
-session=$(find ~/pers/devcon/definitions -mindepth 1 -maxdepth 1 -type f ! -name '.*' | fzf --border --delimiter='/' --with-nth='7..' --prompt="Devcon?: ")
+session=$(find ~/pers/devcon/definitions -mindepth 1 -maxdepth 1 -type f ! -name '.*' ! -name 'base.json' | fzf --border --delimiter='/' --with-nth='7..' --prompt="Devcon?: ")
 
 [ -z "$session" ] && exit 0
 
@@ -23,20 +23,27 @@ folder=$(find ~/dev -mindepth 1 -maxdepth 2 -type d ! -path '*/.*' | fzf --borde
 
 container_folder="${folder/#$HOME\/dev//workspaces/dev}"
 
-# $session is the picked definition file; use it as the devcontainer config.
-# Stable per-persona dir (not mktemp): keeps the devcontainer.config_file label
-# constant across launches so `up` reuses the existing container instead of
-# creating a new one every time (~0.3s vs ~10-30s). Overwrite so edits to the
-# definition still propagate; pass --remove-existing-container to force a fresh one.
+# Definitions "extend" base.json: base.json holds everything shared, and each
+# persona file lists only its extra features. base.json is the actual devcontainer
+# config; the persona's features are layered on via `up --additional-features`.
+#
+# Stable per-persona dir (not mktemp): the devcontainer.config_file label is part
+# of the container identity, so copying base.json to a per-persona path keeps each
+# persona's container separate and reusable across launches (~0.3s vs ~10-30s).
+# Overwrite so edits to base.json still propagate; pass --remove-existing-container
+# to force a fresh one.
 dc_dir="${XDG_CACHE_HOME:-$HOME/.cache}/devcon/$(basename "$session" .json)"
 mkdir -p "$dc_dir"
-cp "$session" "$dc_dir/devcontainer.json"
+cp "$HOME/pers/devcon/definitions/base.json" "$dc_dir/devcontainer.json"
 CONFIG_FLAG="--config $dc_dir/devcontainer.json"
+
+# The persona's language/tool features, injected on top of base.json.
+persona_features=$(jq -c '.features // {}' "$session")
 
 # Bring the container up (reused if already running), then hand this kitty window
 # straight to nvim inside it -- no tmux. If `up` fails, pause so the error stays
 # readable before kitty closes the window.
-if ! BUILDKIT_PROGRESS=plain devcontainer up --workspace-folder "$HOME/dev/" $CONFIG_FLAG $EXTRA_UP_ARGS --log-level trace; then
+if ! BUILDKIT_PROGRESS=plain devcontainer up --workspace-folder "$HOME/dev/" $CONFIG_FLAG --additional-features "$persona_features" $EXTRA_UP_ARGS --log-level trace; then
   echo
   echo "devcontainer up failed. Press Enter to close."
   read -r _
