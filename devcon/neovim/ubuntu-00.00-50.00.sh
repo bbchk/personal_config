@@ -3,7 +3,7 @@
 
 source /usr/local/share/devcontainer-helpers/utils.sh
 
-apt-get install -y \
+apt-get update && apt-get install -y \
   git \
   build-essential \
   wget \
