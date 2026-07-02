@@ -22,6 +22,8 @@ alias devcon="devcontainer"
 
 alias se="sudoedit"
 
+alias ros="ros2"
+
 # ------------------------------
 # Remaps
 # ------------------------------

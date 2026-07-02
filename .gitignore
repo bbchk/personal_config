@@ -4,3 +4,4 @@ isohdpfx.bin
 
 secrets/my/browser/History-journal
 secrets/my/sys/.zsh_history
+dotfiles/.config/ros.org/rqt_gui.ini
