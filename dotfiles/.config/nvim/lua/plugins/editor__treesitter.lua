@@ -19,30 +19,9 @@ return {
 			indent = { enable = true },
 			auto_install = false,
 			sync_install = false,
-			ensure_installed = {
-				"vimdoc",
-				"query",
-				"json",
-				"javascript",
-				"typescript",
-				"tsx",
-				"yaml",
-				"html",
-				"css",
-				"markdown",
-				"markdown_inline",
-				"bash",
-				"lua",
-				"vim",
-				"dockerfile",
-				"gitignore",
-				"c",
-				"rust",
-				"ruby",
-				"go",
-				"php",
-				"sql",
-			},
+			-- Scoped to this container's toolchains (base parsers + detected langs).
+			-- See core/langs.lua.
+			ensure_installed = require("core.langs").parsers(),
 			incremental_selection = {
 				enable = true,
 				keymaps = {

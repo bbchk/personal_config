@@ -8,8 +8,7 @@ return {
 		"williamboman/mason-lspconfig.nvim",
 	},
 	config = function()
-		require("mason").setup()
-		require("mason-lspconfig").setup()
+		-- mason + mason-lspconfig are configured with real options in lsp__mason.lua.
 
 		vim.api.nvim_create_autocmd("LspAttach", {
 			callback = function(ev)
@@ -20,23 +19,8 @@ return {
 			end,
 		})
 
-		vim.lsp.enable({
-			"cssls",
-			"eslint",
-			"gopls",
-			"html",
-			"intelephense",
-			"jsonls",
-			"lua_ls",
-			"pyright",
-			"ruby_lsp",
-			"sqlls",
-			"tailwindcss",
-			"ts_ls",
-			"clangd",
-			"bashls",
-			"dockerls",
-			"stylelint_lsp",
-		})
+		-- Enable only the servers scoped to this container's toolchains (same list
+		-- that mason installs in lsp__mason.lua, so enable and install stay in sync).
+		vim.lsp.enable(require("core.langs").servers())
 	end,
 }

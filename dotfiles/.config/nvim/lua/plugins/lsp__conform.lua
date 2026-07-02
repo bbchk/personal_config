@@ -7,23 +7,9 @@ return {
 		local conform = require("conform")
 
 		conform.setup({
-			formatters_by_ft = {
-				javascript = { "prettier" },
-				typescript = { "prettier" },
-				javascriptreact = { "prettier" },
-				typescriptreact = { "prettier" },
-				css = { "prettier" },
-				scss = { "prettier" },
-				html = { "prettier" },
-				json = { "prettier" },
-				yaml = { "prettier" },
-				markdown = { "prettier" },
-				lua = { "stylua" },
-				python = { "isort", "black" },
-				ruby = { "rubocop" },
-				go = { "gofmt" },
-				rust = { "rustfmt" },
-			},
+			-- Scoped to this container's toolchains so format_on_save doesn't error on
+			-- a missing formatter binary. See core/langs.lua.
+			formatters_by_ft = require("core.langs").formatters_by_ft(),
 			-- Configure prettier with custom options
 			formatters = {
 				prettier = {
