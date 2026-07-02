@@ -1,4 +1,4 @@
-#!/usr/bin/env bash
+j!/usr/bin/env bash
 # shellcheck source=/dev/null
 
 source /usr/local/share/devcontainer-helpers/utils.sh
