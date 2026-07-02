@@ -4,6 +4,7 @@
     "dockerfile": "${localEnv:HOME}/pers/devcon/Dockerfile",
     "context": "${localEnv:HOME}"
   },
+  "initializeCommand": "gpgconf --launch gpg-agent",
   "mounts": [
     "source=/var/run/docker.sock,target=/var/run/docker.sock,type=bind",
     "source=${localEnv:XDG_RUNTIME_DIR}/gnupg/S.gpg-agent.extra,target=/home/bchk/.gnupg/S.gpg-agent,type=bind",
