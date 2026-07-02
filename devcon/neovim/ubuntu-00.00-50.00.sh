@@ -15,7 +15,8 @@ apt-get update && apt-get install -y \
   unzip \
   fzf \
   zsh \
-  iproute2
+  iproute2 \
+  ncurses-term
 
 ARCHIVE="nvim-linux-x86_64.tar.gz"
 TEMP_DIR=$(mktemp -d)
