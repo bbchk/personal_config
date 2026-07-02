@@ -8,6 +8,16 @@ session=$(find ~/pers/devcon/definitions -mindepth 1 -maxdepth 1 -type f ! -name
 
 [ -z "$session" ] && exit 0
 
+# Then pick the folder to open by default in nvim (terminal tab + Oil tab).
+# Options live under ~/dev on the host, which is mounted at /workspaces/dev
+# inside the container, so translate the host path to its in-container path
+# before handing it to nvim.
+folder=$(find ~/dev -mindepth 1 -maxdepth 2 -type d ! -path '*/.*' | fzf --border --delimiter='/' --with-nth='5..' --prompt="Folder?: ")
+
+[ -z "$folder" ] && exit 0
+
+container_folder="${folder/#$HOME\/dev//workspaces/dev}"
+
 if ! tmux ls &>/dev/null; then
   tmux start-server
 fi
@@ -29,7 +39,7 @@ session_name="${config_label}_${rand_num}"
 
 if ! tmux has-session -t "$session_name" 2>/dev/null; then
   tmux new-session -s "$session_name" -c "$HOME/dev" -d
-  tmux send-keys -t "$session_name" "BUILDKIT_PROGRESS=plain devcon up --workspace-folder $HOME/dev/ $CONFIG_FLAG $EXTRA_UP_ARGS --log-level trace && devcon exec --workspace-folder $HOME/dev $CONFIG_FLAG 'nvim' '--cmd' 'lua vim.g.sessionizer_devcon = true'" C-m
+  tmux send-keys -t "$session_name" "BUILDKIT_PROGRESS=plain devcon up --workspace-folder $HOME/dev/ $CONFIG_FLAG $EXTRA_UP_ARGS --log-level trace && devcon exec --workspace-folder $HOME/dev $CONFIG_FLAG 'nvim' '--cmd' 'lua vim.g.sessionizer_devcon = true; vim.g.sessionizer_folder = \"$container_folder\"'" C-m
 fi
 
 if [ -z "$TMUX" ]; then
