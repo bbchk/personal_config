@@ -38,8 +38,24 @@ u.keyset(
 -- Window Management
 -----------------------------------
 
-u.keyset("n", "<leader>v", "<CMD>vsplit<CR>")
-u.keyset("n", "<leader>s", "<CMD>split<CR>")
+-- Split the current window. A terminal buffer is still just a buffer, so a bare
+-- :split reuses the same PTY in both windows (keystrokes appear in both). For
+-- terminals we start a fresh :terminal in the new window so the split gets its
+-- own shell; file buffers keep the normal (shared-view) split behavior.
+local function split(cmd)
+	return function()
+		if vim.bo.buftype == "terminal" then
+			vim.cmd(cmd)
+			vim.cmd("terminal")
+			vim.cmd("startinsert")
+		else
+			vim.cmd(cmd)
+		end
+	end
+end
+
+u.keyset("n", "<leader>v", split("vsplit"), { desc = "Vertical split (new shell if terminal)" })
+u.keyset("n", "<leader>s", split("split"), { desc = "Horizontal split (new shell if terminal)" })
 
 u.keyset("n", "<C-h>", "<C-w>h")
 u.keyset("n", "<C-l>", "<C-w>l")
