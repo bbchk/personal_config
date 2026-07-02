@@ -23,6 +23,7 @@ apt-get update
 
 apt-get install -y ros-lyrical-desktop
 apt-get install -y ros-lyrical-ros-base
+apt-get install -y ros-distro-turtulesim
 
 apt-get install -y ros-dev-tools
 
