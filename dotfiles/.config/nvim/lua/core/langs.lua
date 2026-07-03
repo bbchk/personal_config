@@ -1,30 +1,29 @@
--- Language scoping for LSP / tools / formatters / treesitter parsers.
+-- Language scoping for nvim: which LSP servers to enable, which conform
+-- formatters to run, and which treesitter parsers to expect -- scoped to the
+-- toolchains actually present in this container.
 --
--- The personas are split by toolchain (Rust-only, Go-only, ...), so installing
--- the full tooling set everywhere means mason tries to install servers/tools for
--- languages that aren't present and errors out on first launch. Here we detect
--- which toolchains actually exist (vim.fn.executable) and only enable/install the
--- matching tooling. Same env idiom as core/clipboard.lua / editor__lualine.lua.
+-- We detect toolchains with vim.fn.executable and only enable matching tooling,
+-- so a single-purpose container (rust-only, go-only, ...) never tries to start a
+-- server or run a formatter whose binary isn't installed.
 --
--- Override with DEVCON_NVIM_LANGS="rust,lua" to force the set when detection is
--- wrong (e.g. a toolchain installed somewhere off PATH at startup).
+-- INSTALLATION lives in the image, not here. The `langtools` devcontainer
+-- feature (devcon/langtools) installs the LSP servers, formatters and linters
+-- onto the system PATH, and postCreate.sh compiles the treesitter parsers. nvim
+-- just enables whatever ended up on PATH -- there is no mason. Keep the map
+-- below in sync with what devcon/langtools installs.
 --
--- Note: many servers/tools ship as npm packages (bashls, jsonls, dockerls, sqlls,
--- prettier, eslint_d, markdownlint, pyright, intelephense, php-*), so mason needs
--- `node` present to install them — that's why they live under the `node` gate (or
--- under a language whose personas always ship node), not in the always-on BASE.
+-- Override detection with DEVCON_NVIM_LANGS="rust,lua" when it guesses wrong
+-- (e.g. a toolchain installed off PATH at startup). Same env idiom as
+-- core/clipboard.lua.
 
 local M = {}
 
--- Each language: `has` = detection binaries (any present => enabled); the rest is
--- what it contributes. `servers` feed both mason-lspconfig install and lsp.enable;
--- `tools` are mason-tool-installer packages; `parsers` are treesitter parsers;
--- `ft` maps filetype -> conform formatters.
+-- Each language: `has` = detection binaries (any present => enabled); `servers`
+-- feed vim.lsp.enable, `parsers` feed treesitter, `ft` maps filetype -> conform
+-- formatters.
 local LANGS = {
 	node = {
 		has = { "node" },
-		-- ts_ls..stylelint_lsp are node dev servers; bashls/jsonls/dockerls/sqlls
-		-- are general but ship as npm packages, so they need node to install.
 		servers = {
 			"ts_ls",
 			"eslint",
@@ -37,7 +36,6 @@ local LANGS = {
 			"dockerls",
 			"sqlls",
 		},
-		tools = { "prettier", "eslint_d", "js-debug-adapter", "markdownlint" },
 		parsers = { "javascript", "typescript", "tsx", "html", "css" },
 		ft = {
 			javascript = { "prettier" },
@@ -54,34 +52,33 @@ local LANGS = {
 	},
 	python = {
 		has = { "python3", "python" },
-		servers = { "pyright" }, -- pyright is npm; python personas ship node too
-		tools = { "black", "isort" },
+		servers = { "pyright" },
 		parsers = { "python" },
 		ft = { python = { "isort", "black" } },
 	},
 	go = {
 		has = { "go" },
-		servers = { "gopls" }, -- mason installs via `go install`, needs the go toolchain
+		servers = { "gopls" },
 		parsers = { "go" },
 		ft = { go = { "gofmt" } },
 	},
 	rust = {
 		has = { "cargo", "rustc" },
-		servers = {}, -- rust-analyzer comes via rustup, not mason (matches prior config)
+		-- rust-analyzer is installed as a rustup component by langtools, so it
+		-- lands on PATH and we can enable it here (was previously unmanaged).
+		servers = { "rust_analyzer" },
 		parsers = { "rust" },
 		ft = { rust = { "rustfmt" } },
 	},
 	ruby = {
 		has = { "ruby" },
 		servers = { "ruby_lsp" },
-		tools = { "rubocop" },
 		parsers = { "ruby" },
 		ft = { ruby = { "rubocop" } },
 	},
 	php = {
 		has = { "php" },
-		servers = { "intelephense" }, -- npm; php personas ship node too
-		tools = { "php-cs-fixer", "php-debug-adapter" },
+		servers = { "intelephense" },
 		parsers = { "php" },
 	},
 	java = {
@@ -90,17 +87,14 @@ local LANGS = {
 	},
 	cpp = {
 		has = { "clangd", "cc", "gcc", "clang" },
-		servers = { "clangd" }, -- prebuilt binary, no toolchain needed to install
-		tools = { "clang-format" },
+		servers = { "clangd" },
 		parsers = { "c", "cpp" },
 	},
 }
 
--- Always safe to install regardless of toolchain: prebuilt-binary servers/tools
--- and treesitter parsers (parsers only need a C compiler, always present).
+-- Always safe regardless of toolchain (prebuilt-binary servers, base parsers).
 local BASE = {
 	servers = { "lua_ls" },
-	tools = { "stylua", "shfmt" },
 	parsers = {
 		"vimdoc",
 		"query",
@@ -169,10 +163,6 @@ end
 
 function M.servers()
 	return collect("servers")
-end
-
-function M.mason_tools()
-	return collect("tools")
 end
 
 function M.parsers()

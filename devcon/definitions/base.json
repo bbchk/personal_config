@@ -36,7 +36,8 @@
     },
     "ghcr.io/bbchk/pers/neovim:latest": {
       "version": "v0.11.5"
-    }
+    },
+    "ghcr.io/bbchk/pers/langtools:latest": {}
   },
   "remoteUser": "bchk",
   "updateRemoteUserUID": true,

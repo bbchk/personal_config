@@ -5,7 +5,6 @@ return {
 			"rcarriga/nvim-dap-ui",
 			"theHamsta/nvim-dap-virtual-text",
 			"nvim-neotest/nvim-nio",
-			"williamboman/mason.nvim",
 		},
 		config = function()
 			local dap = require("dap")
@@ -15,17 +14,15 @@ return {
 			ui.setup()
 			dap_virt_text.setup({})
 
+			-- DAP adapters are installed on PATH by the langtools devcontainer
+			-- feature (js-debug-adapter, php-debug-adapter launchers), not mason.
 			dap.adapters["pwa-node"] = {
 				type = "server",
 				host = "localhost",
 				port = "${port}",
 				executable = {
-					command = "bash",
-
-					args = {
-						os.getenv("HOME") .. "/.local/share/nvim/mason/packages/js-debug-adapter/js-debug-adapter",
-						"${port}",
-					},
+					command = "js-debug-adapter",
+					args = { "${port}" },
 				},
 			}
 
@@ -41,11 +38,8 @@ return {
 
 			dap.adapters.php = {
 				type = "executable",
-				command = "bash",
-				args = {
-					os.getenv("HOME") .. "/.local/share/nvim/mason/packages/php-debug-adapter/php-debug-adapter",
-					"${port}",
-				},
+				command = "php-debug-adapter",
+				args = {},
 			}
 
 			dap.configurations.php = {

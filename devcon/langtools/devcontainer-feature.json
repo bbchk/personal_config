@@ -1,0 +1,20 @@
+{
+  "name": "Language tools",
+  "id": "langtools",
+  "version": "0.0.1",
+  "description": "Install LSP servers, formatters, linters and DAP adapters for the language toolchains present in the image. Replaces nvim's mason: nvim just enables whatever this puts on PATH.",
+  "dependsOn": {
+    "ghcr.io/bbchk/pers/helper:latest": {}
+  },
+  "installsAfter": [
+    "ghcr.io/devcontainers/features/node",
+    "ghcr.io/devcontainers/features/python",
+    "ghcr.io/devcontainers/features/go",
+    "ghcr.io/devcontainers/features/rust",
+    "ghcr.io/devcontainers/features/ruby",
+    "ghcr.io/devcontainers/features/java",
+    "ghcr.io/devcontainers/features/php",
+    "ghcr.io/devcontainer-community/devcontainer-features/collection-c-cpp",
+    "ghcr.io/bbchk/pers/ros2"
+  ]
+}
