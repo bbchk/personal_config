@@ -46,4 +46,13 @@ log "Dancing around Nvim plugins..."
 sudo chown "$(id -u):$(id -g)" "$HOME/.local" "$HOME/.local/share" "$HOME/.local/share/nvim"
 nvim --headless -c "Lazy! restore" -c "qa!" 2>/dev/null || true
 
+# Compile the treesitter parsers for this container's detected langs now, while
+# the config is symlinked and toolchains are on PATH. Otherwise the first
+# interactive file-open triggers an async compile and shows Vim's regex-syntax
+# fallback (flat highlighting) until it finishes. `ensure_installed` only runs on
+# the lazy BufReadPre/BufNewFile event, which headless `Lazy! restore` never fires.
+nvim --headless \
+  -c 'lua vim.cmd("TSInstallSync! " .. table.concat(require("core.langs").parsers(), " "))' \
+  -c "qa!" 2>/dev/null || true
+
 log "postCreate complete"

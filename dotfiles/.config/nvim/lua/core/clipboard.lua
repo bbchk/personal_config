@@ -19,6 +19,18 @@ local has_display = not in_container
 
 if not has_display then
 	local osc52 = require("vim.ui.clipboard.osc52")
+	-- OSC 52 paste requires the terminal to echo the clipboard back, which
+	-- almost every terminal blocks for security. That query returns empty and
+	-- makes `p` fail with 'Nothing in register "'. So read from the local
+	-- unnamed register instead; copy still reaches the host via OSC 52. The
+	-- trade-off is that host->nvim paste won't work (use the terminal's native
+	-- paste for that) -- an inherent OSC 52 limitation.
+	local function paste()
+		return {
+			vim.fn.split(vim.fn.getreg('"'), "\n"),
+			vim.fn.getregtype('"'),
+		}
+	end
 	vim.g.clipboard = {
 		name = "OSC 52",
 		copy = {
@@ -26,8 +38,8 @@ if not has_display then
 			["*"] = osc52.copy("*"),
 		},
 		paste = {
-			["+"] = osc52.paste("+"),
-			["*"] = osc52.paste("*"),
+			["+"] = paste,
+			["*"] = paste,
 		},
 	}
 end

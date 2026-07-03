@@ -17,7 +17,7 @@ session=$(find ~/pers/devcon/definitions -mindepth 1 -maxdepth 1 -type f ! -name
 # Options live under ~/dev on the host, which is mounted at /workspaces/dev
 # inside the container, so translate the host path to its in-container path
 # before handing it to nvim.
-folder=$(find ~/dev -mindepth 1 -maxdepth 2 -type d ! -path '*/.*' | fzf --border --delimiter='/' --with-nth='5..' --prompt="Folder?: ")
+folder=$({ echo "$HOME/pers"; echo "$HOME/pers/xdg"; find ~/dev ~/pers -mindepth 1 -maxdepth 2 -type d ! -path '*/.*'; } | awk '!seen[$0]++' | fzf --border --delimiter='/' --with-nth='4..' --prompt="Folder?: ")
 
 [ -z "$folder" ] && exit 0
 

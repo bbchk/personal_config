@@ -33,10 +33,8 @@ cp -ru "$SRC/lib/." /usr/local/lib/
 
 rm -rf "$TEMP_DIR"
 
-# Pre-install plugins and treesitter parsers at build time
+# Pre-install plugins at build time. Treesitter parsers are NOT installed here:
+# the dotfiles config is only symlinked into $HOME later (postCreate.sh), so at
+# build time there's no nvim-treesitter and `:TSInstall` is a no-op. Parsers are
+# compiled in postCreate instead, once the config and toolchains are in place.
 nvim --headless "+Lazy! sync" +qa 2>/dev/null || true
-nvim --headless "+TSInstall! all" +qa 2>/dev/null || true
-
-# Clean up any stale tmp dirs left by failed parser compilations
-find "${XDG_DATA_HOME:-$HOME/.local/share}/nvim" \
-  -name "*-tmp" -type d -exec rm -rf {} + 2>/dev/null || true
