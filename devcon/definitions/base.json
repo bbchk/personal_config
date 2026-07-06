@@ -4,6 +4,8 @@
     "dockerfile": "${localEnv:HOME}/pers/devcon/Dockerfile",
     "context": "${localEnv:HOME}"
   },
+  "workspaceMount": "source=${localWorkspaceFolder},target=${localWorkspaceFolder},type=bind",
+  "workspaceFolder": "${localWorkspaceFolder}",
   "initializeCommand": "gpgconf --launch gpg-agent; xhost +SI:localuser:$(id -un) >/dev/null 2>&1 || true",
   "mounts": [
     "source=/var/run/docker.sock,target=/var/run/docker.sock,type=bind",
