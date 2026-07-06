@@ -14,14 +14,14 @@ session=$(find ~/pers/devcon/definitions -mindepth 1 -maxdepth 1 -type f ! -name
 [ -z "$session" ] && exit 0
 
 # Then pick the folder to open by default in nvim (terminal tab + Oil tab).
-# Options live under ~/dev on the host, which is mounted at /workspaces/dev
-# inside the container, so translate the host path to its in-container path
-# before handing it to nvim.
+# ~/dev and ~/pers are bind-mounted at the same paths inside the container
+# (see base.json workspaceMount + mounts), so the host path is also the
+# in-container path -- no translation needed.
 folder=$({ echo "$HOME/pers"; echo "$HOME/pers/xdg"; find ~/dev ~/pers -mindepth 1 -maxdepth 2 -type d ! -path '*/.*'; } | awk '!seen[$0]++' | fzf --border --delimiter='/' --with-nth='4..' --prompt="Folder?: ")
 
 [ -z "$folder" ] && exit 0
 
-container_folder="${folder/#$HOME\/dev//workspaces/dev}"
+container_folder="$folder"
 
 # Definitions "extend" base.json: base.json holds everything shared, and each
 # persona file lists only its extra features. base.json is the actual devcontainer
@@ -43,7 +43,7 @@ persona_features=$(jq -c '.features // {}' "$session")
 # Bring the container up (reused if already running), then hand this kitty window
 # straight to nvim inside it -- no tmux. If `up` fails, pause so the error stays
 # readable before kitty closes the window.
-if ! BUILDKIT_PROGRESS=plain devcontainer up --workspace-folder "$HOME/dev/" $CONFIG_FLAG --additional-features "$persona_features" $EXTRA_UP_ARGS --log-level trace; then
+if ! BUILDKIT_PROGRESS=plain devcontainer up --workspace-folder "$HOME/dev" $CONFIG_FLAG --additional-features "$persona_features" $EXTRA_UP_ARGS --log-level trace; then
   echo
   echo "devcontainer up failed. Press Enter to close."
   read -r _
