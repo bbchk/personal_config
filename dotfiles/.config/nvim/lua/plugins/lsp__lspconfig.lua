@@ -19,18 +19,6 @@ return {
 			end,
 		})
 
-		-- Explicit configuration for clangd to fix standard library resolution in devcontainers
-		local lspconfig = require("lspconfig")
-		lspconfig.clangd.setup({
-			cmd = {
-				"clangd",
-				"--background-index",
-				"--clang-tidy",
-				-- Allows clangd to query the container's compiler (/usr/bin/c++) for system headers
-				"--query-driver=/**/*",
-			},
-		})
-
 		-- Enable only the servers scoped to this container's toolchains (same list
 		-- that mason installs in lsp__mason.lua, so enable and install stay in sync).
 		vim.lsp.enable(require("core.langs").servers())
