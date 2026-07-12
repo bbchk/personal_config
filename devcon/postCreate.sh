@@ -51,7 +51,12 @@ nvim --headless -c "Lazy! restore" -c "qa!" 2>/dev/null || true
 # interactive file-open triggers an async compile and shows Vim's regex-syntax
 # fallback (flat highlighting) until it finishes. `ensure_installed` only runs on
 # the lazy BufReadPre/BufNewFile event, which headless `Lazy! restore` never fires.
+#
+# nvim-treesitter is lazy-loaded on BufReadPre/BufNewFile, so headless (no file
+# opened) it isn't loaded and :TSInstallSync doesn't exist yet — force-load it via
+# lazy first, then run the sync compile.
 nvim --headless \
+  -c 'lua require("lazy").load({ plugins = { "nvim-treesitter" } })' \
   -c 'lua vim.cmd("TSInstallSync! " .. table.concat(require("core.langs").parsers(), " "))' \
   -c "qa!" 2>/dev/null || true
 

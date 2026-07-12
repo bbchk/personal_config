@@ -1,5 +1,11 @@
 return {
 	"nvim-treesitter/nvim-treesitter",
+	-- Pin to `master`: this config uses the classic API (nvim-treesitter.configs,
+	-- ensure_installed, highlight.enable, :TSInstallSync). The `main` branch is an
+	-- incompatible rewrite that drops all of it, so the config's pcall bails and no
+	-- highlighting is set up. The default branch is now `main`, so without this pin
+	-- a fresh install (e.g. a devcontainer's clean nvim volume) silently breaks.
+	branch = "master",
 	dependencies = {
 		{ "windwp/nvim-ts-autotag" },
 	},
